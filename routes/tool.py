@@ -6,10 +6,17 @@ can swap its local analyzeTranscript()/draftNote() calls for fetch() calls
 against these endpoints with almost no other change.
 
 Endpoints
-    GET  /api/patients                 -- care-team queue, ranked by severity
+    GET  /api/patients                 -- care-team queue, ranked by disposition
     GET  /api/patients/<slug>          -- one patient + encounter + check-in + result
-    POST /api/triage                   -- score a transcript -> disposition
+    POST /api/triage                   -- score a transcript -> disposition (Claude Sonnet 5)
     POST /api/draft-note               -- draft a chart note from a disposition
+
+NOTE: /triage and /draft-note now call the real triage_service.analyze_transcript_with_claude()
+(Sonnet 5, FHIR-grounded, 6-way disposition taxonomy) instead of the old
+analyze_transcript() keyword stub. This changes /triage's request contract:
+it now requires a "patient" object (with an "id"/slug) in addition to
+"transcript", since the real agent looks up the patient's full FHIR record by
+slug rather than scoring the transcript in isolation.
 """
 from flask import Blueprint, jsonify, request
 
@@ -42,7 +49,8 @@ def _serialize_patient(patient):
 
 @bp.get("/patients")
 def list_patients():
-    """Return all patients ranked red -> orange -> yellow -> green."""
+    """Return all patients ranked by disposition urgency (see SEVERITY_ORDER
+    in services/triage_service.py for the 6-way ranking)."""
     patients = [_serialize_patient(p) for p in Patient.query.all()]
     ranked = triage_service.rank_by_severity(
         [p for p in patients if p.get("triage")],
@@ -63,17 +71,29 @@ def get_patient(slug):
 
 @bp.post("/triage")
 def triage():
-    """Tool: score a check-in transcript into a disposition.
+    """Tool: score a check-in transcript into a disposition, using Claude
+    Sonnet 5 grounded in the patient's full FHIR record.
 
-    Body: { "transcript": [["PT", "..."], ["AGENT", "..."], ...] }
+    Body: { "patient": {"id": "<slug>", ...}, "transcript": [["PT", "..."], ...] }
+    ("encounter" may also be included but is currently unused by the real
+    agent, which pulls its own FHIR context by patient slug instead.)
     Returns: { severity, label, rationale, flags }
     """
     payload = request.get_json(silent=True) or {}
     transcript = payload.get("transcript")
+    patient = payload.get("patient")
+    encounter = payload.get("encounter") or {}
+
     if not isinstance(transcript, list):
         return jsonify(error="'transcript' (list of [speaker, line]) is required"), 400
+    if not patient or not patient.get("id"):
+        return jsonify(error="'patient' object with an 'id' (slug) is required"), 400
 
-    result = triage_service.analyze_transcript(transcript)
+    try:
+        result = triage_service.analyze_transcript_with_claude(transcript, patient, encounter)
+    except Exception as e:  # network error, missing API key, bad patient slug, etc.
+        return jsonify(error=f"triage agent failed: {e}"), 502
+
     return jsonify(result)
 
 
@@ -82,7 +102,8 @@ def draft_note():
     """Tool: draft a chart note from patient context + a disposition.
 
     Body: { "patient": {...}, "encounter": {...}, "triage": {...} }
-    If "triage" is omitted, it is computed from "encounter.transcript".
+    If "triage" is omitted, it is computed from "encounter.transcript" via
+    the real Claude-based triage agent.
     Returns: { note }
     """
     payload = request.get_json(silent=True) or {}
@@ -94,7 +115,10 @@ def draft_note():
     result = payload.get("triage")
     if result is None:
         transcript = encounter.get("transcript", [])
-        result = triage_service.analyze_transcript(transcript)
+        try:
+            result = triage_service.analyze_transcript_with_claude(transcript, patient, encounter)
+        except Exception as e:
+            return jsonify(error=f"triage agent failed: {e}"), 502
 
     note = triage_service.draft_note(patient, encounter, result)
     return jsonify(note=note, triage=result)
