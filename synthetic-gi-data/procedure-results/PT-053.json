@@ -1,0 +1,93 @@
+{
+  "id": "gi-synth-0053::proc-result",
+  "_synthetic": true,
+  "_note": "MOCK procedure result. No real patient. For PreChart development/eval. Procedure amended from referral (full colonoscopy) to limited unprepped flexible sigmoidoscopy given acute severe UC flare.",
+  "patient_id": "gi-synth-0053",
+  "procedure": {
+    "name": "Flexible sigmoidoscopy (limited, unprepped)",
+    "code": {"system": "http://snomed.info/sct", "code": "44441009", "display": "Flexible sigmoidoscopy (procedure)"},
+    "date": "2026-07-18T14:30:00-07:00",
+    "indication": "Acute severe ulcerative colitis flare — endoscopic severity grading and mucosal biopsies including CMV immunostains. Referral requested full colonoscopy; amended to limited unprepped flexible sigmoidoscopy given elevated perforation/decompensation risk in acute severe colitis.",
+    "sedation": "None (unsedated limited exam; patient tolerated well)",
+    "prep_quality": "Unprepped (no bowel preparation given acute severe flare) — mucosa adequately visualized in the rectosigmoid/left colon; luminal contents present but did not preclude severity grading",
+    "extent_reached": "Descending colon / proximal to splenic flexure (deliberately limited exam; scope not advanced further to minimize perforation risk)",
+    "withdrawal_time_min": null,
+    "status": "completed"
+  },
+  "procedure_report": "PROCEDURE: Limited unprepped flexible sigmoidoscopy. INDICATION: acute severe ulcerative colitis flare for severity grading and biopsies (including CMV). SEDATION: none. PREP: unprepped. FINDINGS: The sigmoidoscope was advanced carefully to the descending colon, just short of the splenic flexure; the exam was deliberately limited to reduce perforation risk in the setting of acute severe colitis. The examined mucosa from the rectum through the distal descending colon demonstrated continuous, confluent severe inflammation with loss of vascular pattern, marked friability with spontaneous bleeding, and deep ulceration — Mayo endoscopic subscore 3. No discrete mass, stricture, or large-caliber vessel with active arterial bleeding was seen; oozing was diffuse from friable ulcerated mucosa. Cold-forceps biopsies were obtained from the sigmoid and descending colon for histology and CMV immunohistochemistry/PCR. The scope was withdrawn. No immediate complication. IMPRESSION: Continuous severe left-sided colitis, Mayo endoscopic subscore 3, with deep ulceration consistent with acute severe ulcerative colitis; biopsies including CMV immunostains pending. Findings support admission for IV corticosteroids with early consideration of rescue therapy if inadequate response.",
+  "findings": [
+    {"finding": "Continuous severe colitis with loss of vascular pattern, marked friability, spontaneous bleeding, and deep ulceration (Mayo endoscopic subscore 3)", "location": "rectum through distal descending colon", "action_taken": "biopsies for histology + CMV immunostains", "specimen": "A"},
+    {"finding": "Diffuse mucosal oozing from friable ulcerated mucosa, no discrete bleeding vessel", "location": "left colon", "action_taken": "none (no endoscopic hemostasis indicated)"},
+    {"finding": "No mass, stricture, polyp, or discrete lesion identified", "location": "examined rectosigmoid/left colon", "action_taken": "none"}
+  ],
+  "specimens": [
+    {"id": "A", "site": "sigmoid and descending colon mucosa", "type": "cold-forceps biopsy (histology + CMV immunohistochemistry/PCR)"}
+  ],
+  "pathology": {"status": "pending", "expected_back": "2026-07-22", "report": null, "diagnosis": null, "actionable": null},
+  "complications": [],
+  "disposition": "Admitted to inpatient GI/IBD service directly from endoscopy. Plan for IV methylprednisolone, VTE prophylaxis, daily monitoring of stool frequency/CRP/albumin, and surgical + IBD co-management. Rescue therapy (infliximab or cyclosporine) to be considered on day 3 if inadequate response to IV steroids.",
+  "followup": [
+    {"recommendation": "Review CMV immunostain/PCR and histology on colonic biopsies; if CMV positive, initiate antiviral therapy (e.g., ganciclovir) — critical given concurrent corticosteroids", "timeframe": "within 3-4 days", "owner": "GI / IBD team", "status": "open"},
+    {"recommendation": "Admit for IV corticosteroids and monitor response; assess need for rescue therapy at day 3", "timeframe": "immediate / day 3 checkpoint", "owner": "Inpatient GI / IBD", "status": "open"},
+    {"recommendation": "Surgical consultation (colorectal) for co-management given acute severe colitis and colectomy contingency if refractory", "timeframe": "during admission", "owner": "Colorectal surgery", "status": "open"},
+    {"recommendation": "Monitor anemia (Hgb 10.9) and hemodynamics; transfuse per threshold and reassess iron studies during admission", "timeframe": "during admission", "owner": "Inpatient GI", "status": "open"},
+    {"recommendation": "Reinforce mesalamine adherence (adherence gap preceded flare) and continue prednisone; reconcile medication list to reflect prednisone 40 mg daily", "timeframe": "before discharge", "owner": "GI", "status": "open"}
+  ],
+  "planted_followup_items": [
+    {"id": "F1", "type": "pending_pathology", "description": "CMV immunohistochemistry/PCR and histology on colonic biopsies pending — a positive CMV result mandates antiviral therapy and changes management in this steroid-treated acute severe UC patient", "urgency": "critical", "expected_action": "review CMV result when back; if positive start antiviral (ganciclovir) and notify IBD team; document histology", "status": "open"},
+    {"id": "F2", "type": "complication_watch", "description": "Acute severe UC on IV steroids — assess steroid response at day 3; if inadequate, escalate to rescue therapy (infliximab or cyclosporine) or surgery. Risk of colonic decompensation/toxic megacolon during admission", "urgency": "critical", "expected_action": "daily monitoring of stool frequency/CRP/albumin; day-3 rescue-therapy decision; watch for perforation/toxic megacolon", "status": "open"},
+    {"id": "F3", "type": "referral", "description": "Colorectal surgery co-management for colectomy contingency in refractory acute severe colitis", "urgency": "urgent", "expected_action": "obtain surgical consult during admission", "status": "open"},
+    {"id": "F4", "type": "complication_watch", "description": "Anemia (Hgb 10.9 g/dL) with ongoing hematochezia — monitor for worsening GI blood loss requiring transfusion", "urgency": "urgent", "expected_action": "serial CBC, transfuse per threshold, reassess iron studies", "status": "open"},
+    {"id": "F5", "type": "med_reconciliation", "description": "Medication reconciliation: prednisone 40 mg daily not on prior med list must be added; reinforce mesalamine adherence (missed ~1 week preceded flare). No true anticoagulant to hold/resume — reported 'blood thinner' is OTC fish oil", "urgency": "routine", "expected_action": "update med list to include prednisone; counsel and confirm mesalamine continuity", "status": "open"},
+    {"id": "F6", "type": "surveillance_interval", "description": "Post-flare disease reassessment and mucosal healing follow-up (repeat endoscopic evaluation after acute management)", "urgency": "routine", "expected_action": "schedule outpatient IBD follow-up and interval endoscopic reassessment once flare controlled", "status": "open"}
+  ],
+  "post_procedure_followup": {
+    "window": "day 0 to day 14",
+    "channels": ["automated_check_in", "patient_portal_message", "nurse_triage_call"],
+    "_note": "Patient-reported stream after the procedure — the inbound signal the LeftBehind product triages. Each contact is labeled ground truth so triage can be scored.",
+    "contacts": [
+      {
+        "id": "C1",
+        "day": 1,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "I've got some cramping and a bit of gas since the camera test, about the same as my usual colitis. Nothing worse.",
+        "clinical_signal": "Mild post-sigmoidoscopy cramping/insufflation gas, not exceeding baseline flare symptoms; no new red flag",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; mild cramping and gas after an unsedated limited sigmoidoscopy are expected and self-limited. Advise to report fever, severe/worsening abdominal pain, abdominal distension, or a large increase in bleeding.",
+        "rationale": "Common benign post-endoscopy symptoms at or below the patient's ongoing flare baseline; no escalation while she is monitored inpatient."
+      },
+      {
+        "id": "C2",
+        "day": 3,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "When will you know about the biopsy results, the one testing for that virus? I keep hearing it might change my treatment.",
+        "clinical_signal": "Patient asking about pending CMV immunostain/PCR and histology results",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F1",
+        "expected_action": "Answer from the result: CMV immunostains/PCR and histology are pending (expected ~2026-07-22); the IBD team will review and, if CMV positive, start antiviral therapy. Reassure results are being tracked.",
+        "rationale": "Answerable from the procedure result and follow-up plan; links to the pending_pathology CMV item (F1)."
+      },
+      {
+        "id": "C3",
+        "day": 6,
+        "channel": "nurse_triage_call",
+        "type": "question",
+        "verbatim": "I want to make sure I've got my medicines right — should I still be taking the prednisone and my mesalamine, and is the fish oil okay?",
+        "clinical_signal": "Medication reconciliation question — steroid continuation, mesalamine adherence, OTC fish oil clarification",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F5",
+        "expected_action": "Confirm per reconciled list: continue prednisone/steroid course as directed by the IBD team, continue mesalamine without gaps (adherence gap preceded the flare), and reassure that OTC fish oil is not a true anticoagulant and does not need to be stopped.",
+        "rationale": "Answerable from the medication-reconciliation follow-up item (F5); reinforces adherence, no clinical escalation needed."
+      }
+    ]
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "id": "gi-synth-0033::proc-result",
+  "_synthetic": true,
+  "_note": "MOCK procedure result for PT-033. No real patient. For PreChart development/eval.",
+  "patient_id": "gi-synth-0033",
+  "procedure": {
+    "name": "ERCP with plastic biliary stent exchange",
+    "code": {"system": "http://snomed.info/sct", "code": "45170000", "display": "Endoscopic retrograde cholangiopancreatography (procedure)"},
+    "date": "2026-07-28T09:10:00-07:00",
+    "indication": "Scheduled (elective) exchange of indwelling plastic biliary stent for benign distal common bile duct stricture; asymptomatic, normal LFTs",
+    "sedation": "Monitored anesthesia care (propofol) with anesthesiology present",
+    "prep_quality": "N/A (upper endoscopic/biliary procedure)",
+    "extent_reached": "Second portion of duodenum; major papilla identified and cannulated; deep biliary cannulation achieved",
+    "withdrawal_time_min": null,
+    "status": "completed"
+  },
+  "procedure_report": "PROCEDURE: ERCP with plastic biliary stent exchange. INDICATION: routine scheduled exchange of a 10 Fr x 7 cm plastic biliary stent placed 2026-04-16 for a benign distal CBD stricture; patient asymptomatic with normal LFTs. ANTIPLATELET MANAGEMENT: clopidogrel (single-agent for secondary stroke prevention after 2024 TIA) was CONTINUED without interruption — a simple plastic stent exchange without sphincterotomy is a low-bleeding-risk procedure; given the patient's stroke risk on monotherapy, no hold was indicated and this was confirmed with the endoscopist prior to the case. SEDATION: MAC/propofol. FINDINGS: The duodenoscope was advanced to the major papilla without difficulty. The previously placed plastic biliary stent was seen protruding from the papilla, patent and in good position; it was grasped with a snare and removed intact. There was good flow of clear bile after removal. Deep biliary cannulation was achieved over a guidewire without sphincterotomy. Occlusion cholangiogram demonstrated a short, smooth, benign-appearing distal CBD stricture, stable to modestly improved compared with the April 2026 study, with mild residual upstream ductal dilation and no filling defects/stones. Repeat brush cytology of the stricture was obtained. A new 10 Fr x 7 cm plastic biliary stent was placed across the stricture over the guidewire with brisk drainage of bile and good positioning. No sphincterotomy was performed. No immediate bleeding. IMPRESSION: Successful uncomplicated plastic biliary stent exchange for a stable benign distal CBD stricture. New 10 Fr x 7 cm plastic stent in good position. Repeat brush cytology pending. Clopidogrel continued throughout. Plan for next scheduled exchange in ~3 months and ongoing surveillance of the benign-appearing stricture.",
+  "findings": [
+    {"finding": "Prior 10 Fr x 7 cm plastic biliary stent, patent and well-positioned", "location": "distal common bile duct / major papilla", "action_taken": "removed intact with snare", "specimen": null},
+    {"finding": "Short benign-appearing distal CBD stricture, stable to mildly improved vs 2026-04-16; mild upstream dilation, no stones/filling defects", "location": "distal common bile duct", "action_taken": "repeat brush cytology obtained; new stent placed across stricture", "specimen": "A"},
+    {"finding": "New 10 Fr x 7 cm plastic biliary stent placed with good bile drainage", "location": "distal common bile duct", "action_taken": "stent placement over guidewire, no sphincterotomy", "specimen": null}
+  ],
+  "specimens": [{"id": "A", "site": "distal CBD stricture", "type": "brush cytology"}],
+  "pathology": {"status": "pending", "expected_back": "2026-08-01", "report": null, "diagnosis": null, "actionable": null},
+  "complications": [],
+  "disposition": "Discharged home same day in stable condition with escort after uneventful recovery from anesthesia. Advised to continue clopidogrel and amlodipine as before. Return precautions reviewed: fever/chills, jaundice, dark urine, worsening abdominal pain, or signs of post-ERCP pancreatitis.",
+  "followup": [
+    {"recommendation": "Review repeat brush cytology of distal CBD stricture; call patient with result. Result must be reconciled against the benign April 2026 brushings — any atypia/malignancy escalates management", "timeframe": "within 1-2 weeks", "owner": "GI", "status": "open"},
+    {"recommendation": "Schedule next routine plastic biliary stent exchange to maintain patency and reassess the benign stricture", "timeframe": "~3 months (approx 2026-10)", "owner": "GI", "status": "open"},
+    {"recommendation": "Continue clopidogrel (single-agent, secondary stroke prevention) and amlodipine; no interruption was required for this low-bleeding-risk exchange", "timeframe": "ongoing", "owner": "patient / GI", "status": "open"},
+    {"recommendation": "Monitor for post-ERCP pancreatitis and delayed cholangitis; patient to call for fever, jaundice, or abdominal pain", "timeframe": "48-72 hours", "owner": "patient / GI", "status": "open"}
+  ],
+  "planted_followup_items": [
+    {"id": "F1", "type": "pending_pathology", "description": "Repeat brush cytology of the distal CBD stricture is pending; result must be communicated and reconciled with the prior benign (April 2026) brushings", "urgency": "routine", "expected_action": "call patient with cytology result; if atypical/suspicious/malignant, escalate to EUS/repeat sampling and multidisciplinary review", "status": "open"},
+    {"id": "F2", "type": "repeat_procedure", "description": "Next routine scheduled plastic biliary stent exchange to maintain patency of the indwelling 10 Fr plastic stent and reassess the benign stricture", "urgency": "routine", "expected_action": "book ERCP plastic stent exchange in ~3 months (approx 2026-10) so the stent does not occlude", "status": "open"},
+    {"id": "F3", "type": "surveillance_interval", "description": "Ongoing surveillance of the benign distal CBD stricture pending resolution or definitive management", "urgency": "routine", "expected_action": "track stricture course across exchanges; reassess need for continued stenting vs definitive intervention", "status": "open"},
+    {"id": "F4", "type": "med_reconciliation", "description": "Clopidogrel was continued (not held) for this low-bleeding-risk exchange; confirm no hold instruction was erroneously issued and that the single-agent stroke-prevention indication (not DAPT for a coronary stent) is reflected", "urgency": "routine", "expected_action": "verify clopidogrel uninterrupted; ensure chart indication corrected to TIA/secondary stroke prevention", "status": "open"},
+    {"id": "F5", "type": "complication_watch", "description": "Post-ERCP pancreatitis and delayed cholangitis watch after biliary instrumentation", "urgency": "routine", "expected_action": "advise patient to report fever/chills, jaundice, dark urine, or worsening abdominal pain within 48-72h", "status": "open"}
+  ],
+  "post_procedure_followup": {
+    "window": "day 0 to day 14",
+    "channels": ["automated_check_in", "patient_portal_message", "nurse_triage_call"],
+    "_note": "Patient-reported stream after the procedure — the inbound signal the LeftBehind product triages. Each contact is labeled ground truth so triage can be scored.",
+    "contacts": [
+      {
+        "id": "C1",
+        "day": 1,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "My throat feels a little scratchy and I'm burping up some air, but no fever and no pain in my belly.",
+        "clinical_signal": "Expected post-endoscopy sore throat and swallowed-air bloating after duodenoscope; explicitly denies fever and abdominal pain",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; mild sore throat and gassiness are expected after an upper endoscopic/biliary procedure and settle within 24-48h. Reiterate return precautions for fever, jaundice, or worsening abdominal pain.",
+        "rationale": "Benign self-limited post-ERCP symptoms with no pancreatitis/cholangitis features; no escalation."
+      },
+      {
+        "id": "C2",
+        "day": 2,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "When will you have the results from the brushing you took, and should I keep taking my blood thinner like normal?",
+        "clinical_signal": "Question about pending brush cytology result and whether to continue clopidogrel; 'blood thinner' is the single-agent antiplatelet, which was continued and never held",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F1",
+        "expected_action": "Answer from the record: brush cytology expected back ~2026-08-01, GI will call with the result and reconcile it against the prior benign April brushings. Confirm clopidogrel should be continued uninterrupted — it was not held for this low-bleeding-risk exchange.",
+        "rationale": "Fully answerable from the procedure result and follow-up plan; links to the pending_pathology item and reinforces the med-reconciliation guidance that clopidogrel continues."
+      },
+      {
+        "id": "C3",
+        "day": 6,
+        "channel": "automated_check_in",
+        "type": "question",
+        "verbatim": "I had a bit of mild queasiness the evening after the procedure but it's gone now and I feel back to normal. Is that alright?",
+        "clinical_signal": "Transient mild post-sedation/post-procedure nausea that has fully resolved; no ongoing pain, fever, or persistent vomiting to suggest post-ERCP pancreatitis",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": "F5",
+        "expected_action": "Reassure; brief self-resolving nausea after anesthesia/biliary instrumentation is expected. Confirm she remains afebrile and pain-free, and restate that new or worsening abdominal pain, fever, or jaundice warrants an immediate call.",
+        "rationale": "Resolved transient symptom without red-flag features; documents that the post-ERCP pancreatitis watch (F5) window passed uneventfully. No escalation."
+      }
+    ]
+  }
+}

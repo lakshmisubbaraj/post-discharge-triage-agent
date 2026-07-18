@@ -1,0 +1,85 @@
+{
+  "id": "gi-synth-0010::proc-result",
+  "_synthetic": true,
+  "_note": "MOCK procedure result. No real patient. For PreChart development/eval.",
+  "patient_id": "gi-synth-0010",
+  "procedure": {
+    "name": "Colonoscopy",
+    "code": {"system": "http://snomed.info/sct", "code": "73761001", "display": "Colonoscopy (procedure)"},
+    "date": "2026-08-04T08:40:00-07:00",
+    "indication": "Average-risk colorectal cancer screening (first screening, asymptomatic 50-year-old)",
+    "sedation": "Moderate sedation (midazolam 2 mg, fentanyl 75 mcg)",
+    "prep_quality": "Boston Bowel Prep Scale 8/9 — adequate (split-dose prep, procedure scheduled on a non-fasting day per patient request)",
+    "extent_reached": "Cecum (confirmed by appendiceal orifice and ileocecal valve; terminal ileum intubated)",
+    "withdrawal_time_min": 10,
+    "status": "completed"
+  },
+  "procedure_report": "PROCEDURE: Colonoscopy. INDICATION: average-risk colorectal cancer screening in an asymptomatic 50-year-old man, first lifetime colonoscopy. No anticoagulant/antiplatelet agents to hold (patient takes no medications). SEDATION: moderate sedation, well tolerated. PREP: adequate, Boston Bowel Prep Scale 8/9; split-dose prep timed around patient's Monday/Thursday fasting and procedure booked on a non-fasting day. FINDINGS: The colonoscope was advanced to the cecum and the terminal ileum was intubated and appeared normal. A single 4 mm sessile polyp was identified in the ascending colon and removed by cold snare polypectomy; the specimen was retrieved and sent to pathology. The remainder of the examined colon was normal with no additional polyps, masses, ulceration, inflammation, or bleeding. No diverticulosis. Hemorrhoids not significant. IMPRESSION: Single 4 mm ascending colon polyp removed (cold snare); otherwise normal screening colonoscopy to the cecum. Pathology pending.",
+  "findings": [
+    {"finding": "4 mm sessile polyp", "location": "ascending colon", "size_mm": 4, "action_taken": "cold snare polypectomy, retrieved", "specimen": "A"},
+    {"finding": "Normal terminal ileum, colon, rectum — no mass, ulceration, or bleeding", "location": "whole colon", "action_taken": "none"}
+  ],
+  "specimens": [{"id": "A", "site": "ascending colon polyp", "type": "polypectomy"}],
+  "pathology": {"status": "pending", "expected_back": "2026-08-08", "report": null, "diagnosis": null, "actionable": null},
+  "complications": [],
+  "disposition": "Discharged home same day in stable condition with escort. Post-polypectomy precautions reviewed by phone-preferred channel. Patient tolerated procedure well.",
+  "followup": [
+    {"recommendation": "Review ascending colon polypectomy pathology; call patient (phone, not portal) with result and set surveillance interval accordingly", "timeframe": "within 2 weeks", "owner": "GI", "status": "open"},
+    {"recommendation": "Assuming small tubular adenoma or hyperplastic histology, next screening colonoscopy in 7-10 years per average-risk guidelines; confirm interval once pathology returns", "timeframe": "7-10 years", "owner": "GI", "status": "open"},
+    {"recommendation": "Communicate all results and instructions by phone per documented preference; portal-only outreach will fail", "timeframe": "with result call", "owner": "GI / scheduling", "status": "open"}
+  ],
+  "planted_followup_items": [
+    {"id": "F1", "type": "pending_pathology", "description": "Ascending colon polypectomy (specimen A) pathology pending — result must be communicated to the patient and drive the surveillance interval", "urgency": "routine", "expected_action": "call patient with result + document surveillance interval", "status": "open"},
+    {"id": "F2", "type": "surveillance_interval", "description": "Surveillance interval to be finalized once polyp histology returns; average-risk 7-10 years expected for a single small adenoma/hyperplastic polyp", "urgency": "routine", "expected_action": "document and communicate next colonoscopy interval", "status": "open"},
+    {"id": "F3", "type": "care_coordination", "description": "Care-coordination flag: patient is a portal non-responder and requests phone-only contact — result call and prep/surveillance communication must route to phone", "urgency": "routine", "expected_action": "ensure result notification uses phone channel, not portal", "status": "open"}
+  ],
+  "post_procedure_followup": {
+    "window": "day 0 to day 14",
+    "channels": ["automated_check_in", "patient_portal_message", "nurse_triage_call"],
+    "_note": "Patient-reported stream after the procedure — the inbound signal the LeftBehind product triages. Each contact is labeled ground truth so triage can be scored.",
+    "contacts": [
+      {
+        "id": "C1",
+        "day": 1,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "My throat feels a little scratchy and my belly is full of gas since yesterday. Is that normal?",
+        "clinical_signal": "Expected post-endoscopy sore throat and insufflation bloating",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; mild sore throat and gas/bloating are expected after colonoscopy and resolve within 24-48h. Walking and warm fluids help.",
+        "rationale": "Common benign post-endoscopy symptoms with no red-flag features; no escalation."
+      },
+      {
+        "id": "C2",
+        "day": 3,
+        "channel": "nurse_triage_call",
+        "type": "question",
+        "verbatim": "You took a little piece out during the test — when will I know what it was, and will someone call me? I don't use that online message thing.",
+        "clinical_signal": "Patient asking about pending polyp pathology and reiterating phone-only contact preference",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F1",
+        "expected_action": "Answer from the result: single 4 mm ascending polyp removed, pathology pending (expected ~2026-08-08); GI will call by phone with the result and next screening interval. Confirm phone-only preference is flagged.",
+        "rationale": "Answerable from the procedure result and follow-up plan; links to the pending_pathology item and reinforces the phone-contact care-coordination flag."
+      },
+      {
+        "id": "C3",
+        "day": 6,
+        "channel": "automated_check_in",
+        "type": "question",
+        "verbatim": "I noticed a tiny bit of pink when I wiped once today. No pain, no real bleeding, everything else feels fine. Should I worry?",
+        "clinical_signal": "Trace self-limited spotting after cold-snare polypectomy in a patient on no anticoagulation; no hemodynamic or volume red flags",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; a trace of pink after a small cold-snare polypectomy is expected and self-limited. Give return precautions: call or seek care for repeated red blood, clots, black stools, lightheadedness, or abdominal pain.",
+        "rationale": "Triage trap — dangerous-sounding minor spotting that is actually benign after a 4 mm cold-snare polypectomy with no anticoagulant and no hemodynamic symptoms; reassure with clear return precautions rather than escalate."
+      }
+    ]
+  }
+}

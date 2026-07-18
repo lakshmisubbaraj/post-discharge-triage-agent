@@ -1,0 +1,98 @@
+{
+  "id": "gi-synth-0008::proc-result",
+  "_synthetic": true,
+  "_note": "MOCK GI procedure result. No real patient. For PreChart development/eval. Clinically consistent with PT-008 referral (diagnostic colonoscopy for hematochezia, 45M, FDR colon cancer, regular NSAID use).",
+  "patient_id": "gi-synth-0008",
+  "procedure": {
+    "name": "Colonoscopy",
+    "code": {"system": "http://snomed.info/sct", "code": "73761001", "display": "Colonoscopy (procedure)"},
+    "date": "2026-07-23T08:40:00-05:00",
+    "indication": "Hematochezia x2 weeks (blood coating stool), first-degree relative with colorectal cancer; diagnostic colonoscopy",
+    "sedation": "Moderate sedation (midazolam 3 mg, fentanyl 100 mcg)",
+    "prep_quality": "Boston Bowel Prep Scale 8/9 — adequate",
+    "extent_reached": "Cecum (confirmed by appendiceal orifice and ileocecal valve intubation)",
+    "withdrawal_time_min": 14,
+    "status": "completed",
+    "peri_procedure_medication_note": "Per pre-procedure plan, OTC ibuprofen was held for 5 days prior to the procedure. Daily fish oil is a dietary supplement, not a therapeutic anticoagulant; no anticoagulation hold was required and the patient was confirmed to be on no prescription antiplatelet/anticoagulant agent."
+  },
+  "procedure_report": "PROCEDURE: Colonoscopy with cold snare polypectomy and mass biopsy. INDICATION: 45-year-old man with ~2 weeks of hematochezia (bright red blood coating the stool), first-degree relative (father) with colorectal cancer diagnosed ~age 50, and regular OTC ibuprofen use; longstanding unconfirmed patient-reported hemorrhoids. SEDATION: moderate (midazolam/fentanyl). PREP: adequate, BBPS 8/9. FINDINGS: The colonoscope was advanced to the cecum with intubation of the terminal ileum, which was normal. In the sigmoid colon there was a partially circumferential, firm, ulcerated mass approximately 3.5 cm with friability and contact bleeding, mildly narrowing the lumen but traversable with the adult scope; the lesion was not resected — multiple cold-forceps biopsies were obtained (specimen A) and the site was tattooed distally with submucosal India ink for future localization. A 7 mm sessile polyp in the descending colon was removed by cold snare polypectomy and retrieved (specimen B). A 4 mm sessile polyp in the ascending colon was removed by cold snare polypectomy and retrieved (specimen C). Non-bleeding internal hemorrhoids were noted on retroflexion in the rectum, without stigmata of recent bleeding and insufficient to explain the presentation. No active arterial bleeding; contact bleeding from the sigmoid mass biopsy sites was self-limited. IMPRESSION: Ulcerated, partially obstructing sigmoid mass — suspicious for malignancy, biopsied and tattooed, pathology pending. Two colonic polyps removed. Incidental non-bleeding internal hemorrhoids. Findings likely account for the hematochezia; hemorrhoids are not the source. Awaiting histology.",
+  "findings": [
+    {"finding": "Partially circumferential ulcerated friable mass, ~3.5 cm, mildly narrowing lumen, suspicious for malignancy", "location": "sigmoid colon", "size_mm": 35, "action_taken": "cold-forceps biopsies obtained; distal submucosal India ink tattoo placed for localization; not resected", "specimen": "A"},
+    {"finding": "7 mm sessile polyp", "location": "descending colon", "size_mm": 7, "action_taken": "cold snare polypectomy, retrieved", "specimen": "B"},
+    {"finding": "4 mm sessile polyp", "location": "ascending colon", "size_mm": 4, "action_taken": "cold snare polypectomy, retrieved", "specimen": "C"},
+    {"finding": "Non-bleeding internal hemorrhoids, no stigmata of recent bleeding", "location": "rectum (retroflexion)", "action_taken": "none — not the source of bleeding"}
+  ],
+  "specimens": [
+    {"id": "A", "site": "sigmoid mass", "type": "cold-forceps biopsy"},
+    {"id": "B", "site": "descending colon polyp", "type": "polypectomy"},
+    {"id": "C", "site": "ascending colon polyp", "type": "polypectomy"}
+  ],
+  "pathology": {"status": "pending", "expected_back": "2026-07-28", "report": null, "diagnosis": null, "actionable": null},
+  "complications": [],
+  "disposition": "Discharged home same day in stable condition with escort. Post-polypectomy and post-biopsy precautions reviewed. Patient counseled that a sigmoid lesion suspicious for cancer was found and biopsied, that results are pending, and that a staging and treatment plan will follow once pathology returns. Return precautions given for heavy bleeding, severe abdominal pain, fever, or obstructive symptoms.",
+  "followup": [
+    {"recommendation": "Expedite and personally review sigmoid mass biopsy pathology (specimen A); contact patient with result and disclose the suspected diagnosis", "timeframe": "within 3-5 days of resulting", "owner": "GI", "status": "open"},
+    {"recommendation": "Review descending and ascending polyp pathology (specimens B, C) and incorporate into surveillance planning", "timeframe": "within 2 weeks", "owner": "GI", "status": "open"},
+    {"recommendation": "If pathology confirms malignancy: staging workup (CT chest/abdomen/pelvis, CEA) and referral to colorectal surgery and multidisciplinary oncology; do not delay pending polyp histology", "timeframe": "within 1-2 weeks of malignant result", "owner": "GI / colorectal surgery / oncology", "status": "open"},
+    {"recommendation": "Reconcile medication list: keep OTC ibuprofen held given GI bleeding and pending diagnosis; document fish oil as a supplement (not an anticoagulant). No prescription anticoagulant to resume", "timeframe": "at result call", "owner": "GI", "status": "open"},
+    {"recommendation": "Document confirmed first-degree family history of colorectal cancer; will drive surveillance interval independent of index findings", "timeframe": "now", "owner": "GI", "status": "open"}
+  ],
+  "planted_followup_items": [
+    {"id": "F1", "type": "pending_pathology", "description": "Sigmoid mass biopsy (specimen A) pathology pending — lesion is endoscopically suspicious for malignancy; result must be personally reviewed and communicated, and drives staging/referral", "urgency": "critical", "expected_action": "expedite pathology, disclose result to patient, initiate staging + surgical/oncology referral if malignant", "status": "open"},
+    {"id": "F2", "type": "critical_result", "description": "Ulcerated partially obstructing sigmoid mass suspicious for colorectal cancer in a 45M with FDR CRC — a critical endoscopic finding that must not be dropped even before histology returns", "urgency": "critical", "expected_action": "ensure patient is tracked to staging workup and multidisciplinary referral; confirm no loss to follow-up", "status": "open"},
+    {"id": "F3", "type": "referral", "description": "Colorectal surgery and oncology referral contingent on/anticipating malignant pathology; tattoo placed to localize lesion for surgical planning", "urgency": "urgent", "expected_action": "place referrals promptly once malignancy confirmed; communicate tattoo location", "status": "open"},
+    {"id": "F4", "type": "pending_pathology", "description": "Descending colon (7 mm, specimen B) and ascending colon (4 mm, specimen C) polypectomy pathology pending", "urgency": "routine", "expected_action": "review histology and factor into surveillance interval", "status": "open"},
+    {"id": "F5", "type": "surveillance_interval", "description": "Surveillance interval must account for confirmed first-degree relative with colorectal cancer plus index findings; interval cannot be set until all pathology returns", "urgency": "routine", "expected_action": "set and document surveillance interval after full pathology and any surgical pathology", "status": "open"},
+    {"id": "F6", "type": "med_reconciliation", "description": "OTC ibuprofen intentionally held; given active GI bleeding and pending malignancy workup, it should NOT be resumed without GI sign-off (do-not-resume guidance; ibuprofen is an NSAID, not an anticoagulant/antiplatelet, so no true anticoagulation hold occurred). Fish oil is a supplement (mislabeled by patient as a 'blood thinner'), no anticoagulant hold/resume applies", "urgency": "routine", "expected_action": "confirm ibuprofen remains held pending diagnosis; document fish oil as supplement, clarify no anticoagulant on board", "status": "open"},
+    {"id": "F7", "type": "incidental_finding", "description": "Non-bleeding internal hemorrhoids noted — incidental; explicitly NOT the source of the hematochezia, so the prior unconfirmed hemorrhoid label must not be used to close out the bleeding workup", "urgency": "routine", "expected_action": "document as incidental; ensure bleeding is attributed to the sigmoid lesion, not premature hemorrhoid closure", "status": "open"}
+  ],
+  "post_procedure_followup": {
+    "window": "day 0 to day 14",
+    "channels": ["automated_check_in", "patient_portal_message", "nurse_triage_call"],
+    "_note": "Patient-reported stream after the procedure — the inbound signal the LeftBehind product triages. Each contact is labeled ground truth so triage can be scored. SYNTHETIC.",
+    "contacts": [
+      {
+        "id": "C1",
+        "day": 1,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "Throat's a little scratchy and I'm real bloated and burping up gas since yesterday.",
+        "clinical_signal": "Expected post-procedure sore throat plus insufflation bloating/flatus",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; sore throat and gas/bloating are expected after colonoscopy with air insufflation and resolve within 24-48h. Walking and warm fluids help.",
+        "rationale": "Common benign post-endoscopy symptoms; no red flags, no escalation."
+      },
+      {
+        "id": "C2",
+        "day": 3,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "The doctor said they found something and took a sample. When will I know what it is? And can I take my ibuprofen again, my back is acting up.",
+        "clinical_signal": "Patient asking about pending biopsy result and whether to restart held OTC ibuprofen",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F1",
+        "expected_action": "Answer from the result: sigmoid biopsy pathology pending (expected ~2026-07-28); GI will personally call with the result and next steps. Advise ibuprofen stays HELD given the GI bleeding and pending workup; use acetaminophen for back pain instead and do not restart NSAID without GI sign-off.",
+        "rationale": "Answerable from the procedure result and follow-up plan; maps to the pending_pathology item and the ibuprofen do-not-resume reconciliation (F6). No red flag."
+      },
+      {
+        "id": "C3",
+        "day": 6,
+        "channel": "automated_check_in",
+        "type": "question",
+        "verbatim": "Saw a tiny bit of pink on the toilet paper once today, no real blood. Should I worry?",
+        "clinical_signal": "Minor self-limited spotting after cold snare polypectomy / biopsy; no active bleeding, no hemodynamic symptoms",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; a small amount of pink spotting on the tissue after cold snare polypectomy and biopsy is expected and self-limited. Give return precautions: call or seek care for heavy or repeated red blood, clots, lightheadedness, or severe abdominal pain.",
+        "rationale": "Dangerous-sounding-but-benign: trivial one-time spotting after low-risk cold snare polypectomy is expected, not delayed post-polypectomy hemorrhage; reassure with clear escalation triggers."
+      }
+    ]
+  }
+}

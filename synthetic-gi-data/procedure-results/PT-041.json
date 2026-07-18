@@ -1,0 +1,109 @@
+{
+  "id": "gi-synth-0041::proc-result",
+  "_synthetic": true,
+  "_note": "MOCK procedure result for PT-041. No real patient. For PreChart/LeftBehind development/eval.",
+  "patient_id": "gi-synth-0041",
+  "procedure": {
+    "name": "Colonoscopy with biopsy",
+    "code": {"system": "http://snomed.info/sct", "code": "73761001", "display": "Colonoscopy (procedure)"},
+    "date": "2026-08-06T08:10:00-07:00",
+    "indication": "Iron-deficiency anemia (Hgb 9.1, MCV 76, ferritin 11) with positive fecal occult blood and unintentional weight loss (~10 lb/3 mo) in an 88-year-old — evaluation for occult GI blood loss/malignancy. Proceeded after documented goals-of-care/shared decision-making with POA daughter, cardiology, and PCP.",
+    "sedation": "Monitored anesthesia care (anesthesia-administered propofol), titrated for frailty and advanced age; hemodynamically stable throughout.",
+    "prep_quality": "Boston Bowel Prep Scale 6/9 (right 1, transverse 2, left 3) — adequate but suboptimal in the right colon; mucosa examined after additional washing/suctioning.",
+    "extent_reached": "Cecum (confirmed by appendiceal orifice and ileocecal valve); terminal ileum intubated.",
+    "withdrawal_time_min": 14,
+    "status": "completed"
+  },
+  "procedure_report": "PROCEDURE: Colonoscopy with cold-forceps biopsies. INDICATION: iron-deficiency anemia with positive FOBT and weight loss in an 88-year-old; occult GI blood loss/malignancy workup. CONSENT: informed consent obtained from healthcare POA (daughter) as surrogate given patient's moderate dementia; capacity for independent consent not established. ANTICOAGULATION: apixaban (patient confirmed on 5 mg PO BID per pharmacy bottle; chart had listed 2.5 mg BID — reconciled) held for 48 hours pre-procedure in coordination with cardiology; last dose morning of 2026-08-04. SEDATION: monitored anesthesia care (propofol). PREP: adequate but suboptimal in the right colon (BBPS 6). FINDINGS: The colonoscope was advanced to the cecum with terminal ileum intubation. In the ascending colon a partially circumferential, fungating, friable mass approximately 4 cm was identified, occupying roughly one-third to one-half of the luminal circumference, non-obstructing, with contact bleeding on gentle manipulation and no active spontaneous bleeding. The lumen remained traversable. Multiple cold-forceps biopsies (6) were obtained from the mass margin and sent to pathology (specimen A); the site was tattooed with sterile carbon ink distally for future localization. A separate 6 mm sessile polyp was noted in the sigmoid colon and removed by cold snare polypectomy (specimen B). Scattered non-bleeding diverticula were present in the sigmoid. The terminal ileum and the remainder of the examined colon were otherwise unremarkable. IMPRESSION: Fungating ~4 cm mass in the ascending colon, suspicious for malignancy — biopsied and tattooed, pathology pending; likely source of the iron-deficiency anemia and occult blood loss. 6 mm sigmoid polyp removed. Diverticulosis. PLAN: Expedite pathology; staging CT chest/abdomen/pelvis and CEA; multidisciplinary review with colorectal surgery and oncology in the context of goals of care and the patient's frailty/dementia; communicate results with POA.",
+  "findings": [
+    {"finding": "Fungating partially circumferential friable mass, ~4 cm, non-obstructing, contact bleeding — suspicious for malignancy", "location": "ascending colon", "size_mm": 40, "action_taken": "6 cold-forceps biopsies obtained; site tattooed distally", "specimen": "A"},
+    {"finding": "6 mm sessile polyp", "location": "sigmoid colon", "size_mm": 6, "action_taken": "cold snare polypectomy, retrieved", "specimen": "B"},
+    {"finding": "Diverticulosis, no stigmata of recent bleeding", "location": "sigmoid colon", "action_taken": "none"}
+  ],
+  "specimens": [
+    {"id": "A", "site": "ascending colon mass", "type": "cold-forceps biopsy"},
+    {"id": "B", "site": "sigmoid polyp", "type": "cold snare polypectomy"}
+  ],
+  "pathology": {"status": "pending", "expected_back": "2026-08-11", "report": null, "diagnosis": null, "actionable": true},
+  "complications": [],
+  "disposition": "Recovered from anesthesia without incident; discharged same day to assisted living with daughter/POA escort. Post-procedure and post-polypectomy precautions reviewed with daughter. Given the mass findings, results to be discussed with POA once pathology returns.",
+  "followup": [
+    {"recommendation": "Expedite and communicate ascending colon mass biopsy pathology to the POA; if malignant, coordinate multidisciplinary care in context of goals of care", "timeframe": "within 5-7 days", "owner": "GI", "status": "open"},
+    {"recommendation": "Obtain staging CT chest/abdomen/pelvis and CEA pending pathology; discuss with colorectal surgery and oncology", "timeframe": "1-2 weeks", "owner": "GI / PCP", "status": "open"},
+    {"recommendation": "Reconvene goals-of-care/shared decision-making with POA, cardiology, and PCP to determine extent of oncologic workup and treatment appropriate to frailty/dementia", "timeframe": "after pathology", "owner": "GI / PCP", "status": "open"},
+    {"recommendation": "Resume apixaban 48 hours post-procedure if no bleeding, and reconcile intended dose (5 mg vs 2.5 mg BID) with cardiology given low body weight ~47 kg and age >=80", "timeframe": "48 hours", "owner": "cardiology / GI", "status": "open"},
+    {"recommendation": "Review sigmoid polyp pathology; continue iron-deficiency anemia management/iron repletion independent of oncologic decisions", "timeframe": "within 2 weeks", "owner": "GI / PCP", "status": "open"}
+  ],
+  "planted_followup_items": [
+    {"id": "F1", "type": "critical_result", "description": "Ascending colon fungating ~4 cm mass suspicious for malignancy identified on colonoscopy — the likely source of the iron-deficiency anemia and occult bleeding; must not be dropped.", "urgency": "critical", "expected_action": "Ensure biopsy result is tracked and communicated to POA; escalate to multidisciplinary colorectal surgery/oncology review", "status": "open"},
+    {"id": "F2", "type": "pending_pathology", "description": "Ascending colon mass biopsy pathology (specimen A) pending — result determines diagnosis and drives staging/treatment decisions.", "urgency": "critical", "expected_action": "Track pathology, communicate result to POA, initiate staging if malignant", "status": "open"},
+    {"id": "F3", "type": "referral", "description": "Referral to colorectal surgery and oncology, plus staging CT chest/abdomen/pelvis and CEA, contingent on pathology and goals of care.", "urgency": "urgent", "expected_action": "Place referrals and staging orders once pathology confirms; frame within frailty/dementia goals of care", "status": "open"},
+    {"id": "F4", "type": "med_resume", "description": "Apixaban held 48h peri-procedurally (patient actually on 5 mg BID; chart listed 2.5 mg BID). Resumption after biopsy/polypectomy plus unresolved dose-reconciliation with cardiology (low weight ~47 kg, age >=80 favor reduced dose).", "urgency": "urgent", "expected_action": "Confirm safe resumption timing and reconcile intended apixaban dose with cardiology", "status": "open"},
+    {"id": "F5", "type": "pending_pathology", "description": "Sigmoid polyp pathology (specimen B) pending — determines polyp histology and any surveillance implications.", "urgency": "routine", "expected_action": "Review polyp histology; document any surveillance interval (subordinate to oncologic plan)", "status": "open"},
+    {"id": "F6", "type": "lab_followup", "description": "Iron-deficiency anemia (Hgb 9.1) with a friable contact-bleeding mass in a patient on full-dose DOAC — ongoing anemia/blood-loss risk requires Hgb monitoring and iron repletion independent of oncologic decisions.", "urgency": "urgent", "expected_action": "Monitor Hgb, arrange iron repletion (oral vs IV), set transfusion threshold, weigh anticoagulation net benefit", "status": "open"},
+    {"id": "F7", "type": "incidental_finding", "description": "Suboptimal right-colon prep (BBPS right segment 1) in the setting of a right-sided mass — if pathology is non-diagnostic or lesion incompletely characterized, consider repeat/cross-sectional imaging.", "urgency": "routine", "expected_action": "Ensure mass adequately characterized; consider repeat evaluation only if clinically warranted and consistent with goals of care", "status": "open"}
+  ],
+  "post_procedure_followup": {
+    "window": "day 0 to day 14",
+    "channels": ["automated_check_in", "patient_portal_message", "nurse_triage_call"],
+    "_note": "Patient-reported stream after the procedure — the inbound signal the LeftBehind product triages. Contacts are relayed by the daughter/POA given the patient's moderate dementia. Each contact is labeled ground truth so triage can be scored.",
+    "contacts": [
+      {
+        "id": "C1",
+        "day": 1,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "Mom's a little groggy today and says her throat feels scratchy, but she ate some breakfast at the home.",
+        "clinical_signal": "Expected residual post-anesthesia grogginess and mild post-endoscopy sore throat; tolerating intake",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; grogginess and sore throat are expected after sedation/scope and self-limited within 24-48h. Ensure hydration; call for fever, severe abdominal pain, or bleeding.",
+        "rationale": "Common benign post-endoscopy/sedation symptoms in a frail elderly patient; no escalation."
+      },
+      {
+        "id": "C2",
+        "day": 2,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "The assisted living nurse is asking when we should give Mom her apixaban again, and when we'll hear back about the biopsy from the growth you found.",
+        "clinical_signal": "POA asking about anticoagulation resumption timing and pending mass pathology",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F4",
+        "expected_action": "Answer from the plan: resume apixaban ~48h post-procedure if no bleeding, with dose to be reconciled with cardiology (5 mg vs 2.5 mg BID given low weight/age); pathology pending (~day 5), team will call POA with the result and next steps.",
+        "rationale": "Answerable from the follow-up plan; links to the med_resume item (F4) and touches pending pathology; safety-relevant but not urgent as long as no bleeding."
+      },
+      {
+        "id": "C3",
+        "day": 5,
+        "channel": "nurse_triage_call",
+        "type": "complaint",
+        "verbatim": "There was a little pink streak on the toilet paper once after her bowel movement this morning. She feels fine, no dizziness, and it hasn't happened again.",
+        "clinical_signal": "Minor self-limited spotting after cold-snare polypectomy of a small (6 mm) polyp; hemodynamically well, single episode",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; a small amount of pink/streaky blood once after a cold-snare polypectomy is common and self-limited. Give return precautions: call or seek care for repeated or large-volume bleeding, clots, dizziness, black stools, or lightheadedness — especially once apixaban is resumed.",
+        "rationale": "Dangerous-sounding-but-benign: minor one-time spotting after a small cold-snare polypectomy in a stable patient does not warrant escalation, but return precautions matter given resumed anticoagulation."
+      },
+      {
+        "id": "C4",
+        "day": 12,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "It's been almost two weeks and nobody has called us about Mom's biopsy from the growth. Should we be worried? What happens next?",
+        "clinical_signal": "POA following up on the pending mass pathology (expected back ~day 5); results should now be available and communicated",
+        "red_flag": false,
+        "ground_truth_disposition": "schedule",
+        "urgency": "routine",
+        "links_followup_item": "F2",
+        "expected_action": "Retrieve the specimen A pathology (expected back 2026-08-11) and schedule a call/visit with the POA to convey the result and next steps (staging, colorectal surgery/oncology review framed within goals of care). Ensure the result was not dropped.",
+        "rationale": "Loop-closure on the critical pending pathology; links to F2. Not a clinical emergency, but flags a possible dropped follow-up on a malignancy-suspicious result that must be actively closed."
+      }
+    ]
+  }
+}

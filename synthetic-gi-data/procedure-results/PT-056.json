@@ -1,0 +1,113 @@
+{
+  "id": "gi-synth-0056::proc-result",
+  "_synthetic": true,
+  "_note": "MOCK GI procedure result. No real patient. For PreChart development/eval. Clinically coherent with PT-056 referral (expedited colonoscopy for suspected new fistulizing IBD).",
+  "patient_id": "gi-synth-0056",
+  "procedure": {
+    "name": "Colonoscopy with ileal intubation and biopsies",
+    "code": {"system": "http://snomed.info/sct", "code": "73761001", "display": "Colonoscopy (procedure)"},
+    "date": "2026-07-23T09:10:00-05:00",
+    "indication": "Suspected new-onset inflammatory bowel disease (fistulizing phenotype); chronic bloody diarrhea, weight loss, perianal fistula, fecal calprotectin 890 ug/g — diagnostic colonoscopy to confirm diagnosis and obtain tissue",
+    "sedation": "Moderate sedation (midazolam 4 mg, fentanyl 100 mcg)",
+    "prep_quality": "Boston Bowel Prep Scale 7/9 — adequate",
+    "extent_reached": "Terminal ileum (successful ileal intubation via ileocecal valve, ~15 cm ileum examined)",
+    "withdrawal_time_min": 16,
+    "status": "completed"
+  },
+  "procedure_report": "PROCEDURE: Colonoscopy with ileal intubation and segmental biopsies. INDICATION: suspected new-onset inflammatory bowel disease, fistulizing phenotype; confirm diagnosis and map disease. SEDATION: moderate. PREP: adequate (BBPS 7). FINDINGS: The colonoscope was advanced to the cecum and the terminal ileum was intubated. TERMINAL ILEUM: multiple aphthous and larger linear ulcers with surrounding erythema and edema over ~15 cm of examined ileum; biopsies obtained. RIGHT/TRANSVERSE COLON: patchy erythema, loss of vascular pattern, scattered aphthous ulcers with intervening normal-appearing mucosa (skip lesions); biopsies obtained. LEFT COLON/SIGMOID: focal cobblestoning and a deep serpiginous ulcer, moderate friability; biopsies obtained. RECTUM: relative rectal sparing with mild patchy inflammation; biopsies obtained. PERIANAL/ANORECTAL: on retroflexion and external inspection, an external perianal opening with a fistulous tract and a skin tag were noted, consistent with perianal fistulizing disease. No active brisk bleeding; contact friability only. No large mass or stricture precluding passage; the scope traversed all segments. IMPRESSION: Discontinuous (skip) ileocolonic ulceration with cobblestoning, relative rectal sparing, and perianal fistulizing disease — endoscopic appearance highly consistent with Crohn's disease. Segmental biopsies obtained throughout for histologic confirmation. Correlate with histology and MR enterography.",
+  "findings": [
+    {"finding": "Multiple aphthous and linear ulcers with erythema/edema (active ileitis)", "location": "terminal ileum", "action_taken": "biopsies obtained", "specimen": "A"},
+    {"finding": "Patchy erythema, aphthous ulcers with skip areas of normal mucosa", "location": "right/transverse colon", "action_taken": "biopsies obtained", "specimen": "B"},
+    {"finding": "Cobblestoning and deep serpiginous ulcer, moderate friability", "location": "left colon/sigmoid", "action_taken": "biopsies obtained", "specimen": "C"},
+    {"finding": "Relative rectal sparing with mild patchy inflammation", "location": "rectum", "action_taken": "biopsies obtained", "specimen": "D"},
+    {"finding": "External perianal fistulous opening with skin tag (perianal fistulizing disease)", "location": "perianal/anorectal", "action_taken": "documented; anatomy to be further characterized on MR enterography/pelvis", "specimen": null}
+  ],
+  "specimens": [
+    {"id": "A", "site": "terminal ileum", "type": "mucosal biopsy"},
+    {"id": "B", "site": "right/transverse colon", "type": "mucosal biopsy"},
+    {"id": "C", "site": "left colon/sigmoid", "type": "mucosal biopsy"},
+    {"id": "D", "site": "rectum", "type": "mucosal biopsy"}
+  ],
+  "pathology": {"status": "pending", "expected_back": "2026-07-28", "report": null, "diagnosis": null, "actionable": null},
+  "complications": [],
+  "disposition": "Discharged home same day in stable condition with escort. Tolerated procedure well. Return precautions reviewed for heavy rectal bleeding, high fever, or severe abdominal pain.",
+  "followup": [
+    {"recommendation": "Review segmental biopsy histology to confirm Crohn's disease; contact patient with result. Endoscopic findings strongly consistent with Crohn's — update chart diagnosis from provisional to confirmed once histology returns and correct the prematurely-labeled 'confirmed' status", "timeframe": "within 1 week", "owner": "GI / IBD team", "status": "open"},
+    {"recommendation": "Complete MR enterography (pelvis) to map small-bowel extent and characterize perianal fistula anatomy prior to initiating therapy", "timeframe": "within 1-2 weeks", "owner": "GI / Radiology", "status": "open"},
+    {"recommendation": "Reinforce discontinuation of OTC ibuprofen/NSAIDs (may worsen intestinal inflammation); use acetaminophen for pain", "timeframe": "immediate/ongoing", "owner": "GI / patient", "status": "open"},
+    {"recommendation": "Refer to colorectal surgery for perianal fistula assessment (EUA / seton consideration) in conjunction with medical therapy", "timeframe": "within 2 weeks", "owner": "GI / Colorectal surgery", "status": "open"},
+    {"recommendation": "Initiate IBD treatment planning (biologic therapy given fistulizing phenotype); obtain pre-biologic workup (TB/hepatitis serologies), recheck hemoglobin and inflammatory markers, nutrition assessment for weight loss", "timeframe": "at pathology confirmation", "owner": "GI / IBD team", "status": "open"}
+  ],
+  "planted_followup_items": [
+    {"id": "F1", "type": "pending_pathology", "description": "Segmental ileocolonic and rectal biopsies (specimens A-D) pending — histology is the confirming step for the still-provisional Crohn's diagnosis and gates treatment initiation", "urgency": "urgent", "expected_action": "review histology, confirm/refute Crohn's, contact patient, update chart diagnosis label", "status": "open"},
+    {"id": "F2", "type": "known_lesion_followup", "description": "Endoscopic findings highly consistent with Crohn's disease with fistulizing perianal phenotype in a treatment-naive young patient — strongly suspected but not yet histologically confirmed; must be acted upon (not dropped) to start timely therapy and prevent complications", "urgency": "urgent", "expected_action": "escalate to IBD team for therapy planning once histology confirms; ensure patient is contacted", "status": "open"},
+    {"id": "F3", "type": "care_coordination", "description": "MR enterography (with pelvis) still outstanding — needed to define small-bowel extent and perianal fistula anatomy before therapy; an initial planned study, not yet performed", "urgency": "urgent", "expected_action": "schedule and complete MR enterography; review results", "status": "open"},
+    {"id": "F4", "type": "referral", "description": "Colorectal surgery referral for perianal fistula (EUA/seton) coordinated with medical therapy", "urgency": "urgent", "expected_action": "place and track surgical referral", "status": "open"},
+    {"id": "F5", "type": "med_reconciliation", "description": "NSAID (ibuprofen) discontinuation counseling — undocumented OTC ibuprofen use; patient is on no anticoagulant/antiplatelet (the reported 'blood thinner' is OTC fish oil), so nothing was held or resumed. Ensure patient stopped ibuprofen and is using acetaminophen instead", "urgency": "routine", "expected_action": "confirm NSAID cessation and document in med list", "status": "open"},
+    {"id": "F6", "type": "lab_followup", "description": "Pre-biologic workup and treatment initiation labs (TB/hepatitis serologies, recheck Hgb/CRP, nutrition assessment for weight loss)", "urgency": "routine", "expected_action": "order pre-biologic labs and nutrition referral ahead of therapy start", "status": "open"},
+    {"id": "F7", "type": "surveillance_interval", "description": "Establish IBD disease-monitoring/surveillance plan (including future colonoscopic reassessment/dysplasia surveillance appropriate to eventual disease duration and extent)", "urgency": "routine", "expected_action": "document longitudinal IBD monitoring plan once diagnosis confirmed", "status": "open"}
+  ],
+  "post_procedure_followup": {
+    "window": "day 0 to day 14",
+    "channels": ["automated_check_in", "patient_portal_message", "nurse_triage_call"],
+    "_note": "Patient-reported stream after the procedure — the inbound signal the LeftBehind product triages. Each contact is labeled ground truth so triage can be scored.",
+    "contacts": [
+      {
+        "id": "C1",
+        "day": 1,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "My throat's a little scratchy and I'm super gassy and bloated. Also saw a tiny bit of blood when I wiped — is that from the biopsies?",
+        "clinical_signal": "Expected post-endoscopy sore throat + insufflation bloating; minor spotting after multiple segmental biopsies with no volume or hemodynamic concern",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; sore throat, gas/bloating, and trace spotting after biopsies are expected and self-limited. Advise return precautions for heavy bleeding, fever, or severe pain.",
+        "rationale": "Dangerous-sounding-but-benign: a little blood after multiple biopsies with no volume, lightheadedness, or ongoing bleeding is expected — reassure with return precautions."
+      },
+      {
+        "id": "C2",
+        "day": 2,
+        "channel": "nurse_triage_call",
+        "type": "complication",
+        "verbatim": "Since last night my lower belly on the left has been really hurting, worse when I move, and I feel hot and shivery — I think I have a fever. It hurts to press on my stomach.",
+        "clinical_signal": "New severe localized abdominal pain with peritoneal features and fever 1-2 days post-colonoscopy with deep-ulcer biopsies — concern for perforation/microperforation or localized peritonitis",
+        "red_flag": true,
+        "ground_truth_disposition": "escalate",
+        "urgency": "emergent",
+        "links_followup_item": null,
+        "expected_action": "Escalate for immediate evaluation / ED referral; NPO, urgent exam, CBC and abdominal imaging (CT) to assess for perforation; involve GI and surgery.",
+        "rationale": "True complication contact: worsening localized abdominal pain with peritoneal signs and fever after biopsies of deeply ulcerated bowel is a red-flag post-procedure complication requiring emergent action."
+      },
+      {
+        "id": "C3",
+        "day": 4,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "When am I going to hear about my biopsy results, and when do I get that belly MRI scheduled?",
+        "clinical_signal": "Patient asking about pending pathology and the outstanding MR enterography",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F1",
+        "expected_action": "Answer from the result: pathology expected back ~2026-07-28, IBD team will call with histology and next steps; confirm MR enterography is being scheduled within 1-2 weeks.",
+        "rationale": "Answerable from the procedure result and follow-up plan; links to the pending_pathology item."
+      },
+      {
+        "id": "C4",
+        "day": 9,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "My cramps are acting up again — can I just take my ibuprofen for it, or should I stick with Tylenol?",
+        "clinical_signal": "Patient reconsidering NSAID use after being counseled to stop; NSAIDs can worsen IBD inflammation",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F5",
+        "expected_action": "Counsel to avoid ibuprofen/NSAIDs (may worsen intestinal inflammation); use acetaminophen; if pain uncontrolled, contact GI rather than resuming NSAIDs.",
+        "rationale": "Med-timing/med-choice question that maps to the NSAID-cessation reconciliation item; reinforce the counseling rather than allow NSAID resumption."
+      }
+    ]
+  }
+}

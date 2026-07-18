@@ -1,0 +1,88 @@
+{
+  "id": "gi-synth-0015::proc-result",
+  "_synthetic": true,
+  "_note": "MOCK procedure result. No real patient. For PreChart/LeftBehind development and eval.",
+  "patient_id": "gi-synth-0015",
+  "procedure": {
+    "name": "Esophagogastroduodenoscopy (EGD) with esophageal dilation",
+    "code": {"system": "http://snomed.info/sct", "code": "235135005", "display": "Esophagogastroduodenoscopy (procedure)"},
+    "date": "2026-08-06T09:10:00-07:00",
+    "indication": "Recurrent solid-food dysphagia from known distal peptic esophageal stricture (last dilated to 15 mm May 2025)",
+    "sedation": "Monitored anesthesia care (propofol), anesthesia-administered",
+    "prep_quality": "NPO since midnight — adequate for upper endoscopy",
+    "extent_reached": "Second portion of the duodenum",
+    "withdrawal_time_min": null,
+    "status": "completed"
+  },
+  "procedure_report": "PROCEDURE: EGD with esophageal dilation. INDICATION: recurrent solid-food dysphagia, known distal peptic esophageal stricture. SEDATION: MAC/propofol. PERIPROCEDURAL ANTICOAGULATION: apixaban 2.5 mg BID (corrected dose) held x 3 days pre-procedure per current CrCl obtained before scheduling; daily aspirin 81 mg held x 5 days in coordination with cardiology. Last apixaban dose documented prior to hold. FINDINGS: The esophagus demonstrated a smooth, tapered narrowing in the distal esophagus consistent with recurrent peptic stricture, luminal diameter approximately 10-11 mm, not comfortably traversable with the standard adult gastroscope on first pass. Mild distal esophagitis, LA grade A. Savary-Gilliard bougie dilation was performed in graded fashion to 15 mm with good effect and a positive dilation sign; the scope was subsequently passed easily. No mucosal tear beyond expected dilation effect, minimal self-limited oozing, no active bleeding at completion. The stomach and examined duodenum to the second portion were normal. Mucosal biopsies were obtained from the distal esophagus/stricture (specimen A) to exclude eosinophilic esophagitis and malignancy given recurrence, and to sample the LA grade A esophagitis. IMPRESSION: Recurrent distal peptic esophageal stricture, dilated to 15 mm with good result; LA grade A esophagitis. No malignancy grossly. Biopsies pending. No immediate complications.",
+  "findings": [
+    {"finding": "Recurrent distal peptic esophageal stricture, ~10-11 mm luminal diameter", "location": "distal esophagus", "size_mm": 10, "action_taken": "Savary-Gilliard bougie dilation to 15 mm, good effect", "specimen": "A"},
+    {"finding": "Reflux esophagitis, LA grade A", "location": "distal esophagus", "action_taken": "biopsy; continue high-dose PPI", "specimen": "A"},
+    {"finding": "Normal stomach and duodenum to D2", "location": "stomach/duodenum", "action_taken": "none"}
+  ],
+  "specimens": [{"id": "A", "site": "distal esophagus / stricture (includes LA grade A esophagitis mucosa)", "type": "mucosal biopsy (r/o EoE and malignancy)"}],
+  "pathology": {"status": "pending", "expected_back": "2026-08-11", "report": null, "diagnosis": null, "actionable": null},
+  "complications": [],
+  "disposition": "Discharged home same day in stable condition with escort. Post-dilation and post-biopsy precautions reviewed. Soft diet advanced as tolerated. Return precautions for chest pain, fever, odynophagia, inability to swallow saliva, hematemesis, or melena.",
+  "followup": [
+    {"recommendation": "Review distal esophageal biopsy pathology (r/o EoE / malignancy); call patient with result and document plan", "timeframe": "within 2 weeks", "owner": "GI", "status": "open"},
+    {"recommendation": "Resume apixaban 2.5 mg BID and aspirin 81 mg per cardiology-coordinated plan once post-dilation bleeding risk acceptable (typically 24-48 h if no bleeding)", "timeframe": "24-48 hours", "owner": "GI / cardiology / patient", "status": "open"},
+    {"recommendation": "Continue omeprazole 40 mg every morning; repeat EGD with dilation as needed for recurrent dysphagia", "timeframe": "PRN / as symptoms recur", "owner": "GI", "status": "open"}
+  ],
+  "planted_followup_items": [
+    {"id": "F1", "type": "pending_pathology", "description": "Distal esophageal/stricture biopsy pending to exclude eosinophilic esophagitis and malignancy given recurrent stricture; result must be communicated and drive further management", "urgency": "routine", "expected_action": "call patient with result, document EoE/malignancy exclusion and next steps", "status": "open"},
+    {"id": "F2", "type": "med_resume", "description": "Resume held apixaban 2.5 mg BID (corrected reduced dose) after higher-bleed-risk dilation, coordinated with cardiology and keyed to bleeding risk; on a DOAC so resumption timing is safety-critical", "urgency": "urgent", "expected_action": "confirm and document safe apixaban resumption date/time with cardiology", "status": "open"},
+    {"id": "F3", "type": "med_resume", "description": "Resume held aspirin 81 mg after dilation per cardiology plan; additive bleed risk was the reason for hold", "urgency": "routine", "expected_action": "confirm aspirin resumption timing with cardiology", "status": "open"},
+    {"id": "F4", "type": "surveillance_interval", "description": "Recurrent peptic stricture pattern (second symptomatic recurrence) — establish repeat dilation / EGD plan and PPI optimization for recurrent dysphagia", "urgency": "routine", "expected_action": "set PRN repeat-dilation plan and reinforce high-dose PPI adherence", "status": "open"},
+    {"id": "F5", "type": "complication_watch", "description": "Post-dilation perforation/bleeding watch, heightened by periprocedural DOAC and antiplatelet exposure", "urgency": "urgent", "expected_action": "monitor for chest pain, fever, odynophagia, hematemesis, melena; act if positive", "status": "open"}
+  ],
+  "post_procedure_followup": {
+    "window": "day 0 to day 14",
+    "channels": ["automated_check_in", "patient_portal_message", "nurse_triage_call"],
+    "_note": "Patient-reported stream after the procedure — the inbound signal the LeftBehind product triages. Each contact is labeled ground truth so triage can be scored. SYNTHETIC.",
+    "contacts": [
+      {
+        "id": "C1",
+        "day": 1,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "My throat feels scratchy and swallowing is a little sore today, but water and soft food are going down fine.",
+        "clinical_signal": "Expected post-EGD/post-dilation sore throat and transient odynophagia; tolerating liquids and soft diet, no obstruction",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; mild sore throat and swallowing tenderness are expected after scope + dilation and settle over 24-72h. Advise soft diet, fluids, and return precautions for inability to swallow saliva, chest pain, or fever.",
+        "rationale": "Common benign post-dilation symptoms with preserved swallowing; no red flag for perforation."
+      },
+      {
+        "id": "C2",
+        "day": 2,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "When will I hear about the biopsy from my esophagus, and when is it safe for me to start my apixaban and baby aspirin again?",
+        "clinical_signal": "Patient asking about pending pathology and anticoagulant/antiplatelet resumption timing",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F1",
+        "expected_action": "Answer from the result: biopsies pending (~day 5, expected 2026-08-11); team will call with result and plan. Confirm apixaban 2.5 mg BID and aspirin 81 mg resumption timing per the cardiology-coordinated plan (typically 24-48h if no bleeding).",
+        "rationale": "Answerable from the procedure result and follow-up plan; links to pending_pathology (F1) and the med_resume items (F2/F3)."
+      },
+      {
+        "id": "C3",
+        "day": 6,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "I feel a little bloated and burpy since the test, but the swallowing is already better than before — meat went down okay tonight.",
+        "clinical_signal": "Expected post-endoscopy insufflation bloating; improving dysphagia consistent with successful dilation",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; bloating/gas from insufflation is self-limited, and improved solid-food swallowing reflects a good dilation result. Reinforce omeprazole adherence and return precautions.",
+        "rationale": "Benign insufflation symptom with clinical improvement; no escalation warranted."
+      }
+    ]
+  }
+}

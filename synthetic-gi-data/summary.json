@@ -1,0 +1,608 @@
+{
+ "name": "synthetic-gi-dataset",
+ "records": 60,
+ "target": 60,
+ "synthetic": true,
+ "index": [
+  {
+   "pt": "PT-001",
+   "id": "gi-synth-0060::enc-2026-0060",
+   "date": "2026-07-18",
+   "visit_title": "GI clinic — pre-procedure consult for average-risk screening colonoscopy",
+   "gender": "female",
+   "birth_date": "1974-03-22",
+   "fhir_resources": 14,
+   "discrepancies": 5
+  },
+  {
+   "pt": "PT-002",
+   "id": "gi-synth-0002::enc-2026-0002",
+   "date": "2026-07-18",
+   "visit_title": "GI clinic — pre-procedure consult for average-risk screening colonoscopy (overdue)",
+   "gender": "male",
+   "birth_date": "1964-09-03",
+   "fhir_resources": 16,
+   "discrepancies": 5
+  },
+  {
+   "pt": "PT-003",
+   "id": "gi-synth-0003::enc-2026-0003",
+   "date": "2026-07-18",
+   "visit_title": "GI clinic — pre-procedure consult for 5-year surveillance colonoscopy (prior tubular adenomas)",
+   "gender": "female",
+   "birth_date": "1968-03-22",
+   "fhir_resources": 20,
+   "discrepancies": 5
+  },
+  {
+   "pt": "PT-004",
+   "id": "gi-synth-0004::enc-2026-0004",
+   "date": "2026-07-18",
+   "visit_title": "GI clinic — pre-procedure consult for surveillance colonoscopy (prior sessile serrated polyp)",
+   "gender": "male",
+   "birth_date": "1959-03-22",
+   "fhir_resources": 17,
+   "discrepancies": 5
+  },
+  {
+   "pt": "PT-005",
+   "id": "gi-synth-0005::enc-2026-0005",
+   "date": "2026-07-18",
+   "visit_title": "GI clinic — pre-procedure consult for diagnostic colonoscopy; iron-deficiency anemia workup",
+   "gender": "female",
+   "birth_date": "1977-02-11",
+   "fhir_resources": 20,
+   "discrepancies": 7
+  },
+  {
+   "pt": "PT-006",
+   "id": "gi-synth-0006::enc-2026-0006",
+   "date": "2026-07-18",
+   "visit_title": "GI clinic — pre-procedure consult for diagnostic colonoscopy; alarm features (weight loss + stool caliber change)",
+   "gender": "male",
+   "birth_date": "1955-02-09",
+   "fhir_resources": 18,
+   "discrepancies": 7
+  },
+  {
+   "pt": "PT-007",
+   "id": "gi-synth-0007::enc-2026-0007",
+   "date": "2026-07-18",
+   "visit_title": "GI clinic — pre-procedure consult for average-risk screening colonoscopy; sedation anxiety and anesthesia-nausea history",
+   "gender": "female",
+   "birth_date": "1971-03-05",
+   "fhir_resources": 15,
+   "discrepancies": 5
+  },
+  {
+   "pt": "PT-008",
+   "id": "gi-synth-0008::enc-2026-0008",
+   "date": "2026-07-16",
+   "visit_title": "GI clinic — pre-procedure consult for diagnostic colonoscopy, hematochezia x2 weeks",
+   "gender": "male",
+   "birth_date": "1980-11-03",
+   "fhir_resources": 14,
+   "discrepancies": 6
+  },
+  {
+   "pt": "PT-009",
+   "id": "gi-synth-0009::enc-2026-0009",
+   "date": "2026-07-18",
+   "visit_title": "GI clinic — first-time screening colonoscopy consult in a 76-year-old (USPSTF gray-zone shared decision)",
+   "gender": "female",
+   "birth_date": "1950-03-22",
+   "fhir_resources": 16,
+   "discrepancies": 5
+  },
+  {
+   "pt": "PT-010",
+   "id": "gi-synth-0010::enc-2026-0010",
+   "date": "2026-07-18",
+   "visit_title": "GI clinic — average-risk screening colonoscopy pre-procedure consult; religious fasting and prep-timing logistics",
+   "gender": "male",
+   "birth_date": "1976-03-05",
+   "fhir_resources": 11,
+   "discrepancies": 5
+  },
+  {
+   "pt": "PT-011",
+   "id": "gi-synth-0011::enc-2026-0011",
+   "date": "2026-07-18",
+   "visit_title": "GI clinic — surveillance colonoscopy planning with anticoagulation reconciliation (referral says 'no anticoagulation' vs. pharmacy warfarin)",
+   "gender": "female",
+   "birth_date": "1958-03-22",
+   "fhir_resources": 17,
+   "discrepancies": 5
+  },
+  {
+   "pt": "PT-012",
+   "id": "gi-synth-0012::enc-2026-0012",
+   "date": "2026-07-15",
+   "visit_title": "GI clinic — pre-procedure consult for FIT-positive diagnostic colonoscopy",
+   "gender": "male",
+   "birth_date": "1963-01-22",
+   "fhir_resources": 17,
+   "discrepancies": 5
+  },
+  {
+   "pt": "PT-013",
+   "id": "gi-synth-0013::enc-2026-0013",
+   "date": "2026-07-18",
+   "visit_title": "GI clinic — pre-procedure consult for EGD, refractory GERD (rule out erosive disease/Barrett's)",
+   "gender": "female",
+   "birth_date": "1982-03-09",
+   "fhir_resources": 15,
+   "discrepancies": 6
+  },
+  {
+   "pt": "PT-014",
+   "id": "gi-synth-0014::enc-2026-0014",
+   "date": "2026-07-18",
+   "visit_title": "GI clinic — pre-procedure consult for EGD; progressive solid-food dysphagia with weight loss (ALARM)",
+   "gender": "male",
+   "birth_date": "1966-11-08",
+   "fhir_resources": 16,
+   "discrepancies": 7
+  },
+  {
+   "pt": "PT-015",
+   "id": "gi-synth-0015::enc-2026-0015",
+   "date": "2026-07-18",
+   "visit_title": "GI clinic — pre-procedure consult for EGD with possible esophageal dilation; anticoagulation hold planning on apixaban",
+   "gender": "female",
+   "birth_date": "1959-11-22",
+   "fhir_resources": 21,
+   "discrepancies": 8
+  },
+  {
+   "pt": "PT-016",
+   "id": "gi-synth-0016::enc-2026-0016",
+   "date": "2026-07-18",
+   "visit_title": "GI clinic — pre-procedure consult for diagnostic EGD, positive celiac serology and iron deficiency",
+   "gender": "male",
+   "birth_date": "1988-03-12",
+   "fhir_resources": 17,
+   "discrepancies": 6
+  },
+  {
+   "pt": "PT-017",
+   "id": "gi-synth-0017::enc-2026-0017",
+   "date": "2026-07-16",
+   "visit_title": "GI clinic — pre-procedure consult for EGD variceal screening in NASH cirrhosis (Child-Pugh B)",
+   "gender": "female",
+   "birth_date": "1953-11-30",
+   "fhir_resources": 22,
+   "discrepancies": 9
+  },
+  {
+   "pt": "PT-018",
+   "id": "gi-synth-0018::enc-2026-0018",
+   "date": "2026-07-18",
+   "visit_title": "GI clinic — pre-procedure consult for EGD, suspected eosinophilic esophagitis after food impaction",
+   "gender": "male",
+   "birth_date": "1997-03-10",
+   "fhir_resources": 19,
+   "discrepancies": 7
+  },
+  {
+   "pt": "PT-019",
+   "id": "gi-synth-0019::enc-2026-0019",
+   "date": "2026-07-18",
+   "visit_title": "GI clinic — urgent pre-EGD consult for resolved coffee-ground emesis in an 84-year-old on a DOAC",
+   "gender": "female",
+   "birth_date": "1941-12-02",
+   "fhir_resources": 20,
+   "discrepancies": 6
+  },
+  {
+   "pt": "PT-020",
+   "id": "gi-synth-0020::enc-2026-0020",
+   "date": "2026-07-18",
+   "visit_title": "GI clinic — pre-procedure consult for EGD, refractory H. pylori for biopsy/culture-guided therapy",
+   "gender": "male",
+   "birth_date": "1979-02-11",
+   "fhir_resources": 18,
+   "discrepancies": 8
+  },
+  {
+   "pt": "PT-021",
+   "id": "gi-synth-0021::enc-2026-0021",
+   "date": "2026-07-18",
+   "visit_title": "GI clinic — surveillance colonoscopy pre-procedure consult with high-complexity anticoagulation (mechanical mitral valve)",
+   "gender": "female",
+   "birth_date": "1952-03-09",
+   "fhir_resources": 21,
+   "discrepancies": 6
+  },
+  {
+   "pt": "PT-022",
+   "id": "gi-synth-0022::enc-2026-0022",
+   "date": "2026-07-18",
+   "visit_title": "GI clinic — pre-procedure consult for colonoscopy (FIT positive) in patient on DAPT after recent drug-eluting stent",
+   "gender": "male",
+   "birth_date": "1963-11-05",
+   "fhir_resources": 25,
+   "discrepancies": 7
+  },
+  {
+   "pt": "PT-023",
+   "id": "gi-synth-0023::enc-2026-0023",
+   "date": "2026-07-15",
+   "visit_title": "GI clinic — surveillance colonoscopy pre-procedure consult; verify anticoagulation status",
+   "gender": "female",
+   "birth_date": "1957-03-22",
+   "fhir_resources": 19,
+   "discrepancies": 5
+  },
+  {
+   "pt": "PT-024",
+   "id": "gi-synth-0024::enc-2026-0024",
+   "date": "2026-07-18",
+   "visit_title": "GI clinic — pre-procedure consult for colonoscopy in anemia workup; high-risk anticoagulation on renally-cleared DOAC with CKD4",
+   "gender": "male",
+   "birth_date": "1948-02-09",
+   "fhir_resources": 20,
+   "discrepancies": 6
+  },
+  {
+   "pt": "PT-025",
+   "id": "gi-synth-0025::enc-2026-0025",
+   "date": "2026-07-18",
+   "visit_title": "GI clinic — pre-procedure consult for screening colonoscopy; medication/anticoagulation review",
+   "gender": "female",
+   "birth_date": "1969-03-22",
+   "fhir_resources": 16,
+   "discrepancies": 5
+  },
+  {
+   "pt": "PT-026",
+   "id": "gi-synth-0026::enc-2026-0026",
+   "date": "2026-07-18",
+   "visit_title": "GI clinic — pre-procedure consult for urgent bidirectional endoscopy; iron-deficiency anemia, guaiac-positive stool, DOAC management",
+   "gender": "male",
+   "birth_date": "1945-02-09",
+   "fhir_resources": 22,
+   "discrepancies": 7
+  },
+  {
+   "pt": "PT-027",
+   "id": "gi-synth-0027::enc-2026-0027",
+   "date": "2026-07-18",
+   "visit_title": "GI clinic — pre-procedure consult for surveillance colonoscopy in patient on DAPT 2 months post-DES",
+   "gender": "female",
+   "birth_date": "1972-02-09",
+   "fhir_resources": 20,
+   "discrepancies": 7
+  },
+  {
+   "pt": "PT-028",
+   "id": "gi-synth-0028::enc-2026-0028",
+   "date": "2026-07-18",
+   "visit_title": "GI clinic — pre-procedure consult for colonoscopy after positive FIT; medication reconciliation of reported 'blood thinner'",
+   "gender": "male",
+   "birth_date": "1961-03-09",
+   "fhir_resources": 18,
+   "discrepancies": 5
+  },
+  {
+   "pt": "PT-029",
+   "id": "gi-synth-0029::enc-2026-0029",
+   "date": "2026-07-18",
+   "visit_title": "GI clinic — ERCP pre-procedure consult for choledocholithiasis after resolved gallstone pancreatitis",
+   "gender": "female",
+   "birth_date": "1964-11-03",
+   "fhir_resources": 20,
+   "discrepancies": 6
+  },
+  {
+   "pt": "PT-030",
+   "id": "gi-synth-0030::enc-2026-0030",
+   "date": "2026-07-18",
+   "visit_title": "GI pre-procedure consult — acute cholangitis, urgent/emergent ERCP; anticoagulation timing decision",
+   "gender": "male",
+   "birth_date": "1956-01-15",
+   "fhir_resources": 24,
+   "discrepancies": 6
+  },
+  {
+   "pt": "PT-031",
+   "id": "gi-synth-0031::enc-2026-0031",
+   "date": "2026-07-18",
+   "visit_title": "GI clinic — pre-procedure consult for EUS-FNA of pancreatic head mass with painless jaundice",
+   "gender": "female",
+   "birth_date": "1966-11-30",
+   "fhir_resources": 21,
+   "discrepancies": 7
+  },
+  {
+   "pt": "PT-032",
+   "id": "gi-synth-0032::enc-2026-0032",
+   "date": "2026-07-15",
+   "visit_title": "GI clinic — pre-procedure consult for EUS of incidental 14 mm pancreatic cyst",
+   "gender": "male",
+   "birth_date": "1978-03-09",
+   "fhir_resources": 16,
+   "discrepancies": 6
+  },
+  {
+   "pt": "PT-033",
+   "id": "gi-synth-0033::enc-2026-0033",
+   "date": "2026-07-18",
+   "visit_title": "GI clinic — pre-procedure consult for scheduled ERCP biliary plastic stent exchange; antiplatelet management review",
+   "gender": "female",
+   "birth_date": "1949-03-22",
+   "fhir_resources": 21,
+   "discrepancies": 6
+  },
+  {
+   "pt": "PT-034",
+   "id": "gi-synth-0034::enc-2026-0034",
+   "date": "2026-07-18",
+   "visit_title": "GI clinic — pre-procedure ERCP consult for choledocholithiasis in altered (Roux-en-Y) anatomy",
+   "gender": "male",
+   "birth_date": "1985-02-11",
+   "fhir_resources": 20,
+   "discrepancies": 6
+  },
+  {
+   "pt": "PT-035",
+   "id": "gi-synth-0035::enc-2026-0035",
+   "date": "2026-07-18",
+   "visit_title": "GI clinic — pre-procedure consult for EUS of an incidental gastric subepithelial lesion",
+   "gender": "female",
+   "birth_date": "1962-03-09",
+   "fhir_resources": 15,
+   "discrepancies": 5
+  },
+  {
+   "pt": "PT-036",
+   "id": "gi-synth-0036::enc-2026-0036",
+   "date": "2026-07-18",
+   "visit_title": "GI clinic — pre-ERCP consult for suspected PSC dominant stricture progression, brushings requested to exclude cholangiocarcinoma",
+   "gender": "male",
+   "birth_date": "1970-11-03",
+   "fhir_resources": 24,
+   "discrepancies": 8
+  },
+  {
+   "pt": "PT-037",
+   "id": "gi-synth-0037::enc-2026-0037",
+   "date": "2026-07-18",
+   "visit_title": "GI clinic — pre-procedure consult for surveillance colonoscopy with severe OSA / anesthesia risk stratification",
+   "gender": "female",
+   "birth_date": "1960-03-22",
+   "fhir_resources": 17,
+   "discrepancies": 5
+  },
+  {
+   "pt": "PT-038",
+   "id": "gi-synth-0038::enc-2026-0038",
+   "date": "2026-07-18",
+   "visit_title": "GI clinic — EGD planning for dysphagia in high-anesthesia-risk COPD/afib patient",
+   "gender": "male",
+   "birth_date": "1953-02-09",
+   "fhir_resources": 22,
+   "discrepancies": 8
+  },
+  {
+   "pt": "PT-039",
+   "id": "gi-synth-0039::enc-2026-0039",
+   "date": "2026-07-18",
+   "visit_title": "GI clinic — pre-procedure consult for colonoscopy after positive FIT in patient with HFrEF (EF 25%) and ICD",
+   "gender": "female",
+   "birth_date": "1968-03-22",
+   "fhir_resources": 26,
+   "discrepancies": 6
+  },
+  {
+   "pt": "PT-040",
+   "id": "gi-synth-0040::enc-2026-0040",
+   "date": "2026-07-18",
+   "visit_title": "GI clinic — pre-procedure consult for EGD + colonoscopy (anemia workup); triple anesthesia risk and GLP-1 timing review",
+   "gender": "male",
+   "birth_date": "1975-02-11",
+   "fhir_resources": 21,
+   "discrepancies": 7
+  },
+  {
+   "pt": "PT-041",
+   "id": "gi-synth-0041::enc-2026-0041",
+   "date": "2026-07-16",
+   "visit_title": "GI clinic — pre-procedure consult for possible colonoscopy in frail 88F with anemia, guaiac-positive stool, dementia, and anticoagulation (goals-of-care review)",
+   "gender": "female",
+   "birth_date": "1938-03-22",
+   "fhir_resources": 24,
+   "discrepancies": 9
+  },
+  {
+   "pt": "PT-042",
+   "id": "gi-synth-0042::enc-2026-0042",
+   "date": "2026-07-18",
+   "visit_title": "GI clinic — pre-procedure consult for EGD (GERD) with propofol allergy adjudication",
+   "gender": "male",
+   "birth_date": "1980-02-11",
+   "fhir_resources": 15,
+   "discrepancies": 4
+  },
+  {
+   "pt": "PT-043",
+   "id": "gi-synth-0043::enc-2026-0043",
+   "date": "2026-07-18",
+   "visit_title": "GI clinic — pre-procedure consult for POEM (achalasia type II, failed dilation, nutrition decline)",
+   "gender": "female",
+   "birth_date": "1990-02-11",
+   "fhir_resources": 18,
+   "discrepancies": 8
+  },
+  {
+   "pt": "PT-044",
+   "id": "gi-synth-0044::enc-2026-0044",
+   "date": "2026-07-14",
+   "visit_title": "GI clinic — pre-procedure consult for endoscopic submucosal dissection of gastric high-grade dysplasia; antiplatelet/bleeding-risk clearance",
+   "gender": "male",
+   "birth_date": "1956-09-22",
+   "fhir_resources": 19,
+   "discrepancies": 6
+  },
+  {
+   "pt": "PT-045",
+   "id": "gi-synth-0045::enc-2026-0045",
+   "date": "2026-07-18",
+   "visit_title": "GI clinic — pre-procedure consult for serial esophageal dilation (#4) of radiation stricture",
+   "gender": "female",
+   "birth_date": "1966-02-11",
+   "fhir_resources": 17,
+   "discrepancies": 5
+  },
+  {
+   "pt": "PT-046",
+   "id": "gi-synth-0046::enc-2026-0046",
+   "date": "2026-07-18",
+   "visit_title": "GI clinic — pre-procedure consult for PEG placement in ALS with progressive dysphagia (time-sensitive, respiratory-risk anesthesia planning)",
+   "gender": "male",
+   "birth_date": "1969-03-22",
+   "fhir_resources": 16,
+   "discrepancies": 9
+  },
+  {
+   "pt": "PT-047",
+   "id": "gi-synth-0047::enc-2026-0047",
+   "date": "2026-07-18",
+   "visit_title": "GI clinic — pre-procedure consult for colonoscopy; new hematochezia on rivaroxaban, referral mislabeled routine",
+   "gender": "female",
+   "birth_date": "1946-09-03",
+   "fhir_resources": 20,
+   "discrepancies": 7
+  },
+  {
+   "pt": "PT-048",
+   "id": "gi-synth-0048::enc-2026-0048",
+   "date": "2026-07-16",
+   "visit_title": "GI clinic — pre-procedure consult for Barrett's surveillance EGD; periprocedural anticoagulation review",
+   "gender": "male",
+   "birth_date": "1962-02-11",
+   "fhir_resources": 18,
+   "discrepancies": 6
+  },
+  {
+   "pt": "PT-049",
+   "id": "gi-synth-0049::enc-2026-0049",
+   "date": "2026-07-18",
+   "visit_title": "GI clinic — Day 4 post-EMR contact reporting melena and orthostatic symptoms on resumed apixaban",
+   "gender": "female",
+   "birth_date": "1973-02-09",
+   "fhir_resources": 17,
+   "discrepancies": 6
+  },
+  {
+   "pt": "PT-050",
+   "id": "gi-synth-0050::enc-2026-0050",
+   "date": "2026-07-18",
+   "visit_title": "GI clinic — post-ERCP day 1 visit; new epigastric pain radiating to back with vomiting (rule out post-ERCP pancreatitis)",
+   "gender": "male",
+   "birth_date": "1958-03-22",
+   "fhir_resources": 17,
+   "discrepancies": 6
+  },
+  {
+   "pt": "PT-051",
+   "id": "gi-synth-0051::enc-2026-0051",
+   "date": "2026-07-18",
+   "visit_title": "GI clinic — post-EGD with dilation follow-up (peptic stricture), routine expected course",
+   "gender": "female",
+   "birth_date": "1966-09-30",
+   "fhir_resources": 17,
+   "discrepancies": 4
+  },
+  {
+   "pt": "PT-052",
+   "id": "gi-synth-0052::enc-2026-0052",
+   "date": "2026-07-18",
+   "visit_title": "GI clinic — post-colonoscopy follow-up; patient asks when to restart 'blood thinner' (= fish oil)",
+   "gender": "male",
+   "birth_date": "1954-03-09",
+   "fhir_resources": 16,
+   "discrepancies": 4
+  },
+  {
+   "pt": "PT-053",
+   "id": "gi-synth-0053::enc-2026-0053",
+   "date": "2026-07-18",
+   "visit_title": "GI clinic — acute severe UC flare, pre-procedure planning for endoscopic severity grading + CMV biopsies",
+   "gender": "female",
+   "birth_date": "1979-03-22",
+   "fhir_resources": 18,
+   "discrepancies": 6
+  },
+  {
+   "pt": "PT-054",
+   "id": "gi-synth-0054::enc-2026-0054",
+   "date": "2026-07-18",
+   "visit_title": "GI clinic — pre-procedure consult for surveillance colonoscopy; antiplatelet hold and certified-interpreter consent",
+   "gender": "male",
+   "birth_date": "1951-03-09",
+   "fhir_resources": 18,
+   "discrepancies": 5
+  },
+  {
+   "pt": "PT-055",
+   "id": "gi-synth-0055::enc-2026-0055",
+   "date": "2026-07-18",
+   "visit_title": "GI clinic — pre-procedure consult for urgent ERCP in a pregnant patient with symptomatic choledocholithiasis",
+   "gender": "female",
+   "birth_date": "1993-02-10",
+   "fhir_resources": 20,
+   "discrepancies": 7
+  },
+  {
+   "pt": "PT-056",
+   "id": "gi-synth-0056::enc-2026-0056",
+   "date": "2026-07-16",
+   "visit_title": "GI clinic — pre-procedure consult for expedited colonoscopy, suspected new IBD (fistulizing phenotype)",
+   "gender": "male",
+   "birth_date": "2007-03-05",
+   "fhir_resources": 18,
+   "discrepancies": 6
+  },
+  {
+   "pt": "PT-057",
+   "id": "gi-synth-0057::enc-2026-0057",
+   "date": "2026-07-18",
+   "visit_title": "GI clinic — pre-procedure consult for screening colonoscopy with prior prep failure",
+   "gender": "female",
+   "birth_date": "1963-11-09",
+   "fhir_resources": 15,
+   "discrepancies": 6
+  },
+  {
+   "pt": "PT-058",
+   "id": "gi-synth-0058::enc-2026-0058",
+   "date": "2026-07-18",
+   "visit_title": "GI clinic — pre-procedure consult for EGD; possible melena on NSAIDs with hedged/collateral history",
+   "gender": "male",
+   "birth_date": "1969-11-30",
+   "fhir_resources": 15,
+   "discrepancies": 5
+  },
+  {
+   "pt": "PT-059",
+   "id": "gi-synth-0059::enc-2026-0059",
+   "date": "2026-07-18",
+   "visit_title": "GI clinic — pre-procedure consult for EUS-FNA of mediastinal (station 7) node, oncology-expedite",
+   "gender": "female",
+   "birth_date": "1955-09-22",
+   "fhir_resources": 23,
+   "discrepancies": 6
+  },
+  {
+   "pt": "PT-060",
+   "id": "gi-synth-0060::enc-2026-0060",
+   "date": "2026-07-18",
+   "visit_title": "GI clinic — first-time screening colonoscopy consult driven by strong family history of colorectal cancer",
+   "gender": "male",
+   "birth_date": "1961-03-09",
+   "fhir_resources": 15,
+   "discrepancies": 6
+  }
+ ]
+}

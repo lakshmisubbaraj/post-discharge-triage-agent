@@ -1,0 +1,94 @@
+{
+  "id": "gi-synth-0020::proc-result",
+  "_synthetic": true,
+  "_note": "MOCK procedure result. No real patient. For PreChart development/eval.",
+  "patient_id": "gi-synth-0020",
+  "procedure": {
+    "name": "Esophagogastroduodenoscopy (EGD) with gastric biopsy and H. pylori culture/susceptibility",
+    "code": {"system": "http://snomed.info/sct", "code": "1919006", "display": "Esophagogastroduodenoscopy (procedure)"},
+    "date": "2026-08-04T09:10:00-07:00",
+    "indication": "Treatment-refractory Helicobacter pylori infection with persistent dyspepsia; gastric biopsy for culture/susceptibility to guide next-line eradication",
+    "sedation": "Moderate sedation (midazolam 2 mg, fentanyl 75 mcg) with topical pharyngeal anesthesia",
+    "prep_quality": "NPO >8 hours; adequate mucosal visualization. Pantoprazole held 2 weeks pre-procedure per plan.",
+    "extent_reached": "Second portion of duodenum (D2)",
+    "withdrawal_time_min": null,
+    "status": "completed"
+  },
+  "procedure_report": "PROCEDURE: Esophagogastroduodenoscopy with gastric biopsies. INDICATION: refractory H. pylori infection, biopsy for culture and susceptibility. SEDATION: moderate (midazolam/fentanyl). The endoscope was passed under direct vision to the second portion of the duodenum. ESOPHAGUS: normal mucosa; Z-line at 40 cm, no esophagitis, no Barrett's, no stricture or mass. STOMACH: mild-to-moderate erythematous, non-erosive antral gastritis with a nodular appearance of the antral mucosa consistent with H. pylori-associated changes. No gastric ulcer, no mass, no bleeding, no stigmata of recent hemorrhage. Rugal folds normal. Retroflexion of the cardia and fundus unremarkable. DUODENUM: normal bulb and D2, no ulceration. Targeted biopsies obtained per Sydney protocol (antrum x2, incisura x1, body x2) — a subset submitted fresh for H. pylori culture and antimicrobial susceptibility, the remainder in formalin for histology. Rapid urease test (CLO) performed intra-procedurally. IMPRESSION: Nodular non-erosive antral gastritis consistent with persistent H. pylori infection; no ulcer, mass, or bleeding source. Gastric biopsies sent for histology and culture/susceptibility.",
+  "findings": [
+    {"finding": "Nodular non-erosive antral gastritis with mucosal erythema, consistent with H. pylori", "location": "gastric antrum", "action_taken": "biopsies obtained (Sydney protocol); subset for culture/susceptibility", "specimen": "A"},
+    {"finding": "Rapid urease (CLO) test", "location": "gastric antrum/body", "action_taken": "performed intra-procedurally — POSITIVE", "specimen": "B"},
+    {"finding": "Normal esophagus, no esophagitis/Barrett's/stricture/mass", "location": "esophagus", "action_taken": "none"},
+    {"finding": "Normal duodenal bulb and D2, no ulceration", "location": "duodenum", "action_taken": "none"},
+    {"finding": "No ulcer, mass, or bleeding source", "location": "stomach/duodenum", "action_taken": "none"}
+  ],
+  "specimens": [
+    {"id": "A", "site": "gastric antrum/incisura/body biopsies (Sydney protocol)", "type": "biopsy — histology + culture/susceptibility"},
+    {"id": "B", "site": "gastric mucosa", "type": "rapid urease (CLO) test"}
+  ],
+  "pathology": {"status": "pending", "expected_back": "2026-08-18", "report": "Rapid urease (CLO) test POSITIVE intra-procedurally. Histology and H. pylori culture with antimicrobial susceptibility pending (culture typically 10-14 days).", "diagnosis": null, "actionable": true},
+  "complications": [],
+  "disposition": "Discharged home same day in stable condition with escort. Tolerated procedure well. Instructed to remain off antibiotics until susceptibility-guided regimen is selected; may resume symptom control per clinic instructions.",
+  "followup": [
+    {"recommendation": "Review gastric biopsy histology and H. pylori culture/susceptibility results; call patient and select culture-guided salvage eradication regimen. AVOID amoxicillin-based regimens given penicillin allergy (itchy rash).", "timeframe": "within 2-3 weeks (culture 10-14 days)", "owner": "GI", "status": "open"},
+    {"recommendation": "Prescribe next-line H. pylori eradication therapy guided by susceptibility and penicillin allergy; confirm patient is off all antibiotics >=4 weeks before any test-of-cure", "timeframe": "after susceptibility available", "owner": "GI / ID", "status": "open"},
+    {"recommendation": "Test-of-cure (stool antigen or urea breath test) >=4 weeks after completing eradication therapy and >=2 weeks off PPI", "timeframe": "after treatment course", "owner": "GI", "status": "open"},
+    {"recommendation": "Resume/maintain pantoprazole for dyspepsia symptom control now that biopsies are obtained; hold PPI again 2 weeks before any test-of-cure", "timeframe": "now", "owner": "patient / GI", "status": "open"}
+  ],
+  "planted_followup_items": [
+    {"id": "F1", "type": "pending_pathology", "description": "Gastric biopsy H. pylori culture and antimicrobial susceptibility pending (10-14 days) — the entire purpose of the EGD; result must drive selection of the salvage eradication regimen", "urgency": "urgent", "expected_action": "review culture/susceptibility, call patient, prescribe susceptibility-guided regimen", "status": "open"},
+    {"id": "F2", "type": "pending_pathology", "description": "Gastric biopsy histology pending (Sydney protocol) — assess gastritis severity, intestinal metaplasia/atrophy, exclude MALT/dysplasia", "urgency": "routine", "expected_action": "review histology and document; escalate if atrophy/IM/dysplasia found", "status": "open"},
+    {"id": "F3", "type": "referral", "description": "Allergy-constrained salvage antibiotic selection — penicillin/amoxicillin allergy (rash) newly identified; must avoid amoxicillin-based regimens; ID co-management referral in place", "urgency": "routine", "expected_action": "select non-amoxicillin regimen with GI/ID per susceptibility", "status": "open"},
+    {"id": "F4", "type": "lab_followup", "description": "Test-of-cure required after salvage eradication (>=4 weeks post-therapy, >=2 weeks off PPI) — non-invasive stool antigen or urea breath test; repeat EGD only if therapy again fails or alarm features develop", "urgency": "routine", "expected_action": "schedule non-invasive test-of-cure and confirm eradication", "status": "open"},
+    {"id": "F5", "type": "med_reconciliation", "description": "Pantoprazole management — PPI was held 2 weeks pre-procedure for biopsy accuracy (not an anticoagulant hold); resume for symptom control now that biopsies are obtained, then re-hold 2 weeks before any test-of-cure to avoid false-negative", "urgency": "routine", "expected_action": "instruct patient on PPI resume/hold timing around test-of-cure", "status": "open"}
+  ],
+  "post_procedure_followup": {
+    "window": "day 0 to day 14",
+    "channels": ["automated_check_in", "patient_portal_message", "nurse_triage_call"],
+    "_note": "Patient-reported stream after the procedure — the inbound signal the LeftBehind product triages. Each contact is labeled ground truth so triage can be scored.",
+    "contacts": [
+      {
+        "id": "C1",
+        "day": 1,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "My throat feels scratchy and I've been kind of burpy and bloated since the camera test. Is that normal?",
+        "clinical_signal": "Expected post-EGD sore throat and insufflation bloating/belching after a diagnostic scope with biopsies",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; mild sore throat and gas/bloating are expected after EGD and settle within 24-48h. Warm fluids, lozenges; call for fever, worsening abdominal or chest pain, black stools, or vomiting blood.",
+        "rationale": "Common benign post-endoscopy symptoms after a diagnostic EGD; no complication, no escalation."
+      },
+      {
+        "id": "C2",
+        "day": 3,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "When will you know about the stomach biopsies, and what antibiotic will I get since I'm allergic to penicillin?",
+        "clinical_signal": "Patient asking about pending H. pylori culture/susceptibility timing and allergy-constrained salvage regimen",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F1",
+        "expected_action": "Answer from the result: culture/susceptibility takes about 10-14 days (expected ~2026-08-18); GI will call with results and choose a non-amoxicillin, susceptibility-guided regimen given the penicillin allergy. Stay off antibiotics until then.",
+        "rationale": "Answerable directly from the procedure result and follow-up plan; links to the pending culture/susceptibility item (F1) and the documented penicillin allergy."
+      },
+      {
+        "id": "C3",
+        "day": 6,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "Can I start taking my pantoprazole again for the burning, or am I supposed to keep it stopped?",
+        "clinical_signal": "Patient asking about PPI resumption timing after the biopsy hold",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F5",
+        "expected_action": "Answer: pantoprazole may be resumed now for symptom control since the biopsies are already obtained; it will need to be held again for 2 weeks before any future test-of-cure. Use antacid/H2 as needed in the meantime.",
+        "rationale": "Answerable from the medication-reconciliation follow-up (F5); PPI was held only for biopsy accuracy and can safely resume post-procedure."
+      }
+    ]
+  }
+}

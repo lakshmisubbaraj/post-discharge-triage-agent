@@ -1,0 +1,256 @@
+{
+  "id": "gi-synth-0026::proc-result",
+  "_synthetic": true,
+  "_note": "MOCK procedure result. No real patient. For PreChart development/eval. Clinically coherent with PT-026 referral (urgent bidirectional endoscopy for iron-deficiency anemia, guaiac-positive stool, melena, DOAC-managed).",
+  "patient_id": "gi-synth-0026",
+  "procedure": {
+    "name": "Bidirectional endoscopy (EGD + colonoscopy)",
+    "code": {
+      "coding": [
+        {
+          "system": "http://snomed.info/sct",
+          "code": "1919006",
+          "display": "Esophagogastroduodenoscopy (procedure)"
+        },
+        {
+          "system": "http://snomed.info/sct",
+          "code": "73761001",
+          "display": "Colonoscopy (procedure)"
+        }
+      ],
+      "text": "Bidirectional endoscopy (EGD + colonoscopy)"
+    },
+    "date": "2026-07-24T08:10:00-07:00",
+    "indication": "Iron-deficiency anemia (Hgb 8.4), guaiac-positive stool, ~2 weeks of melena \u2014 evaluation of GI blood loss, upper source suspected",
+    "sedation": "Monitored anesthesia care (propofol), anesthesiologist-directed given age 81, HFpEF, CKD3a; opioid-sparing (documented codeine intolerance)",
+    "prep_quality": "Boston Bowel Prep Scale 7/9 \u2014 adequate (right 2, transverse 3, left 2)",
+    "extent_reached": "EGD to second/third portion of duodenum; colonoscopy to cecum (confirmed by appendiceal orifice and ileocecal valve intubation)",
+    "withdrawal_time_min": 11,
+    "status": "completed"
+  },
+  "procedure_report": "PROCEDURE: Bidirectional endoscopy \u2014 esophagogastroduodenoscopy (EGD) followed by colonoscopy, same session. INDICATION: symptomatic iron-deficiency anemia (Hgb 8.4 g/dL), guaiac-positive stool, and ~2 weeks of melena; suspected upper GI blood loss. ANTICOAGULATION: patient on edoxaban (dose corrected to 30 mg daily); last dose held per periprocedural plan coordinated with cardiology; procedure performed on held DOAC. SEDATION: monitored anesthesia care (propofol). \n\nEGD FINDINGS: The esophagus was normal with a normal Z-line; no varices. The stomach was examined in forward and retroflexed views; no fundic or antral mass. In the duodenal bulb there was a single 12 mm ulcer with a non-bleeding visible vessel (Forrest IIa) and adherent clot. The clot was removed by targeted irrigation; combination endoscopic hemostasis was performed \u2014 dilute epinephrine injection (1:10,000) at the ulcer base followed by placement of two through-the-scope hemostatic clips to the visible vessel. Hemostasis was achieved with no active bleeding at completion. Antral and body biopsies were obtained to assess for H. pylori (rapid urease test placed; histology sent). The ulcer edge was not biopsied at this setting given recent hemostasis; interval healing EGD planned. \n\nCOLONOSCOPY FINDINGS: The colonoscope was advanced to the cecum. Moderate sigmoid diverticulosis without stigmata of recent bleeding. A single 6 mm sessile polyp in the ascending colon was removed by cold snare polypectomy and retrieved (specimen B). Terminal ileum intubated and normal. No colonic mass, no active bleeding source identified. \n\nIMPRESSION: Bleeding duodenal (bulbar) ulcer, Forrest IIa \u2014 successful endoscopic hemostasis (epinephrine + 2 clips); most likely source of melena and iron-deficiency anemia. Gastric biopsies for H. pylori (pending). 6 mm ascending colon polyp removed. Sigmoid diverticulosis. Start high-dose PPI.",
+  "findings": [
+    {
+      "finding": "Duodenal bulb ulcer, 12 mm, non-bleeding visible vessel with adherent clot (Forrest IIa)",
+      "location": "duodenal bulb",
+      "size_mm": 12,
+      "action_taken": "clot removed; dilute epinephrine injection + 2 hemostatic clips; hemostasis achieved",
+      "specimen": null
+    },
+    {
+      "finding": "Gastric antral/body mucosa \u2014 biopsies for H. pylori (RUT + histology)",
+      "location": "stomach",
+      "action_taken": "biopsy",
+      "specimen": "A"
+    },
+    {
+      "finding": "6 mm sessile polyp",
+      "location": "ascending colon",
+      "size_mm": 6,
+      "action_taken": "cold snare polypectomy, retrieved",
+      "specimen": "B"
+    },
+    {
+      "finding": "Diverticulosis, no stigmata of bleeding",
+      "location": "sigmoid colon",
+      "action_taken": "none"
+    },
+    {
+      "finding": "Normal esophagus and terminal ileum",
+      "location": "esophagus / terminal ileum",
+      "action_taken": "none"
+    }
+  ],
+  "specimens": [
+    {
+      "id": "A",
+      "site": "gastric antrum/body",
+      "type": "biopsy (H. pylori)"
+    },
+    {
+      "id": "B",
+      "site": "ascending colon polyp",
+      "type": "polypectomy"
+    }
+  ],
+  "pathology": {
+    "status": "pending",
+    "expected_back": "2026-07-29",
+    "report": null,
+    "diagnosis": null,
+    "actionable": null
+  },
+  "complications": [],
+  "disposition": "Admitted for overnight observation given high-risk ulcer (Forrest IIa), symptomatic anemia, and DOAC. IV pantoprazole (80 mg bolus then infusion), NPO then advanced. Type and screen; transfusion threshold Hgb <7 or if symptomatic (1 unit PRBC given periprocedurally for Hgb 7.6 with dyspnea). Hemodynamically stable at end of procedure.",
+  "followup": [
+    {
+      "recommendation": "Review gastric biopsy / H. pylori result; if positive, treat with eradication therapy and confirm cure with post-treatment testing",
+      "timeframe": "within 1 week",
+      "owner": "GI",
+      "status": "open"
+    },
+    {
+      "recommendation": "Review ascending colon polyp pathology; call patient and set colonoscopy surveillance interval",
+      "timeframe": "within 2 weeks",
+      "owner": "GI",
+      "status": "open"
+    },
+    {
+      "recommendation": "Anticoagulation (edoxaban 30 mg) resumption after high-risk ulcer hemostasis \u2014 restart timing must be coordinated with cardiology (AF, CHA2DS2-VASc 4) balancing rebleeding vs. thromboembolic risk; DO NOT resume without GI/cardiology sign-off",
+      "timeframe": "individualized, typically after hemostasis confirmed (often ~3-7 days)",
+      "owner": "GI / Cardiology",
+      "status": "open"
+    },
+    {
+      "recommendation": "High-dose PPI: IV then transition to oral twice daily; interval healing EGD in 6-8 weeks to confirm ulcer healing and exclude underlying malignancy",
+      "timeframe": "6-8 weeks",
+      "owner": "GI",
+      "status": "open"
+    },
+    {
+      "recommendation": "Continue IV iron repletion and monitor CBC; recheck hemoglobin",
+      "timeframe": "outpatient",
+      "owner": "GI / Hematology / PCP",
+      "status": "open"
+    },
+    {
+      "recommendation": "Review OTC fish oil use \u2014 discontinue periprocedurally / during active ulcer given bleeding risk",
+      "timeframe": "now",
+      "owner": "GI / PCP",
+      "status": "open"
+    }
+  ],
+  "planted_followup_items": [
+    {
+      "id": "F1",
+      "type": "critical_result",
+      "description": "High-risk bleeding duodenal ulcer (Forrest IIa, visible vessel) treated endoscopically in a patient on a DOAC (edoxaban) with symptomatic anemia \u2014 high rebleeding risk requiring inpatient monitoring and IV PPI",
+      "urgency": "critical",
+      "expected_action": "admit/observe, high-dose IV PPI, serial CBC, ensure rebleed plan communicated and documented",
+      "status": "open"
+    },
+    {
+      "id": "F2",
+      "type": "med_resume",
+      "description": "Edoxaban resumption after high-risk ulcer hemostasis \u2014 load-bearing decision balancing rebleeding vs. thromboembolic (AF, CHA2DS2-VASc 4, CKD3a) risk; correct dose is 30 mg daily (chart still shows stale 60 mg)",
+      "urgency": "critical",
+      "expected_action": "GI + cardiology jointly set restart date/dose; do not resume without sign-off; update chart to 30 mg",
+      "status": "open"
+    },
+    {
+      "id": "F3",
+      "type": "pending_pathology",
+      "description": "Gastric biopsy / H. pylori result (RUT + histology) pending \u2014 drives eradication therapy and rebleeding-risk reduction",
+      "urgency": "urgent",
+      "expected_action": "review result; if positive, prescribe eradication regimen and arrange test-of-cure",
+      "status": "open"
+    },
+    {
+      "id": "F4",
+      "type": "pending_pathology",
+      "description": "Ascending colon polypectomy pathology pending \u2014 determines colonoscopy surveillance interval",
+      "urgency": "routine",
+      "expected_action": "call patient with result + document surveillance interval",
+      "status": "open"
+    },
+    {
+      "id": "F5",
+      "type": "repeat_procedure",
+      "description": "Interval healing EGD in 6-8 weeks to confirm healing of the high-risk duodenal (bulbar) bleeding ulcer (Forrest IIa; ulcer edge not biopsied at index procedure)",
+      "urgency": "urgent",
+      "expected_action": "schedule repeat EGD with ulcer-edge biopsies at ~6-8 weeks",
+      "status": "open"
+    },
+    {
+      "id": "F6",
+      "type": "surveillance_interval",
+      "description": "Set colonoscopy surveillance interval once ascending polyp histology returns",
+      "urgency": "routine",
+      "expected_action": "document next colonoscopy date based on polyp pathology",
+      "status": "open"
+    },
+    {
+      "id": "F7",
+      "type": "lab_followup",
+      "description": "Ongoing anemia / rebleeding surveillance \u2014 symptomatic IDA, 1 unit PRBC given; continue IV iron and monitor hemoglobin trend",
+      "urgency": "urgent",
+      "expected_action": "serial CBC, continue IV iron repletion, transfuse per threshold, watch for recurrent melena/hemodynamic change",
+      "status": "open"
+    },
+    {
+      "id": "F8",
+      "type": "med_reconciliation",
+      "description": "OTC fish oil ('natural blood thinner') contributes to periprocedural bleeding risk and was not on the medication list",
+      "urgency": "routine",
+      "expected_action": "advise holding fish oil during active ulcer/anticoagulation; reconcile medication list",
+      "status": "open"
+    }
+  ],
+  "post_procedure_followup": {
+    "window": "day 0 to day 14",
+    "channels": [
+      "automated_check_in",
+      "patient_portal_message",
+      "nurse_triage_call"
+    ],
+    "_note": "SYNTHETIC. Patient-reported stream after the procedure \u2014 the inbound signal the LeftBehind product triages. Each contact is labeled ground truth so triage can be scored. No real patient.",
+    "contacts": [
+      {
+        "id": "C1",
+        "day": 1,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "My throat's a bit scratchy and I was pretty groggy and worn out yesterday after the anesthesia.",
+        "clinical_signal": "Expected post-endoscopy sore throat and residual sedation grogginess",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; mild sore throat and next-day grogginess after MAC are expected and self-limited. Push fluids, rest.",
+        "rationale": "Common benign post-procedure symptoms in an 81-year-old after MAC sedation; no escalation."
+      },
+      {
+        "id": "C2",
+        "day": 3,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "Nobody has called about my stomach biopsy yet. Also \u2014 when can I go back on my edoxaban? And is my fish oil okay to keep taking?",
+        "clinical_signal": "Patient asking about pending gastric/H. pylori pathology and about anticoagulation/fish-oil resumption timing after a high-risk ulcer",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F3",
+        "expected_action": "Answer from the record: gastric H. pylori pathology still pending (expected ~2026-07-29); team will call with result. Do NOT resume edoxaban or fish oil independently \u2014 restart date/dose is being set jointly by GI and cardiology (edoxaban 30 mg, not 60 mg); hold fish oil during active ulcer.",
+        "rationale": "Answerable from the procedure result and follow-up plan; links to pending pathology (F3) and the anticoagulation/med-reconciliation items (F2/F8)."
+      },
+      {
+        "id": "C3",
+        "day": 6,
+        "channel": "nurse_triage_call",
+        "type": "complication",
+        "verbatim": "I've had two black tarry bowel movements since last night and I felt dizzy and clammy when I stood up this morning.",
+        "clinical_signal": "Recurrent melena with orthostatic symptoms \u2014 rebleeding from the treated Forrest IIa duodenal ulcer in an anticoagulated, anemic patient",
+        "red_flag": true,
+        "ground_truth_disposition": "escalate",
+        "urgency": "emergent",
+        "links_followup_item": "F1",
+        "expected_action": "Escalate for immediate ED evaluation / same-day admission: recurrent melena + orthostasis after high-risk ulcer hemostasis. Ensure edoxaban and fish oil held, IV access, type & crossmatch, serial CBC, high-dose IV PPI, urgent repeat EGD for re-treatment.",
+        "rationale": "Recurrent melena plus a hemodynamic symptom after a Forrest IIa ulcer is high-risk rebleeding \u2014 the index critical result (F1) becoming an active emergency."
+      },
+      {
+        "id": "C4",
+        "day": 11,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "I felt so much better that I started my edoxaban back up on my own three days ago, and my fish oil too. That's fine, right?",
+        "clinical_signal": "Patient self-resumed anticoagulation and OTC antiplatelet fish oil early, without the planned GI/cardiology sign-off, after a high-risk bleeding ulcer",
+        "red_flag": true,
+        "ground_truth_disposition": "escalate",
+        "urgency": "urgent",
+        "links_followup_item": "F2",
+        "expected_action": "Escalate/counsel urgently: patient resumed edoxaban and fish oil against plan and before hemostasis-confirmed sign-off \u2014 elevated early-rebleeding risk. Contact same day, instruct to hold fish oil, confirm the coordinated GI/cardiology restart decision and correct dose (30 mg), assess for interval bleeding symptoms.",
+        "rationale": "Med-timing trap: benign-sounding self-report masks premature anticoagulant/antiplatelet resumption after a high-risk ulcer \u2014 the load-bearing resumption decision (F2) done wrong."
+      }
+    ]
+  }
+}

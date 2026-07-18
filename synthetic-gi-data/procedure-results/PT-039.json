@@ -1,0 +1,112 @@
+{
+  "id": "gi-synth-0039::proc-result",
+  "_synthetic": true,
+  "_note": "MOCK procedure result. No real patient. For PreChart/LeftBehind development/eval. Colonoscopy result for positive-FIT diagnostic workup in a high-acuity cardiac patient (HFrEF EF 25%, ICD, new AFib on apixaban).",
+  "patient_id": "gi-synth-0039",
+  "procedure": {
+    "name": "Colonoscopy",
+    "code": {"system": "http://snomed.info/sct", "code": "73761001", "display": "Colonoscopy (procedure)"},
+    "date": "2026-08-06T08:00:00-07:00",
+    "indication": "Positive fecal immunochemical test (FIT) — diagnostic colonoscopy",
+    "sedation": "Monitored anesthesia care (propofol) with anesthesiology present; selected over endoscopist-directed moderate sedation given HFrEF EF 25% and ICD. ICD managed per EP plan (magnet on standby, no reprogramming required for lower endoscopy). Continuous hemodynamic and telemetry monitoring.",
+    "prep_quality": "Boston Bowel Prep Scale 7/9 (right 2, transverse 2, left 3) — adequate; low-volume split-dose PEG used with attention to electrolyte and volume status given HFrEF and reduced-dose spironolactone",
+    "extent_reached": "Cecum (confirmed by appendiceal orifice, ileocecal valve, and terminal ileum intubation)",
+    "withdrawal_time_min": 14,
+    "status": "completed"
+  },
+  "procedure_report": "PROCEDURE: Colonoscopy with polypectomy. INDICATION: positive FIT (2026-06-28) in a 58-year-old woman with ischemic cardiomyopathy, HFrEF (EF 25%), single-chamber ICD, and new-onset atrial fibrillation. ANTICOAGULATION: apixaban 5 mg BID held for 3 days pre-procedure per plan coordinated with cardiology/EP (last dose morning of 2026-08-03); low-dose aspirin 81 mg continued through the procedure. SEDATION: monitored anesthesia care with anesthesiology present given cardiac risk; ICD managed per EP plan. PREP: adequate (BBPS 7). FINDINGS: The colonoscope was advanced to the cecum and the terminal ileum was intubated and appeared normal. A 9 mm pedunculated polyp was identified in the ascending colon and removed by snare polypectomy; a prophylactic hemoclip was placed on the stalk given interrupted anticoagulation. A 6 mm sessile polyp in the sigmoid colon was removed by cold snare. Two diminutive (2-3 mm) polyps in the descending colon were removed by cold biopsy forceps. Non-bleeding sigmoid diverticulosis was noted without stigmata of recent hemorrhage. Internal hemorrhoids, small, non-bleeding. No mass, no ulceration, and no active bleeding identified. All specimens retrieved and sent to pathology. IMPRESSION: Multiple colon polyps removed (ascending 9 mm pedunculated, sigmoid 6 mm, two descending diminutive); diverticulosis; internal hemorrhoids. Positive FIT most likely attributable to the polyps; no other bleeding source identified. Pathology pending. Given interrupted therapeutic anticoagulation and clip placement, delayed post-polypectomy bleeding risk counseled.",
+  "findings": [
+    {"finding": "9 mm pedunculated polyp", "location": "ascending colon", "size_mm": 9, "action_taken": "snare polypectomy, retrieved; prophylactic hemoclip placed on stalk", "specimen": "A"},
+    {"finding": "6 mm sessile polyp", "location": "sigmoid colon", "size_mm": 6, "action_taken": "cold snare polypectomy, retrieved", "specimen": "B"},
+    {"finding": "Two diminutive polyps (2-3 mm)", "location": "descending colon", "size_mm": 3, "action_taken": "cold forceps removal, retrieved", "specimen": "C"},
+    {"finding": "Diverticulosis, no stigmata of bleeding", "location": "sigmoid colon", "action_taken": "none"},
+    {"finding": "Small internal hemorrhoids, non-bleeding", "location": "rectum", "action_taken": "none"},
+    {"finding": "Terminal ileum normal", "location": "terminal ileum", "action_taken": "inspection"}
+  ],
+  "specimens": [
+    {"id": "A", "site": "ascending colon polyp (9 mm pedunculated)", "type": "polypectomy"},
+    {"id": "B", "site": "sigmoid colon polyp (6 mm)", "type": "polypectomy"},
+    {"id": "C", "site": "descending colon diminutive polyps (x2)", "type": "polypectomy"}
+  ],
+  "pathology": {"status": "pending", "expected_back": "2026-08-11", "report": null, "diagnosis": null, "actionable": null},
+  "complications": [],
+  "disposition": "Discharged home same day in stable condition with escort after extended monitored recovery given cardiac history; hemodynamically stable, at cardiac baseline, no arrhythmia during recovery. Post-polypectomy precautions reviewed, including delayed-bleeding warning signs given interrupted anticoagulation. Instructed NOT to restart apixaban until explicitly cleared by GI/cardiology.",
+  "followup": [
+    {"recommendation": "Review pathology on all polypectomy specimens (ascending 9 mm, sigmoid 6 mm, descending x2); call patient with results and set surveillance interval per histology/size/number", "timeframe": "within 2 weeks", "owner": "GI", "status": "open"},
+    {"recommendation": "Resume apixaban 5 mg BID after post-polypectomy bleeding risk window, coordinated with cardiology/EP — clip placed on ascending stalk; balance stroke prophylaxis (new AFib, elevated CHA2DS2-VASc, EF 25%) against delayed bleeding. Confirm exact restart day and communicate to patient in writing", "timeframe": "48-72 hours post-procedure, per GI/cardiology", "owner": "GI / cardiology", "status": "open"},
+    {"recommendation": "Continue low-dose aspirin 81 mg (was not held); confirm patient understands aspirin and apixaban are separate", "timeframe": "ongoing", "owner": "GI / patient", "status": "open"},
+    {"recommendation": "Recheck BMP (potassium, creatinine) post-prep/post-procedure given prior K 5.4, reduced-dose spironolactone 12.5 mg, and HFrEF; ensure euvolemia", "timeframe": "within 3-5 days", "owner": "GI / primary care", "status": "open"},
+    {"recommendation": "Communicate procedure outcome and device course to cardiology/EP; ICD tolerated procedure without event", "timeframe": "within 1 week", "owner": "GI", "status": "open"}
+  ],
+  "planted_followup_items": [
+    {"id": "F1", "type": "pending_pathology", "description": "Histology pending on all four polypectomy specimens (ascending 9 mm pedunculated, sigmoid 6 mm, two descending diminutive). Result determines whether any advanced histology (villous features, high-grade dysplasia) is present and drives the surveillance interval; must be communicated to the patient.", "urgency": "routine", "expected_action": "call patient with pathology result and document surveillance interval per histology, size, and polyp count", "status": "open"},
+    {"id": "F2", "type": "med_resume", "description": "Therapeutic apixaban 5 mg BID was held 3 days pre-procedure and remains held post-polypectomy. Patient has new-onset atrial fibrillation with elevated CHA2DS2-VASc and EF 25% (high stroke risk) but underwent multiple polypectomies including a pedunculated stalk with clip during interrupted anticoagulation (delayed-bleeding risk). Restart timing must be set and communicated in writing; if dropped, patient is left off stroke prophylaxis indefinitely or restarts unsafely.", "urgency": "critical", "expected_action": "GI and cardiology/EP jointly set and document exact apixaban restart date; give patient written instructions; confirm resumption occurred", "status": "open"},
+    {"id": "F3", "type": "surveillance_interval", "description": "Multiple polyps removed; surveillance colonoscopy interval must be set once pathology returns (contingent on F1). Positive-FIT diagnostic exam with adenomatous polyps typically warrants a shortened interval.", "urgency": "routine", "expected_action": "assign and document next colonoscopy interval after pathology; enter into recall/reminder system", "status": "open"},
+    {"id": "F4", "type": "complication_watch", "description": "Delayed post-polypectomy bleeding risk elevated due to interrupted therapeutic anticoagulation, pedunculated ascending polyp with stalk resection (clip placed), and continued aspirin. Bleeding can present up to ~2 weeks post-procedure.", "urgency": "urgent", "expected_action": "patient counseled on hematochezia/melena/lightheadedness; ensure return precautions and a reachable contact; reassess before apixaban restart", "status": "open"},
+    {"id": "F5", "type": "lab_followup", "description": "Reduced-dose spironolactone (12.5 mg) with prior hyperkalemia (K 5.4), creatinine 1.3, and HFrEF; bowel prep and periprocedural fasting can shift electrolytes/volume, warranting post-procedure electrolyte monitoring.", "urgency": "routine", "expected_action": "recheck BMP post-procedure; coordinate with primary care/cardiology on electrolyte and volume management", "status": "open"},
+    {"id": "F6", "type": "care_coordination", "description": "Close-the-loop with cardiology/EP: ICD tolerated the procedure without arrhythmic event; anticoagulation was held periprocedurally. Cardiology/EP must be informed to co-manage apixaban restart and confirm device status.", "urgency": "routine", "expected_action": "send procedure summary to cardiology/EP; confirm receipt and shared plan for apixaban resumption", "status": "open"}
+  ],
+  "post_procedure_followup": {
+    "window": "day 0 to day 14",
+    "channels": ["automated_check_in", "patient_portal_message", "nurse_triage_call"],
+    "_note": "Patient-reported stream after the procedure — the inbound signal the LeftBehind product triages. Each contact is labeled ground truth so triage can be scored. Fully synthetic.",
+    "contacts": [
+      {
+        "id": "C1",
+        "day": 1,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "My throat's a bit scratchy and I'm really gassy and bloated since I got home. Is that normal?",
+        "clinical_signal": "Expected post-endoscopy sore throat and colonic insufflation bloating",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; sore throat and gas/bloating are expected after colonoscopy and settle within 24-48h. Walking and warm fluids help.",
+        "rationale": "Common benign post-procedure symptoms with no red-flag features; no escalation."
+      },
+      {
+        "id": "C2",
+        "day": 3,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "I take two blood thinners — the little aspirin and the twice-a-day apixaban. I kept taking the aspirin. When exactly do I start the apixaban again? I don't want to miss a dose and have a stroke.",
+        "clinical_signal": "Patient seeking apixaban restart timing after held therapeutic anticoagulation; correctly distinguishing continued aspirin from held apixaban",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F2",
+        "expected_action": "Answer from the plan: aspirin was intentionally continued; apixaban restart date must be set jointly by GI and cardiology/EP given clip placement and high stroke risk. Provide the written restart date and confirm she has it; do not have her restart on her own until instructed.",
+        "rationale": "Answerable/coordination item that maps to the critical med_resume follow-up (F2); no clinical red flag but must not be dropped."
+      },
+      {
+        "id": "C3",
+        "day": 6,
+        "channel": "nurse_triage_call",
+        "type": "complication",
+        "verbatim": "I've passed a bunch of dark red blood into the toilet three times this evening and there are clots. I feel dizzy and clammy when I stand up.",
+        "clinical_signal": "Delayed post-polypectomy hemorrhage with hemodynamic symptoms; higher risk given resected pedunculated stalk, continued aspirin, and pending apixaban restart timing",
+        "red_flag": true,
+        "ground_truth_disposition": "escalate",
+        "urgency": "emergent",
+        "links_followup_item": "F4",
+        "expected_action": "Escalate for immediate ED evaluation; do NOT restart apixaban; alert GI on-call and anticipate repeat colonoscopy for hemostasis; notify cardiology given anticoagulation/EF context.",
+        "rationale": "Hematochezia with clots plus orthostatic lightheadedness is delayed post-polypectomy bleeding with a hemodynamic signal — a true complication requiring emergent action; links to complication_watch (F4)."
+      },
+      {
+        "id": "C4",
+        "day": 11,
+        "channel": "automated_check_in",
+        "type": "question",
+        "verbatim": "Nobody has called me yet about the results of the polyps you took out. Should I have heard by now?",
+        "clinical_signal": "Patient prompting on outstanding pathology communication",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F1",
+        "expected_action": "Confirm pathology status (expected back 2026-08-11); ensure a GI team member calls with the result and the surveillance interval, and document the loop is closed.",
+        "rationale": "Benign informational request that maps to the pending_pathology item (F1); ensures the result is not lost to follow-up."
+      }
+    ]
+  }
+}

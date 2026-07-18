@@ -1,0 +1,103 @@
+{
+  "id": "gi-synth-0007::proc-result",
+  "_synthetic": true,
+  "_note": "MOCK procedure result. No real patient. For PreChart development/eval.",
+  "patient_id": "gi-synth-0007",
+  "procedure": {
+    "name": "Colonoscopy",
+    "code": {"system": "http://snomed.info/sct", "code": "73761001", "display": "Colonoscopy (procedure)"},
+    "date": "2026-08-05T08:00:00-07:00",
+    "indication": "Screening colonoscopy; first-degree relative (father) with colorectal cancer at ~68 — above average risk",
+    "sedation": "Moderate sedation (midazolam 3 mg, fentanyl 100 mcg); PONV prophylaxis given — ondansetron 4 mg IV and dexamethasone 4 mg IV pre-procedure per history of postoperative nausea and vomiting",
+    "prep_quality": "Boston Bowel Prep Scale 8/9 — adequate",
+    "extent_reached": "Cecum (confirmed by appendiceal orifice and ileocecal valve)",
+    "withdrawal_time_min": 11,
+    "status": "completed"
+  },
+  "procedure_report": "PROCEDURE: Colonoscopy. INDICATION: colorectal cancer screening in a patient with a first-degree relative (father) diagnosed with colon cancer at approximately age 68 — above average risk. SEDATION: moderate sedation, well tolerated. Given the documented history of postoperative nausea and vomiting, anti-emetic prophylaxis with ondansetron 4 mg IV and dexamethasone 4 mg IV was administered prior to sedation, and the patient recovered without nausea or vomiting. PREP: adequate (BBPS 8/9). FINDINGS: The colonoscope was advanced to the cecum and the terminal ileum was intubated and appeared normal. Two diminutive polyps were identified — a 4 mm sessile polyp in the ascending colon and a 3 mm sessile polyp in the descending colon — both removed by cold snare polypectomy and retrieved for histology. The remainder of the examined colon and rectum were normal. No mass, no ulceration, and no active bleeding. IMPRESSION: Two diminutive polyps (ascending and descending colon) removed; otherwise normal colonoscopy to the cecum with terminal ileum intubation. Pathology pending. Surveillance interval to be finalized once histology returns, taking into account the family history of colorectal cancer.",
+  "findings": [
+    {"finding": "4 mm sessile polyp", "location": "ascending colon", "size_mm": 4, "action_taken": "cold snare polypectomy, retrieved", "specimen": "A"},
+    {"finding": "3 mm sessile polyp", "location": "descending colon", "size_mm": 3, "action_taken": "cold snare polypectomy, retrieved", "specimen": "B"},
+    {"finding": "Terminal ileum normal", "location": "terminal ileum", "action_taken": "none"}
+  ],
+  "specimens": [
+    {"id": "A", "site": "ascending colon polyp", "type": "polypectomy"},
+    {"id": "B", "site": "descending colon polyp", "type": "polypectomy"}
+  ],
+  "pathology": {"status": "pending", "expected_back": "2026-08-11", "report": null, "diagnosis": null, "actionable": null},
+  "complications": [],
+  "disposition": "Discharged home same day in stable condition with escort. Tolerated procedure and recovery without nausea/vomiting. Post-polypectomy precautions reviewed. Reminded not to drive for the remainder of the day.",
+  "followup": [
+    {"recommendation": "Review pathology on both polypectomy specimens; call patient with result and set surveillance interval accounting for first-degree family history of colorectal cancer", "timeframe": "within 2 weeks", "owner": "GI", "status": "open"},
+    {"recommendation": "Ensure surveillance interval reflects father's colorectal cancer (above average risk) — not the average-risk interval implied on the original referral", "timeframe": "at result communication", "owner": "GI", "status": "open"},
+    {"recommendation": "Confirm PONV (not motion sickness) is carried forward in the anesthesia/procedural record for any future sedation", "timeframe": "routine", "owner": "GI / anesthesia", "status": "open"}
+  ],
+  "planted_followup_items": [
+    {"id": "F1", "type": "pending_pathology", "description": "Histology pending on two polypectomy specimens (ascending 4 mm, descending 3 mm); result must be communicated to patient and drive surveillance planning", "urgency": "routine", "expected_action": "call patient with result + document surveillance interval", "status": "open"},
+    {"id": "F2", "type": "surveillance_interval", "description": "Surveillance interval must incorporate first-degree relative (father) with colorectal cancer at ~68 — patient is above average risk, so the average-risk 10-year interval on the referral does not apply; likely 5-year interval, to be finalized with pathology", "urgency": "routine", "expected_action": "set and document risk-appropriate surveillance interval; correct the average-risk classification on record", "status": "open"},
+    {"id": "F3", "type": "record_correction", "description": "Anesthesia/sedation record should reflect postoperative nausea and vomiting (PONV) rather than motion sickness so future sedation includes anti-emetic prophylaxis", "urgency": "routine", "expected_action": "verify PONV documented as active problem; carry forward prophylaxis plan", "status": "open"}
+  ],
+  "post_procedure_followup": {
+    "window": "day 0 to day 14",
+    "channels": ["automated_check_in", "patient_portal_message", "nurse_triage_call"],
+    "_note": "Patient-reported stream after the procedure — the inbound signal the LeftBehind product triages. Each contact is labeled ground truth so triage can be scored.",
+    "contacts": [
+      {
+        "id": "C1",
+        "day": 1,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "My throat is scratchy and I've been really gassy and bloated since yesterday. Is that normal?",
+        "clinical_signal": "Expected post-colonoscopy sore throat and insufflation-related bloating/flatus",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; sore throat and gas/bloating are expected after colonoscopy and settle within 24-48h. Walking and warm fluids help.",
+        "rationale": "Common benign post-endoscopy symptoms; no escalation."
+      },
+      {
+        "id": "C2",
+        "day": 2,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "When should I expect to hear about the biopsies from my polyps? And I want to make sure my bad-nausea-from-anesthesia note actually got written down this time.",
+        "clinical_signal": "Patient asking about pending pathology timing and confirming PONV is documented for future sedation",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F1",
+        "expected_action": "Answer from the result: histology pending, expected back ~2026-08-11; team will call with result and the family-history-adjusted surveillance interval. Confirm PONV (not motion sickness) is recorded for future anesthesia.",
+        "rationale": "Answerable from the procedure result and follow-up plan; maps to the pending_pathology item and the PONV record-correction item."
+      },
+      {
+        "id": "C3",
+        "day": 4,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "I'm a bit scared — I saw a little streak of blood on the toilet paper after a bowel movement this morning. No pain, and it hasn't happened again.",
+        "clinical_signal": "TRIAGE TRAP (dangerous-sounding, benign): minor self-limited spotting after cold-snare removal of two diminutive polyps; no clots, no recurrent bleeding, no lightheadedness or abdominal pain",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; a small amount of spotting after diminutive cold-snare polypectomy is expected and self-limited. Give clear return precautions: call/seek care for large-volume bleeding, passing clots, lightheadedness/dizziness, or severe abdominal pain.",
+        "rationale": "Sounds alarming but is a normal minor post-polypectomy finding for tiny cold-snare sites; the trap is over-escalating. Only true red flags (heavy/repeated bleeding, hemodynamic symptoms, severe pain) warrant escalation."
+      },
+      {
+        "id": "C4",
+        "day": 12,
+        "channel": "nurse_triage_call",
+        "type": "complaint",
+        "verbatim": "It's been almost two weeks and nobody has called me about my biopsy results. I'm anxious not knowing, especially with my dad's colon cancer.",
+        "clinical_signal": "Pathology result not yet communicated to patient — potential dropped follow-up on the pending_pathology loop",
+        "red_flag": false,
+        "ground_truth_disposition": "schedule",
+        "urgency": "routine",
+        "links_followup_item": "F1",
+        "expected_action": "Locate the histology result (expected ~2026-08-11), have GI call the patient with the result, and set/document the family-history-adjusted surveillance interval; correct the average-risk classification on record.",
+        "rationale": "Flags a follow-up that may have been dropped; links to the pending_pathology item and the surveillance-interval correction. Disposition is to close the loop, not clinically emergent."
+      }
+    ]
+  }
+}

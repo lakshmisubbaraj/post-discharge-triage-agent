@@ -1,0 +1,97 @@
+{
+  "id": "gi-synth-0023::proc-result",
+  "_synthetic": true,
+  "_note": "MOCK procedure result. No real patient. For PreChart development/eval. Result of the surveillance colonoscopy PT-023 was referred for.",
+  "patient_id": "gi-synth-0023",
+  "procedure": {
+    "name": "Colonoscopy",
+    "code": {"system": "http://snomed.info/sct", "code": "73761001", "display": "Colonoscopy (procedure)"},
+    "date": "2026-08-05T08:40:00-07:00",
+    "indication": "Surveillance colonoscopy — history of tubular adenoma with low-grade dysplasia, ascending colon (2023); 3-year interval",
+    "sedation": "Moderate sedation (midazolam 2 mg, fentanyl 75 mcg)",
+    "prep_quality": "Boston Bowel Prep Scale 8/9 — adequate (right 3, transverse 2, left 3)",
+    "extent_reached": "Cecum (confirmed by appendiceal orifice and ileocecal valve); terminal ileum intubated",
+    "withdrawal_time_min": 11,
+    "status": "completed"
+  },
+  "procedure_report": "PROCEDURE: Colonoscopy. INDICATION: surveillance for prior tubular adenoma with low-grade dysplasia (ascending colon, 2023). PATIENT: 69-year-old woman, asymptomatic. ANTICOAGULATION: patient not on anticoagulation — completed provoked-DVT apixaban course and discontinued ~January 2026 (reconciled at pre-procedure consult); no periprocedural hold or bridging required. SEDATION: moderate. PREP: adequate (BBPS 8/9). FINDINGS: The colonoscope was advanced to the cecum; the appendiceal orifice and ileocecal valve were identified and the terminal ileum was intubated and normal. A single 5 mm sessile polyp was identified in the ascending colon and removed by cold snare polypectomy; the specimen was retrieved and sent to pathology (specimen A). Mild diverticulosis was noted in the sigmoid colon without stigmata of bleeding. No masses, no strictures, no ulceration. The mucosa of the remainder of the examined colon was normal. No active bleeding at the polypectomy site after removal. IMPRESSION: 5 mm ascending colon polyp removed by cold snare; mild sigmoid diverticulosis; otherwise normal surveillance colonoscopy to the cecum with terminal ileal intubation. Pathology pending.",
+  "findings": [
+    {"finding": "5 mm sessile polyp", "location": "ascending colon", "size_mm": 5, "action_taken": "cold snare polypectomy, retrieved", "specimen": "A"},
+    {"finding": "Diverticulosis, mild, no stigmata of bleeding", "location": "sigmoid colon", "action_taken": "none"},
+    {"finding": "Terminal ileum normal", "location": "terminal ileum", "action_taken": "none"}
+  ],
+  "specimens": [{"id": "A", "site": "ascending colon polyp", "type": "polypectomy"}],
+  "pathology": {"status": "pending", "expected_back": "2026-08-09", "report": null, "diagnosis": null, "actionable": null},
+  "complications": [],
+  "disposition": "Discharged home same day in stable condition with escort. Post-polypectomy precautions reviewed; return precautions for rectal bleeding, black stools, or abdominal pain given.",
+  "followup": [
+    {"recommendation": "Review ascending colon polypectomy pathology; call patient with result and set the next surveillance interval", "timeframe": "within 2 weeks", "owner": "GI", "status": "open"}
+  ],
+  "planted_followup_items": [
+    {"id": "F1", "type": "pending_pathology", "description": "Ascending colon polypectomy pathology pending — result must be communicated to the patient and drive the next surveillance colonoscopy interval", "urgency": "routine", "expected_action": "call patient with result and document surveillance interval", "status": "open"},
+    {"id": "F2", "type": "surveillance_interval", "description": "Next surveillance colonoscopy interval to be set once pathology returns (prior low-grade tubular adenoma; small polyp removed this exam)", "urgency": "routine", "expected_action": "assign and document interval (likely 3-5 years pending final histology)", "status": "open"}
+  ],
+  "post_procedure_followup": {
+    "window": "day 0 to day 14",
+    "channels": ["automated_check_in", "patient_portal_message", "nurse_triage_call"],
+    "_note": "Patient-reported stream after the procedure — the inbound signal the LeftBehind product triages. Each contact is labeled ground truth so triage can be scored. SYNTHETIC.",
+    "contacts": [
+      {
+        "id": "C1",
+        "day": 1,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "My throat feels a bit scratchy and I've been really gassy and bloated since I got home. Is that normal?",
+        "clinical_signal": "Expected post-endoscopy sore throat and insufflation-related bloating/flatulence",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; sore throat and gas/bloating are expected after colonoscopy and resolve within 24-48h. Walking and warm fluids help.",
+        "rationale": "Classic benign post-endoscopy symptoms; no red flags, no escalation."
+      },
+      {
+        "id": "C2",
+        "day": 2,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "The nurse mentioned my old blood thinner before the test. I still have that half bottle of apixaban in the cabinet — should I start taking it again now that the scope is done?",
+        "clinical_signal": "Medication-timing confusion — patient is NOT anticoagulated (completed provoked-DVT course, stopped ~Jan 2026); no anticoagulant was held and none should be resumed",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Counsel clearly: do NOT restart apixaban. Her DVT course was completed and discontinued; nothing was held for the procedure, so there is nothing to resume. Reinforce stopping pharmacy auto-refills and safely disposing of leftover tablets.",
+        "rationale": "Med-timing confusion trap — a wrong 'resume anticoagulation' answer would inappropriately re-anticoagulate a patient with no indication and add bleeding risk; correct disposition is to counsel against restarting."
+      },
+      {
+        "id": "C3",
+        "day": 4,
+        "channel": "automated_check_in",
+        "type": "question",
+        "verbatim": "I saw a tiny bit of pink on the toilet paper once today. No real bleeding, I feel completely fine otherwise. Should I worry?",
+        "clinical_signal": "Minor self-limited spotting after cold-snare polypectomy of a small polyp; hemodynamically well, isolated and trivial",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; a trace of pink after a small cold-snare polypectomy is expected and self-limited. Give return precautions: call or seek care for repeated dark red blood, clots, black stools, lightheadedness, or abdominal pain.",
+        "rationale": "Dangerous-sounding-but-benign trap — trace spotting after low-risk cold-snare polypectomy in a non-anticoagulated patient does not warrant escalation, but return precautions must be stated."
+      },
+      {
+        "id": "C4",
+        "day": 8,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "It's been about a week and I haven't heard anything about the biopsy from my colonoscopy. When will I find out the results?",
+        "clinical_signal": "Patient following up on pending polypectomy pathology and next surveillance interval",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F1",
+        "expected_action": "Answer from the result: polypectomy pathology was expected back ~2026-08-09; GI team will call with the result and set the next surveillance colonoscopy interval. Confirm the loop is open and owned by GI.",
+        "rationale": "Answerable from the procedure result; links to the pending_pathology item (F1) and prompts closing the results-communication loop."
+      }
+    ]
+  }
+}

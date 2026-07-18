@@ -1,0 +1,96 @@
+{
+  "id": "gi-synth-0058::proc-result",
+  "_synthetic": true,
+  "_note": "MOCK procedure result. No real patient. For PreChart development/eval. Result of the EGD this patient was referred for.",
+  "patient_id": "gi-synth-0058",
+  "procedure": {
+    "name": "Esophagogastroduodenoscopy (EGD) with hemostasis",
+    "code": {"system": "http://snomed.info/sct", "code": "1919006", "display": "Esophagogastroduodenoscopy (procedure)"},
+    "date": "2026-07-22T09:10:00-07:00",
+    "indication": "Suspected upper GI bleeding (collateral history of two melena episodes) on chronic self-directed NSAID (naproxen) use; GERD",
+    "sedation": "Monitored anesthesia care (propofol), anesthesiologist-directed",
+    "prep_quality": "N/A (upper endoscopy); NPO >8 hours, adequate mucosal visualization",
+    "extent_reached": "Second portion of the duodenum (D2)",
+    "withdrawal_time_min": null,
+    "status": "completed"
+  },
+  "procedure_report": "PROCEDURE: Esophagogastroduodenoscopy with endoscopic hemostasis. INDICATION: Suspected upper GI bleeding (collateral melena x2 last week) in the setting of chronic daily naproxen use and GERD; naproxen held since clinic visit. SEDATION: MAC/propofol. FINDINGS: The endoscope was passed without difficulty to the second portion of the duodenum. ESOPHAGUS: Los Angeles Grade A reflux esophagitis with two small mucosal breaks at the GE junction; no varices, no Barrett's segment. STOMACH: Retroflexion normal. A single 12 mm gastric ulcer was identified in the antrum along the lesser curvature with a non-bleeding visible vessel (Forrest IIa). No active spurting or oozing. Endoscopic hemostasis performed: injection of dilute epinephrine (1:10,000) around the ulcer base followed by placement of two hemostatic clips over the visible vessel; adequate hemostasis achieved. Two biopsies taken from the gastric antrum (away from the ulcer) for H. pylori testing; ulcer margins biopsied to exclude malignancy. DUODENUM: Bulb and D2 normal, no ulcer. IMPRESSION: 12 mm antral gastric ulcer, Forrest IIa (non-bleeding visible vessel), treated with epinephrine injection and hemoclips; LA Grade A esophagitis. Likely NSAID-induced ulcer as source of melena. PLAN: High-dose IV PPI transitioning to oral BID, continue naproxen cessation, H. pylori testing, repeat EGD in 8-12 weeks to confirm ulcer healing given malignancy exclusion biopsies pending.",
+  "findings": [
+    {"finding": "Gastric ulcer, 12 mm, Forrest IIa (non-bleeding visible vessel)", "location": "gastric antrum, lesser curvature", "size_mm": 12, "action_taken": "epinephrine injection + 2 hemoclips; margin biopsies", "specimen": "A"},
+    {"finding": "Antral mucosa biopsy for H. pylori", "location": "gastric antrum", "action_taken": "biopsy", "specimen": "B"},
+    {"finding": "LA Grade A reflux esophagitis (two small mucosal breaks)", "location": "gastroesophageal junction", "action_taken": "none"},
+    {"finding": "Normal duodenum to D2", "location": "duodenum", "action_taken": "none"}
+  ],
+  "specimens": [
+    {"id": "A", "site": "gastric antral ulcer margins", "type": "biopsy (malignancy exclusion)"},
+    {"id": "B", "site": "gastric antrum", "type": "biopsy (H. pylori)"}
+  ],
+  "pathology": {"status": "pending", "expected_back": "2026-07-27", "report": null, "diagnosis": null, "actionable": null},
+  "complications": [],
+  "disposition": "Recovered from anesthesia and discharged home same day in stable condition with escort. Hemodynamically stable post-procedure. Post-hemostasis and post-biopsy precautions reviewed. Instructed to return/ED for recurrent melena, hematemesis, lightheadedness, or syncope.",
+  "followup": [
+    {"recommendation": "Review gastric ulcer margin biopsy pathology (malignancy exclusion) and call patient with result", "timeframe": "within 1 week", "owner": "GI", "status": "open"},
+    {"recommendation": "Review H. pylori biopsy result; if positive, prescribe eradication therapy and arrange confirmation of cure", "timeframe": "within 1 week", "owner": "GI", "status": "open"},
+    {"recommendation": "Follow up on same-day/pending CBC (hemoglobin) ordered at pre-procedure visit; assess for anemia requiring iron or transfusion", "timeframe": "within 24-48 hours", "owner": "GI", "status": "open"},
+    {"recommendation": "Continue high-dose PPI (pantoprazole 40 mg BID); do NOT resume naproxen — provide alternative analgesia plan for chronic back pain", "timeframe": "ongoing", "owner": "GI / PCP", "status": "open"},
+    {"recommendation": "Repeat EGD in 8-12 weeks to confirm gastric ulcer healing (mandatory given gastric location)", "timeframe": "8-12 weeks", "owner": "GI", "status": "open"}
+  ],
+  "planted_followup_items": [
+    {"id": "F1", "type": "pending_pathology", "description": "Gastric ulcer margin biopsies pending to exclude malignancy — gastric ulcers require histologic and endoscopic confirmation of benignity; result must be communicated and acted upon", "urgency": "urgent", "expected_action": "review path, call patient, ensure malignancy excluded and healing confirmed on repeat EGD", "status": "open"},
+    {"id": "F2", "type": "pending_pathology", "description": "H. pylori antral biopsy pending — if positive, eradication therapy is required to reduce ulcer recurrence", "urgency": "routine", "expected_action": "review H. pylori result; treat and confirm eradication if positive", "status": "open"},
+    {"id": "F3", "type": "critical_result", "description": "Endoscopically treated gastric ulcer with a Forrest IIa non-bleeding visible vessel in a patient with recent melena — high rebleeding risk; pending CBC/hemoglobin must be reviewed to assess anemia and transfusion need", "urgency": "critical", "expected_action": "review hemoglobin promptly; monitor for rebleeding; escalate/admit if Hgb low or symptomatic", "status": "open"},
+    {"id": "F4", "type": "med_reconciliation", "description": "Naproxen must NOT be resumed — it is the likely ulcer culprit; patient (on no anticoagulant/antiplatelet) needs an alternative back-pain analgesia plan and NSAID-cessation reinforcement, with permanent NSAID-avoidance documented on the reconciled medication list", "urgency": "urgent", "expected_action": "document permanent NSAID avoidance on the medication list; coordinate alternative analgesia with PCP", "status": "open"},
+    {"id": "F5", "type": "repeat_procedure", "description": "Repeat EGD in 8-12 weeks to confirm gastric ulcer healing (standard of care for gastric ulcers)", "urgency": "urgent", "expected_action": "schedule surveillance EGD to document healing and re-biopsy if not healed", "status": "open"},
+    {"id": "F6", "type": "complication_watch", "description": "Post-hemostasis rebleeding watch — early rebleeding after epinephrine + clip therapy; patient counseled on return precautions", "urgency": "urgent", "expected_action": "ensure patient understands return precautions; consider next-day check-in call", "status": "open"},
+    {"id": "F7", "type": "incidental_finding", "description": "LA Grade A reflux esophagitis — continue PPI and reassess reflux control", "urgency": "routine", "expected_action": "continue PPI, reassess GERD symptoms at follow-up", "status": "open"}
+  ],
+  "post_procedure_followup": {
+    "window": "day 0 to day 14",
+    "channels": ["automated_check_in", "patient_portal_message", "nurse_triage_call"],
+    "_note": "Patient-reported stream after the procedure — the inbound signal the LeftBehind product triages. Each contact is labeled ground truth so triage can be scored.",
+    "contacts": [
+      {
+        "id": "C1",
+        "day": 1,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "My throat is a little scratchy and I have some mild burning in my upper belly, but nothing bad.",
+        "clinical_signal": "Expected post-EGD sore throat plus mild residual dyspepsia; no alarm features",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; sore throat and mild upper-abdominal burning are expected and self-limited. Continue PPI; return precautions reinforced.",
+        "rationale": "Common benign post-endoscopy symptoms in a treated-ulcer patient; no red flag, no escalation."
+      },
+      {
+        "id": "C2",
+        "day": 2,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "When will I hear back about the biopsy from my stomach? And can I start taking my naproxen again for my back now?",
+        "clinical_signal": "Asking about pending pathology and, importantly, about resuming the NSAID that is the likely ulcer culprit",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F4",
+        "expected_action": "Answer from the result: biopsies pending (~2026-07-27), team will call with result. Counsel that naproxen must NOT be resumed — it likely caused the ulcer; coordinate alternative analgesia (e.g., acetaminophen) with PCP.",
+        "rationale": "Benign but a med-timing trap — the patient wants to restart the culprit NSAID. Answerable/counsel from the plan; links to the med_reconciliation NSAID-avoidance item."
+      },
+      {
+        "id": "C3",
+        "day": 6,
+        "channel": "automated_check_in",
+        "type": "question",
+        "verbatim": "My stools have been normal brown and I feel back to myself. Do I really still need another scope in a couple months?",
+        "clinical_signal": "No rebleeding (normal brown stools, feels well); asking about the planned surveillance EGD",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F5",
+        "expected_action": "Reassure that resolution of dark stools is a good sign; explain the repeat EGD in 8-12 weeks is still required to confirm gastric ulcer healing and review pending malignancy-exclusion biopsy. Schedule the surveillance scope.",
+        "rationale": "Benign course with an answerable question; links to the repeat_procedure surveillance item. No escalation."
+      }
+    ]
+  }
+}

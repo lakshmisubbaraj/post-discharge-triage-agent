@@ -1,0 +1,96 @@
+{
+  "id": "gi-synth-0042::proc-result",
+  "_synthetic": true,
+  "_note": "MOCK procedure result in the style of synthetic-gi-mock-v1. No real patient. For PreChart development/eval.",
+  "patient_id": "gi-synth-0042",
+  "procedure": {
+    "name": "Esophagogastroduodenoscopy (EGD)",
+    "code": {"system": "http://snomed.info/sct", "code": "76664006", "display": "Esophagogastroduodenoscopy (procedure)"},
+    "date": "2026-08-05T09:10:00-06:00",
+    "indication": "Persistent GERD despite daily PPI (omeprazole 20 mg)",
+    "sedation": "Moderate (conscious) sedation — midazolam 3 mg IV, fentanyl 100 mcg IV. Propofol avoided pending/per Anesthesiology adjudication of unconfirmed 2021 reaction; Anesthesiology reviewed the 2021 pre-anesthesia record and recommended a non-propofol sedation plan for this exam. Mild intermittent asthma noted; no periprocedural bronchospasm, SpO2 maintained 96-99% on 2 L NC.",
+    "prep_quality": "N/A (upper endoscopy) — NPO >8 hours, adequate; clear gastric field",
+    "extent_reached": "Second portion of duodenum (D2) intubated; complete diagnostic exam of esophagus, stomach, and duodenum",
+    "withdrawal_time_min": null,
+    "status": "completed"
+  },
+  "procedure_report": "PROCEDURE: Esophagogastroduodenoscopy with biopsies. INDICATION: persistent GERD despite omeprazole 20 mg daily. SEDATION: moderate (midazolam/fentanyl); propofol avoided per Anesthesiology adjudication of unconfirmed 2021 reaction. FINDINGS: The endoscope was passed under direct vision into the esophagus. The gastroesophageal junction was located at 40 cm; a small (approximately 2 cm) sliding hiatal hernia was present. In the distal esophagus there were several linear mucosal breaks, some confluent between the tops of adjacent folds — consistent with LA Grade B erosive esophagitis. No circumferential ulceration, no stricture, and no obvious salmon-colored columnar mucosa/tongue suggestive of Barrett's; no mass or luminal narrowing. The stomach was examined in forward and retroflexed views: mild antral erythema consistent with gastritis, no ulcer, no mass; retained mucus cleared without difficulty. Gastric antral and body biopsies obtained for Helicobacter pylori. The pylorus was normal and traversed; the duodenal bulb and second portion were normal without ulcer or mass; duodenal biopsies obtained to evaluate for celiac disease given the biopsy-during-exam protocol. Distal esophageal biopsies obtained to exclude eosinophilic esophagitis and to characterize inflammation. No active bleeding at any point. IMPRESSION: (1) LA Grade B erosive esophagitis. (2) Small sliding hiatal hernia. (3) Mild gastritis; H. pylori biopsies obtained. Pathology pending.",
+  "findings": [
+    {"finding": "LA Grade B erosive esophagitis (linear mucosal breaks, some confluent)", "location": "distal esophagus", "action_taken": "biopsies obtained (rule out eosinophilic esophagitis / characterize inflammation)", "specimen": "A"},
+    {"finding": "Small (~2 cm) sliding hiatal hernia", "location": "gastroesophageal junction (40 cm)", "size_mm": 20, "action_taken": "none"},
+    {"finding": "Mild gastritis (antral erythema), no ulcer or mass", "location": "gastric antrum/body", "action_taken": "biopsies obtained for H. pylori", "specimen": "B"},
+    {"finding": "Normal duodenal bulb and second portion, no ulcer/mass", "location": "duodenum (D1-D2)", "action_taken": "biopsies obtained (celiac evaluation)", "specimen": "C"},
+    {"finding": "No Barrett's esophagus, no stricture, no mass, no active bleeding", "location": "esophagus/stomach/duodenum", "action_taken": "none"}
+  ],
+  "specimens": [
+    {"id": "A", "site": "distal esophagus", "type": "mucosal biopsy"},
+    {"id": "B", "site": "gastric antrum/body", "type": "mucosal biopsy (H. pylori)"},
+    {"id": "C", "site": "duodenum (D2)", "type": "mucosal biopsy (celiac)"}
+  ],
+  "pathology": {"status": "pending", "expected_back": "2026-08-11", "report": null, "diagnosis": null, "actionable": null},
+  "complications": [],
+  "disposition": "Discharged home same day in stable condition with escort. Tolerated non-propofol moderate sedation well; no respiratory events. GERD/erosive esophagitis instructions reviewed; return precautions given.",
+  "followup": [
+    {"recommendation": "Step up acid suppression for LA Grade B erosive esophagitis — increase omeprazole to 40 mg daily (or twice daily) and plan repeat EGD in 8-12 weeks to confirm mucosal healing and exclude underlying Barrett's masked by inflammation", "timeframe": "8-12 weeks", "owner": "GI", "status": "open"},
+    {"recommendation": "Review H. pylori biopsy result; treat with eradication therapy if positive and confirm cure with post-treatment testing", "timeframe": "within 2 weeks", "owner": "GI", "status": "open"},
+    {"recommendation": "Review esophageal and duodenal biopsy pathology (eosinophilic esophagitis / celiac); communicate results to patient", "timeframe": "within 2 weeks", "owner": "GI", "status": "open"},
+    {"recommendation": "Ensure the Anesthesiology propofol adjudication outcome is documented durably in the allergy record so future proceduralists have the corrected assessment", "timeframe": "before next sedated procedure", "owner": "GI / Anesthesiology", "status": "open"}
+  ],
+  "planted_followup_items": [
+    {"id": "F1", "type": "pending_pathology", "description": "H. pylori biopsy (gastric antrum/body) pending — a positive result requires eradication therapy and confirmatory cure testing", "urgency": "routine", "expected_action": "review result; if positive start eradication therapy and schedule test-of-cure", "status": "open"},
+    {"id": "F2", "type": "pending_pathology", "description": "Distal esophageal biopsies pending (eosinophilic esophagitis vs reflux esophagitis) and duodenal biopsies pending (celiac disease)", "urgency": "routine", "expected_action": "review pathology and communicate results to patient", "status": "open"},
+    {"id": "F3", "type": "repeat_procedure", "description": "LA Grade B erosive esophagitis warrants repeat EGD in 8-12 weeks after PPI step-up to confirm healing and exclude Barrett's esophagus obscured by active inflammation", "urgency": "urgent", "expected_action": "schedule follow-up EGD after acid-suppression optimization", "status": "open"},
+    {"id": "F4", "type": "med_reconciliation", "description": "Acid suppression step-up: increase omeprazole from 20 mg to 40 mg daily (or BID) for erosive esophagitis; ensure order placed and patient instructed. (No anticoagulant/antiplatelet was held — this is a PPI dose titration, not a medication resumption.)", "urgency": "routine", "expected_action": "place updated PPI order and counsel patient", "status": "open"},
+    {"id": "F5", "type": "record_correction", "description": "Anesthesiology propofol allergy adjudication outcome (2021 reaction was unconfirmed urticaria, not anaphylaxis) must be reconciled into the durable AllergyIntolerance record to guide future sedation", "urgency": "urgent", "expected_action": "update allergy record with adjudicated sedation plan; close out the discrepancy", "status": "open"},
+    {"id": "F6", "type": "surveillance_interval", "description": "If repeat EGD confirms healed mucosa with no Barrett's, place on symptom-driven follow-up; if Barrett's is found on repeat exam, enter appropriate surveillance program", "urgency": "routine", "expected_action": "set surveillance interval based on repeat EGD findings", "status": "open"}
+  ],
+  "post_procedure_followup": {
+    "window": "day 0 to day 14",
+    "channels": ["automated_check_in", "patient_portal_message", "nurse_triage_call"],
+    "_note": "Patient-reported stream after the procedure — the inbound signal the LeftBehind product triages. Each contact is labeled ground truth so triage can be scored. SYNTHETIC data.",
+    "contacts": [
+      {
+        "id": "C1",
+        "day": 1,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "My throat's a little scratchy and I'm burping up a lot of air since the scope. Nothing terrible.",
+        "clinical_signal": "Expected post-EGD sore throat plus insufflation-related bloating/belching",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; mild sore throat and gas/bloating are expected after upper endoscopy and self-limited within 24-48h. Return precautions if fever, chest pain, or trouble swallowing develop.",
+        "rationale": "Common benign post-endoscopy symptoms; no escalation."
+      },
+      {
+        "id": "C2",
+        "day": 2,
+        "channel": "nurse_triage_call",
+        "type": "complication",
+        "verbatim": "Since last night I've had a fever and this deep chest and upper back pain, and it really hurts to swallow — worse than a sore throat. I feel pretty lousy.",
+        "clinical_signal": "Fever + chest/back pain + odynophagia 1-2 days after esophageal biopsy — concerning for esophageal perforation / deep mucosal injury with early mediastinitis",
+        "red_flag": true,
+        "ground_truth_disposition": "escalate",
+        "urgency": "emergent",
+        "links_followup_item": null,
+        "expected_action": "Escalate for immediate evaluation / ED referral; NPO; urgent clinician contact and imaging (CT chest / contrast esophagram) to exclude esophageal perforation. Do not manage as simple sore throat.",
+        "rationale": "Fever with chest/back pain and odynophagia after esophageal instrumentation is a red-flag presentation for perforation/mediastinitis and requires urgent action — this is the one true complication in this timeline."
+      },
+      {
+        "id": "C3",
+        "day": 6,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "When will my biopsy results be back, and should I already be taking the higher dose of the omeprazole they mentioned?",
+        "clinical_signal": "Patient asking about pending pathology and the PPI step-up instruction",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F1",
+        "expected_action": "Answer from the result: biopsies pending (H. pylori, esophageal, duodenal), expected back ~2026-08-11; team will communicate results. Confirm omeprazole step-up to 40 mg daily per the erosive esophagitis plan and that a repeat EGD in 8-12 weeks is planned.",
+        "rationale": "Answerable from the procedure result and follow-up plan; links to the pending pathology and the PPI titration items."
+      }
+    ]
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "id": "gi-synth-0035::proc-result",
+  "_synthetic": true,
+  "_note": "MOCK procedure result. No real patient. For PreChart development/eval.",
+  "patient_id": "gi-synth-0035",
+  "procedure": {
+    "name": "Endoscopic ultrasound (EUS), upper GI, with FNA",
+    "code": {"system": "http://snomed.info/sct", "code": "235968004", "display": "Endoscopic ultrasonography of upper gastrointestinal tract (procedure)"},
+    "date": "2026-08-05T09:10:00-07:00",
+    "indication": "Characterization of an 18 mm subepithelial gastric lesion identified on outside EGD; asymptomatic",
+    "sedation": "Monitored anesthesia care (propofol), anesthesia-directed",
+    "prep_quality": "N/A (upper endoscopy) — NPO >8 hours, adequate",
+    "extent_reached": "Second portion of duodenum; radial and linear echoendoscope examination of stomach completed",
+    "withdrawal_time_min": null,
+    "status": "completed"
+  },
+  "procedure_report": "PROCEDURE: Endoscopic ultrasound (EUS) of the upper GI tract with fine-needle aspiration/biopsy. INDICATION: 18 mm subepithelial gastric lesion found on outside EGD; asymptomatic. SEDATION: MAC (propofol). FINDINGS: The echoendoscope was advanced without difficulty. Endoscopically, a smooth subepithelial bulge with intact overlying mucosa was seen along the gastric body/fundus (greater curve), without ulceration. On radial and linear EUS, a well-circumscribed, hypoechoic, homogeneous lesion measuring 19 x 16 mm was identified arising from the fourth echolayer (muscularis propria). No internal cystic spaces, calcification, or exophytic irregular borders. No peri-gastric lymphadenopathy; no ascites. Doppler confirmed avascular needle path. EUS-guided fine-needle biopsy was performed with a 22-gauge core needle x3 passes under real-time guidance; adequate cellular cores obtained on-site macroscopic assessment. No immediate bleeding at the puncture site. The examined esophagus, remainder of stomach, and duodenum to the second portion were normal. IMPRESSION: 19 mm hypoechoic lesion arising from the muscularis propria, most consistent with a gastrointestinal stromal tumor (GIST); differential includes leiomyoma or schwannoma. EUS-FNB performed; histopathology and immunohistochemistry pending.",
+  "findings": [
+    {"finding": "Hypoechoic homogeneous subepithelial lesion arising from muscularis propria (4th layer), consistent with GIST vs leiomyoma/schwannoma", "location": "gastric body/fundus, greater curvature", "size_mm": 19, "action_taken": "EUS-FNB, 22G core needle x3 passes", "specimen": "A"},
+    {"finding": "No peri-gastric lymphadenopathy or ascites", "location": "perigastric", "action_taken": "none"},
+    {"finding": "Normal esophagus, remaining stomach, and duodenum to D2", "location": "upper GI tract", "action_taken": "none"}
+  ],
+  "specimens": [{"id": "A", "site": "gastric subepithelial lesion (muscularis propria)", "type": "EUS-guided fine-needle biopsy (core)"}],
+  "pathology": {"status": "pending", "expected_back": "2026-08-11", "report": null, "diagnosis": null, "actionable": null},
+  "complications": [],
+  "disposition": "Discharged home same day in stable condition with escort. Post-EUS/FNB precautions reviewed; advised to report abdominal pain, fever, hematemesis, or melena.",
+  "followup": [
+    {"recommendation": "Review EUS-FNB histopathology and immunohistochemistry (CD117/DOG-1/S100/desmin); communicate result to patient. If GIST confirmed, obtain staging CT and refer to surgical oncology / MDT for resection decision based on size and mitotic index", "timeframe": "within 1-2 weeks", "owner": "GI", "status": "open"},
+    {"recommendation": "If pathology non-diagnostic or benign (e.g., leiomyoma), establish EUS surveillance interval for the subepithelial lesion", "timeframe": "per pathology result", "owner": "GI", "status": "open"},
+    {"recommendation": "Reconcile lesion size against outside EGD report once received (referral 18 mm vs EUS 19 mm vs patient-recalled ~2 cm)", "timeframe": "before next visit", "owner": "GI", "status": "open"},
+    {"recommendation": "Continue levothyroxine 75 mcg daily", "timeframe": "ongoing", "owner": "patient / PCP", "status": "open"}
+  ],
+  "planted_followup_items": [
+    {"id": "F1", "type": "pending_pathology", "description": "EUS-FNB histopathology/IHC of gastric muscularis-propria lesion pending — GIST is the leading diagnosis; result determines whether staging and surgical referral are triggered", "urgency": "urgent", "expected_action": "review path + IHC, call patient with result, and if GIST confirmed initiate staging CT and surgical oncology/MDT referral", "status": "open"},
+    {"id": "F2", "type": "referral", "description": "Conditional surgical oncology / MDT referral for resection if GIST confirmed on pathology", "urgency": "urgent", "expected_action": "place surgical oncology referral and obtain staging CT once GIST confirmed", "status": "open"},
+    {"id": "F3", "type": "surveillance_interval", "description": "If lesion proves benign or biopsy non-diagnostic, an EUS surveillance interval for the subepithelial lesion must be set", "urgency": "routine", "expected_action": "document EUS follow-up interval based on final pathology", "status": "open"},
+    {"id": "F4", "type": "record_correction", "description": "Outside EGD report/images still outstanding; lesion size discrepancy (18 mm referral vs 19 mm EUS vs ~2 cm patient recollection) to be reconciled", "urgency": "routine", "expected_action": "obtain outside records and reconcile documented lesion size/location", "status": "open"},
+    {"id": "F5", "type": "med_reconciliation", "description": "No prescription anticoagulant/antiplatelet in use (\"blood thinner\" = OTC fish oil); no periprocedural hold required — documented for completeness", "urgency": "routine", "expected_action": "confirm no anticoagulant hold needed; document OTC fish oil on the medication list, may continue per patient preference", "status": "closed"}
+  ],
+  "post_procedure_followup": {
+    "window": "day 0 to day 14",
+    "channels": ["automated_check_in", "patient_portal_message", "nurse_triage_call"],
+    "_note": "Patient-reported stream after the procedure — the inbound signal the LeftBehind product triages. Each contact is labeled ground truth so triage can be scored.",
+    "contacts": [
+      {
+        "id": "C1",
+        "day": 1,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "My throat feels a bit scratchy and my belly is kind of bloated and burpy since the ultrasound. No fever, no throwing up.",
+        "clinical_signal": "Expected post-upper-endoscopy sore throat and insufflation bloating; no red-flag features",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; mild sore throat and bloating/gas are expected after EUS and self-limited over 24-48h. Return precautions if fever, severe/worsening abdominal pain, vomiting blood, or black stools.",
+        "rationale": "Common benign post-endoscopy symptoms without any complication signal; no escalation."
+      },
+      {
+        "id": "C2",
+        "day": 3,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "When will I hear back about the sample you took? I've been a little anxious waiting on the results.",
+        "clinical_signal": "Patient asking about pending EUS-FNB pathology timing",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F1",
+        "expected_action": "Answer from the result: histopathology/IHC pending, expected back ~2026-08-11; GI team will call with the result and next steps once finalized.",
+        "rationale": "Answerable directly from the procedure result and follow-up plan; links to the pending_pathology item."
+      },
+      {
+        "id": "C3",
+        "day": 5,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "Is it okay for me to keep taking my fish oil capsules, or should I hold off after this procedure?",
+        "clinical_signal": "Medication question about OTC omega-3 (patient's 'blood thinner'); no true anticoagulant in use",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F5",
+        "expected_action": "Answer: fish oil is an OTC supplement, not a prescription anticoagulant; no periprocedural hold was required and she may continue it per preference. Document on the medication list.",
+        "rationale": "Answerable from the med-reconciliation item; the 'blood thinner' was clarified as OTC fish oil, so no hold or resumption timing applies."
+      }
+    ]
+  }
+}

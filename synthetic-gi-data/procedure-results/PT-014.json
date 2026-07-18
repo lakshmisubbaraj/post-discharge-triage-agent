@@ -1,0 +1,107 @@
+{
+  "id": "gi-synth-0014::proc-result",
+  "_synthetic": true,
+  "_note": "MOCK procedure result. No real patient. For PreChart development/eval. Adapted to the EGD this patient was referred for.",
+  "patient_id": "gi-synth-0014",
+  "procedure": {
+    "name": "Esophagogastroduodenoscopy (EGD) with biopsy",
+    "code": {"system": "http://snomed.info/sct", "code": "1919006", "display": "Esophagogastroduodenoscopy (procedure)"},
+    "date": "2026-07-22T08:40:00-07:00",
+    "indication": "Progressive solid-food dysphagia with ~15 lb weight loss and tobacco/alcohol risk factors (alarm features); expedited EGD to evaluate for obstructing esophageal lesion",
+    "sedation": "Monitored anesthesia care (MAC) with propofol; anesthesia involved given heavier-than-charted alcohol use and airway/sedation risk",
+    "prep_quality": "NPO adequate; not applicable (upper endoscopy)",
+    "extent_reached": "Second portion of the duodenum",
+    "withdrawal_time_min": null,
+    "status": "completed"
+  },
+  "procedure_report": "PROCEDURE: Esophagogastroduodenoscopy with biopsy. INDICATION: progressive solid-food dysphagia with weight loss and smoking/alcohol history (alarm features). SEDATION: monitored anesthesia care with propofol; tolerated well. PERIPROCEDURAL: OTC aspirin 81 mg was held for 5 days prior per plan given anticipated biopsies; fish oil (patient-described 'blood thinner') correctly identified as a supplement and did not require hold or delay. FINDINGS: The scope was passed under direct vision. The proximal and mid esophagus were normal. In the distal esophagus, beginning approximately 32 cm from the incisors and extending to the gastroesophageal junction at ~38 cm, there was a partially circumferential, friable, ulcerated mass causing luminal narrowing and mucosal irregularity. The adult gastroscope traversed the narrowed segment with mild resistance. Cold-forceps biopsies (x8) were obtained from the mass and sent to pathology. No active bleeding after biopsy; the ulcerated surface oozed minimally and stopped spontaneously. The stomach was examined in forward and retroflexed views; no esophageal or gastric varices were seen. The duodenum to the second portion was normal. IMPRESSION: Obstructing, ulcerated distal esophageal / GE-junction mass, highly suspicious for malignancy. Biopsies obtained; pathology pending. No varices. RECOMMENDATIONS: expedite pathology; oncologic staging (CT chest/abdomen/pelvis and EUS) and multidisciplinary referral pending tissue diagnosis.",
+  "findings": [
+    {"finding": "Partially circumferential, friable, ulcerated obstructing mass, suspicious for malignancy", "location": "distal esophagus / gastroesophageal junction (32-38 cm from incisors)", "size_mm": 60, "action_taken": "cold-forceps biopsies x8, retrieved; hemostasis spontaneous", "specimen": "A"},
+    {"finding": "No esophageal or gastric varices", "location": "distal esophagus / stomach", "action_taken": "none"},
+    {"finding": "Normal stomach and duodenum to second portion", "location": "stomach / duodenum", "action_taken": "none"}
+  ],
+  "specimens": [{"id": "A", "site": "distal esophageal / GE-junction mass", "type": "endoscopic forceps biopsy"}],
+  "pathology": {"status": "pending", "expected_back": "2026-07-25", "report": null, "diagnosis": null, "actionable": null},
+  "complications": [],
+  "disposition": "Discharged home same day in stable condition with escort after uneventful recovery from anesthesia. Advised soft diet as tolerated pending results; return precautions reviewed (inability to swallow liquids/saliva, chest pain, hematemesis, melena, fever).",
+  "followup": [
+    {"recommendation": "Communicate distal esophageal mass biopsy pathology to patient as soon as resulted; if malignant, disclose and initiate oncology pathway", "timeframe": "within 3-5 days", "owner": "GI", "status": "open"},
+    {"recommendation": "Order staging CT chest/abdomen/pelvis and endoscopic ultrasound (EUS) for locoregional staging pending tissue diagnosis", "timeframe": "within 1-2 weeks", "owner": "GI", "status": "open"},
+    {"recommendation": "Refer to GI oncology / thoracic multidisciplinary tumor board for suspected esophageal malignancy", "timeframe": "upon pathology confirmation", "owner": "GI", "status": "open"},
+    {"recommendation": "Resume OTC aspirin 81 mg once no post-biopsy bleeding concern (48 hours); document resumption on the reconciled medication list", "timeframe": "48 hours", "owner": "patient / GI", "status": "open"},
+    {"recommendation": "Alcohol use ~6-8 drinks/day per collateral — monitor for withdrawal, counsel on reduction, and arrange support given upcoming treatment", "timeframe": "ongoing", "owner": "GI / primary care", "status": "open"},
+    {"recommendation": "Address nutrition given dysphagia and ongoing weight loss (dietitian; consider enteral access if intake inadequate)", "timeframe": "within 1-2 weeks", "owner": "GI / nutrition", "status": "open"}
+  ],
+  "planted_followup_items": [
+    {"id": "F1", "type": "critical_result", "description": "Biopsy of obstructing distal esophageal / GE-junction mass highly suspicious for malignancy — tissue diagnosis is a critical result that must be communicated and drive the oncology pathway", "urgency": "critical", "expected_action": "expedite pathology; disclose result to patient; initiate oncology referral on confirmation", "status": "open"},
+    {"id": "F2", "type": "pending_pathology", "description": "Esophageal mass biopsy (specimen A) pathology pending — result outstanding and must be tracked to closure", "urgency": "critical", "expected_action": "track pathology to completion; do not let result go unread", "status": "open"},
+    {"id": "F3", "type": "referral", "description": "GI oncology / thoracic multidisciplinary tumor board referral for suspected esophageal cancer", "urgency": "urgent", "expected_action": "place referral upon pathology confirmation", "status": "open"},
+    {"id": "F4", "type": "repeat_procedure", "description": "Staging endoscopic ultrasound (EUS) and CT chest/abdomen/pelvis for locoregional and distant staging", "urgency": "urgent", "expected_action": "order staging imaging and EUS pending tissue diagnosis", "status": "open"},
+    {"id": "F5", "type": "med_resume", "description": "OTC aspirin 81 mg held periprocedurally (not on original chart — reconciled at consult) — needs resumption instruction after biopsies", "urgency": "routine", "expected_action": "confirm safe resumption at 48h and document on medication list", "status": "open"},
+    {"id": "F6", "type": "care_coordination", "description": "Alcohol intake heavier than charted (~6-8 drinks/day) — withdrawal monitoring and counseling; relevant to sedation and upcoming treatment", "urgency": "urgent", "expected_action": "monitor for withdrawal; provide cessation counseling/support", "status": "open"},
+    {"id": "F7", "type": "complication_watch", "description": "Post-biopsy bleeding watch in a patient on chronic OTC aspirin with an ulcerated friable mass", "urgency": "routine", "expected_action": "counsel on hematemesis/melena return precautions", "status": "open"}
+  ],
+  "post_procedure_followup": {
+    "window": "day 0 to day 14",
+    "channels": ["automated_check_in", "patient_portal_message", "nurse_triage_call"],
+    "_note": "Patient-reported stream after the procedure — the inbound signal the LeftBehind product triages. Each contact is labeled ground truth so triage can be scored.",
+    "contacts": [
+      {
+        "id": "C1",
+        "day": 1,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "My throat's a little raw and my chest feels kind of sore where the food used to stick. No throwing up, no fever.",
+        "clinical_signal": "Expected post-EGD sore throat plus mild retrosternal soreness after the scope traversed the narrowed segment; no red-flag features",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; sore throat and mild chest soreness are expected after an EGD through a narrowed segment and settle within 24-48h. Return precautions: worsening chest pain, fever, trouble breathing, vomiting blood, or black stools.",
+        "rationale": "Common benign post-endoscopy symptoms; no perforation/aspiration features to escalate."
+      },
+      {
+        "id": "C2",
+        "day": 3,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "The nurse told me to stop my baby aspirin before the test. When can I start it again, and when will I hear about the biopsy?",
+        "clinical_signal": "Patient asking about aspirin resumption timing and pending pathology; aspirin was held 5 days pre-procedure",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F5",
+        "expected_action": "Answer from the plan: aspirin may resume at 48h post-biopsy if no bleeding; document on reconciled med list. Pathology expected ~day 4 (2026-07-25); team will call with the result.",
+        "rationale": "Answerable from the procedure result and follow-up plan; links to the med_resume (held aspirin) item."
+      },
+      {
+        "id": "C3",
+        "day": 6,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "There was a little pink when I spit after brushing my teeth this morning. Feeling fine otherwise, eating soft food okay.",
+        "clinical_signal": "Trace blood-tinged saliva after tooth-brushing in an otherwise well patient; no hematemesis, melena, lightheadedness, or ongoing bleeding — benign despite alarming wording",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": "F7",
+        "expected_action": "Reassure; a trace of pink after brushing is not GI bleeding. Counsel to watch for and call immediately if vomiting blood, black/tarry stools, lightheadedness, or persistent bleeding.",
+        "rationale": "Dangerous-sounding-but-benign triage trap: minor oral spotting is not post-biopsy hemorrhage; reinforce the true red-flag precautions without escalating."
+      },
+      {
+        "id": "C4",
+        "day": 12,
+        "channel": "nurse_triage_call",
+        "type": "complaint",
+        "verbatim": "It's been almost two weeks since my scope and nobody has ever called me about the biopsy. I'm worried — they said it might be something serious. What did it show?",
+        "clinical_signal": "Dropped follow-up: patient with a mass highly suspicious for malignancy has an unread/uncommunicated pathology result nearly two weeks out; expected back ~day 4",
+        "red_flag": true,
+        "ground_truth_disposition": "escalate",
+        "urgency": "urgent",
+        "links_followup_item": "F2",
+        "expected_action": "Escalate to GI same day: retrieve the pending esophageal-mass pathology, confirm it has resulted, and have the physician disclose the result and initiate the oncology/staging pathway; document that the loop was closed.",
+        "rationale": "A near-certain esophageal malignancy result left uncommunicated for ~12 days is a dropped critical follow-up; the contact must escalate to surface and close the pending_pathology item rather than merely reassure."
+      }
+    ]
+  }
+}

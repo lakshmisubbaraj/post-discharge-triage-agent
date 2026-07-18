@@ -1,0 +1,105 @@
+{
+  "id": "gi-synth-0046::proc-result",
+  "_synthetic": true,
+  "_note": "MOCK procedure result. No real patient. For PreChart development/eval.",
+  "patient_id": "gi-synth-0046",
+  "procedure": {
+    "name": "Percutaneous endoscopic gastrostomy (PEG) placement",
+    "code": {"system": "http://snomed.info/sct", "code": "175905003", "display": "Endoscopic insertion of gastrostomy tube (procedure)"},
+    "date": "2026-07-21T08:00:00-07:00",
+    "indication": "ALS with progressive dysphagia, inadequate oral intake and weight loss; enteral access. Expedited given declining respiratory reserve (FVC 43% predicted).",
+    "sedation": "Minimized MAC with anesthesia present; low-dose propofol titrated, topical pharyngeal lidocaine, no benzodiazepine. Non-supine (head-of-bed elevated ~30 degrees) positioning. Nocturnal NIV equipment and respiratory therapy available at bedside.",
+    "prep_quality": "N/A (upper endoscopy) — NPO confirmed; OTC fish oil held pre-procedure per instruction, no prescription anticoagulant to hold.",
+    "extent_reached": "Second portion of duodenum; gastrostomy sited on anterior gastric body",
+    "withdrawal_time_min": null,
+    "status": "completed"
+  },
+  "procedure_report": "PROCEDURE: Percutaneous endoscopic gastrostomy (PEG) placement via pull technique. INDICATION: ALS with progressive dysphagia, weight loss, and inadequate oral intake; enteral access expedited due to declining respiratory reserve. SEDATION: minimized anesthesia-supported (MAC) with head-of-bed elevated, non-supine positioning; respiratory therapy and NIV available. PROPHYLAXIS: single dose IV cefazolin given pre-procedure. FINDINGS: The gastroscope was passed under direct vision through the oropharynx and advanced to the second portion of the duodenum. Esophagus without stricture or obstructing lesion; some pooled secretions consistent with impaired clearance. Stomach normal without ulcer, mass, or retained food. Adequate transillumination and single-finger indentation confirmed on the anterior gastric body. Under sterile technique the site was infiltrated with local anesthetic, a needle/cannula was passed into the stomach under endoscopic visualization, a guidewire was snared and withdrawn transorally, and a 20 Fr PEG tube was placed by the pull technique. Internal bumper seen well-apposed to the gastric wall on repeat endoscopy; external bolster set at 3 cm with a small gap. No bleeding at the puncture site. Tolerated the procedure without desaturation; SpO2 maintained 94-96%. IMPRESSION: Successful 20 Fr PEG placement, technically uncomplicated. No obstructing esophageal or gastric lesion. Pooled esophageal secretions consistent with bulbar dysphagia.",
+  "findings": [
+    {"finding": "20 Fr PEG tube placed by pull technique, anterior gastric body; internal bumper well-apposed, external bolster at 3 cm", "location": "anterior gastric body", "action_taken": "gastrostomy tube placement"},
+    {"finding": "Pooled esophageal/pharyngeal secretions consistent with bulbar dysphagia; no stricture or obstructing lesion", "location": "esophagus", "action_taken": "none"},
+    {"finding": "Normal stomach and duodenum; no ulcer, mass, or bleeding", "location": "stomach / duodenum", "action_taken": "none"}
+  ],
+  "specimens": [],
+  "pathology": {"status": "not_applicable", "expected_back": null, "report": null, "diagnosis": null, "actionable": null},
+  "complications": [],
+  "disposition": "Admitted for short observation given ALS with reduced respiratory reserve (FVC 43%) and possible recent microaspiration; monitored with head-of-bed elevation, respiratory therapy, and NIV availability. PEG to remain to gravity drainage; tube feeding to begin after 4-6 hours per protocol if stable. Anesthesia recovery uneventful.",
+  "followup": [
+    {"recommendation": "Monitor for aspiration pneumonia given pre-procedure choking episode and low respiratory reserve; low threshold for chest imaging; continue NIV per pulmonary", "timeframe": "first 24-48 hours", "owner": "GI / inpatient team / Pulmonology", "status": "open"},
+    {"recommendation": "Initiate/advance PEG tube feeds per nutrition protocol; nutrition consult for formula and rate; monitor weight and albumin", "timeframe": "within 24 hours", "owner": "Nutrition / GI", "status": "open"},
+    {"recommendation": "PEG site care and complication watch (bleeding, buried bumper, infection, peritonitis); external bolster positioning check", "timeframe": "48-72 hours and at 1 week", "owner": "GI / patient / spouse", "status": "open"},
+    {"recommendation": "Reconcile medication list — add edaravone (Radicava) infusions; convert riluzole and other meds to enteral formulations via PEG", "timeframe": "at discharge", "owner": "GI / Neurology / Pharmacy", "status": "open"},
+    {"recommendation": "Resume OTC fish oil (omega-3) only if desired; no prescription anticoagulant was held so no bridging required", "timeframe": "after 48 hours if no bleeding", "owner": "patient / GI", "status": "open"}
+  ],
+  "planted_followup_items": [
+    {"id": "F1", "type": "complication_watch", "description": "Aspiration pneumonia surveillance — pre-procedure choking episode with thin liquids plus low-grade fever and FVC 43% predicted put patient at elevated peri-procedural aspiration/respiratory risk", "urgency": "urgent", "expected_action": "monitor respiratory status, maintain NIV availability and HOB elevation, obtain chest imaging if symptomatic, coordinate with pulmonology", "status": "open"},
+    {"id": "F2", "type": "complication_watch", "description": "PEG site complication watch — bleeding, buried bumper syndrome, wound infection, peristomal leak, or peritonitis after fresh gastrostomy", "urgency": "routine", "expected_action": "site checks and bolster positioning at 48-72 hours and 1 week; educate patient/spouse on warning signs", "status": "open"},
+    {"id": "F3", "type": "referral", "description": "Nutrition follow-up to establish and titrate enteral feeding regimen; monitor weight (13 lb loss over 2 months) and albumin (3.4 g/dL)", "urgency": "urgent", "expected_action": "nutrition consult completes feeding plan; begin feeds per protocol and reassess intake", "status": "open"},
+    {"id": "F4", "type": "med_reconciliation", "description": "Convert medications to enteral route via PEG (riluzole) and reconcile chart-omitted edaravone (Radicava) infusions into the medication list", "urgency": "routine", "expected_action": "pharmacy/neurology confirm enteral formulations and update medication list", "status": "open"},
+    {"id": "F5", "type": "referral", "description": "Coordinate ongoing pulmonary follow-up including nocturnal NIV initiation now that enteral access is established", "urgency": "routine", "expected_action": "pulmonology confirms NIV setup and continued respiratory surveillance", "status": "open"},
+    {"id": "F6", "type": "med_reconciliation", "description": "OTC fish oil (omega-3) resumption guidance — clarified as non-prescription supplement; no anticoagulant was held so no bridging is required", "urgency": "routine", "expected_action": "advise patient it may be resumed after 48 hours if no bleeding", "status": "closed"}
+  ],
+  "post_procedure_followup": {
+    "window": "day 0 to day 14",
+    "channels": ["automated_check_in", "patient_portal_message", "nurse_triage_call"],
+    "_note": "Patient-reported stream after the procedure — the inbound signal the LeftBehind product triages. Each contact is labeled ground truth so triage can be scored.",
+    "contacts": [
+      {
+        "id": "C1",
+        "day": 1,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "My throat is a little scratchy and I feel groggy and worn out, and the tube site is a bit tender. Is that normal?",
+        "clinical_signal": "Expected post-endoscopy sore throat, residual sedation grogginess, and mild peristomal tenderness the day after fresh PEG placement",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; mild sore throat, grogginess, and site tenderness are expected in the first 24-48h. Review warning signs (spreading redness, fever, severe pain, leaking).",
+        "rationale": "Common benign early post-PEG symptoms; no escalation needed."
+      },
+      {
+        "id": "C2",
+        "day": 2,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "How do we give his ALS pills through the new tube now, and should he still go to the infusion center for the Radicava?",
+        "clinical_signal": "Caregiver asking about enteral medication route and continuation/reconciliation of the chart-omitted edaravone infusions",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F4",
+        "expected_action": "Answer from the plan: pharmacy/neurology to confirm enteral riluzole formulation via PEG and continue scheduled edaravone (Radicava) infusions; ensure med list is updated.",
+        "rationale": "Answerable from the medication-reconciliation follow-up item; links to F4."
+      },
+      {
+        "id": "C3",
+        "day": 3,
+        "channel": "nurse_triage_call",
+        "type": "complication",
+        "verbatim": "Since last night he's breathing harder, coughing more, and he's got a fever of 101. He seems more tired than usual.",
+        "clinical_signal": "New fever, worsening cough and dyspnea in an ALS patient with FVC 43% and recent microaspiration — possible aspiration pneumonia with limited respiratory reserve",
+        "red_flag": true,
+        "ground_truth_disposition": "escalate",
+        "urgency": "emergent",
+        "links_followup_item": "F1",
+        "expected_action": "Escalate for same-day/urgent evaluation; obtain chest imaging, assess oxygenation, initiate NIV support and treat for aspiration pneumonia; coordinate with pulmonology.",
+        "rationale": "Fever plus worsening respiratory symptoms in a patient with severely reduced reserve is a true complication requiring emergent action; maps to the aspiration surveillance item F1."
+      },
+      {
+        "id": "C4",
+        "day": 7,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "A little clear fluid weeps around the tube and the skin right at the opening looks slightly pink. Should we panic?",
+        "clinical_signal": "Minor peristomal moisture and slight pink skin at a one-week-old stoma without fever, spreading erythema, purulence, or severe pain",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": "F2",
+        "expected_action": "Reassure and coach site care (keep clean/dry, confirm external bolster ~3 cm); educate on true warning signs — spreading redness, warmth, pus, foul drainage, fever, or severe abdominal pain — and to call if any appear.",
+        "rationale": "Dangerous-sounding-but-benign triage trap: small clear leakage and faint pink skin at a fresh stoma are common and self-limited, distinct from spreading infection/peritonitis; links to the PEG site watch F2."
+      }
+    ]
+  }
+}

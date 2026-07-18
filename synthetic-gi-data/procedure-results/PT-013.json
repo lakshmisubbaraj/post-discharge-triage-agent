@@ -1,0 +1,93 @@
+{
+  "id": "gi-synth-0013::proc-result",
+  "_synthetic": true,
+  "_note": "MOCK procedure result in the style of synthetic-gi-mock-v1. No real patient. For PreChart/LeftBehind development/eval.",
+  "patient_id": "gi-synth-0013",
+  "procedure": {
+    "name": "Esophagogastroduodenoscopy (EGD)",
+    "code": {"system": "http://snomed.info/sct", "code": "302209009", "display": "Endoscopy of upper gastrointestinal tract (procedure)"},
+    "date": "2026-08-05T09:10:00-07:00",
+    "indication": "Persistent GERD labeled refractory to PPI; evaluate for erosive esophagitis and Barrett's esophagus. No alarm features (no dysphagia, weight loss, or GI bleeding).",
+    "sedation": "Moderate sedation (midazolam 2 mg, fentanyl 75 mcg)",
+    "prep_quality": "N/A (upper endoscopy); NPO >8 hours, adequate mucosal visualization",
+    "extent_reached": "Second portion of the duodenum (D2)",
+    "withdrawal_time_min": null,
+    "status": "completed"
+  },
+  "procedure_report": "PROCEDURE: Esophagogastroduodenoscopy. INDICATION: persistent GERD, rule out erosive disease/Barrett's; ongoing regular NSAID (ibuprofen) use noted. SEDATION: moderate (midazolam 2 mg, fentanyl 75 mcg). The endoscope was passed under direct visualization from the mouth to the second portion of the duodenum. ESOPHAGUS: Several longitudinal mucosal breaks were seen in the distal esophagus, non-confluent, involving more than one mucosal fold — consistent with LA Grade B erosive esophagitis. The squamocolumnar junction was at 39 cm and the diaphragmatic hiatus at 42 cm, consistent with a small (approximately 3 cm) sliding hiatal hernia. No definite salmon-colored columnar mucosa suggestive of Barrett's above the gastroesophageal junction; no mass, no stricture, and the scope traversed the GE junction without resistance. STOMACH: Mild antral erythema consistent with gastritis; no ulcer, no mass. Retroflexion normal. DUODENUM: Bulb and D2 normal; no ulcer or erosion. BIOPSIES: Distal esophageal biopsies obtained to evaluate the mucosal breaks and exclude intestinal metaplasia (specimen A); gastric antral biopsies obtained for histology/H. pylori (specimen B). No active bleeding. IMPRESSION: LA Grade B erosive esophagitis, small hiatal hernia, mild antral gastritis. Findings consistent with undertreated acid reflux compounded by NSAID use. Pathology pending.",
+  "findings": [
+    {"finding": "Erosive esophagitis, LA Grade B (non-confluent mucosal breaks, distal esophagus)", "location": "distal esophagus", "action_taken": "biopsy", "specimen": "A"},
+    {"finding": "Small sliding hiatal hernia (~3 cm)", "location": "gastroesophageal junction", "size_mm": 30, "action_taken": "none"},
+    {"finding": "No endoscopic evidence of Barrett's esophagus", "location": "gastroesophageal junction", "action_taken": "none"},
+    {"finding": "Mild antral gastritis (erythema, no ulcer)", "location": "gastric antrum", "action_taken": "biopsy", "specimen": "B"}
+  ],
+  "specimens": [
+    {"id": "A", "site": "distal esophagus (mucosal breaks)", "type": "biopsy"},
+    {"id": "B", "site": "gastric antrum", "type": "biopsy"}
+  ],
+  "pathology": {"status": "pending", "expected_back": "2026-08-11", "report": null, "diagnosis": null, "actionable": null},
+  "complications": [],
+  "disposition": "Discharged home same day in stable condition with escort. Tolerated procedure well. Post-sedation and diet instructions reviewed.",
+  "followup": [
+    {"recommendation": "Review distal esophageal biopsy pathology to confirm reflux esophagitis and exclude intestinal metaplasia (Barrett's); communicate result to patient", "timeframe": "within 2 weeks", "owner": "GI", "status": "open"},
+    {"recommendation": "Review gastric antral biopsy pathology (histology/H. pylori); treat if positive", "timeframe": "within 2 weeks", "owner": "GI", "status": "open"},
+    {"recommendation": "Optimize acid suppression: pantoprazole 40 mg BID taken 30-60 minutes before meals, reinforce adherence; discontinue/minimize ibuprofen and substitute acetaminophen", "timeframe": "now / ongoing", "owner": "GI / patient", "status": "open"},
+    {"recommendation": "Repeat EGD in 8-12 weeks after optimized PPI therapy to confirm mucosal healing of LA Grade B esophagitis and to assess the GE junction for Barrett's on a healed mucosa", "timeframe": "8-12 weeks", "owner": "GI", "status": "open"}
+  ],
+  "planted_followup_items": [
+    {"id": "F1", "type": "pending_pathology", "description": "Distal esophageal biopsy pending — must confirm erosive esophagitis and, importantly, exclude intestinal metaplasia (Barrett's esophagus); result drives whether Barrett's surveillance is needed", "urgency": "routine", "expected_action": "review path, call patient with result, document Barrett's status and any surveillance interval", "status": "open"},
+    {"id": "F2", "type": "pending_pathology", "description": "Gastric antral biopsy pending — histology and H. pylori (prior stool antigen negative; confirm on tissue)", "urgency": "routine", "expected_action": "review path; if H. pylori positive, initiate eradication therapy", "status": "open"},
+    {"id": "F3", "type": "repeat_procedure", "description": "Follow-up EGD in 8-12 weeks after optimized PPI therapy to confirm healing of LA Grade B erosive esophagitis and reassess GE junction for Barrett's on healed mucosa", "urgency": "routine", "expected_action": "schedule surveillance/healing EGD once PPI optimized", "status": "open"},
+    {"id": "F4", "type": "med_reconciliation", "description": "Medication reconciliation and optimization (no anticoagulant/antiplatelet held for this EGD): correct PPI to BID pre-meal dosing, discontinue famotidine (already stopped by patient), and stop/minimize OTC ibuprofen (contributor to erosive disease); substitute acetaminophen for headaches", "urgency": "routine", "expected_action": "update med list, counsel patient, coordinate NSAID cessation with PCP", "status": "open"},
+    {"id": "F5", "type": "incidental_finding", "description": "Small sliding hiatal hernia noted — contributes to reflux; relevant if symptoms persist despite optimized medical therapy (consider anti-reflux surgery evaluation)", "urgency": "routine", "expected_action": "document; revisit surgical evaluation only if refractory after true PPI optimization", "status": "open"}
+  ],
+  "post_procedure_followup": {
+    "window": "day 0 to day 14",
+    "channels": ["automated_check_in", "patient_portal_message", "nurse_triage_call"],
+    "_note": "Patient-reported stream after the procedure — the inbound signal the LeftBehind product triages. Each contact is labeled ground truth so triage can be scored.",
+    "contacts": [
+      {
+        "id": "C1",
+        "day": 1,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "My throat's a bit scratchy and I've been really burpy and bloated since yesterday. Is that normal?",
+        "clinical_signal": "Expected post-EGD sore throat plus insufflation-related bloating/belching",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; mild sore throat and air-related bloating are expected after upper endoscopy and self-resolve within 24-48h. Warm fluids, lozenges as needed.",
+        "rationale": "Common benign post-endoscopy symptoms after a diagnostic EGD with biopsies only; no escalation."
+      },
+      {
+        "id": "C2",
+        "day": 3,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "When will I find out what the biopsies showed? And did they see anything bad in my esophagus?",
+        "clinical_signal": "Patient asking about pending esophageal/gastric pathology and results communication",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F1",
+        "expected_action": "Answer from the result: EGD showed treatable acid-reflux inflammation (LA Grade B esophagitis) and no visible Barrett's or mass; biopsies pending (expected ~2026-08-11), team will call with results and any surveillance plan.",
+        "rationale": "Answerable from the procedure report and follow-up plan; maps to the pending esophageal pathology item."
+      },
+      {
+        "id": "C3",
+        "day": 6,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "I've got one of my headaches coming on — am I okay to take my ibuprofen, or should I be avoiding it now?",
+        "clinical_signal": "Patient clarifying NSAID use given its role in her erosive esophagitis; medication-optimization counseling opportunity",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F4",
+        "expected_action": "Counsel to avoid/minimize ibuprofen because it contributed to the esophageal inflammation; use acetaminophen for headaches and follow up with PCP on headache pattern; reinforce pre-meal BID PPI dosing.",
+        "rationale": "Benign, answerable medication question that maps to the medication-reconciliation/optimization follow-up item; no held anticoagulant is involved, so no bleeding-risk escalation."
+      }
+    ]
+  }
+}

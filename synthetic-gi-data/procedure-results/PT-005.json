@@ -1,0 +1,100 @@
+{
+  "id": "gi-synth-0005::proc-result",
+  "_synthetic": true,
+  "_note": "MOCK procedure result. No real patient. For PreChart development/eval.",
+  "patient_id": "gi-synth-0005",
+  "procedure": {
+    "name": "Bidirectional endoscopy (EGD + Colonoscopy)",
+    "code": {"system": "http://snomed.info/sct", "code": "444783004", "display": "Esophagogastroduodenoscopy and colonoscopy (procedure)"},
+    "date": "2026-07-28T08:10:00-07:00",
+    "indication": "Unexplained iron-deficiency anemia (ferritin 6, Hgb 9.8, MCV 74) with resolved menstrual source; daily aspirin and regular NSAID use; intermittent dark stools",
+    "sedation": "Moderate sedation (midazolam 4 mg, fentanyl 100 mcg)",
+    "prep_quality": "Boston Bowel Prep Scale 7/9 (2/3 right, 2/3 transverse, 3/3 left) — adequate",
+    "extent_reached": "EGD: second portion of duodenum. Colonoscopy: cecum (confirmed by appendiceal orifice and ileocecal valve intubation)",
+    "withdrawal_time_min": 10,
+    "status": "completed"
+  },
+  "procedure_report": "PROCEDURE: Bidirectional endoscopy (EGD followed by colonoscopy). INDICATION: unexplained iron-deficiency anemia with resolved menstrual source; daily low-dose aspirin and regular OTC ibuprofen; intermittent dark stools. Peri-procedure antiplatelet: patient advised to hold self-directed aspirin 81 mg and ibuprofen prior to procedure; NSAIDs held. SEDATION: moderate. \n\nEGD FINDINGS: The esophagus was normal with a Z-line at 39 cm and no evidence of esophagitis or varices. The stomach demonstrated patchy antral erythema with several small (2-4 mm) non-bleeding erosions consistent with NSAID/aspirin-related gastropathy. A single 8 mm clean-based ulcer (Forrest III, no stigmata of recent hemorrhage) was identified in the duodenal bulb; the ulcer base was clean without visible vessel or adherent clot and was photodocumented (duodenal bulb ulcers are not routinely biopsied, as malignancy is exceedingly rare at this site). Biopsies were taken from the gastric antrum and body for H. pylori (specimen B) and random biopsies were obtained from the second portion of the duodenum to evaluate for celiac disease as part of the iron-deficiency anemia workup (specimen C). The remainder of the duodenum to the second portion was normal. \n\nCOLONOSCOPY FINDINGS: The colonoscope was advanced to the cecum. A single 5 mm sessile polyp was identified in the ascending colon and removed by cold snare polypectomy (specimen A, retrieved). Scattered sigmoid diverticula without stigmata of bleeding. No mass, no angioectasia, no active bleeding. Terminal ileum intubated and normal. \n\nIMPRESSION: (1) 8 mm clean-based duodenal bulb ulcer plus antral erosions — likely aspirin/NSAID-related; probable occult upper-GI blood-loss source explaining the iron-deficiency anemia. (2) Gastric biopsies for H. pylori and duodenal biopsies for celiac disease pending. (3) 5 mm ascending colon polyp removed. (4) Sigmoid diverticulosis. Pathology pending.",
+  "findings": [
+    {"finding": "8 mm clean-based ulcer, Forrest III (no stigmata of recent hemorrhage)", "location": "duodenal bulb", "size_mm": 8, "action_taken": "photodocumented; managed medically with high-dose PPI (bulb ulcers not biopsied — malignancy exceedingly rare at this site)", "specimen": null},
+    {"finding": "Antral erythema with 2-4 mm non-bleeding erosions (NSAID/aspirin gastropathy)", "location": "gastric antrum", "action_taken": "biopsy for H. pylori", "specimen": "B"},
+    {"finding": "Normal-appearing second-portion duodenal mucosa; random biopsies obtained to evaluate for celiac disease (IDA workup)", "location": "duodenum (second portion)", "action_taken": "random biopsy for celiac disease", "specimen": "C"},
+    {"finding": "5 mm sessile polyp", "location": "ascending colon", "size_mm": 5, "action_taken": "cold snare polypectomy, retrieved", "specimen": "A"},
+    {"finding": "Diverticulosis, no stigmata of bleeding", "location": "sigmoid colon", "action_taken": "none"},
+    {"finding": "Normal esophagus, no esophagitis or varices", "location": "esophagus", "action_taken": "none"}
+  ],
+  "specimens": [
+    {"id": "A", "site": "ascending colon polyp", "type": "polypectomy"},
+    {"id": "B", "site": "gastric antrum/body", "type": "biopsy — H. pylori"},
+    {"id": "C", "site": "duodenum, second portion", "type": "biopsy — celiac disease evaluation"}
+  ],
+  "pathology": {"status": "pending", "expected_back": "2026-08-01", "report": null, "diagnosis": null, "actionable": null},
+  "complications": [],
+  "disposition": "Discharged home same day in stable condition with escort. Post-polypectomy and post-biopsy precautions reviewed. Counseled to discontinue ibuprofen/NSAIDs indefinitely and to hold aspirin pending physician review given occult GI blood-loss source and low-risk primary-prevention indication.",
+  "followup": [
+    {"recommendation": "Review H. pylori (specimen B) and celiac (specimen C) biopsy results; if H. pylori positive, treat and confirm eradication; call patient with results", "timeframe": "within 1-2 weeks", "owner": "GI", "status": "open"},
+    {"recommendation": "Review ascending colon polyp pathology and set colonoscopy surveillance interval", "timeframe": "within 2 weeks", "owner": "GI", "status": "open"},
+    {"recommendation": "Escalate PPI to omeprazole 40 mg daily for duodenal ulcer healing; discontinue NSAIDs; reassess need for daily aspirin with PCP/cardiology (self-started primary prevention, now with GI blood-loss source)", "timeframe": "now / ongoing", "owner": "GI / PCP", "status": "open"},
+    {"recommendation": "Continue oral iron repletion (separate from tea, add vitamin C); recheck CBC/ferritin to confirm response", "timeframe": "6-8 weeks", "owner": "GI / PCP", "status": "open"},
+    {"recommendation": "Repeat EGD to confirm duodenal ulcer healing", "timeframe": "8-12 weeks", "owner": "GI", "status": "open"}
+  ],
+  "planted_followup_items": [
+    {"id": "F1", "type": "pending_pathology", "description": "Duodenal second-portion biopsy (specimen C) pending to evaluate for celiac disease as part of the iron-deficiency anemia workup — result must be reviewed and communicated", "urgency": "routine", "expected_action": "review celiac biopsy result, call patient, document", "status": "open"},
+    {"id": "F2", "type": "pending_pathology", "description": "Gastric H. pylori biopsy (specimen B) pending — positive result requires eradication therapy and post-treatment confirmation", "urgency": "routine", "expected_action": "review H. pylori result; if positive treat and arrange test-of-cure", "status": "open"},
+    {"id": "F3", "type": "pending_pathology", "description": "Ascending colon polyp (specimen A) pathology pending — drives colonoscopy surveillance interval", "urgency": "routine", "expected_action": "review polyp histology and set surveillance interval", "status": "open"},
+    {"id": "F4", "type": "med_reconciliation", "description": "Self-directed daily aspirin 81 mg and OTC ibuprofen held peri-procedure — decision needed on permanent NSAID discontinuation and whether to resume/stop the self-started aspirin given the identified occult GI bleeding source and low-risk primary-prevention indication (do-not-resume guidance likely)", "urgency": "urgent", "expected_action": "reconcile med list; clarify antiplatelet/NSAID plan with patient, PCP, and cardiology; document decision (avoid NSAIDs; likely do not resume aspirin)", "status": "open"},
+    {"id": "F5", "type": "known_lesion_followup", "description": "8 mm clean-based duodenal bulb ulcer identified as the probable occult blood-loss source for severe IDA (ferritin 6) in a patient on daily aspirin plus NSAIDs — requires PPI escalation, NSAID cessation, and endoscopic healing confirmation to prevent recurrent/overt bleeding", "urgency": "urgent", "expected_action": "escalate PPI, ensure NSAID cessation, arrange healing reassessment", "status": "open"},
+    {"id": "F6", "type": "repeat_procedure", "description": "Repeat EGD in 8-12 weeks to confirm duodenal ulcer healing", "urgency": "routine", "expected_action": "schedule follow-up EGD and confirm healing", "status": "open"},
+    {"id": "F7", "type": "surveillance_interval", "description": "Colonoscopy surveillance interval to be set once ascending colon polyp histology returns", "urgency": "routine", "expected_action": "assign surveillance interval based on polyp pathology", "status": "open"},
+    {"id": "F8", "type": "lab_followup", "description": "Anemia response monitoring — recheck CBC/ferritin after iron repletion and source control to confirm hemoglobin recovery and exclude ongoing blood loss", "urgency": "routine", "expected_action": "recheck labs in 6-8 weeks and confirm response", "status": "open"}
+  ],
+  "post_procedure_followup": {
+    "window": "day 0 to day 14",
+    "channels": ["automated_check_in", "patient_portal_message", "nurse_triage_call"],
+    "_note": "Patient-reported stream after the procedure — the inbound signal the LeftBehind product triages. Each contact is labeled ground truth so triage can be scored.",
+    "contacts": [
+      {
+        "id": "C1",
+        "day": 1,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "My throat feels a bit scratchy and I'm burping a lot and feel gassy since yesterday.",
+        "clinical_signal": "Expected post-endoscopy sore throat plus insufflation-related bloating/gas after bidirectional exam",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; mild sore throat and bloating/gas are expected after EGD and colonoscopy and typically settle within 24-48h. Advise fluids and walking; return precautions given.",
+        "rationale": "Common benign post-endoscopy symptoms with no red-flag features; no escalation needed."
+      },
+      {
+        "id": "C2",
+        "day": 3,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "When will I find out about my biopsies? And do I go back on my baby aspirin and my ibuprofen for my knee now?",
+        "clinical_signal": "Patient asking about pending pathology timing and whether to restart self-started aspirin / NSAIDs",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F4",
+        "expected_action": "Answer from the result: biopsies pending (~day 4-5), team will call with results. Advise to keep NSAIDs/ibuprofen stopped indefinitely and to NOT restart aspirin yet — the ulcer is a likely bleeding source; antiplatelet plan will be decided with PCP/cardiology.",
+        "rationale": "Answerable from the procedure result and follow-up plan; links to the med_reconciliation item (do-not-resume/avoid guidance). Counseling, not escalation."
+      },
+      {
+        "id": "C3",
+        "day": 7,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "I'm feeling much better, cramping is gone. When should I get my blood counts rechecked to see if the iron is working?",
+        "clinical_signal": "Recovering patient asking about anemia response lab monitoring timing",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F8",
+        "expected_action": "Answer from the plan: recheck CBC/ferritin in ~6-8 weeks after iron repletion and source control; continue iron with vitamin C, separated from tea/coffee; keep taking omeprazole.",
+        "rationale": "Routine informational question answerable from the follow-up plan; links to the lab_followup item. No escalation."
+      }
+    ]
+  }
+}

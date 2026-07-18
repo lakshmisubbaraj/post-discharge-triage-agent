@@ -1,0 +1,91 @@
+{
+  "id": "gi-synth-0037::proc-result",
+  "_synthetic": true,
+  "_note": "MOCK procedure result for PT-037. No real patient. For PreChart development/eval.",
+  "patient_id": "gi-synth-0037",
+  "procedure": {
+    "name": "Colonoscopy",
+    "code": {"system": "http://snomed.info/sct", "code": "73761001", "display": "Colonoscopy (procedure)"},
+    "date": "2026-08-12T07:40:00-07:00",
+    "indication": "Surveillance colonoscopy — prior tubular adenomas with low-grade dysplasia (2021), surveillance due 2026",
+    "sedation": "Anesthesia-directed monitored anesthesia care (propofol) in setting equipped for airway rescue; endotracheal intubation not required. Severe OSA (AHI 42) + BMI 41 with unverified CPAP adherence — anesthesia pre-op review completed; CPAP brought day-of and applied in recovery. Latex-safe environment used per reported latex contact allergy.",
+    "prep_quality": "Boston Bowel Prep Scale 7/9 — adequate (right 2, transverse 2, left 3)",
+    "extent_reached": "Cecum (confirmed by appendiceal orifice and ileocecal valve); terminal ileum intubated",
+    "withdrawal_time_min": 11,
+    "status": "completed"
+  },
+  "procedure_report": "PROCEDURE: Colonoscopy with polypectomy. INDICATION: surveillance for prior tubular adenomas with low-grade dysplasia (2021). ANESTHESIA: anesthesia-directed monitored anesthesia care (propofol) given severe OSA (AHI 42), morbid obesity (BMI 41), and unverified/poor CPAP adherence; airway managed without intubation; patient's own CPAP applied in PACU. Latex-safe room per patient-reported latex contact allergy. PREP: adequate (BBPS 7). FINDINGS: The colonoscope was advanced to the cecum with confirmation of the appendiceal orifice and ileocecal valve; the terminal ileum was intubated and normal. A 5 mm sessile polyp was identified in the ascending colon and removed by cold snare polypectomy, specimen retrieved (Specimen A). A 4 mm sessile polyp in the sigmoid colon was removed by cold snare polypectomy, specimen retrieved (Specimen B). Scattered sigmoid diverticulosis without stigmata of bleeding. Internal hemorrhoids, non-bleeding. No mass, no ulceration, no active bleeding. IMPRESSION: Two small polyps removed (ascending 5 mm, sigmoid 4 mm); mild sigmoid diverticulosis; internal hemorrhoids. Pathology pending. PERI-PROCEDURE: Hemodynamically stable throughout; SpO2 maintained on supplemental O2 with close airway monitoring; no desaturation events. Recovered on CPAP in PACU without complication.",
+  "findings": [
+    {"finding": "5 mm sessile polyp", "location": "ascending colon", "size_mm": 5, "action_taken": "cold snare polypectomy, retrieved", "specimen": "A"},
+    {"finding": "4 mm sessile polyp", "location": "sigmoid colon", "size_mm": 4, "action_taken": "cold snare polypectomy, retrieved", "specimen": "B"},
+    {"finding": "Diverticulosis, no stigmata of bleeding", "location": "sigmoid colon", "action_taken": "none"},
+    {"finding": "Internal hemorrhoids, non-bleeding", "location": "rectum", "action_taken": "none"}
+  ],
+  "specimens": [
+    {"id": "A", "site": "ascending colon polyp", "type": "polypectomy"},
+    {"id": "B", "site": "sigmoid colon polyp", "type": "polypectomy"}
+  ],
+  "pathology": {"status": "pending", "expected_back": "2026-08-16", "report": null, "diagnosis": null, "actionable": null},
+  "complications": [],
+  "disposition": "Discharged home same day in stable condition with escort. Recovered on own CPAP in PACU without desaturation. Post-polypectomy precautions reviewed. Instructed to resume home medications (losartan, hydrochlorothiazide) with normal diet.",
+  "followup": [
+    {"recommendation": "Review ascending and sigmoid polyp pathology; call patient with result and set surveillance interval", "timeframe": "within 2 weeks", "owner": "GI", "status": "open"},
+    {"recommendation": "Obtain updated CPAP compliance download from sleep medicine and reinforce nightly use (severe OSA, unverified adherence) — relevant to any future sedated procedure", "timeframe": "before next sedated procedure", "owner": "GI / Sleep Medicine", "status": "open"},
+    {"recommendation": "Ensure latex allergy and hydrochlorothiazide are reconciled in the permanent medication/allergy record", "timeframe": "this encounter", "owner": "GI", "status": "open"}
+  ],
+  "planted_followup_items": [
+    {"id": "F1", "type": "pending_pathology", "description": "Ascending (5 mm) and sigmoid (4 mm) polypectomy pathology pending — result must be communicated to the patient and drive the surveillance interval", "urgency": "routine", "expected_action": "call patient with result + document surveillance interval", "status": "open"},
+    {"id": "F2", "type": "surveillance_interval", "description": "Surveillance interval must be set once pathology returns (prior tubular adenomas with LGD; likely 3-5 year interval depending on histology)", "urgency": "routine", "expected_action": "document next surveillance colonoscopy date after path review", "status": "open"},
+    {"id": "F3", "type": "referral", "description": "Sleep medicine follow-up for CPAP compliance download and adherence optimization — severe OSA (AHI 42) with poor/unverified CPAP use is the anesthesia risk driver for any future sedated procedure", "urgency": "routine", "expected_action": "refer to sleep medicine; obtain objective compliance data", "status": "open"},
+    {"id": "F4", "type": "med_reconciliation", "description": "Latex contact allergy and unlisted hydrochlorothiazide identified pre-procedure — reconcile into permanent allergy/medication record", "urgency": "routine", "expected_action": "update chart allergy list (latex) and medication list (hydrochlorothiazide)", "status": "open"}
+  ],
+  "post_procedure_followup": {
+    "window": "day 0 to day 14",
+    "channels": ["automated_check_in", "patient_portal_message", "nurse_triage_call"],
+    "_note": "Patient-reported stream after the procedure — the inbound signal the LeftBehind product triages. Each contact is labeled ground truth so triage can be scored.",
+    "contacts": [
+      {
+        "id": "C1",
+        "day": 1,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "My throat's a little scratchy and I've been burping and passing a lot of gas since yesterday. Is that normal?",
+        "clinical_signal": "Expected post-endoscopy sore throat plus insufflation-related bloating and flatus",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; scratchy throat and gas/bloating are expected after colonoscopy and resolve within 24-48h. Walking and warm fluids help.",
+        "rationale": "Common benign post-endoscopy symptoms with no red-flag features; no escalation needed."
+      },
+      {
+        "id": "C2",
+        "day": 3,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "When will I hear back about the polyp results? And I want to make sure — I'm back on my losartan and my little water pill like normal, right?",
+        "clinical_signal": "Patient asking about pending pathology and confirming resumption of routine home meds (no anticoagulant was held)",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F1",
+        "expected_action": "Answer from the result: pathology pending (expected ~2026-08-16); team will call with result and surveillance interval. Confirm losartan and hydrochlorothiazide should continue as normal — neither was held for this procedure.",
+        "rationale": "Answerable from the procedure result and follow-up plan; links to the pending_pathology item. No anticoagulant was held, so this is routine reassurance, not a resumption-timing risk."
+      },
+      {
+        "id": "C3",
+        "day": 6,
+        "channel": "nurse_triage_call",
+        "type": "complication",
+        "verbatim": "I noticed a little pink on the toilet paper after I went this morning, just the one time. No dizziness, no belly pain, I feel fine otherwise — but after a scope with those polyps taken out it scared me.",
+        "clinical_signal": "TRAP (dangerous-sounding-but-benign): scant self-limited pink streak after cold-snare removal of two small (4-5 mm) polyps, no recurrence, no hemodynamic or pain symptoms — expected minor post-polypectomy spotting, not delayed hemorrhage",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; a single episode of minor pink spotting after cold-snare polypectomy of small polyps is expected and self-limited. Give return precautions: call back or seek care for repeated/large-volume dark red or clotted blood, lightheadedness, or abdominal pain.",
+        "rationale": "Cold-snare removal of two diminutive polyps carries very low delayed-bleeding risk; a single scant pink streak without recurrence or systemic symptoms is benign. The trap is that any bleeding after polypectomy sounds alarming, but this presentation does not meet escalation criteria — over-triage would be the error."
+      }
+    ]
+  }
+}

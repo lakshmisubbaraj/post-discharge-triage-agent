@@ -1,0 +1,108 @@
+{
+  "id": "gi-synth-0036::proc-result",
+  "_synthetic": true,
+  "_note": "MOCK procedure result. No real patient. For PreChart development/eval. Result of the ERCP the patient was referred for.",
+  "patient_id": "gi-synth-0036",
+  "procedure": {
+    "name": "ERCP with cholangiography, dominant stricture assessment, biliary brushing cytology, and biliary stent placement",
+    "code": {"system": "http://snomed.info/sct", "code": "45300000", "display": "Endoscopic retrograde cholangiopancreatography (procedure)"},
+    "date": "2026-07-24T09:10:00-07:00",
+    "indication": "PSC with new dominant stricture of the common hepatic duct and rising cholestatic labs (ALP 320 -> 480, total bilirubin 1.9); MRCP cannot exclude superimposed cholangiocarcinoma. Tissue sampling (brushings +/- FISH) to establish or exclude malignancy.",
+    "sedation": "Monitored anesthesia care (propofol) with anesthesia support",
+    "prep_quality": "N/A (biliary procedure); NPO confirmed, OTC fish oil held 5 days pre-procedure per instructions",
+    "extent_reached": "Second portion of duodenum; major papilla identified and cannulated; selective deep biliary cannulation achieved",
+    "withdrawal_time_min": null,
+    "status": "completed"
+  },
+  "procedure_report": "PROCEDURE: ERCP with cholangiography, biliary brushing cytology, and biliary stent placement. INDICATION: PSC with new dominant common hepatic duct stricture, rising cholestatic labs, and MRCP unable to exclude cholangiocarcinoma. SEDATION: MAC/propofol with anesthesia. ANTICOAGULATION: no prescription anticoagulant/antiplatelet; patient's OTC fish oil held pre-procedure; no reversal or bridging required. FINDINGS: The duodenoscope was advanced without difficulty to the major papilla. Selective deep biliary cannulation was achieved with a sphincterotome and guidewire. Cholangiography demonstrated the known PSC changes with multifocal intra- and extrahepatic strictures and beading. A dominant stricture of the common hepatic duct measuring approximately 2 cm in length was confirmed, with upstream intrahepatic ductal dilatation, corresponding to the MRCP finding and increased from prior. A biliary sphincterotomy was performed. The dominant stricture was traversed with a guidewire. Brush cytology of the dominant stricture was obtained with multiple passes (specimen sent for cytology and FISH). The stricture was dilated with a balloon, and a 10 Fr x 9 cm plastic biliary stent was placed across the dominant stricture with good bile drainage observed. No active bleeding at the sphincterotomy site. IMPRESSION: Dominant common hepatic duct stricture in PSC, brushed for cytology/FISH; balloon dilation and plastic biliary stent placed with good drainage. Cannot confirm or exclude cholangiocarcinoma at this time — awaiting cytology/FISH. Cytology and FISH pending.",
+  "findings": [
+    {"finding": "Dominant stricture of common hepatic duct, ~2 cm, with upstream ductal dilatation", "location": "common hepatic duct", "size_mm": 20, "action_taken": "guidewire traversal, brush cytology (multiple passes), balloon dilation, plastic biliary stent placement", "specimen": "A"},
+    {"finding": "Multifocal intra- and extrahepatic strictures with beading (known PSC)", "location": "intra- and extrahepatic biliary tree", "action_taken": "none"},
+    {"finding": "Biliary sphincterotomy site, no active bleeding", "location": "major papilla", "action_taken": "sphincterotomy"}
+  ],
+  "specimens": [
+    {"id": "A", "site": "dominant common hepatic duct stricture", "type": "brush cytology + FISH"}
+  ],
+  "pathology": {"status": "pending", "expected_back": "2026-07-29", "report": null, "diagnosis": null, "actionable": null},
+  "complications": [],
+  "disposition": "Discharged home same day in stable condition with escort. Post-ERCP precautions reviewed including return for fever/chills, jaundice, or severe abdominal pain (post-ERCP pancreatitis/cholangitis). Resume ursodiol and mesalamine as before.",
+  "followup": [
+    {"recommendation": "Review dominant stricture brush cytology + FISH; cancer cannot be excluded — communicate result to patient and hepatology and determine oncologic vs surveillance pathway", "timeframe": "within 5-7 days / on result availability", "owner": "GI / Hepatology", "status": "open"},
+    {"recommendation": "If cytology/FISH negative or indeterminate but clinical suspicion persists, consider repeat brushings or cholangioscopy with directed biopsy", "timeframe": "as indicated by cytology result", "owner": "GI", "status": "open"},
+    {"recommendation": "Plastic biliary stent placed — schedule stent exchange/removal to avoid occlusion/cholangitis", "timeframe": "8-12 weeks", "owner": "GI", "status": "open"},
+    {"recommendation": "Monitor for post-ERCP pancreatitis and cholangitis; return precautions given", "timeframe": "24-72 hours", "owner": "patient / GI", "status": "open"},
+    {"recommendation": "Resume OTC fish oil per instructions; no prescription anticoagulant to resume", "timeframe": "per instructions", "owner": "patient", "status": "open"},
+    {"recommendation": "Confirm mesalamine 1.2 g daily and ursodiol 300 mg TID continued; ensure mesalamine reflected on active medication list", "timeframe": "next visit", "owner": "GI / Hepatology", "status": "open"}
+  ],
+  "planted_followup_items": [
+    {"id": "F1", "type": "pending_pathology", "description": "Dominant common hepatic duct stricture brush cytology + FISH pending — performed specifically to exclude cholangiocarcinoma in a PSC patient with a new dominant stricture, rising ALP/bilirubin, and MRCP that could not exclude malignancy. Result must be communicated and must drive the oncologic vs surveillance pathway.", "urgency": "critical", "expected_action": "track cytology/FISH result; communicate to patient and hepatology; if positive/suspicious escalate to hepatobiliary/oncology for staging; if negative determine repeat sampling vs surveillance", "status": "open"},
+    {"id": "F2", "type": "known_lesion_followup", "description": "Suspected cholangiocarcinoma remains unresolved (SUSPICION ONLY, not tissue-confirmed). A negative or indeterminate brushing does NOT exclude malignancy given brush cytology's low sensitivity — must not be dropped or falsely reassured.", "urgency": "critical", "expected_action": "ensure definitive disposition of malignancy question; consider cholangioscopy with directed biopsy if suspicion persists despite non-diagnostic cytology", "status": "open"},
+    {"id": "F3", "type": "repeat_procedure", "description": "Plastic biliary stent (10 Fr x 9 cm) placed across dominant stricture — requires scheduled exchange/removal to prevent stent occlusion and cholangitis.", "urgency": "urgent", "expected_action": "schedule stent exchange or removal ERCP in 8-12 weeks", "status": "open"},
+    {"id": "F4", "type": "complication_watch", "description": "Post-ERCP pancreatitis and cholangitis risk after sphincterotomy, dilation, and stenting; jaundice/fever/RUQ pain must prompt urgent evaluation.", "urgency": "urgent", "expected_action": "monitor 24-72h; return precautions reviewed; low threshold for evaluation and antibiotics if cholangitis", "status": "open"},
+    {"id": "F5", "type": "surveillance_interval", "description": "PSC-IBD dysplasia surveillance colonoscopy interval (annual) and ongoing PSC cholangiocarcinoma surveillance (MRCP/CA 19-9) to be maintained regardless of this result.", "urgency": "routine", "expected_action": "ensure annual surveillance colonoscopy and PSC imaging surveillance are scheduled", "status": "open"},
+    {"id": "F6", "type": "med_reconciliation", "description": "Peri-procedure med reconciliation: OTC fish oil (patient's mislabeled 'blood thinner') may resume per instructions; no prescription anticoagulant exists to resume; confirm mesalamine 1.2 g daily is added to the active medication list (was missing).", "urgency": "routine", "expected_action": "resume fish oil per instructions; reconcile and correct active medication list to include mesalamine", "status": "open"}
+  ],
+  "post_procedure_followup": {
+    "window": "day 0 to day 14",
+    "channels": ["automated_check_in", "patient_portal_message", "nurse_triage_call"],
+    "_note": "Patient-reported stream after the procedure — the inbound signal the LeftBehind product triages. Each contact is labeled ground truth so triage can be scored.",
+    "contacts": [
+      {
+        "id": "C1",
+        "day": 1,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "My throat feels a little scratchy and I'm burping up gas, but otherwise I'm okay.",
+        "clinical_signal": "Expected post-endoscopy sore throat and insufflation-related bloating/belching",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; mild sore throat and gas are expected after ERCP and settle within 24-48h with fluids and rest.",
+        "rationale": "Common benign post-endoscopy symptoms with no red-flag features; no escalation."
+      },
+      {
+        "id": "C2",
+        "day": 2,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "When will I find out what the brush test showed? And when can I start my fish oil again?",
+        "clinical_signal": "Patient asking about pending brush cytology/FISH result and resumption of OTC fish oil",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F1",
+        "expected_action": "Answer from the result: cytology/FISH expected back ~2026-07-29 (day ~5); team will call with result and next steps. Fish oil (not a true blood thinner) may resume per instructions; no prescription anticoagulant to restart.",
+        "rationale": "Answerable from the procedure result and follow-up plan; links to the pending pathology item and reconciles the fish-oil 'blood thinner' confusion."
+      },
+      {
+        "id": "C3",
+        "day": 2,
+        "channel": "nurse_triage_call",
+        "type": "complication",
+        "verbatim": "I've got really bad pain in the pit of my stomach going through to my back, and I keep throwing up. It started last night and it's getting worse.",
+        "clinical_signal": "Severe epigastric pain radiating to the back with persistent vomiting after sphincterotomy/dilation/stenting — concerning for post-ERCP pancreatitis",
+        "red_flag": true,
+        "ground_truth_disposition": "escalate",
+        "urgency": "emergent",
+        "links_followup_item": "F4",
+        "expected_action": "Escalate for same-day/ED evaluation; check lipase and CBC, assess for post-ERCP pancreatitis; IV fluids and analgesia, admit as indicated.",
+        "rationale": "Classic post-ERCP pancreatitis presentation is a true complication of this procedure and requires urgent evaluation, not reassurance."
+      },
+      {
+        "id": "C4",
+        "day": 9,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "Do I need another procedure to take the stent out, and when would that be?",
+        "clinical_signal": "Patient asking about the plastic biliary stent and the planned exchange/removal timeline",
+        "red_flag": false,
+        "ground_truth_disposition": "schedule",
+        "urgency": "routine",
+        "links_followup_item": "F3",
+        "expected_action": "Answer and schedule: the plastic biliary stent needs exchange/removal in 8-12 weeks to prevent occlusion/cholangitis; book the follow-up ERCP.",
+        "rationale": "Answerable and schedulable from the follow-up plan; links to the stent exchange repeat_procedure item."
+      }
+    ]
+  }
+}

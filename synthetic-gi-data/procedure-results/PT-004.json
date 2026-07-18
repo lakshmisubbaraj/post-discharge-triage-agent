@@ -1,0 +1,84 @@
+{
+  "id": "gi-synth-0004::proc-result",
+  "_synthetic": true,
+  "_note": "MOCK procedure result. No real patient. For PreChart development/eval. Surveillance colonoscopy result for PT-004 (prior sessile serrated lesion 2023).",
+  "patient_id": "gi-synth-0004",
+  "procedure": {
+    "name": "Colonoscopy",
+    "code": {"system": "http://snomed.info/sct", "code": "73761001", "display": "Colonoscopy (procedure)"},
+    "date": "2026-08-05T08:40:00-07:00",
+    "indication": "Surveillance colonoscopy — prior sessile serrated lesion (2023, no dysplasia); asymptomatic, no alarm features",
+    "sedation": "Moderate sedation (midazolam 2 mg, fentanyl 75 mcg)",
+    "prep_quality": "Boston Bowel Prep Scale 8/9 — adequate",
+    "extent_reached": "Cecum (confirmed by appendiceal orifice and ileocecal valve)",
+    "withdrawal_time_min": 11,
+    "status": "completed"
+  },
+  "procedure_report": "PROCEDURE: Colonoscopy. INDICATION: surveillance for prior sessile serrated lesion (2023, no dysplasia); asymptomatic, no alarm features. CONSENT: obtained. SEDATION: moderate (midazolam 2 mg, fentanyl 75 mcg), well tolerated. PREP: adequate (BBPS 8/9). FINDINGS: The colonoscope was advanced to the cecum; the appendiceal orifice and ileocecal valve were identified. Careful inspection on withdrawal (11 minutes). A single 5 mm sessile polyp was identified in the transverse colon and removed by cold snare polypectomy; the specimen was retrieved and sent to pathology (specimen A). Known diverticulosis of the sigmoid colon, mild, without stigmata of bleeding. No masses, no ulceration, no active bleeding. Retroflexion in the rectum was normal; internal hemorrhoids, non-bleeding. The remainder of the examined colon was normal. IMPRESSION: 5 mm transverse colon polyp removed (cold snare); mild sigmoid diverticulosis; non-bleeding internal hemorrhoids. Pathology pending.",
+  "findings": [
+    {"finding": "5 mm sessile polyp", "location": "transverse colon", "size_mm": 5, "action_taken": "cold snare polypectomy, retrieved", "specimen": "A"},
+    {"finding": "Diverticulosis, mild, no stigmata of bleeding", "location": "sigmoid colon", "action_taken": "none"},
+    {"finding": "Internal hemorrhoids, non-bleeding", "location": "rectum", "action_taken": "none"}
+  ],
+  "specimens": [{"id": "A", "site": "transverse colon polyp", "type": "polypectomy"}],
+  "pathology": {"status": "pending", "expected_back": "2026-08-11", "report": null, "diagnosis": null, "actionable": null},
+  "complications": [],
+  "disposition": "Discharged home same day in stable condition with escort. Post-polypectomy precautions reviewed; regular diet resumed. Amlodipine continued; no anticoagulant to resume (patient on OTC fish oil only, no procedural hold was required).",
+  "followup": [
+    {"recommendation": "Review transverse colon polypectomy pathology; call patient with result and confirm surveillance interval", "timeframe": "within 2 weeks", "owner": "GI", "status": "open"},
+    {"recommendation": "Set next surveillance colonoscopy interval once pathology returns (anticipated 3-5 years if serrated/tubular adenoma without high-risk features)", "timeframe": "after pathology", "owner": "GI", "status": "open"}
+  ],
+  "planted_followup_items": [
+    {"id": "F1", "type": "pending_pathology", "description": "Transverse colon polypectomy pathology pending (specimen A) — result must be communicated to the patient and drive the surveillance interval", "urgency": "routine", "expected_action": "call patient with result + document surveillance interval", "status": "open"},
+    {"id": "F2", "type": "surveillance_interval", "description": "Next surveillance colonoscopy interval to be set based on final polyp pathology (histology and count); prior lesion was a sessile serrated lesion", "urgency": "routine", "expected_action": "document and communicate next colonoscopy due date", "status": "open"}
+  ],
+  "post_procedure_followup": {
+    "window": "day 0 to day 14",
+    "channels": ["automated_check_in", "patient_portal_message", "nurse_triage_call"],
+    "_note": "Patient-reported stream after the procedure — the inbound signal the LeftBehind product triages. Each contact is labeled ground truth so triage can be scored. SYNTHETIC.",
+    "contacts": [
+      {
+        "id": "C1",
+        "day": 1,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "Throat's a little scratchy and I'm pretty gassy and bloated since yesterday. Otherwise fine.",
+        "clinical_signal": "Expected post-colonoscopy sore throat and insufflation bloating; no bleeding, no pain",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; sore throat and gas/bloating are expected and self-limited within 24-48h. Walking and warm fluids help.",
+        "rationale": "Common benign post-endoscopy symptoms after a low-risk cold-snare polypectomy; no escalation."
+      },
+      {
+        "id": "C2",
+        "day": 3,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "When will I find out about the polyp they took out? And is it okay that I've gone back to my fish oil?",
+        "clinical_signal": "Patient asking about pending pathology timing and OTC fish oil (mistaken 'blood thinner') resumption",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F1",
+        "expected_action": "Answer from the result: pathology pending (expected ~2026-08-11), GI team will call with result and set surveillance interval. Reassure that OTC fish oil is a supplement, was never a required hold, and is fine to continue.",
+        "rationale": "Answerable from the procedure result and follow-up plan; links to pending_pathology (F1). No anticoagulant was held, so nothing to time."
+      },
+      {
+        "id": "C3",
+        "day": 12,
+        "channel": "nurse_triage_call",
+        "type": "complaint",
+        "verbatim": "It's been almost two weeks and nobody ever called me about the biopsy from my colonoscopy. I'm starting to worry something got missed.",
+        "clinical_signal": "Dropped follow-up — pathology result not communicated to patient within expected window",
+        "red_flag": false,
+        "ground_truth_disposition": "schedule",
+        "urgency": "routine",
+        "links_followup_item": "F1",
+        "expected_action": "Retrieve specimen A pathology (expected back ~2026-08-11), have GI call the patient with the result, document the surveillance interval (F2), and close the loop; flag the missed result-communication step.",
+        "rationale": "Classic dropped-ball: a pending_pathology item (F1) whose result was never relayed. Not a clinical emergency, but requires active scheduling/outreach to close the follow-up loop."
+      }
+    ]
+  }
+}

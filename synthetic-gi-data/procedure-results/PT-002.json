@@ -1,0 +1,89 @@
+{
+  "id": "gi-synth-0002::proc-result",
+  "_synthetic": true,
+  "_note": "MOCK procedure result. No real patient. For PreChart development/eval.",
+  "patient_id": "gi-synth-0002",
+  "procedure": {
+    "name": "Colonoscopy",
+    "code": {"system": "http://snomed.info/sct", "code": "73761001", "display": "Colonoscopy (procedure)"},
+    "date": "2026-07-30T08:40:00-07:00",
+    "indication": "Average-risk screening (first-time, overdue)",
+    "sedation": "Moderate sedation (midazolam 2 mg, fentanyl 100 mcg)",
+    "prep_quality": "Boston Bowel Prep Scale 8/9 — adequate",
+    "extent_reached": "Cecum (confirmed by appendiceal orifice and ileocecal valve); terminal ileum intubated",
+    "withdrawal_time_min": 11,
+    "status": "completed"
+  },
+  "procedure_report": "PROCEDURE: Colonoscopy. INDICATION: average-risk screening (first colonoscopy, overdue). SEDATION: moderate (midazolam 2 mg, fentanyl 100 mcg). PREP: adequate (BBPS 8/9). ANTITHROMBOTICS: low-dose aspirin 81 mg continued per protocol; OTC ibuprofen held for 7 days pre-procedure; OTC fish oil is a supplement — no hold required. FINDINGS: The colonoscope was advanced to the cecum with confirmation of the appendiceal orifice and ileocecal valve; the terminal ileum was intubated and appeared normal. A single 5 mm sessile polyp was identified in the ascending colon and removed by cold snare polypectomy; the specimen was retrieved and sent to pathology (Specimen A). A 3 mm sessile polyp in the descending colon was removed by cold forceps and retrieved (Specimen B). Scattered sigmoid diverticula were noted without stigmata of bleeding. No mass, no active bleeding, no worrisome lesion. Hemostasis was intact at both polypectomy sites. IMPRESSION: Two small polyps removed (ascending 5 mm, descending 3 mm); mild sigmoid diverticulosis. Pathology pending. Overall a good-quality screening exam with adequate prep.",
+  "findings": [
+    {"finding": "5 mm sessile polyp", "location": "ascending colon", "size_mm": 5, "action_taken": "cold snare polypectomy, retrieved", "specimen": "A"},
+    {"finding": "3 mm sessile polyp", "location": "descending colon", "size_mm": 3, "action_taken": "cold forceps polypectomy, retrieved", "specimen": "B"},
+    {"finding": "Diverticulosis, no stigmata of bleeding", "location": "sigmoid colon", "action_taken": "none"}
+  ],
+  "specimens": [
+    {"id": "A", "site": "ascending colon polyp", "type": "polypectomy"},
+    {"id": "B", "site": "descending colon polyp", "type": "polypectomy"}
+  ],
+  "pathology": {"status": "pending", "expected_back": "2026-08-04", "report": null, "diagnosis": null, "actionable": null},
+  "complications": [],
+  "disposition": "Discharged home same day in stable condition with escort. Post-polypectomy precautions reviewed. Low-dose aspirin was continued throughout (never held). May resume OTC ibuprofen after 5-7 days if no rectal bleeding. OTC fish oil is a supplement and was not held — patient may continue it as usual.",
+  "followup": [
+    {"recommendation": "Review polyp pathology (Specimens A and B); call patient with result and set surveillance interval", "timeframe": "within 2 weeks", "owner": "GI", "status": "open"},
+    {"recommendation": "Set colorectal cancer surveillance interval based on final pathology (likely repeat colonoscopy — interval per polyp histology/count; if tubular adenomas <10 mm, typically 7-10 years)", "timeframe": "after pathology returns", "owner": "GI", "status": "open"},
+    {"recommendation": "Patient may resume OTC ibuprofen (held peri-procedurally) after 5-7 days if no rectal bleeding; OTC fish oil is a supplement that was not held and may be continued as usual", "timeframe": "5-7 days", "owner": "patient", "status": "open"}
+  ],
+  "planted_followup_items": [
+    {"id": "F1", "type": "pending_pathology", "description": "Polypectomy pathology pending for ascending (5 mm) and descending (3 mm) colon polyps — result must be communicated to the patient and drive the surveillance interval", "urgency": "routine", "expected_action": "call patient with result + document surveillance interval", "status": "open"},
+    {"id": "F2", "type": "surveillance_interval", "description": "Colorectal cancer surveillance interval must be set once polyp histology returns (dependent on adenoma vs hyperplastic, size, count)", "urgency": "routine", "expected_action": "document and communicate next colonoscopy interval per USMSTF guidelines", "status": "open"},
+    {"id": "F3", "type": "med_reconciliation", "description": "OTC ibuprofen (NSAID) was held peri-procedurally for bleeding risk — patient to resume after 5-7 days only if no rectal bleeding. Low-dose aspirin was continued throughout (never held; no anticoagulant/antiplatelet was held). OTC fish oil is a supplement and was not held — no resumption action needed; reconcile it onto the supplement list", "urgency": "routine", "expected_action": "confirm patient understands safe resumption timing for the held NSAID and that aspirin/fish oil were never held", "status": "open"}
+  ],
+  "post_procedure_followup": {
+    "window": "day 0 to day 14",
+    "channels": ["automated_check_in", "patient_portal_message", "nurse_triage_call"],
+    "_note": "Patient-reported stream after the procedure — the inbound signal the LeftBehind product triages. Each contact is labeled ground truth so triage can be scored.",
+    "contacts": [
+      {
+        "id": "C1",
+        "day": 1,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "My throat feels scratchy and I've been really gassy and bloated since I got home. Is that normal?",
+        "clinical_signal": "Expected post-endoscopy sore throat and insufflation-related bloating/flatulence",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; mild sore throat and gas/bloating are expected after colonoscopy and resolve within 24-48h. Walking and warm fluids help.",
+        "rationale": "Common benign post-colonoscopy symptoms with no red-flag features; no escalation needed."
+      },
+      {
+        "id": "C2",
+        "day": 3,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "When will I hear back about the polyps you took out, and is it okay to start my ibuprofen again for my knee?",
+        "clinical_signal": "Patient asking about pending pathology result and safe timing to resume the held OTC NSAID",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F3",
+        "expected_action": "Answer from the record: pathology expected back ~2026-08-04 and the team will call with the result and surveillance interval; ibuprofen may resume after 5-7 days if there has been no rectal bleeding; aspirin and fish oil were never held.",
+        "rationale": "Fully answerable from the procedure result and follow-up plan; links to the NSAID reconciliation/resumption item (F3) and the pending pathology (F1)."
+      },
+      {
+        "id": "C3",
+        "day": 6,
+        "channel": "nurse_triage_call",
+        "type": "complication",
+        "verbatim": "I restarted my ibuprofen a couple days ago and now I've passed a bunch of dark red blood in the toilet twice today and I feel kind of dizzy and weak.",
+        "clinical_signal": "Delayed post-polypectomy hemorrhage, likely aggravated by early NSAID resumption, with a hemodynamic symptom (lightheadedness)",
+        "red_flag": true,
+        "ground_truth_disposition": "escalate",
+        "urgency": "emergent",
+        "links_followup_item": "F3",
+        "expected_action": "Escalate for same-day evaluation / ED referral; instruct to stop ibuprofen immediately; assess vitals and hemoglobin; anticipate possible repeat colonoscopy for hemostasis. Counsel that NSAID was resumed earlier than advised.",
+        "rationale": "Delayed post-polypectomy bleeding with lightheadedness is a red-flag complication requiring urgent action; the premature NSAID resumption is a triage trap that compounds bleeding risk."
+      }
+    ]
+  }
+}

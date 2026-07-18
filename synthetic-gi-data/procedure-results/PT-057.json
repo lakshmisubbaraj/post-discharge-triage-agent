@@ -1,0 +1,89 @@
+{
+  "id": "gi-synth-0057::proc-result",
+  "_synthetic": true,
+  "_note": "MOCK procedure result in the style of synthetic-ambient-fhir-25. No real patient. For PreChart development/eval.",
+  "patient_id": "gi-synth-0057",
+  "procedure": {
+    "name": "Colonoscopy",
+    "code": {"system": "http://snomed.info/sct", "code": "73761001", "display": "Colonoscopy (procedure)"},
+    "date": "2026-08-05T07:30:00-07:00",
+    "indication": "Colorectal cancer screening — prior incomplete exam (2018, inadequate prep); first-degree family history of CRC (father, ~70s)",
+    "sedation": "Moderate sedation (midazolam 3 mg, fentanyl 100 mcg)",
+    "prep_quality": "Boston Bowel Prep Scale 7/9 (right 2, transverse 2, left 3) — adequate. Low-volume split-dose PEG-based prep with pre-procedure ondansetron; patient tolerated prep without vomiting.",
+    "extent_reached": "Cecum (confirmed by appendiceal orifice and ileocecal valve); terminal ileum intubated",
+    "withdrawal_time_min": 11,
+    "status": "completed"
+  },
+  "procedure_report": "PROCEDURE: Colonoscopy. INDICATION: colorectal cancer screening; prior 2018 attempt aborted for inadequate preparation; newly reported first-degree family history of colon cancer (father, early 70s). PREP: This time a low-volume split-dose PEG-based preparation was used with pre-procedure ondansetron given the documented 2018 tolerability issue (nausea/vomiting with high-volume PEG — an intolerance, not a true allergy). Patient tolerated the prep without vomiting. Bowel preparation was adequate overall (BBPS 7/9). SEDATION: moderate (midazolam/fentanyl), well tolerated. FINDINGS: The colonoscope was advanced to the cecum, confirmed by identification of the appendiceal orifice and ileocecal valve; the terminal ileum was intubated and normal. Unlike the 2018 aborted exam, a complete diagnostic examination was achieved. A 5 mm sessile polyp was identified in the ascending colon and removed by cold snare polypectomy (specimen A, retrieved). A 4 mm sessile polyp in the sigmoid colon was removed by cold snare polypectomy (specimen B, retrieved). Scattered non-complicated diverticula were noted in the sigmoid colon without stigmata of bleeding. Findings consistent with the patient's baseline constipation; no mass, ulceration, stricture, or luminal narrowing. No active bleeding. IMPRESSION: Complete screening colonoscopy to cecum with adequate prep. Two diminutive polyps removed (ascending, sigmoid). Sigmoid diverticulosis. Pathology pending. No alarm features and no concerning mucosal lesion identified.",
+  "findings": [
+    {"finding": "5 mm sessile polyp", "location": "ascending colon", "size_mm": 5, "action_taken": "cold snare polypectomy, retrieved", "specimen": "A"},
+    {"finding": "4 mm sessile polyp", "location": "sigmoid colon", "size_mm": 4, "action_taken": "cold snare polypectomy, retrieved", "specimen": "B"},
+    {"finding": "Diverticulosis, no stigmata of bleeding", "location": "sigmoid colon", "action_taken": "none"}
+  ],
+  "specimens": [
+    {"id": "A", "site": "ascending colon polyp", "type": "polypectomy"},
+    {"id": "B", "site": "sigmoid colon polyp", "type": "polypectomy"}
+  ],
+  "pathology": {"status": "pending", "expected_back": "2026-08-11", "report": null, "diagnosis": null, "actionable": null},
+  "complications": [],
+  "disposition": "Discharged home same day in stable condition with escort. Post-polypectomy precautions reviewed. Patient counseled that prep was successfully tolerated with the low-volume/antiemetic strategy and that a complete exam was achieved.",
+  "followup": [
+    {"recommendation": "Review polyp pathology (ascending and sigmoid specimens); call patient with results and set surveillance interval", "timeframe": "within 2 weeks", "owner": "GI", "status": "open"},
+    {"recommendation": "Set surveillance interval accounting for first-degree family history of CRC (father, ~70s) in addition to polyp pathology; family history was newly reported and should be documented in the problem list", "timeframe": "at result review", "owner": "GI", "status": "open"},
+    {"recommendation": "Ensure chart correction persists: PEG bowel prep is an intolerance (nausea/vomiting), not a true allergy — retain low-volume PEG + antiemetic strategy for future preps", "timeframe": "next prep planning", "owner": "GI", "status": "open"}
+  ],
+  "planted_followup_items": [
+    {"id": "F1", "type": "pending_pathology", "description": "Polypectomy pathology pending for two specimens (ascending colon 5 mm, sigmoid colon 4 mm); results must be communicated to the patient and drive the surveillance interval", "urgency": "routine", "expected_action": "call patient with results + document surveillance interval", "status": "open"},
+    {"id": "F2", "type": "surveillance_interval", "description": "Surveillance interval must incorporate newly reported first-degree family history of colorectal cancer (father, early 70s) alongside polyp histology; risk is above average, so a shorter interval than standard low-risk screening may apply", "urgency": "routine", "expected_action": "set and document surveillance interval at pathology review, factoring family history", "status": "open"},
+    {"id": "F3", "type": "record_correction", "description": "Newly reported first-degree family history of CRC (father, ~70s) surfaced pre-procedure and is not in the chart problem list; must be documented to inform future screening", "urgency": "routine", "expected_action": "add family history of colorectal cancer to problem list", "status": "open"}
+  ],
+  "post_procedure_followup": {
+    "window": "day 0 to day 14",
+    "channels": ["automated_check_in", "patient_portal_message", "nurse_triage_call"],
+    "_note": "Patient-reported stream after the procedure — the inbound signal the LeftBehind product triages. Each contact is labeled ground truth so triage can be scored.",
+    "contacts": [
+      {
+        "id": "C1",
+        "day": 1,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "My throat feels a little scratchy and I'm pretty bloated and passing a lot of gas today.",
+        "clinical_signal": "Expected post-colonoscopy sore throat and insufflation-related bloating/flatulence",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; sore throat and gas/bloating from air insufflation are expected and resolve within 24-48h. Walking and warm fluids help.",
+        "rationale": "Common benign post-endoscopy symptoms with no red flags; self-care guidance only."
+      },
+      {
+        "id": "C2",
+        "day": 3,
+        "channel": "patient_portal_message",
+        "type": "complication",
+        "verbatim": "When I wiped after a bowel movement this morning there was a little pink on the toilet paper. Should I be worried? I feel completely fine otherwise, no pain, no dizziness.",
+        "clinical_signal": "TRAP (dangerous-sounding, benign): minor scant spotting after diminutive cold-snare polypectomy in a patient on NO anticoagulant, with no volume of blood, no clots, no pain, and no hemodynamic symptoms — expected minor self-limited oozing, not delayed post-polypectomy hemorrhage",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure: a small amount of pink/spotting after diminutive cold-snare polypectomy is common and self-limited, especially off anticoagulation. Provide return precautions — call back or seek care for repeated passage of a moderate/large amount of red blood or clots, ongoing bleeding, lightheadedness, or abdominal pain.",
+        "rationale": "Scant spotting with no bleeding volume, pain, or hemodynamic symptoms after tiny cold-snare polypectomy off anticoagulation is benign; the trap is that any post-polypectomy 'blood' reads as urgent but this presentation is reassure-with-precautions, not escalate."
+      },
+      {
+        "id": "C3",
+        "day": 8,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "It's been over a week — when will I find out what the biopsies showed, and does my dad's colon cancer change how often I need this done?",
+        "clinical_signal": "Patient asking about pending pathology results and how the newly reported family history affects her surveillance interval",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F1",
+        "expected_action": "Answer from the result: two diminutive polyps removed, pathology expected back ~2026-08-11; the team will call with results and set the surveillance interval, which will also factor in her father's colon cancer (first-degree family history raises risk above average and may shorten the interval).",
+        "rationale": "Answerable from the procedure result and follow-up plan; links to the pending_pathology item (F1) and the surveillance/family-history items (F2, F3)."
+      }
+    ]
+  }
+}

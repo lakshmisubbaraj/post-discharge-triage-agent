@@ -1,0 +1,96 @@
+{
+  "id": "gi-synth-0032::proc-result",
+  "_synthetic": true,
+  "_note": "MOCK procedure result. No real patient. For PreChart development/eval.",
+  "patient_id": "gi-synth-0032",
+  "procedure": {
+    "name": "Endoscopic ultrasound (EUS) of the pancreas, cyst protocol, with EUS-guided fine-needle aspiration",
+    "code": {"system": "http://snomed.info/sct", "code": "232599006", "display": "Endoscopic ultrasonography (procedure)"},
+    "date": "2026-07-29T09:10:00-07:00",
+    "indication": "Characterization of incidental 14 mm cystic lesion in the pancreatic body (found on trauma CT 2026-06-21); rule out mucinous/malignant features. Family history of pancreatic cancer (father).",
+    "sedation": "Monitored anesthesia care (propofol), anesthesiologist-directed",
+    "prep_quality": "N/A (upper EUS; NPO x8h confirmed)",
+    "extent_reached": "Second portion of duodenum; complete survey of pancreatic head, body, and tail via transgastric and transduodenal windows",
+    "withdrawal_time_min": null,
+    "status": "completed"
+  },
+  "procedure_report": "PROCEDURE: Linear echoendoscope EUS of the pancreas with EUS-FNA. INDICATION: incidental 14 mm pancreatic body cystic lesion for characterization. SEDATION: MAC/propofol. FINDINGS: The echoendoscope was advanced to the second portion of the duodenum without difficulty. Systematic survey of the entire pancreas was performed. A single 13 x 12 mm anechoic, unilocular cystic lesion was identified in the pancreatic body with thin, smooth walls and no enhancing mural nodule, no internal septations, and no solid component. The main pancreatic duct measured 2 mm and was normal in caliber with no communication clearly demonstrated with the cyst. No upstream ductal dilation. No associated parenchymal mass. No peripancreatic lymphadenopathy. Remainder of the pancreatic parenchyma was normal in echotexture. Common bile duct normal caliber; no biliary dilation. Under real-time EUS guidance, a single-pass 22-gauge FNA of the cyst was performed transgastrically with near-complete aspiration of ~1.5 mL of clear, non-viscous fluid. Fluid was sent for CEA, amylase, cytology, and molecular (KRAS/GNAS) analysis. Prophylactic antibiotics administered per cyst-aspiration protocol. No immediate complication; no bleeding at the puncture site on Doppler. IMPRESSION: Solitary 13 mm unilocular pancreatic body cyst without high-risk stigmata (no mural nodule, no main-duct involvement, no solid mass). Benign-appearing morphology; FNA fluid analysis and cytology pending to differentiate serous vs. mucinous etiology.",
+  "findings": [
+    {"finding": "13 x 12 mm unilocular anechoic cyst, thin smooth wall, no mural nodule or solid component", "location": "pancreatic body", "size_mm": 13, "action_taken": "EUS-FNA, 22G single pass, ~1.5 mL clear fluid aspirated", "specimen": "A"},
+    {"finding": "Main pancreatic duct normal caliber (2 mm), no upstream dilation, no clear cyst-duct communication", "location": "pancreas", "action_taken": "none"},
+    {"finding": "No peripancreatic lymphadenopathy, no parenchymal mass, normal parenchymal echotexture", "location": "pancreas", "action_taken": "none"},
+    {"finding": "Common bile duct normal caliber, no biliary dilation", "location": "biliary tree", "action_taken": "none"}
+  ],
+  "specimens": [
+    {"id": "A", "site": "pancreatic body cyst fluid", "type": "EUS-FNA aspirate — CEA, amylase, cytology, KRAS/GNAS molecular"}
+  ],
+  "pathology": {
+    "status": "pending",
+    "expected_back": "2026-08-05",
+    "report": null,
+    "diagnosis": null,
+    "actionable": null
+  },
+  "complications": [],
+  "disposition": "Discharged home same day in stable condition with escort. Post-EUS-FNA precautions reviewed (return for severe abdominal pain, fever, or vomiting — post-procedure pancreatitis/infection precautions). Resumed regular diet as tolerated. Advised he may continue OTC fish oil.",
+  "followup": [
+    {"recommendation": "Review cyst-fluid CEA, amylase, cytology, and KRAS/GNAS molecular results; classify cyst (serous vs mucinous) and call patient with results and management plan", "timeframe": "within 2 weeks", "owner": "GI", "status": "open"},
+    {"recommendation": "Establish MRI/MRCP or EUS surveillance interval for the pancreatic cyst per guideline once cyst type is known; heightened vigilance given family history of pancreatic cancer (father)", "timeframe": "after pathology resulted", "owner": "GI", "status": "open"},
+    {"recommendation": "Post-FNA complication watch — counsel on symptoms of post-procedure pancreatitis or cyst infection", "timeframe": "72 hours", "owner": "patient / GI", "status": "open"}
+  ],
+  "planted_followup_items": [
+    {"id": "F1", "type": "pending_pathology", "description": "Pancreatic cyst-fluid analysis pending — CEA, amylase, cytology, and KRAS/GNAS molecular. Result determines whether the cyst is mucinous (premalignant) vs serous (benign) and drives all downstream management. Must be communicated to the patient.", "urgency": "urgent", "expected_action": "review cyst-fluid CEA/amylase/cytology/molecular, classify cyst, call patient with result and plan", "status": "open"},
+    {"id": "F2", "type": "surveillance_interval", "description": "Pancreatic cyst surveillance interval must be established once cyst type is known; a 13 mm body cyst with a first-degree family history of pancreatic cancer warrants imaging surveillance rather than discharge.", "urgency": "urgent", "expected_action": "set MRI/MRCP or EUS surveillance interval per guideline and enter recall", "status": "open"},
+    {"id": "F3", "type": "record_correction", "description": "Family history of pancreatic cancer in father (first-degree relative) elevates baseline risk; ensure it is documented and factored into surveillance and any consideration of familial pancreatic cancer screening — but attributed to the father, not the patient.", "urgency": "routine", "expected_action": "document family history as risk factor; consider referral to high-risk pancreatic screening program", "status": "open"},
+    {"id": "F4", "type": "complication_watch", "description": "Post-EUS-FNA of a pancreatic cyst carries small risk of post-procedure pancreatitis and cyst infection; patient counseled on return precautions.", "urgency": "routine", "expected_action": "confirm no post-procedure pancreatitis/infection; ensure prophylactic antibiotic course completed if prescribed", "status": "open"}
+  ],
+  "post_procedure_followup": {
+    "window": "day 0 to day 14",
+    "channels": ["automated_check_in", "patient_portal_message", "nurse_triage_call"],
+    "_note": "Patient-reported stream after the procedure — the inbound signal the LeftBehind product triages. Each contact is labeled ground truth so triage can be scored. SYNTHETIC.",
+    "contacts": [
+      {
+        "id": "C1",
+        "day": 1,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "My throat feels a little scratchy and my stomach's kind of bloated and gassy since the scope.",
+        "clinical_signal": "Expected post-upper-endoscopy sore throat plus insufflation bloating",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; mild sore throat and bloating are expected after upper EUS and settle within 24-48h. Advise hydration and to call back for severe or worsening abdominal pain, fever, or vomiting.",
+        "rationale": "Common benign post-endoscopy symptoms with no red-flag features; no escalation."
+      },
+      {
+        "id": "C2",
+        "day": 2,
+        "channel": "nurse_triage_call",
+        "type": "complication",
+        "verbatim": "I've got this really bad pain in the upper part of my belly that's boring straight through to my back, and I've thrown up a few times. Sitting up doesn't help.",
+        "clinical_signal": "Severe epigastric pain radiating to the back with vomiting 1-2 days after EUS-FNA of a pancreatic cyst — classic post-FNA acute pancreatitis",
+        "red_flag": true,
+        "ground_truth_disposition": "escalate",
+        "urgency": "emergent",
+        "links_followup_item": "F4",
+        "expected_action": "Escalate for same-day evaluation / ED: check lipase and CBC, assess for post-procedure pancreatitis vs cyst infection, IV fluids and analgesia, admit as indicated.",
+        "rationale": "Post-EUS-FNA pancreatitis is the signature complication of this procedure; epigastric pain radiating to the back with vomiting is a red-flag presentation requiring urgent workup, and it maps to the complication_watch item F4."
+      },
+      {
+        "id": "C3",
+        "day": 6,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "When am I going to hear back about the fluid you took from the cyst? And is it okay that I've kept taking my fish oil every morning?",
+        "clinical_signal": "Patient asking about pending cyst-fluid results and OTC fish oil continuation",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F1",
+        "expected_action": "Answer from the result: cyst-fluid CEA/amylase/cytology/molecular pending (~2026-08-05); GI will call with classification and surveillance plan. Confirm fish oil is not a true anticoagulant and may be continued.",
+        "rationale": "Answerable from the procedure result and follow-up plan; links to the pending_pathology item F1 and reinforces the fish-oil (D2) clarification."
+      }
+    ]
+  }
+}

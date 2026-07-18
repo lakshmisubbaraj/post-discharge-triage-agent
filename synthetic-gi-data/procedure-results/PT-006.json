@@ -1,0 +1,92 @@
+{
+  "id": "PT-006::proc-result",
+  "_synthetic": true,
+  "_note": "MOCK procedure result. No real patient. For PreChart development/eval.",
+  "patient_id": "gi-synth-0006",
+  "procedure": {
+    "name": "Colonoscopy",
+    "code": {"system": "http://snomed.info/sct", "code": "73761001", "display": "Colonoscopy (procedure)"},
+    "date": "2026-07-24T08:00:00-07:00",
+    "indication": "Change in bowel habit with narrowed stool caliber, unintentional weight loss (~8 lb), positive fecal occult blood, and family history of colorectal cancer — expedited diagnostic colonoscopy for suspected colorectal neoplasm",
+    "sedation": "Monitored anesthesia care (propofol), anesthesia-administered",
+    "prep_quality": "Boston Bowel Prep Scale 7/9 — adequate (proximal segments adequate; some solid residue distal to obstructing lesion)",
+    "extent_reached": "Cecum (confirmed by appendiceal orifice and ileocecal valve); scope passed through the narrowed segment with pediatric colonoscope",
+    "withdrawal_time_min": 16,
+    "status": "completed"
+  },
+  "procedure_report": "PROCEDURE: Colonoscopy with biopsy and tattoo. INDICATION: alarm features (narrowed stool caliber, ~8 lb unintentional weight loss, positive FOBT, hemoglobin 12.6 g/dL, family history of colon cancer) — expedited evaluation for colorectal neoplasm. SEDATION: MAC/propofol. PREP: BBPS 7 — adequate. FINDINGS: The colonoscope was advanced with some difficulty through a partially obstructing, circumferential, ulcerated and friable mass in the sigmoid colon, approximately 35 cm from the anal verge, spanning roughly 4-5 cm and narrowing the lumen. A pediatric colonoscope was used to traverse the stenotic segment; the scope was then advanced to the cecum, confirmed by identification of the appendiceal orifice and ileocecal valve; the terminal ileum was intubated and appeared normal. Multiple cold-forceps biopsies (6 fragments) were taken from the mass and sent to pathology. India ink tattoo was placed just distal to the lesion to mark it for surgical localization. The mass was friable and contact-bled; no active spontaneous bleeding, and no intervention required for hemostasis. Scattered sigmoid diverticula were noted without stigmata of bleeding. The remainder of the examined colon was normal. IMPRESSION: Partially obstructing ulcerated sigmoid mass, highly suspicious for colorectal adenocarcinoma — biopsies pending; lesion tattooed for localization. Diverticulosis.",
+  "findings": [
+    {"finding": "Partially obstructing, circumferential, ulcerated and friable mass, highly suspicious for malignancy", "location": "sigmoid colon (~35 cm from anal verge)", "size_mm": 45, "action_taken": "cold-forceps biopsies x6, India ink tattoo placed distal to lesion", "specimen": "A"},
+    {"finding": "Diverticulosis, no stigmata of bleeding", "location": "sigmoid colon", "action_taken": "none"},
+    {"finding": "Normal terminal ileum", "location": "terminal ileum", "action_taken": "none"}
+  ],
+  "specimens": [{"id": "A", "site": "sigmoid mass", "type": "forceps biopsy"}],
+  "pathology": {"status": "pending", "expected_back": "2026-07-29", "report": null, "diagnosis": null, "actionable": null},
+  "complications": [],
+  "disposition": "Discharged home same day in stable condition with escort. Alarm/return precautions reviewed for obstruction (worsening pain, distension, inability to pass stool/gas) and bleeding. Patient and daughter informed that a suspicious mass was found and biopsies are pending; expedited oncology/surgical workup discussed.",
+  "followup": [
+    {"recommendation": "Sigmoid mass biopsy pathology pending — highly suspicious for adenocarcinoma; communicate result urgently to patient and initiate colorectal cancer workup", "timeframe": "within 1 week", "owner": "GI", "status": "open"},
+    {"recommendation": "Staging CT chest/abdomen/pelvis and baseline CEA level", "timeframe": "within 1-2 weeks", "owner": "GI / PCP", "status": "open"},
+    {"recommendation": "Referral to colorectal surgery and multidisciplinary oncology (tumor board) for suspected sigmoid colon cancer", "timeframe": "within 1-2 weeks", "owner": "GI", "status": "open"},
+    {"recommendation": "Confirm daily aspirin 81 mg documented and provide peri-procedural/peri-operative management guidance; 'blood thinner' clarified as OTC fish oil (not a therapeutic anticoagulant)", "timeframe": "before any surgery", "owner": "GI / surgery", "status": "open"},
+    {"recommendation": "Counsel patient on partial obstruction warning signs given narrowed lumen; consider expedited surgery to avoid complete obstruction", "timeframe": "ongoing until definitive treatment", "owner": "GI / surgery", "status": "open"}
+  ],
+  "planted_followup_items": [
+    {"id": "F1", "type": "pending_pathology", "description": "Sigmoid mass biopsy pathology pending (specimen A) — result highly likely to confirm malignancy and must be communicated to the patient and drive cancer workup", "urgency": "critical", "expected_action": "call patient with result urgently + document diagnosis and initiate oncology/surgical pathway", "status": "open"},
+    {"id": "F2", "type": "critical_result", "description": "Endoscopically visible partially obstructing sigmoid mass highly suspicious for colorectal adenocarcinoma", "urgency": "critical", "expected_action": "ensure result is escalated and not lost; confirm patient reached and workup started", "status": "open"},
+    {"id": "F3", "type": "referral", "description": "Referral to colorectal surgery and multidisciplinary oncology/tumor board for suspected sigmoid cancer", "urgency": "urgent", "expected_action": "place and confirm referrals; track that patient is seen", "status": "open"},
+    {"id": "F4", "type": "referral", "description": "Staging imaging (CT chest/abdomen/pelvis) and baseline CEA ordered as part of colorectal cancer workup", "urgency": "urgent", "expected_action": "order staging CT + CEA and confirm results reviewed", "status": "open"},
+    {"id": "F5", "type": "complication_watch", "description": "Partially obstructing lesion — risk of progression to complete large-bowel obstruction before definitive treatment", "urgency": "urgent", "expected_action": "counsel obstruction precautions; expedite surgical evaluation", "status": "open"},
+    {"id": "F6", "type": "med_reconciliation", "description": "Daily aspirin 81 mg (self-started, previously missing from chart) must be documented and reconciled, with peri-operative management guidance ahead of anticipated surgery; no antiplatelet was held for this diagnostic scope, and patient-reported 'blood thinner' clarified as OTC fish oil (omega-3), not therapeutic anticoagulation", "urgency": "routine", "expected_action": "document aspirin on the medication list, reconcile, and provide a peri-operative hold/resume plan for surgery", "status": "open"},
+    {"id": "F7", "type": "incidental_finding", "description": "Sigmoid diverticulosis noted incidentally", "urgency": "routine", "expected_action": "document; no specific intervention", "status": "open"}
+  ],
+  "post_procedure_followup": {
+    "window": "day 0 to day 14",
+    "channels": ["automated_check_in", "patient_portal_message", "nurse_triage_call"],
+    "_note": "Patient-reported stream after the procedure — the inbound signal the LeftBehind product triages. Each contact is labeled ground truth so triage can be scored.",
+    "contacts": [
+      {
+        "id": "C1",
+        "day": 1,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "I saw a little streak of pink when I wiped this morning and my throat's scratchy. Should I be worried?",
+        "clinical_signal": "Minor spotting expected after forceps biopsy of a friable mass plus post-intubation sore throat; no hemodynamic symptoms, single small amount",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; a small amount of spotting after biopsy of a friable lesion and a scratchy throat are expected and self-limited. Review return precautions for heavy/repeated bleeding, lightheadedness, or inability to pass stool/gas.",
+        "rationale": "Dangerous-sounding-but-benign: minimal spotting after a diagnostic biopsy is expected; no red flag without volume, recurrence, or hemodynamic change."
+      },
+      {
+        "id": "C2",
+        "day": 3,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "When will I hear about the biopsy from the mass they found? And should I keep taking my baby aspirin?",
+        "clinical_signal": "Patient asking about pending pathology of the suspicious mass and about continuing self-started low-dose aspirin",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F1",
+        "expected_action": "Answer from the result: pathology expected back ~2026-07-29; team will call with the result and coordinate oncology/surgical workup. Reconcile aspirin 81 mg — no need to stop now for the diagnostic scope; a peri-operative hold/resume plan will be given before any surgery.",
+        "rationale": "Answerable from the procedure result and follow-up plan; links to pending_pathology (F1) and med_reconciliation (F6)."
+      },
+      {
+        "id": "C3",
+        "day": 6,
+        "channel": "nurse_triage_call",
+        "type": "complication",
+        "verbatim": "I haven't been able to pass stool or gas since yesterday, my belly is swollen and cramping bad, and I threw up twice.",
+        "clinical_signal": "Obstipation, abdominal distension, cramping, and vomiting — progression of the known partially obstructing sigmoid mass to complete large-bowel obstruction",
+        "red_flag": true,
+        "ground_truth_disposition": "escalate",
+        "urgency": "emergent",
+        "links_followup_item": "F5",
+        "expected_action": "Escalate for same-day emergency evaluation / ED; obtain abdominal imaging, keep NPO, and involve surgery urgently for possible complete large-bowel obstruction.",
+        "rationale": "Obstipation with distension and vomiting in a patient with a known partially obstructing sigmoid mass is a true, emergent complication requiring immediate escalation."
+      }
+    ]
+  }
+}

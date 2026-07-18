@@ -1,0 +1,100 @@
+{
+  "id": "gi-synth-0027::proc-result",
+  "_synthetic": true,
+  "_note": "MOCK procedure result. No real patient. For PreChart development/eval.",
+  "patient_id": "gi-synth-0027",
+  "procedure": {
+    "name": "Colonoscopy (surveillance) — DEFERRED, not performed",
+    "code": {"system": "http://snomed.info/sct", "code": "73761001", "display": "Colonoscopy (procedure)"},
+    "date": "2026-07-18T13:40:00-06:00",
+    "indication": "Surveillance colonoscopy — history of two tubular adenomas with low-grade dysplasia (2021); interval due 2026. Asymptomatic; no red-flag symptoms.",
+    "sedation": "Not administered — procedure deferred.",
+    "prep_quality": "N/A — procedure not performed.",
+    "extent_reached": "N/A — procedure not performed.",
+    "withdrawal_time_min": null,
+    "status": "deferred",
+    "antithrombotic_management": "Patient is ~2 months post drug-eluting stent to the mid RCA (2026-05-14) on dual antiplatelet therapy (ticagrelor 90 mg BID + aspirin 81 mg daily). Per interview she self-discontinued the aspirin approximately 2 weeks ago (believed she did not need 'two blood thinners'); cardiology was NOT informed. This is an unsanctioned interruption of a DAPT component early after DES — stent-thrombosis risk. Ticagrelor continues. No cardiology clearance for an elective scope/polypectomy has been obtained; cardiology consult is mandatory before any endoscopy or polypectomy."
+  },
+  "procedure_report": "PROCEDURE DEFERRED — NOT PERFORMED. This was a pre-procedure evaluation for an elective surveillance colonoscopy (prior tubular adenomas, 2021). On interview the patient is entirely asymptomatic (no hematochezia, melena, pain, or change in bowel habits), so this is routine surveillance rather than an acute evaluation. The referral had been flagged urgent; reclassified to elective. The dominant issue is cardiac: NSTEMI on 2026-05-14 treated with a drug-eluting stent to the mid RCA (~2 months ago) with the patient on dual antiplatelet therapy. Performing an elective colonoscopy with polypectomy within the first months post-DES on DAPT carries high stent-thrombosis and bleeding risk. In addition, the patient reports self-discontinuing her aspirin ~2 weeks ago without informing cardiology, an unsanctioned interruption of a DAPT component. DECISION: defer the elective colonoscopy. Recommend rescheduling to approximately month 12 post-stent (~mid-2027), contingent on mandatory cardiology consultation to define acceptable timing and peri-procedural antiplatelet management. No scope was introduced; no sedation given; no polyps removed. Cardiology to be contacted today regarding the aspirin interruption and resumption plan. Codeine intolerance (nausea/vomiting) newly reported and to be documented.",
+  "findings": [],
+  "specimens": [],
+  "pathology": null,
+  "complications": [],
+  "disposition": "Procedure deferred; patient discharged from clinic in stable condition. Counseled not to stop or restart antiplatelet agents on her own and to await cardiology guidance before resuming aspirin. Elective surveillance colonoscopy to be rescheduled after cardiology clearance (~1 year post-stent). Return precautions for chest pain/pressure or shortness of breath reviewed (contact cardiology or seek emergency care).",
+  "followup": [
+    {"recommendation": "Obtain mandatory cardiology consultation before any elective endoscopy/polypectomy to define acceptable timing and peri-procedural antiplatelet management post-DES", "timeframe": "before rescheduling", "owner": "GI / Cardiology", "status": "open"},
+    {"recommendation": "URGENT: message cardiology today regarding patient's self-discontinuation of aspirin ~2 weeks ago (unsanctioned DAPT interruption ~2 months post-DES); obtain guidance on resuming aspirin before patient restarts on her own", "timeframe": "same day", "owner": "GI / Cardiology", "status": "open"},
+    {"recommendation": "Reschedule elective surveillance colonoscopy to approximately month 12 post-stent (~mid-2027) once cardiology clears timing", "timeframe": "~mid-2027, pending cardiology", "owner": "GI", "status": "open"},
+    {"recommendation": "Document codeine intolerance (nausea/vomiting) in the chart; reinforce ticagrelor is an antiplatelet, not an anticoagulant/warfarin", "timeframe": "this visit", "owner": "GI", "status": "open"}
+  ],
+  "planted_followup_items": [
+    {"id": "F1", "type": "referral", "description": "Mandatory cardiology consultation required before any elective endoscopy or polypectomy given DES to RCA ~2 months ago on DAPT; cardiology must define acceptable procedure timing and peri-procedural antiplatelet management", "urgency": "urgent", "expected_action": "place/obtain cardiology consult and confirm safe timing before rescheduling the colonoscopy", "status": "open"},
+    {"id": "F2", "type": "med_reconciliation", "description": "Patient self-discontinued aspirin (DAPT component) ~2 weeks ago without informing cardiology — unsanctioned interruption ~2 months post-DES; ticagrelor continues. Clarify true antithrombotic status and resumption plan; patient must not stop or restart antiplatelets independently", "urgency": "urgent", "expected_action": "reconcile active antiplatelet list, message cardiology same day for aspirin resumption guidance, and counsel patient to await instructions", "status": "open"},
+    {"id": "F3", "type": "repeat_procedure", "description": "Elective surveillance colonoscopy deferred and to be rescheduled to approximately month 12 post-stent (~mid-2027), contingent on cardiology clearance", "urgency": "routine", "expected_action": "reschedule the deferred surveillance colonoscopy after cardiology clears timing", "status": "open"},
+    {"id": "F4", "type": "care_coordination", "description": "Coordinate colonoscopy timing and antiplatelet plan between GI and cardiology; ensure cardiology receives today's urgent message about the aspirin interruption and that the reschedule is tracked so the surveillance exam is not lost to follow-up", "urgency": "urgent", "expected_action": "confirm cardiology communication is sent/acknowledged and schedule the coordinated follow-up", "status": "open"},
+    {"id": "F5", "type": "record_correction", "description": "Add newly reported codeine intolerance (nausea/vomiting) to the allergy/intolerance list; correct the record to reflect that the aspirin is currently NOT being taken despite showing active on the med list", "urgency": "routine", "expected_action": "document codeine intolerance and update aspirin status in the chart", "status": "open"}
+  ],
+  "post_procedure_followup": {
+    "window": "day 0 to day 14",
+    "channels": ["automated_check_in", "patient_portal_message", "nurse_triage_call"],
+    "_note": "Patient-reported stream after the deferred visit — the inbound signal the LeftBehind product triages. No scope was performed, so there is no post-polypectomy bleeding; contacts reflect confusion about the cancellation, rescheduling, and antiplatelet questions. Each contact is labeled ground truth so triage can be scored.",
+    "contacts": [
+      {
+        "id": "C1",
+        "day": 0,
+        "channel": "automated_check_in",
+        "type": "question",
+        "verbatim": "I came in today but they didn't do the camera test. I'm confused — was my colonoscopy cancelled?",
+        "clinical_signal": "Patient confusion about deferral of the elective colonoscopy",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F3",
+        "expected_action": "Answer from the visit: the colonoscopy was intentionally deferred because her heart stent is only ~2 months old; it will be rescheduled (~1 year post-stent) after cardiology clears the timing.",
+        "rationale": "Answerable from the deferral decision and reschedule plan; links to the repeat_procedure item."
+      },
+      {
+        "id": "C2",
+        "day": 2,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "You said not to stop my heart pills — should I just start my baby aspirin back up again today? I still have the bottle.",
+        "clinical_signal": "Med-timing confusion — patient wants to unilaterally restart the self-discontinued aspirin before cardiology weighs in",
+        "red_flag": true,
+        "ground_truth_disposition": "escalate",
+        "urgency": "urgent",
+        "links_followup_item": "F2",
+        "expected_action": "Escalate to the team/cardiology: do not have her self-restart until cardiology confirms the resumption plan; ensure the urgent cardiology message about the DAPT interruption is actioned and she receives explicit instructions.",
+        "rationale": "Unsanctioned DAPT changes ~2 months post-DES carry stent-thrombosis/bleeding implications; the resumption decision belongs to cardiology, so this is not a simple reassure — a triage trap (routine-sounding med question with real risk)."
+      },
+      {
+        "id": "C3",
+        "day": 5,
+        "channel": "nurse_triage_call",
+        "type": "complication",
+        "verbatim": "I've had some pressure in my chest on and off since yesterday and I get a little short of breath walking to the kitchen.",
+        "clinical_signal": "Intermittent chest pressure and exertional dyspnea in a patient ~2 months post-DES who has interrupted her aspirin — possible stent thrombosis/ACS",
+        "red_flag": true,
+        "ground_truth_disposition": "escalate",
+        "urgency": "emergent",
+        "links_followup_item": "F1",
+        "expected_action": "Escalate emergently — direct to emergency care / call cardiology immediately; chest pressure with dyspnea after an unsanctioned antiplatelet interruption early post-DES is a possible stent thrombosis and cannot wait.",
+        "rationale": "Benign-sounding intermittent chest pressure is dangerous in this cardiac context; the deferral rationale (recent DES on interrupted DAPT) makes this an emergent escalation."
+      },
+      {
+        "id": "C4",
+        "day": 11,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "When will you actually schedule my colonoscopy, and does my heart doctor need to sign off first?",
+        "clinical_signal": "Patient following up on rescheduling and the required cardiology clearance",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F3",
+        "expected_action": "Answer from the plan: rescheduling targets ~1 year post-stent and yes, cardiology consultation/clearance is required first; confirm the coordination is in progress.",
+        "rationale": "Answerable from the reschedule and cardiology-coordination plan; links to the repeat_procedure item."
+      }
+    ]
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "id": "gi-synth-0052::enc-2026-0052",
+  "_synthetic": true,
+  "_note": "MOCK GI patient in the style of synthetic-ambient-fhir-25. No real patient. For PreChart development/eval.",
+  "metadata": {
+    "source": "synthetic-gi-mock-v1",
+    "synthetic": true,
+    "patient_id": "gi-synth-0052",
+    "encounter_id": "enc-2026-0052",
+    "date": "2026-07-18T10:20:00-07:00",
+    "status": "finished",
+    "visit_type": "Gastroenterology consultation (post-procedure)",
+    "visit_title": "GI clinic — post-colonoscopy follow-up; patient asks when to restart 'blood thinner' (= fish oil)",
+    "related_resource_counts": {"Condition": 3, "MedicationRequest": 2, "Observation": 9, "Procedure": 1, "DiagnosticReport": 1, "AllergyIntolerance": 0},
+    "planted_discrepancies": [
+      {"id": "T1", "type": "terminology_trap", "source_of_error": "none", "chart_state": "no anticoagulant/antiplatelet on file; med list = fish oil + lisinopril", "spoken_truth": "patient's 'blood thinner' is his fish oil supplement, not a prescription anticoagulant", "significance": "medium", "expected_state": "CONFIRMED", "note": "Colloquial 'blood thinner' resolves to over-the-counter fish oil (omega-3). No prescription anticoagulant or antiplatelet exists. No periprocedural hold was ever indicated. Trap: do not infer a missing anticoagulant from patient's phrasing."},
+      {"id": "C1", "type": "confirmed", "source_of_error": "none", "chart_state": "MedicationRequest fish oil (omega-3) = active", "spoken_truth": "patient confirms taking daily fish oil, held it himself around the procedure", "significance": "low", "expected_state": "CONFIRMED", "note": "Fish oil is a supplement; no bleeding-risk hold required, though patient chose to pause it."},
+      {"id": "C2", "type": "confirmed", "source_of_error": "none", "chart_state": "lisinopril 10 mg = active; HTN on problem list", "spoken_truth": "patient confirms daily lisinopril for blood pressure", "significance": "low", "expected_state": "CONFIRMED"},
+      {"id": "C3", "type": "confirmed", "source_of_error": "none", "chart_state": "Procedure: screening colonoscopy 2026-07-17 with 2 small polyps removed by cold snare", "spoken_truth": "patient confirms colonoscopy yesterday, feels well, no bleeding or pain", "significance": "low", "expected_state": "CONFIRMED", "note": "Post-op GREEN — uncomplicated recovery."}
+    ]
+  },
+  "patient_context": {
+    "patient": {
+      "resourceType": "Patient",
+      "id": "gi-synth-0052",
+      "name": [{"use": "official", "family": "Ibarra", "given": ["Hector"], "prefix": ["Mr."]}],
+      "gender": "male",
+      "birthDate": "1954-03-09",
+      "address": [{"city": "San Jose", "state": "CA", "country": "US"}],
+      "communication": [{"language": {"coding": [{"system": "urn:ietf:bcp:47", "code": "en-US", "display": "English (United States)"}], "text": "English (United States)"}}]
+    },
+    "longitudinal_summary": {
+      "resource_counts": {"Condition": 3, "DiagnosticReport": 2, "DocumentReference": 3, "Encounter": 4, "MedicationRequest": 2, "Observation": 14, "Procedure": 1, "Patient": 1},
+      "condition_labels": ["Essential hypertension (disorder)", "Adenomatous polyp of colon (disorder)", "Screening for malignant neoplasm of colon (procedure)"],
+      "medication_labels": ["fish oil (omega-3 fatty acids) Oral Capsule", "lisinopril 10 MG Oral Tablet"]
+    },
+    "prior_notes": [
+      {
+        "document_type": "Primary care note",
+        "date": "2026-04-22",
+        "provider_specialty": "Family Medicine",
+        "text": "Routine visit. Hypertension well controlled on lisinopril 10 mg daily; BP 128/78 today. Takes over-the-counter fish oil once daily on his own for 'heart health.' Not on any prescription anticoagulant or antiplatelet — reviewed and confirmed. Age-appropriate colorectal cancer screening overdue; referred to GI for screening colonoscopy."
+      },
+      {
+        "document_type": "GI clinic note (pre-procedure)",
+        "date": "2026-06-30",
+        "provider_specialty": "Gastroenterology",
+        "text": "Pre-procedure consult for screening colonoscopy. 72 M, average risk, HTN. Medications reviewed: lisinopril 10 mg daily, over-the-counter fish oil daily. No prescription anticoagulant or antiplatelet agents — no periprocedural anticoagulation hold indicated. Advised fish oil optional to continue; not a bleeding-risk hold. Colonoscopy scheduled; standard bowel prep provided."
+      }
+    ]
+  },
+  "encounter_fhir": {
+    "encounter": {"resourceType": "Encounter", "id": "enc-2026-0052", "status": "finished", "class": {"code": "AMB", "display": "ambulatory"}, "type": [{"text": "Gastroenterology consultation (post-procedure follow-up)"}], "subject": {"reference": "urn:uuid:gi-synth-0052"}, "period": {"start": "2026-07-18T10:20:00-07:00", "end": "2026-07-18T10:38:00-07:00"}},
+    "related_resources": {
+      "Condition": [
+        {"resourceType": "Condition", "id": "cond-htn", "clinicalStatus": {"coding": [{"code": "active"}]}, "verificationStatus": {"coding": [{"code": "confirmed"}]}, "code": {"coding": [{"system": "http://snomed.info/sct", "code": "59621000", "display": "Essential hypertension (disorder)"}], "text": "Essential hypertension (disorder)"}, "subject": {"reference": "urn:uuid:gi-synth-0052"}, "onsetDateTime": "2016-08-01"},
+        {"resourceType": "Condition", "id": "cond-adenoma", "clinicalStatus": {"coding": [{"code": "active"}]}, "verificationStatus": {"coding": [{"code": "confirmed"}]}, "code": {"coding": [{"system": "http://snomed.info/sct", "code": "68496003", "display": "Adenomatous polyp of colon (disorder)"}], "text": "Adenomatous polyp of colon (disorder)"}, "subject": {"reference": "urn:uuid:gi-synth-0052"}, "onsetDateTime": "2026-07-17"},
+        {"resourceType": "Condition", "id": "cond-screen", "clinicalStatus": {"coding": [{"code": "active"}]}, "verificationStatus": {"coding": [{"code": "confirmed"}]}, "code": {"coding": [{"system": "http://snomed.info/sct", "code": "44085001", "display": "Screening for malignant neoplasm of colon (procedure)"}], "text": "Screening for malignant neoplasm of colon (procedure)"}, "subject": {"reference": "urn:uuid:gi-synth-0052"}, "onsetDateTime": "2026-07-17"}
+      ],
+      "MedicationRequest": [
+        {"resourceType": "MedicationRequest", "id": "med-fishoil", "status": "active", "intent": "order", "medicationCodeableConcept": {"coding": [{"system": "http://www.nlm.nih.gov/research/umls/rxnorm", "code": "216328", "display": "fish oil (omega-3 fatty acids) Oral Capsule"}], "text": "fish oil (omega-3 fatty acids) Oral Capsule"}, "subject": {"reference": "urn:uuid:gi-synth-0052"}, "authoredOn": "2026-04-22", "_discrepancy": "T1/C1: patient calls this his 'blood thinner'; it is an OTC supplement, not a prescription anticoagulant. No hold required."},
+        {"resourceType": "MedicationRequest", "id": "med-lisinopril", "status": "active", "intent": "order", "medicationCodeableConcept": {"coding": [{"system": "http://www.nlm.nih.gov/research/umls/rxnorm", "code": "314076", "display": "lisinopril 10 MG Oral Tablet"}], "text": "lisinopril 10 MG Oral Tablet"}, "subject": {"reference": "urn:uuid:gi-synth-0052"}, "authoredOn": "2024-01-15"}
+      ],
+      "Observation": [
+        {"resourceType": "Observation", "id": "obs-hgb", "status": "final", "category": [{"coding": [{"code": "laboratory"}]}], "code": {"coding": [{"system": "http://loinc.org", "code": "718-7", "display": "Hemoglobin [Mass/volume] in Blood"}], "text": "Hemoglobin"}, "subject": {"reference": "urn:uuid:gi-synth-0052"}, "effectiveDateTime": "2026-06-30", "valueQuantity": {"value": 14.6, "unit": "g/dL", "system": "http://unitsofmeasure.org", "code": "g/dL"}, "interpretation": []},
+        {"resourceType": "Observation", "id": "obs-bp", "status": "final", "category": [{"coding": [{"code": "vital-signs"}]}], "code": {"coding": [{"system": "http://loinc.org", "code": "85354-9", "display": "Blood pressure panel with all children optional"}], "text": "Blood pressure"}, "subject": {"reference": "urn:uuid:gi-synth-0052"}, "effectiveDateTime": "2026-07-18", "component": [{"code": {"coding": [{"system": "http://loinc.org", "code": "8480-6", "display": "Systolic blood pressure"}]}, "valueQuantity": {"value": 132, "unit": "mm[Hg]", "system": "http://unitsofmeasure.org", "code": "mm[Hg]"}}, {"code": {"coding": [{"system": "http://loinc.org", "code": "8462-4", "display": "Diastolic blood pressure"}]}, "valueQuantity": {"value": 80, "unit": "mm[Hg]", "system": "http://unitsofmeasure.org", "code": "mm[Hg]"}}]},
+        {"resourceType": "Observation", "id": "obs-vital-ht", "status": "final", "category": [{"coding": [{"code": "vital-signs"}]}], "code": {"coding": [{"system": "http://loinc.org", "code": "8302-2", "display": "Body height"}], "text": "Body height"}, "subject": {"reference": "urn:uuid:gi-synth-0052"}, "effectiveDateTime": "2026-07-18", "valueQuantity": {"value": 175, "unit": "cm", "system": "http://unitsofmeasure.org", "code": "cm"}},
+        {"resourceType": "Observation", "id": "obs-vital-wt", "status": "final", "category": [{"coding": [{"code": "vital-signs"}]}], "code": {"coding": [{"system": "http://loinc.org", "code": "29463-7", "display": "Body weight"}], "text": "Body weight"}, "subject": {"reference": "urn:uuid:gi-synth-0052"}, "effectiveDateTime": "2026-07-18", "valueQuantity": {"value": 80, "unit": "kg", "system": "http://unitsofmeasure.org", "code": "kg"}},
+        {"resourceType": "Observation", "id": "obs-vital-bmi", "status": "final", "category": [{"coding": [{"code": "vital-signs"}]}], "code": {"coding": [{"system": "http://loinc.org", "code": "39156-5", "display": "Body mass index (BMI) [Ratio]"}], "text": "Body mass index"}, "subject": {"reference": "urn:uuid:gi-synth-0052"}, "effectiveDateTime": "2026-07-18", "valueQuantity": {"value": 26.1, "unit": "kg/m2", "system": "http://unitsofmeasure.org", "code": "kg/m2"}},
+        {"resourceType": "Observation", "id": "obs-vital-temp", "status": "final", "category": [{"coding": [{"code": "vital-signs"}]}], "code": {"coding": [{"system": "http://loinc.org", "code": "8310-5", "display": "Body temperature"}], "text": "Body temperature"}, "subject": {"reference": "urn:uuid:gi-synth-0052"}, "effectiveDateTime": "2026-07-18", "valueQuantity": {"value": 36.8, "unit": "Cel", "system": "http://unitsofmeasure.org", "code": "Cel"}},
+        {"resourceType": "Observation", "id": "obs-vital-hr", "status": "final", "category": [{"coding": [{"code": "vital-signs"}]}], "code": {"coding": [{"system": "http://loinc.org", "code": "8867-4", "display": "Heart rate"}], "text": "Heart rate"}, "subject": {"reference": "urn:uuid:gi-synth-0052"}, "effectiveDateTime": "2026-07-18", "valueQuantity": {"value": 72, "unit": "/min", "system": "http://unitsofmeasure.org", "code": "/min"}},
+        {"resourceType": "Observation", "id": "obs-vital-rr", "status": "final", "category": [{"coding": [{"code": "vital-signs"}]}], "code": {"coding": [{"system": "http://loinc.org", "code": "9279-1", "display": "Respiratory rate"}], "text": "Respiratory rate"}, "subject": {"reference": "urn:uuid:gi-synth-0052"}, "effectiveDateTime": "2026-07-18", "valueQuantity": {"value": 14, "unit": "/min", "system": "http://unitsofmeasure.org", "code": "/min"}},
+        {"resourceType": "Observation", "id": "obs-vital-spo2", "status": "final", "category": [{"coding": [{"code": "vital-signs"}]}], "code": {"coding": [{"system": "http://loinc.org", "code": "2708-6", "display": "Oxygen saturation in Arterial blood"}], "text": "Oxygen saturation"}, "subject": {"reference": "urn:uuid:gi-synth-0052"}, "effectiveDateTime": "2026-07-18", "valueQuantity": {"value": 98, "unit": "%", "system": "http://unitsofmeasure.org", "code": "%"}}
+      ],
+      "Procedure": [
+        {"resourceType": "Procedure", "id": "proc-colo", "status": "completed", "code": {"coding": [{"system": "http://snomed.info/sct", "code": "73761001", "display": "Colonoscopy (procedure)"}], "text": "Screening colonoscopy with cold snare polypectomy x2"}, "subject": {"reference": "urn:uuid:gi-synth-0052"}, "performedDateTime": "2026-07-17"}
+      ],
+      "DiagnosticReport": [
+        {"resourceType": "DiagnosticReport", "id": "dr-colo-2026", "status": "final", "category": [{"coding": [{"code": "GE", "display": "Gastroenterology"}]}], "code": {"coding": [{"system": "http://loinc.org", "code": "34120-6", "display": "Colonoscopy study"}], "text": "Colonoscopy report"}, "subject": {"reference": "urn:uuid:gi-synth-0052"}, "effectiveDateTime": "2026-07-17", "conclusion": "Screening colonoscopy to cecum. Adequate prep. Two diminutive (3-4 mm) sessile polyps in the ascending and sigmoid colon, both removed en bloc by cold snare and retrieved. No active bleeding at completion. No other lesions. Uncomplicated. Pathology pending."}
+      ],
+      "AllergyIntolerance": []
+    }
+  },
+  "transcript": "DR: Good morning, Mr. Ibarra — how are you feeling after yesterday?\nMA: Before the doctor gets started, let me grab your vitals — you're 5 foot 9, 176 pounds, temp's 36.8, heart rate 72, blood pressure 132 over 80, and oxygen's 98 percent on room air. All looks good.\nPT: Pretty good, doctor. A little tired from the prep, but no pain, no bleeding, nothing like that. My wife drove me home and I slept fine.\nDR: That's exactly what I like to hear. The scope went smoothly — we found two very small polyps and removed them with a cold snare, no complications, and no bleeding at the end. We'll send them to pathology just to check, and I'll let you know the results.\nPT: Okay, good. So the main thing I wanted to ask — when can I go back on my blood thinner? I stopped it before the procedure like they told me.\nDR: Let me make sure I have the right thing. When you say blood thinner, which medication do you mean?\nPT: The fish oil. The omega-3 capsules. I take one every day — I've always called it my blood thinner because, you know, it thins the blood a little, that's what everybody says.\nDR: Ah — thank you for clarifying. That's an over-the-counter supplement, the fish oil. It's not actually a prescription blood thinner like warfarin or one of the newer ones. Looking at your chart, you're not on any prescription anticoagulant at all.\nPT: No, no — never have been. Just the fish oil and my blood pressure pill.\nDR: Right, the lisinopril, ten milligrams. Still taking that each day?\nPT: Every morning, yes.\nDR: Perfect. So the good news is the fish oil never needed to be stopped for the colonoscopy — it doesn't carry a real bleeding risk. You can restart it today if you'd like, and keep taking your lisinopril as usual.\nPT: Oh, that's a relief. I was worried I'd have to wait a week.\nDR: Not at all. Everything looks great. Once pathology is back we'll set your next screening interval — likely a few years out given only small polyps.\nPT: Thank you, doctor.",
+  "note": "**Subjective:** Mr. Ibarra is a 72-year-old man presenting for post-procedure follow-up, one day after an uncomplicated screening colonoscopy (2026-07-17) with cold snare removal of two diminutive polyps. He feels well: no abdominal pain, no rectal bleeding, no dizziness; mild residual fatigue from the prep. His chief question is when he may restart his 'blood thinner.' On clarification, this refers to his over-the-counter fish oil (omega-3) supplement, which he self-held before the procedure; he is not on and has never been on a prescription anticoagulant or antiplatelet agent. He confirms daily lisinopril 10 mg for hypertension.\n\n**Objective:** Vitals (today): T 36.8 C, HR 72, RR 14, BP 132/80, SpO2 98% on RA; Ht 175 cm (5'9\"), Wt 80 kg (176 lb), BMI 26.1. Post-procedure recovery uncomplicated. Most recent hemoglobin 14.6 g/dL (2026-06-30). Colonoscopy 2026-07-17: to cecum, adequate prep, two diminutive (3-4 mm) sessile polyps in ascending and sigmoid colon removed by cold snare, no active bleeding at completion; pathology pending.\n\n**Assessment & Plan:**\n- Status post uncomplicated screening colonoscopy with cold snare polypectomy x2 — post-op course GREEN, no bleeding or complications.\n- Medication clarification: patient's 'blood thinner' = over-the-counter fish oil supplement, NOT a prescription anticoagulant. No periprocedural hold was ever indicated. Reassured; may restart fish oil today.\n- Hypertension — continue lisinopril 10 mg daily; BP at goal.\n- Await pathology; will contact patient with results and finalize surveillance interval (likely extended given only diminutive polyps).\n- Return precautions reviewed: call for significant rectal bleeding, severe abdominal pain, fever, or lightheadedness.",
+  "after_visit_summary": "Visit summary\n\nWhat we discussed\n• Your recovery after yesterday's colonoscopy\n• We removed two small polyps with no complications\n• Your question about restarting your fish oil\n• Your blood pressure medicine\n\nNext steps\n• Your recovery looks great — no bleeding or complications.\n• Your fish oil is an over-the-counter supplement, not a prescription blood thinner. It did not need to be stopped for the procedure. You may restart it today.\n• Keep taking your lisinopril each morning for blood pressure.\n• We will call you with the pathology results and let you know when your next colonoscopy is due — likely a few years from now.\n• Call the clinic for heavy rectal bleeding, severe belly pain, fever, or feeling faint.",
+  "after_visit_summary_provenance": {"method": "deterministic_extractive_v1", "source": "clinical_note_assessment_and_plan", "review_status": "not_clinically_reviewed"}
+}

@@ -1,0 +1,104 @@
+{
+  "id": "gi-synth-0059::proc-result",
+  "_synthetic": true,
+  "_note": "MOCK procedure result. No real patient. For PreChart development/eval.",
+  "patient_id": "gi-synth-0059",
+  "procedure": {
+    "name": "Endoscopic ultrasound with fine-needle aspiration (EUS-FNA) of mediastinal station 7 lymph node",
+    "code": {"system": "http://snomed.info/sct", "code": "235527006", "display": "Endoscopic ultrasonography (procedure)"},
+    "date": "2026-07-24T09:10:00-07:00",
+    "indication": "Diagnosis and staging of subcarinal (station 7) lymphadenopathy with suspicious RUL nodule; tissue sampling to establish/exclude primary lung malignancy",
+    "sedation": "Monitored anesthesia care (propofol), anesthesia-directed given mild COPD; well tolerated",
+    "prep_quality": "N/A (transesophageal EUS; NPO confirmed, no oral bowel prep required)",
+    "extent_reached": "Esophagus and mediastinum; station 7 (subcarinal) node imaged transesophageally with linear echoendoscope",
+    "withdrawal_time_min": null,
+    "status": "completed"
+  },
+  "procedure_report": "PROCEDURE: EUS-FNA of mediastinal (subcarinal, station 7) lymph node. INDICATION: 2.2 cm spiculated RUL nodule with 1.8 cm station 7 lymphadenopathy suspicious for primary lung malignancy with nodal involvement; no prior tissue diagnosis. ANTICOAGULATION: Enoxaparin 40 mg SC daily (PROPHYLACTIC dosing for post hip-fracture immobility, NOT therapeutic) — morning-of dose held per prophylactic-LMWH periprocedural protocol; no therapeutic bridging applied; INR 1.0, platelets 244. SEDATION: MAC/propofol, anesthesia-directed. FINDINGS: The linear echoendoscope was advanced into the esophagus without difficulty. A rounded, hypoechoic, well-demarcated subcarinal (station 7) lymph node measuring approximately 1.9 x 1.6 cm was identified with features concerning for malignancy (round shape, sharp borders, hypoechoic echotexture). Under real-time Doppler-guided EUS control to avoid intervening vasculature, the node was sampled with a 22-gauge FNA needle for a total of 4 passes; rapid on-site evaluation (ROSE) confirmed adequate cellularity with atypical/malignant-appearing cells present. The RUL primary nodule was not directly accessible transesophageally and was not sampled. No immediate procedural bleeding. IMPRESSION: Successful EUS-FNA of station 7 node, adequate sampling with malignant cells on ROSE; final cytology and immunostains pending. Sampling of station 7 (N2 station) has staging implications if malignancy confirmed.",
+  "findings": [
+    {"finding": "Subcarinal (station 7) lymph node, ~1.9 x 1.6 cm, hypoechoic, round, sharp borders — sonographically suspicious for malignancy", "location": "mediastinum, station 7 (subcarinal)", "size_mm": 19, "action_taken": "EUS-FNA x4 passes, 22G needle, ROSE adequacy confirmed", "specimen": "A"},
+    {"finding": "RUL nodule not accessible transesophageally", "location": "right upper lobe", "action_taken": "not sampled; remains radiographically suspicious primary"}
+  ],
+  "specimens": [{"id": "A", "site": "station 7 (subcarinal) lymph node", "type": "fine-needle aspiration cytology (4 passes) with cell block for immunohistochemistry"}],
+  "pathology": {"status": "pending", "expected_back": "2026-07-28", "report": null, "diagnosis": null, "actionable": null, "note": "ROSE showed atypical/malignant-appearing cells; final cytology, cell block, and immunohistochemical panel (e.g., TTF-1, p40) pending to confirm primary and lineage; molecular/PD-L1 testing to be requested if non-small cell carcinoma confirmed."},
+  "complications": [],
+  "disposition": "Discharged home same day in stable condition with escort after uneventful MAC recovery. No post-procedure chest pain, dyspnea, or fever. Given return precautions for fever, chest pain, hemoptysis, or worsening breathing. Oncology-expedite track continued.",
+  "followup": [
+    {"recommendation": "Final station 7 cytology/cell block with immunostains pending — ROSE positive for malignant cells; communicate result to patient and forward to oncology/pulmonology to drive staging and treatment", "timeframe": "within 3-5 days (by 2026-07-28)", "owner": "GI / cytopathology", "status": "open"},
+    {"recommendation": "Expedited oncology referral for staging and treatment planning once tissue diagnosis finalized; correlate N2 nodal involvement with PET/staging workup", "timeframe": "within 1 week of final path", "owner": "Oncology / Pulmonology", "status": "open"},
+    {"recommendation": "Resume prophylactic enoxaparin 40 mg SC daily (VTE prophylaxis for hip-fracture immobility) — no therapeutic bridging needed; confirm no post-procedure bleeding before resuming", "timeframe": "resume same evening / next day per protocol if no bleeding", "owner": "GI / patient", "status": "open"},
+    {"recommendation": "If final cytology is non-diagnostic/benign despite suspicious ROSE and imaging, pursue repeat sampling (repeat EUS-FNA vs EBUS vs CT-guided biopsy of RUL nodule) given high pre-test probability", "timeframe": "if non-diagnostic result returns", "owner": "GI / Pulmonology", "status": "open"},
+    {"recommendation": "Correct problem list: 'Malignant tumor of lung' was carried as confirmed without tissue diagnosis; keep as suspected/provisional until final cytology confirms", "timeframe": "on final path", "owner": "GI", "status": "open"}
+  ],
+  "planted_followup_items": [
+    {"id": "F1", "type": "pending_pathology", "description": "Station 7 EUS-FNA cytology/cell block with immunostains pending; ROSE showed malignant-appearing cells — result must be finalized, communicated to patient, and forwarded to oncology/pulmonology", "urgency": "critical", "expected_action": "track final cytology, call patient with result, route to oncology/pulmonology for staging", "status": "open"},
+    {"id": "F2", "type": "critical_result", "description": "Positive ROSE for malignancy in a mediastinal (N2) node — high-suspicion malignant finding in an expedited cancer workup; must not be dropped", "urgency": "critical", "expected_action": "ensure malignancy result reaches oncology and patient; do not close until oncology handoff documented", "status": "open"},
+    {"id": "F3", "type": "referral", "description": "Expedited oncology referral for staging and treatment planning contingent on final tissue diagnosis", "urgency": "urgent", "expected_action": "place/confirm oncology referral and PET/staging on final path", "status": "open"},
+    {"id": "F4", "type": "med_resume", "description": "Resume PROPHYLACTIC enoxaparin 40 mg SC daily after periprocedural hold; do NOT apply therapeutic bridging (dose is prophylactic per D1)", "urgency": "routine", "expected_action": "confirm no bleeding and resume prophylactic LMWH at correct dose/intent", "status": "open"},
+    {"id": "F5", "type": "repeat_procedure", "description": "Contingency repeat sampling (EUS-FNA/EBUS/CT-guided RUL biopsy) if final cytology returns non-diagnostic despite suspicious ROSE and imaging", "urgency": "urgent", "expected_action": "arrange repeat tissue acquisition if non-diagnostic", "status": "open"},
+    {"id": "F6", "type": "known_lesion_followup", "description": "RUL primary nodule was not sampled transesophageally and remains a known, radiographically suspicious primary lesion requiring staging correlation", "urgency": "urgent", "expected_action": "ensure RUL nodule addressed in staging (PET/biopsy) and not lost to follow-up", "status": "open"}
+  ],
+  "post_procedure_followup": {
+    "window": "day 0 to day 14",
+    "channels": ["automated_check_in", "patient_portal_message", "nurse_triage_call"],
+    "_note": "Patient-reported stream after the procedure — the inbound signal the LeftBehind product triages. Each contact is labeled ground truth so triage can be scored.",
+    "contacts": [
+      {
+        "id": "C1",
+        "day": 1,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "My throat's a bit scratchy and sore when I swallow, but I'm eating okay.",
+        "clinical_signal": "Expected mild post-transesophageal-EUS sore throat; tolerating oral intake",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; mild sore throat after upper endoscopy/EUS is expected and self-limited over 24-48h; lozenges/warm fluids.",
+        "rationale": "Common benign post-endoscopy symptom with preserved swallowing and intake; no escalation."
+      },
+      {
+        "id": "C2",
+        "day": 2,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "When will I hear what the sample showed, and when should I start my belly injection again?",
+        "clinical_signal": "Patient asking about pending cytology result and resumption of prophylactic enoxaparin",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F1",
+        "expected_action": "Answer from the result: final cytology expected ~2026-07-28, team will call with result and route to oncology; confirm the daily prophylactic enoxaparin 40 mg can resume that evening/next day if no bleeding (no bridging needed).",
+        "rationale": "Answerable from the procedure result and follow-up plan; links to pending_pathology (F1) and the med_resume item (F4)."
+      },
+      {
+        "id": "C3",
+        "day": 5,
+        "channel": "nurse_triage_call",
+        "type": "complication",
+        "verbatim": "Since yesterday I've had a fever with chills and a deep aching pain in my chest and upper back, and it hurts more when I swallow.",
+        "clinical_signal": "Fever/chills with retrosternal/back pain and odynophagia several days after mediastinal EUS-FNA — concern for mediastinitis / esophageal micro-perforation / infected node",
+        "red_flag": true,
+        "ground_truth_disposition": "escalate",
+        "urgency": "emergent",
+        "links_followup_item": null,
+        "expected_action": "Escalate for same-day/ED evaluation: exam, labs, and CT chest to assess for mediastinitis/perforation; do not treat as benign post-procedure soreness; start broad-spectrum antibiotics per surgical/thoracic input if confirmed.",
+        "rationale": "Fever plus new chest/back pain and worsening odynophagia is the classic presentation of mediastinitis or esophageal perforation after transesophageal mediastinal FNA — a true, time-critical complication."
+      },
+      {
+        "id": "C4",
+        "day": 11,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "The scan area on my chest still feels a little tender when I press on it — is that something to worry about?",
+        "clinical_signal": "Localized mild chest-wall tenderness, no fever/dyspnea/systemic signs reported",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; isolated mild tenderness without fever, worsening pain, dyspnea, or swallowing difficulty is expected residual soreness; provide return precautions (fever, worsening chest pain, trouble breathing/swallowing).",
+        "rationale": "Benign residual soreness with no systemic red-flag features; safe to reassure with clear return precautions."
+      }
+    ]
+  }
+}

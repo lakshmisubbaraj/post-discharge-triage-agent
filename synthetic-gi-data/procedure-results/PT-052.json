@@ -1,0 +1,104 @@
+{
+  "id": "PT-052::proc-result",
+  "_synthetic": true,
+  "_note": "MOCK procedure result. Result of the screening colonoscopy (2026-07-17) that this post-procedure follow-up encounter is following up from.",
+  "patient_id": "gi-synth-0052",
+  "procedure": {
+    "name": "Colonoscopy",
+    "code": {"system": "http://snomed.info/sct", "code": "73761001", "display": "Colonoscopy (procedure)"},
+    "date": "2026-07-17T08:40:00-07:00",
+    "indication": "Average-risk colorectal cancer screening (72M, screening overdue)",
+    "sedation": "Moderate sedation (midazolam 2 mg, fentanyl 75 mcg)",
+    "prep_quality": "Boston Bowel Prep Scale 8/9 — adequate",
+    "extent_reached": "Cecum (confirmed by appendiceal orifice and ileocecal valve); terminal ileum intubated",
+    "withdrawal_time_min": 11,
+    "status": "completed"
+  },
+  "procedure_report": "PROCEDURE: Colonoscopy. INDICATION: average-risk colorectal cancer screening. SEDATION: moderate (midazolam/fentanyl). PREP: adequate (BBPS 8/9). FINDINGS: The colonoscope was advanced to the cecum, confirmed by the appendiceal orifice and ileocecal valve; the terminal ileum was intubated and normal. Two diminutive (3-4 mm) sessile polyps were identified, one in the ascending colon and one in the sigmoid colon; both were removed en bloc by cold snare polypectomy and fully retrieved (specimens A and B). The remainder of the examined colon and rectum (including retroflexion in the rectum) were normal, with no masses, no significant diverticulosis, and no source of bleeding. No active bleeding at the polypectomy sites at completion. The patient is not on any prescription anticoagulant or antiplatelet agent; his daily fish oil (omega-3) is an over-the-counter supplement and carried no bleeding-risk requirement. IMPRESSION: Two diminutive polyps (ascending and sigmoid) removed by cold snare; otherwise normal screening colonoscopy to the cecum. Pathology pending.",
+  "findings": [
+    {"finding": "Diminutive (3-4 mm) sessile polyp", "location": "ascending colon", "size_mm": 4, "action_taken": "cold snare polypectomy, retrieved", "specimen": "A"},
+    {"finding": "Diminutive (3-4 mm) sessile polyp", "location": "sigmoid colon", "size_mm": 3, "action_taken": "cold snare polypectomy, retrieved", "specimen": "B"},
+    {"finding": "Normal terminal ileum, colon, and rectum otherwise; no mass or bleeding", "location": "colon", "action_taken": "none"}
+  ],
+  "specimens": [
+    {"id": "A", "site": "ascending colon polyp", "type": "polypectomy"},
+    {"id": "B", "site": "sigmoid colon polyp", "type": "polypectomy"}
+  ],
+  "pathology": {"status": "pending", "expected_back": "2026-07-21", "report": null, "diagnosis": null, "actionable": null},
+  "complications": [],
+  "disposition": "Discharged home same day in stable condition with escort (wife). Post-polypectomy precautions reviewed; tolerated procedure well, no immediate bleeding or pain.",
+  "followup": [
+    {"recommendation": "Review polyp pathology (specimens A and B); call patient with result and set surveillance colonoscopy interval accordingly", "timeframe": "within 2 weeks", "owner": "GI", "status": "open"},
+    {"recommendation": "Set colonoscopy surveillance interval — likely extended (e.g., 7-10 years) if only 1-2 small tubular adenomas or hyperplastic polyps on final pathology", "timeframe": "after pathology returns", "owner": "GI", "status": "open"},
+    {"recommendation": "No anticoagulant hold/resume required — patient's 'blood thinner' is OTC fish oil (omega-3), not a prescription anticoagulant; may resume anytime", "timeframe": "n/a", "owner": "GI / patient", "status": "closed"},
+    {"recommendation": "Continue lisinopril 10 mg daily for hypertension; BP at goal", "timeframe": "ongoing", "owner": "primary care", "status": "closed"}
+  ],
+  "planted_followup_items": [
+    {"id": "F1", "type": "pending_pathology", "description": "Polypectomy pathology pending for two diminutive polyps (ascending + sigmoid, specimens A and B) — result must be communicated to the patient and drive the surveillance interval", "urgency": "routine", "expected_action": "call patient with result + document surveillance interval", "status": "open"},
+    {"id": "F2", "type": "surveillance_interval", "description": "Colorectal surveillance interval to be finalized once pathology returns — expected extended interval given diminutive polyps in an average-risk patient", "urgency": "routine", "expected_action": "set and document next colonoscopy due date after pathology", "status": "open"},
+    {"id": "F3", "type": "med_reconciliation", "description": "TERMINOLOGY TRAP: patient's 'blood thinner' is over-the-counter fish oil (omega-3), not a prescription anticoagulant. No periprocedural hold was indicated and none is required. Do NOT infer a missing anticoagulant resume from the patient's phrasing.", "urgency": "routine", "expected_action": "reassure patient may restart fish oil anytime; no anticoagulation action needed", "status": "closed"}
+  ],
+  "post_procedure_followup": {
+    "window": "day 0 to day 14",
+    "channels": ["automated_check_in", "patient_portal_message", "nurse_triage_call"],
+    "_note": "Patient-reported stream after the procedure — the inbound signal the LeftBehind product triages. Each contact is labeled ground truth so triage can be scored.",
+    "contacts": [
+      {
+        "id": "C1",
+        "day": 1,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "I'm pretty gassy and bloated today and my belly feels crampy off and on. No blood or anything.",
+        "clinical_signal": "Expected post-colonoscopy insufflation bloating and mild cramping, no bleeding",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; gas, bloating, and mild crampy discomfort are expected after insufflation and resolve within 24-48h. Walking and passing gas help.",
+        "rationale": "Common benign post-endoscopy symptoms with no red flags; self-care."
+      },
+      {
+        "id": "C2",
+        "day": 2,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "The nurse told me to stop my blood thinner before the scope — my fish oil. Am I okay to start taking it again now?",
+        "clinical_signal": "Patient asking when to restart his 'blood thinner,' which is OTC fish oil, not a prescription anticoagulant",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F3",
+        "expected_action": "Answer from the result: the fish oil is an over-the-counter omega-3 supplement, not a prescription anticoagulant; it carried no bleeding-risk hold and may be restarted anytime. No anticoagulation action needed.",
+        "rationale": "Terminology-trap question answerable from the record; links to the med_reconciliation item. Do not infer a missing prescription anticoagulant."
+      },
+      {
+        "id": "C3",
+        "day": 4,
+        "channel": "nurse_triage_call",
+        "type": "complication",
+        "verbatim": "I just passed a bowel movement with a fair amount of fresh red blood and a couple of small clots. It's the second time today. I feel okay but a little worried.",
+        "clinical_signal": "Delayed post-polypectomy bleeding — recurrent hematochezia with clots on day 4 after cold snare polypectomy",
+        "red_flag": true,
+        "ground_truth_disposition": "escalate",
+        "urgency": "urgent",
+        "links_followup_item": null,
+        "expected_action": "Escalate for same-day clinical evaluation; assess volume, vitals, and hemodynamics, check CBC; advise urgent care/ED if bleeding continues, increases, or lightheadedness/syncope develops. Anticipate possible repeat colonoscopy for hemostasis. Note patient is not anticoagulated (fish oil only), so no anticoagulant to hold.",
+        "rationale": "Recurrent hematochezia with clots is delayed post-polypectomy bleeding — a genuine complication of this procedure requiring urgent evaluation even though the patient is currently hemodynamically stable and not on a true anticoagulant."
+      },
+      {
+        "id": "C4",
+        "day": 12,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "It's been almost two weeks and I still haven't heard anything about the biopsy results or when my next colonoscopy should be. Can someone let me know?",
+        "clinical_signal": "Patient chasing pending pathology result and surveillance interval that have not yet been communicated",
+        "red_flag": false,
+        "ground_truth_disposition": "schedule",
+        "urgency": "routine",
+        "links_followup_item": "F1",
+        "expected_action": "Retrieve final polyp pathology (expected back ~2026-07-21), call the patient with the result, and document/communicate the surveillance colonoscopy interval. Close the pending-pathology loop.",
+        "rationale": "Answerable/actionable from the result; flags a follow-up that should already have been closed. Links to the pending_pathology item."
+      }
+    ]
+  }
+}

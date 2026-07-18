@@ -1,0 +1,109 @@
+{
+  "id": "gi-synth-0024::proc-result",
+  "_synthetic": true,
+  "_note": "MOCK procedure result. No real patient. For PreChart/LeftBehind development/eval.",
+  "patient_id": "gi-synth-0024",
+  "procedure": {
+    "name": "Colonoscopy",
+    "code": {"system": "http://snomed.info/sct", "code": "73761001", "display": "Colonoscopy (procedure)"},
+    "date": "2026-08-06T08:10:00-07:00",
+    "indication": "Anemia with new melena / possible GI blood loss in an anticoagulated CKD4 patient (iron status unresolved: iron deficiency vs. anemia of CKD) — evaluation for GI bleeding source",
+    "sedation": "Monitored anesthesia care (propofol, anesthesia-directed) given CKD4 and periprocedural bleeding risk",
+    "prep_quality": "Boston Bowel Prep Scale 7/9 — adequate",
+    "extent_reached": "Cecum (confirmed by appendiceal orifice and ileocecal valve); terminal ileum intubated",
+    "withdrawal_time_min": 16,
+    "status": "completed",
+    "anticoagulation_note": "Dabigatran (75 mg BID, renally cleared, CKD4/eGFR 22) held on an extended schedule coordinated with nephrology and anesthesia per pre-procedure plan; over-the-counter fish oil also held. No anticoagulant taken periprocedurally. Resumption deliberately DEFERRED pending confirmation of hemostasis and pathology given active occult bleeding source — see follow-up."
+  },
+  "procedure_report": "PROCEDURE: Colonoscopy with cold-forceps biopsy. INDICATION: anemia with new melena / possible occult GI blood loss (iron status unresolved) in a CKD4 patient anticoagulated for atrial fibrillation. SEDATION: monitored anesthesia care. PREP: adequate (BBPS 7). ANTICOAGULATION: dabigatran and fish oil held on an extended, nephrology/anesthesia-coordinated schedule; none taken periprocedurally. FINDINGS: The colonoscope was advanced to the cecum and the terminal ileum was intubated and appeared normal. In the ascending colon a 3.5 cm partially obstructing, friable, ulcerated mass was identified with contact bleeding and adherent clot; no active spurting. Multiple cold-forceps biopsies were obtained (specimen A) and the site was tattooed with sterile carbon marking distal to the lesion for future localization. Scattered non-bleeding angioectasias were noted in the right colon; the most prominent was treated with limited argon plasma coagulation (specimen not taken). A few sigmoid diverticula were seen without stigmata of bleeding. No other mucosal lesions. IMPRESSION: 1) Ascending colon mass, ulcerated and friable — suspicious for malignancy; biopsied and tattooed, pathology pending. 2) Right-colon angioectasias, one treated with APC. 3) Sigmoid diverticulosis. This lesion is a plausible source of occult/overt GI blood loss and the anemia. Pathology pending; oncology/surgical evaluation to follow biopsy results.",
+  "findings": [
+    {"finding": "Ascending colon mass, 3.5 cm, ulcerated/friable with contact bleeding and adherent clot — suspicious for malignancy", "location": "ascending colon", "size_mm": 35, "action_taken": "multiple cold-forceps biopsies; site tattooed distally", "specimen": "A"},
+    {"finding": "Right-colon angioectasias, non-bleeding", "location": "right (ascending) colon", "action_taken": "argon plasma coagulation of most prominent lesion"},
+    {"finding": "Sigmoid diverticulosis, no stigmata of bleeding", "location": "sigmoid colon", "action_taken": "none"},
+    {"finding": "Terminal ileum normal", "location": "terminal ileum", "action_taken": "none"}
+  ],
+  "specimens": [{"id": "A", "site": "ascending colon mass", "type": "biopsy (cold forceps)"}],
+  "pathology": {"status": "pending", "expected_back": "2026-08-11", "report": null, "diagnosis": null, "actionable": null},
+  "complications": [],
+  "disposition": "Discharged home same day in stable condition with escort after extended monitoring. Hemoglobin to be rechecked. Anticoagulation held pending hemostasis and pathology; explicit instruction to NOT resume dabigatran or fish oil until GI/nephrology confirm. Return precautions for large-volume bleeding, dizziness, or worsening fatigue reviewed.",
+  "followup": [
+    {"recommendation": "Communicate ascending-colon mass biopsy pathology to patient as soon as resulted; suspicious for malignancy", "timeframe": "within 3-5 days", "owner": "GI", "status": "open"},
+    {"recommendation": "Refer to colorectal surgery and oncology; obtain staging CT chest/abdomen/pelvis pending pathology confirmation", "timeframe": "within 1-2 weeks", "owner": "GI", "status": "open"},
+    {"recommendation": "Coordinate anticoagulation (dabigatran, renally cleared, CKD4) resumption vs. continued hold with nephrology given active bleeding source — do NOT resume on standard interval", "timeframe": "before any resumption", "owner": "GI / Nephrology", "status": "open"},
+    {"recommendation": "Recheck CBC; continue epoetin alfa and iron per anemia plan; transfuse per threshold if bleeding", "timeframe": "within 1 week", "owner": "GI / Nephrology", "status": "open"},
+    {"recommendation": "Consider EGD to evaluate upper source of melena if clinically indicated (melena may reflect an upper GI contribution)", "timeframe": "as needed", "owner": "GI", "status": "open"}
+  ],
+  "planted_followup_items": [
+    {"id": "F1", "type": "pending_pathology", "description": "Ascending-colon mass biopsy (specimen A) pathology pending — lesion is ulcerated/friable and suspicious for malignancy; result must be actively tracked and communicated", "urgency": "critical", "expected_action": "track pathology, call patient promptly with result, initiate oncology/surgical pathway if malignant", "status": "open"},
+    {"id": "F2", "type": "critical_result", "description": "Suspicious colonic mass identified as likely bleeding source and probable cause of the anemia / GI blood loss in a 78-year-old — high pretest probability of colorectal cancer", "urgency": "critical", "expected_action": "ensure result is escalated to a responsible clinician and not dropped; do not close encounter without disposition", "status": "open"},
+    {"id": "F3", "type": "referral", "description": "Colorectal surgery + oncology referral and staging CT chest/abdomen/pelvis contingent on biopsy result", "urgency": "urgent", "expected_action": "place referrals and staging order once pathology confirms malignancy", "status": "open"},
+    {"id": "F4", "type": "med_resume", "description": "Dabigatran (75 mg BID, renally cleared, CKD4/eGFR 22) held periprocedurally and resumption DEFERRED due to active occult bleeding source; high-risk decision requiring nephrology coordination — must not be resumed on a standard interval or forgotten", "urgency": "critical", "expected_action": "explicit GI/nephrology decision on hold-vs-resume before restarting anticoagulation; also address fish-oil resumption", "status": "open"},
+    {"id": "F5", "type": "complication_watch", "description": "Post-biopsy/post-APC bleeding risk in an anticoagulated CKD4 patient; monitor for overt bleeding and recheck hemoglobin", "urgency": "urgent", "expected_action": "recheck CBC, review return precautions, watch for delayed bleeding", "status": "open"},
+    {"id": "F6", "type": "incidental_finding", "description": "Right-colon angioectasias (one treated with APC) — potential additional/ongoing blood-loss source relevant to anemia", "urgency": "routine", "expected_action": "note as contributing source; reassess if anemia persists after mass management", "status": "open"},
+    {"id": "F7", "type": "repeat_procedure", "description": "Possible EGD to evaluate an upper GI source of melena if colonic pathology does not fully explain blood loss", "urgency": "routine", "expected_action": "decide on EGD based on clinical course and hemoglobin trend", "status": "open"},
+    {"id": "F8", "type": "surveillance_interval", "description": "Post-treatment colonoscopic surveillance interval to be defined once mass pathology/oncologic management is established", "urgency": "routine", "expected_action": "set surveillance plan after definitive management", "status": "open"}
+  ],
+  "post_procedure_followup": {
+    "window": "day 0 to day 14",
+    "channels": ["automated_check_in", "patient_portal_message", "nurse_triage_call"],
+    "_note": "Patient-reported stream after the procedure — the inbound signal the LeftBehind product triages. Each contact is labeled ground truth so triage can be scored.",
+    "contacts": [
+      {
+        "id": "C1",
+        "day": 1,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "Throat's a little scratchy and I'm more tired than usual, but I got home okay.",
+        "clinical_signal": "Expected post-endoscopy sore throat and residual sedation grogginess/fatigue; baseline anemia fatigue",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; mild sore throat and grogginess are expected and self-limited. Reinforce return precautions for heavy bleeding, dizziness, or worsening fatigue.",
+        "rationale": "Common benign post-procedure symptoms; no red flag and no escalation warranted."
+      },
+      {
+        "id": "C2",
+        "day": 4,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "My kidney doctor's blood thinner and the fish oil are still stopped — when do I start them again? I don't want a stroke.",
+        "clinical_signal": "Patient asking about anticoagulation (dabigatran) and fish-oil resumption; deliberate deferred-hold situation given active bleeding source",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F4",
+        "expected_action": "Explain the hold is intentional pending hemostasis and pathology; do NOT self-resume dabigatran or fish oil; GI and nephrology will jointly decide timing. Address stroke-risk concern and confirm plan.",
+        "rationale": "Answerable from the result and follow-up plan; links to the deferred anticoagulation-resumption item. Counsel against premature self-restart of a renally-cleared DOAC in a patient with an active bleeding lesion."
+      },
+      {
+        "id": "C3",
+        "day": 9,
+        "channel": "nurse_triage_call",
+        "type": "complication",
+        "verbatim": "I've gone to the bathroom with a good bit of dark red blood a couple times today and I feel woozy when I stand up.",
+        "clinical_signal": "Delayed lower GI bleeding from the biopsied friable mass / post-APC site with a hemodynamic symptom in a CKD4 patient",
+        "red_flag": true,
+        "ground_truth_disposition": "escalate",
+        "urgency": "emergent",
+        "links_followup_item": "F5",
+        "expected_action": "Escalate for same-day/ED evaluation; keep dabigatran and fish oil held; check hemoglobin/vitals and type-and-screen; anticipate possible repeat colonoscopy for hemostasis and transfusion per threshold.",
+        "rationale": "Overt rectal bleeding with lightheadedness after biopsy/APC of a friable bleeding mass is a true red-flag complication requiring urgent action, especially with baseline anemia and CKD4."
+      },
+      {
+        "id": "C4",
+        "day": 13,
+        "channel": "patient_portal_message",
+        "type": "complaint",
+        "verbatim": "Nobody ever called me about the biopsy they took from that growth. It's been almost two weeks and I'm scared it's cancer — what did it show?",
+        "clinical_signal": "Dropped follow-up — pending pathology on a mass suspicious for malignancy never communicated to the patient",
+        "red_flag": false,
+        "ground_truth_disposition": "schedule",
+        "urgency": "urgent",
+        "links_followup_item": "F1",
+        "expected_action": "Retrieve the pending/resulted pathology, have GI call the patient promptly with the result and plan, and confirm the oncology/surgery referral pathway is moving; close the loop on a suspicious-for-malignancy biopsy that should already have been communicated.",
+        "rationale": "Dropped-ball signal: a critical pending-pathology result on a mass suspicious for cancer was not communicated within the expected 3-5 day window; must be escalated to schedule/callback and result disclosure, not reassured away."
+      }
+    ]
+  }
+}

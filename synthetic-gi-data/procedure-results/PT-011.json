@@ -1,0 +1,90 @@
+{
+  "id": "gi-synth-0011::proc-result",
+  "_synthetic": true,
+  "_note": "MOCK procedure result. No real patient. For PreChart development/eval. Result of the surveillance colonoscopy PT-011 was referred for.",
+  "patient_id": "gi-synth-0011",
+  "procedure": {
+    "name": "Colonoscopy",
+    "code": {"system": "http://snomed.info/sct", "code": "73761001", "display": "Colonoscopy (procedure)"},
+    "date": "2026-08-12T08:00:00-07:00",
+    "indication": "Surveillance colonoscopy (history of tubular adenomas with low-grade dysplasia, 2021; 5-year interval due 2026)",
+    "sedation": "Moderate sedation (midazolam 2 mg, fentanyl 75 mcg)",
+    "prep_quality": "Boston Bowel Prep Scale 8/9 — adequate",
+    "extent_reached": "Cecum (confirmed by appendiceal orifice and ileocecal valve; terminal ileum intubated)",
+    "withdrawal_time_min": 11,
+    "status": "completed"
+  },
+  "procedure_report": "PROCEDURE: Colonoscopy. INDICATION: surveillance for prior tubular adenomas with low-grade dysplasia (2021), interval due 2026. PERI-PROCEDURE ANTICOAGULATION: Patient on warfarin 5 mg daily for atrial fibrillation (CHA2DS2-VASc 4). Warfarin held 5 days pre-procedure per anticoagulation clinic plan; INR checked morning of procedure = 1.2 (acceptable for polypectomy). Bridging with LMWH deferred given adequate INR normalization and endoscopic bleeding risk; resumption plan documented below. SEDATION: moderate. PREP: adequate (BBPS 8). FINDINGS: The colonoscope was advanced to the cecum and the terminal ileum was intubated and normal. A 7 mm sessile polyp was identified in the sigmoid colon and removed by cold snare polypectomy; specimen retrieved (specimen A). A 4 mm sessile polyp in the transverse colon was removed by cold snare polypectomy; specimen retrieved (specimen B). Scattered sigmoid diverticula were noted without stigmata of bleeding. No active bleeding at polypectomy sites; hemostasis was confirmed. The remainder of the examined colon was normal. IMPRESSION: 7 mm sigmoid polyp and 4 mm transverse polyp removed by cold snare; sigmoid diverticulosis. Pathology pending. Peri-procedure warfarin held with therapeutic reversal by INR; resumption instructions given.",
+  "findings": [
+    {"finding": "7 mm sessile polyp", "location": "sigmoid colon", "size_mm": 7, "action_taken": "cold snare polypectomy, retrieved", "specimen": "A"},
+    {"finding": "4 mm sessile polyp", "location": "transverse colon", "size_mm": 4, "action_taken": "cold snare polypectomy, retrieved", "specimen": "B"},
+    {"finding": "Diverticulosis, no stigmata of bleeding", "location": "sigmoid colon", "action_taken": "none"}
+  ],
+  "specimens": [
+    {"id": "A", "site": "sigmoid polyp", "type": "polypectomy"},
+    {"id": "B", "site": "transverse polyp", "type": "polypectomy"}
+  ],
+  "pathology": {"status": "pending", "expected_back": "2026-08-16", "report": null, "diagnosis": null, "actionable": null},
+  "complications": [],
+  "disposition": "Discharged home same day in stable condition with escort. Post-polypectomy precautions reviewed. Written anticoagulation resumption plan provided.",
+  "followup": [
+    {"recommendation": "Review sigmoid and transverse polypectomy pathology; call patient with results and set surveillance interval", "timeframe": "within 2 weeks", "owner": "GI", "status": "open"},
+    {"recommendation": "Resume warfarin the evening of the procedure (no immediate post-polypectomy bleeding); coordinate follow-up INR with anticoagulation clinic within 5-7 days", "timeframe": "same evening / 5-7 days for INR", "owner": "patient / anticoagulation clinic / GI", "status": "open"},
+    {"recommendation": "Counsel patient to report rectal bleeding, melena, or lightheadedness during the post-polypectomy window while re-anticoagulating", "timeframe": "14 days", "owner": "patient / GI", "status": "open"}
+  ],
+  "planted_followup_items": [
+    {"id": "F1", "type": "pending_pathology", "description": "Sigmoid (7 mm) and transverse (4 mm) polypectomy pathology pending — results must be communicated to the patient and drive the surveillance interval", "urgency": "routine", "expected_action": "call patient with results + document surveillance interval", "status": "open"},
+    {"id": "F2", "type": "med_resume", "description": "Warfarin resumption after cold snare polypectomy in a high stroke-risk AF patient (CHA2DS2-VASc 4); warfarin was held 5 days pre-procedure", "urgency": "urgent", "expected_action": "confirm warfarin restarted evening of procedure and arrange follow-up INR with anticoagulation clinic within 5-7 days", "status": "open"},
+    {"id": "F3", "type": "complication_watch", "description": "Post-polypectomy delayed bleeding risk elevated by re-anticoagulation with warfarin", "urgency": "routine", "expected_action": "ensure patient has bleeding precautions and knows when to seek care during 14-day post-polypectomy window", "status": "open"},
+    {"id": "F4", "type": "surveillance_interval", "description": "Surveillance interval to be finalized once pathology returns; prior tubular adenomas with LGD plus current polyps may shorten the next interval", "urgency": "routine", "expected_action": "set and document next colonoscopy interval per pathology and polyp count", "status": "open"}
+  ],
+  "post_procedure_followup": {
+    "window": "day 0 to day 14",
+    "channels": ["automated_check_in", "patient_portal_message", "nurse_triage_call"],
+    "_note": "Patient-reported stream after the procedure — the inbound signal the LeftBehind product triages. Each contact is labeled ground truth so triage can be scored. SYNTHETIC.",
+    "contacts": [
+      {
+        "id": "C1",
+        "day": 1,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "My throat feels a bit scratchy and I'm all bloated and windy since yesterday.",
+        "clinical_signal": "Expected post-endoscopy sore throat and insufflation-related bloating/flatus",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; mild throat irritation and gas/bloating are expected and typically resolve within 24-48h. Walking and warm fluids help.",
+        "rationale": "Common benign post-colonoscopy symptoms with no red-flag features; no escalation."
+      },
+      {
+        "id": "C2",
+        "day": 2,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "The nurse said I could start my warfarin again the night of the test, and I did. When will I hear back about the polyps, and is it okay that I'm back on the blood thinner already?",
+        "clinical_signal": "Patient asking about pending pathology and confirming warfarin resumption timing; resumption was per plan (evening of procedure), no bleeding reported",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F1",
+        "expected_action": "Answer from the result: pathology pending (expected ~2026-08-16), GI will call with results and surveillance interval; confirm warfarin resumption the evening of the procedure was correct per plan and remind her the anticoagulation clinic will recheck INR within 5-7 days. Review bleeding precautions.",
+        "rationale": "Answerable from the procedure result and follow-up plan; resumption matches the documented med_resume plan, so this is reassurance/information rather than a med-timing error. Links to pending_pathology (F1)."
+      },
+      {
+        "id": "C3",
+        "day": 5,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "I saw a little streak of pink on the toilet paper once this morning. No dizziness, no real bleeding, everything else feels normal.",
+        "clinical_signal": "Single episode of minor spotting after cold-snare polypectomy of small polyps; no recurrent bleeding, no clots, no hemodynamic symptoms, hemostasis confirmed intraprocedure",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": "F3",
+        "expected_action": "Reassure; scant one-time spotting after small cold-snare polypectomy is common and self-limited. Advise return precautions: seek care for repeated or large-volume red blood, clots, black stools, lightheadedness, or fast/irregular heartbeat, especially while re-anticoagulated.",
+        "rationale": "Triage trap — dangerous-sounding (bleeding on anticoagulation) but benign: a single trace of pink after a clean cold-snare exam with no volume, recurrence, or hemodynamic signal does not meet escalation criteria. Return precautions are reinforced against the F3 delayed-bleeding watch."
+      }
+    ]
+  }
+}

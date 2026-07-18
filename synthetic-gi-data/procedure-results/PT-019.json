@@ -1,0 +1,112 @@
+{
+  "id": "gi-synth-0019::proc-result",
+  "_synthetic": true,
+  "_note": "MOCK procedure result. No real patient. For PreChart development/eval. Result of the urgent EGD PT-019 was referred for.",
+  "patient_id": "gi-synth-0019",
+  "procedure": {
+    "name": "Esophagogastroduodenoscopy (EGD)",
+    "code": {"system": "http://snomed.info/sct", "code": "386814006", "display": "Upper gastrointestinal endoscopy (procedure)"},
+    "date": "2026-07-22T09:10:00-07:00",
+    "indication": "Suspected upper GI bleed (single coffee-ground emesis, now resolved) in an 84-year-old on a DOAC with recent OTC NSAID use; interval hemoglobin decrease 11.8 to 11.2 g/dL",
+    "sedation": "Monitored anesthesia care (propofol), anesthesiologist-directed given age 84, mild dementia, and CKD",
+    "prep_quality": "NPO >8 hours; adequate mucosal visualization after clearing residual coffee-ground material in the gastric body",
+    "extent_reached": "Second portion of the duodenum (D2)",
+    "withdrawal_time_min": null,
+    "status": "completed"
+  },
+  "procedure_report": "PROCEDURE: Esophagogastroduodenoscopy. INDICATION: suspected UGIB (single coffee-ground emesis, resolved) in an 84-year-old on rivaroxaban with recent daily OTC ibuprofen; interval Hgb decrease. ANTICOAGULATION: rivaroxaban held for 4 days pre-procedure after last dose 2026-07-18 (renal dosing 15 mg daily per cardiology, CKD stage 3); no bridging given afib with acceptable interim risk. SEDATION: MAC/propofol. FINDINGS: The esophagus was normal with a normal Z-line, no esophagitis or varices. In the gastric antrum along the greater curvature there was a single 12 mm ulcer with a discrete adherent pigmented spot at one margin (Forrest IIc); no active bleeding, no visible vessel, and no adherent clot. Surrounding mucosa showed erythematous, erosive gastropathy consistent with NSAID injury. Cold-forceps biopsies were taken from the ulcer margin (malignancy exclusion) and separately from the gastric antrum/body for H. pylori. The duodenal bulb and second portion were normal. No stigmata of recent bleeding beyond the antral ulcer. IMPRESSION: 12 mm benign-appearing antral ulcer, Forrest IIc (adherent pigmented spot, low rebleeding risk), with diffuse NSAID-associated erosive gastropathy — likely culprit for the coffee-ground emesis. No high-risk stigmata requiring endoscopic hemostasis. Ulcer-edge and H. pylori biopsies pending.",
+  "findings": [
+    {"finding": "12 mm gastric ulcer with a marginal adherent pigmented spot (Forrest IIc), no active bleeding and no visible vessel", "location": "gastric antrum, greater curvature", "size_mm": 12, "action_taken": "ulcer-margin biopsies for malignancy exclusion; no endoscopic hemostasis required", "specimen": "A"},
+    {"finding": "Erosive, erythematous gastropathy consistent with NSAID injury", "location": "gastric antrum and body", "action_taken": "biopsies for H. pylori", "specimen": "B"},
+    {"finding": "Normal esophagus, no varices or esophagitis", "location": "esophagus", "action_taken": "none"},
+    {"finding": "Normal duodenal bulb and second portion", "location": "duodenum", "action_taken": "none"}
+  ],
+  "specimens": [
+    {"id": "A", "site": "gastric antral ulcer margin", "type": "cold-forceps biopsy (malignancy exclusion)"},
+    {"id": "B", "site": "gastric antrum/body", "type": "cold-forceps biopsy (H. pylori)"}
+  ],
+  "pathology": {"status": "pending", "expected_back": "2026-07-27", "report": null, "diagnosis": null, "actionable": null},
+  "complications": [],
+  "disposition": "Recovered from MAC without incident; hemodynamically stable. Discharged home same day with daughter (escort/collateral). Continue high-dose PPI (pantoprazole 40 mg twice daily). Ibuprofen and all NSAIDs to remain stopped permanently. Rivaroxaban to remain HELD pending GI/cardiology coordination. Return precautions (hematemesis, melena, lightheadedness) reviewed with daughter.",
+  "followup": [
+    {"recommendation": "Review gastric ulcer-margin biopsy pathology to exclude gastric malignancy; call patient/daughter with result", "timeframe": "within 1 week", "owner": "GI", "status": "open"},
+    {"recommendation": "Review H. pylori biopsy result; if positive, treat with renal-adjusted eradication regimen and confirm eradication after therapy", "timeframe": "within 1 week", "owner": "GI", "status": "open"},
+    {"recommendation": "Determine timing of rivaroxaban resumption after NSAID-ulcer bleed; coordinate with cardiology given atrial fibrillation, CKD stage 3, and renal dose (15 mg daily, not charted 20 mg)", "timeframe": "within 3-5 days", "owner": "GI / Cardiology", "status": "open"},
+    {"recommendation": "Continue high-dose PPI; repeat EGD in 8-12 weeks to confirm gastric ulcer healing (mandatory for gastric ulcers)", "timeframe": "8-12 weeks", "owner": "GI", "status": "open"},
+    {"recommendation": "Ensure NSAIDs remain permanently discontinued; document on medication list and counsel daughter on alternative analgesia for knee pain", "timeframe": "ongoing", "owner": "GI / PCP", "status": "open"},
+    {"recommendation": "Recheck CBC to confirm hemoglobin stability off anticoagulation", "timeframe": "within 1 week", "owner": "GI / PCP", "status": "open"}
+  ],
+  "planted_followup_items": [
+    {"id": "F1", "type": "pending_pathology", "description": "Gastric antral ulcer-margin biopsy pending to exclude gastric malignancy — every gastric ulcer requires histologic malignancy exclusion and the result must be communicated and reconciled", "urgency": "urgent", "expected_action": "review path, call patient/daughter with result, exclude malignancy, document", "status": "open"},
+    {"id": "F2", "type": "pending_pathology", "description": "H. pylori biopsy result pending — positive result requires renal-adjusted eradication therapy and post-treatment confirmation of eradication", "urgency": "routine", "expected_action": "review H. pylori result; if positive, prescribe eradication regimen and schedule test-of-cure", "status": "open"},
+    {"id": "F3", "type": "med_resume", "description": "Rivaroxaban resumption decision after a documented NSAID/DOAC-associated ulcer bleed in an anticoagulated afib patient — held peri-procedure, must be actively coordinated with cardiology and not silently dropped", "urgency": "critical", "expected_action": "GI/cardiology jointly set safe resumption timing at correct renal dose (15 mg daily)", "status": "open"},
+    {"id": "F4", "type": "repeat_procedure", "description": "Repeat EGD in 8-12 weeks to confirm gastric ulcer healing (standard of care for gastric ulcers)", "urgency": "routine", "expected_action": "schedule surveillance EGD to document healing", "status": "open"},
+    {"id": "F5", "type": "med_reconciliation", "description": "Rivaroxaban dose reconciliation — chart still lists stale 20 mg; correct active dose is 15 mg daily (CKD renal reduction). Wrong dose on resumption drives bleeding risk", "urgency": "urgent", "expected_action": "update medication list to rivaroxaban 15 mg daily and ensure resumption uses correct dose", "status": "open"},
+    {"id": "F6", "type": "referral", "description": "Cardiology coordination for periprocedural/post-bleed anticoagulation management in afib + CKD stage 3", "urgency": "urgent", "expected_action": "cardiology consult/communication to finalize anticoagulation plan", "status": "open"},
+    {"id": "F7", "type": "complication_watch", "description": "Rebleeding surveillance after Forrest IIc ulcer off anticoagulation — recheck CBC and monitor for hematemesis/melena", "urgency": "urgent", "expected_action": "recheck CBC within 1 week; ED return precautions reviewed with daughter", "status": "open"},
+    {"id": "F8", "type": "med_reconciliation", "description": "Permanent NSAID discontinuation and alternative analgesia for chronic knee pain (undocumented OTC ibuprofen was the likely mucosal culprit) — do-not-resume/avoid guidance to be recorded on the medication list", "urgency": "routine", "expected_action": "confirm NSAIDs stopped on medication list; PCP to arrange non-NSAID knee analgesia", "status": "open"}
+  ],
+  "post_procedure_followup": {
+    "window": "day 0 to day 14",
+    "channels": ["automated_check_in", "patient_portal_message", "nurse_triage_call"],
+    "_note": "Patient-reported stream after the procedure — the inbound signal the LeftBehind product triages. Each contact is labeled ground truth so triage can be scored. Synthetic; no real patient.",
+    "contacts": [
+      {
+        "id": "C1",
+        "day": 1,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "My throat feels a little scratchy and I'm kind of burpy and bloated since the camera test. Is that normal?",
+        "clinical_signal": "Expected post-EGD sore throat and insufflation bloating",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; mild sore throat and bloating/gas are expected after EGD and settle within 24-48h. Warm fluids, lozenges as needed.",
+        "rationale": "Common benign post-endoscopy symptoms with no red-flag features; no escalation."
+      },
+      {
+        "id": "C2",
+        "day": 3,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "When will we hear back about the biopsies you took from her stomach? Her daughter is asking.",
+        "clinical_signal": "Family asking about pending gastric biopsy pathology (malignancy exclusion + H. pylori)",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F1",
+        "expected_action": "Answer from the result: ulcer-margin and H. pylori biopsies pending, expected back ~2026-07-27; GI will call the daughter with the result and next steps once resulted.",
+        "rationale": "Answerable from the procedure result and follow-up plan; maps to the pending_pathology item F1."
+      },
+      {
+        "id": "C3",
+        "day": 5,
+        "channel": "nurse_triage_call",
+        "type": "question",
+        "verbatim": "I found Mom's old rivaroxaban bottle — it says 20 milligrams. Should I start giving it to her again now that the scope is done?",
+        "clinical_signal": "Caregiver about to resume anticoagulation prematurely and at the stale (wrong) dose",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F5",
+        "expected_action": "Counsel: do NOT resume rivaroxaban yet — it is intentionally held pending GI/cardiology coordination after the ulcer bleed. The correct dose is 15 mg daily (not 20 mg); discard/ignore the old 20 mg bottle. GI/cardiology will confirm the safe restart date and dose.",
+        "rationale": "Med-timing/dose confusion trap: a benign-sounding logistics question that, if unaddressed, leads to early resumption at the wrong (higher) dose and rebleeding risk. Maps to dose-reconciliation item F5 (and the held-med resumption pathway F3)."
+      },
+      {
+        "id": "C4",
+        "day": 8,
+        "channel": "patient_portal_message",
+        "type": "complication",
+        "verbatim": "She threw up some dark blood this morning and her stool was black and tarry. She seems weak and a bit dizzy when she stands up.",
+        "clinical_signal": "Recurrent hematemesis + melena with orthostatic symptoms — ulcer rebleed",
+        "red_flag": true,
+        "ground_truth_disposition": "escalate",
+        "urgency": "emergent",
+        "links_followup_item": "F7",
+        "expected_action": "Escalate for immediate ED evaluation; anticipate repeat EGD for hemostasis, keep rivaroxaban held, check CBC/type-and-screen, resuscitate as needed.",
+        "rationale": "Delayed rebleeding from the antral ulcer with a hemodynamic symptom in an elderly patient is a genuine red-flag complication requiring emergent action; maps to rebleeding-surveillance item F7."
+      }
+    ]
+  }
+}
