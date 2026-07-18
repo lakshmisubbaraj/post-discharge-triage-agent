@@ -45,40 +45,115 @@ Every stubbed section is labeled in the UI itself (yellow "stubbed" tags) so
 it's obvious to anyone reviewing the demo what's real data vs. placeholder
 logic.
 
-## Wiring in the real Claude API
+## The backend (Flask API)
 
-Two things need to happen to make this real, both intentionally **not**
-included yet:
+A small Flask + SQLAlchemy service now lives at the project root. It moves the
+triage logic off the browser and behind an API, which is the prerequisite for
+using real Claude: the Anthropic key must stay server-side, never in browser
+JavaScript where anyone viewing the page source could read it.
 
-1. **A small backend.** Never call the Anthropic API directly from browser
-   JavaScript — your API key would be visible to anyone who views the page
-   source. Add a minimal Flask/FastAPI (Python) or Express (Node) server with
-   one or two endpoints, e.g.:
-   - `POST /api/triage` — takes a transcript + patient FHIR context, calls
-     Claude with a structured prompt, returns `{ severity, label, rationale,
-     flags }` (same shape `analyzeTranscript()` returns today, so the
-     frontend barely has to change).
-   - `POST /api/draft-note` — takes the same inputs, returns a drafted note.
+**How it's designed.** The backend follows the standard Flask *application
+factory* pattern, with three responsibilities cleanly separated:
 
-   Store the key in a `.env` file (already excluded via `.gitignore` below),
-   load it with `python-dotenv`, and have the frontend `fetch()` your own
-   backend instead of running `analyzeTranscript()`/`draftNote()` locally.
+- **Models (`models.py`)** — SQLAlchemy tables for the domain:
+  `Patient → Encounter → CheckIn → TriageResult`. A patient has a discharge
+  encounter (diagnosis, comorbidities, meds), each encounter has a check-in
+  "call" (a speaker-labeled transcript), and each check-in produces one triage
+  result (severity, label, rationale, flags, and the drafted note). Transcripts
+  and list fields are stored as JSON columns so the shapes match what the
+  frontend already consumes.
+- **Services (`services/triage_service.py`)** — the business logic. This is the
+  server-side home of the two "agents" the browser currently stubs:
+  `analyze_transcript()` (Agent 2, triage scoring) and `draft_note()` (Agent 3,
+  note drafting). The scoring still uses the same keyword rules as the mockup —
+  including the rule that **only PATIENT/FAMILY lines are scored, never the
+  agent's own questions** — but it now sits behind a clean function boundary.
+  `analyze_transcript_with_claude()` is the marked seam where the real
+  Anthropic call drops in, returning the identical JSON shape so nothing
+  upstream changes.
+- **Routes (`routes/tool.py`)** — the HTTP endpoints the frontend (or an agent)
+  calls as tools. These return the same JSON the browser stubs produce today,
+  so the frontend can swap its local `analyzeTranscript()`/`draftNote()` calls
+  for `fetch()` calls with almost no other change.
 
-2. **A structured prompt** that gives Claude the transcript plus the
-   patient's `patient_context` and `encounter_fhir` from the dataset, and
-   asks for the same JSON shape currently hardcoded — this is where using
-   Claude actually pays off over keyword matching: it can understand
-   negation ("no chest pain" vs. chest pain), severity language in context,
-   and reason about a patient's specific comorbidities rather than matching
-   fixed phrases.
+Configuration (`config.py`) is environment-driven and loads secrets from
+`.env` via `python-dotenv`; `extensions.py` holds the shared SQLAlchemy
+instance so models and the app factory can import it without a circular
+dependency. `seed_data.py` populates the database with the same 5 demo patients
+described above, running the triage + note logic at seed time so the queue is
+precomputed.
+
+### Endpoints
+
+| Method | Path | Purpose |
+|---|---|---|
+| GET | `/` | lists the available endpoints |
+| GET | `/health` | liveness check |
+| GET | `/api/patients` | care-team queue, ranked 🔴 → 🟠 → 🟡 → 🟢 |
+| GET | `/api/patients/<slug>` | one patient + encounter + transcript + triage result |
+| POST | `/api/triage` | score a transcript → `{ severity, label, rationale, flags }` |
+| POST | `/api/draft-note` | draft a chart note from context + disposition |
+
+### Running the backend
+
+From the project root (no `cd` needed):
+
+```
+pip install -r requirements.txt   # Flask, Flask-SQLAlchemy, python-dotenv, etc.
+python seed_data.py               # creates + populates triage.db with the 5 demo patients
+python app.py                     # serves on http://127.0.0.1:5001
+```
+
+Then open `http://127.0.0.1:5001/api/patients` to see the ranked queue as JSON.
+Run the test suite with `pytest`.
+
+The Anthropic key lives in `.env` (gitignored) and is read by `config.py` — the
+frontend never sees it.
+
+## Making it real with Claude
+
+To swap the stub for a real Claude call:
+
+1. **Implement `analyze_transcript_with_claude()`** in
+   `services/triage_service.py` against the Anthropic Messages API, using the
+   prompts in `PROMPTS.md` and tool-use / structured output. Keep the return
+   shape identical to `analyze_transcript()` so the routes, models, and
+   frontend are unaffected.
+2. **Point the frontend at the API.** Replace the browser's local
+   `analyzeTranscript()`/`draftNote()` calls with `fetch()` calls to
+   `POST /api/triage` and `POST /api/draft-note`.
+
+This is where Claude earns its keep over keyword matching: understanding
+negation ("no chest pain" vs. chest pain), reading severity language in
+context, and reasoning about a patient's specific comorbidities rather than
+matching fixed phrases.
 
 ## Folder structure
 
 ```
 post-discharge-triage-agent/
-├── index.html      # the mockup — open directly in a browser
-├── README.md        # this file
-└── .gitignore        # excludes .env, venv/, node_modules/, etc. once you add a backend
+├── index.html            # the frontend mockup — open directly in a browser
+├── app.py                # Flask app factory, DB setup, root/health routes
+├── config.py             # env-driven config (loads .env; holds ANTHROPIC_API_KEY server-side)
+├── extensions.py         # shared SQLAlchemy instance (avoids circular imports)
+├── models.py             # SQLAlchemy models: Patient / Encounter / CheckIn / TriageResult
+├── routes/
+│   ├── __init__.py
+│   └── tool.py           # the agent-callable API endpoints (/api/*)
+├── services/
+│   ├── __init__.py
+│   └── triage_service.py # triage scoring + note drafting (real-Claude seam here)
+├── tests/
+│   ├── __init__.py
+│   └── test_app.py       # pytest suite for services + endpoints
+├── seed_data.py          # populates the DB with the 5 FHIR-grounded demo patients
+├── test_agents.py        # standalone smoke test hitting the real Anthropic API
+├── PROMPTS.md            # canonical prompts + tool schemas for the 3 agents
+├── DESIGN.md             # full narrative design doc
+├── requirements.txt
+├── .env.example          # copy to .env and add your ANTHROPIC_API_KEY
+├── .gitignore            # excludes .env, venv/, __pycache__/, *.db, etc.
+└── README.md             # this file
 ```
 
 ## Data note

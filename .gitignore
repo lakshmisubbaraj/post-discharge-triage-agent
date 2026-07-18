@@ -8,6 +8,11 @@ venv/
 __pycache__/
 *.pyc
 .mypy_cache/
+.pytest_cache/
+
+# Local database
+*.db
+*.sqlite3
 
 # Node
 node_modules/
