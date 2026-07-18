@@ -97,6 +97,21 @@ DEMO_PATIENTS = [
         ],
     },
     {
+        # GI-dataset patient (synthetic-gi-data/procedure-results/PT-004.json)
+        # for the voice-agent demo: no transcript seeded — his check-in happens
+        # live through the widget, which passes this context to the agent.
+        "slug": "robert",
+        "name": "Robert N.",
+        "age": 67,
+        "gender": "male",
+        "phone": "+16782217469",
+        "discharge_dx": "Surveillance colonoscopy (prior sessile serrated lesion) with cold snare polypectomy (5mm transverse)",
+        "history": ["Prior sessile serrated lesion (2023)", "Essential hypertension"],
+        "meds": ["Amlodipine 5mg", "Fish oil (OTC)"],
+        "days_since_discharge": 12,
+        "transcript": None,
+    },
+    {
         # Dummy patient for the live-call demo: no transcript seeded — her
         # check-in happens through the Call button (ElevenLabs or simulated).
         "slug": "hannah",

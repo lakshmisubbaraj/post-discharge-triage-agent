@@ -279,12 +279,68 @@ const API_BASE = "http://127.0.0.1:5001";
 
 let patients = [];   // populated from the API, already severity-ranked
 let activeId = null;
+let appConfig = { widgetEnabled: false, elevenlabsAgentId: null };
+
+async function loadConfig() {
+  try {
+    const res = await fetch(`${API_BASE}/api/config`);
+    if (res.ok) appConfig = await res.json();
+  } catch (e) { /* config is optional; simulated call still works */ }
+  // Load the ElevenLabs widget script + a persistent widget element once, if a
+  // voice agent is configured. Creating it up front (not on click) means the
+  // custom element is already "upgraded" by the time the user clicks, so
+  // startConversation() runs synchronously inside the click and the browser
+  // allows the microphone prompt.
+  if (appConfig.widgetEnabled && !document.getElementById("convai-script")) {
+    const s = document.createElement("script");
+    s.id = "convai-script";
+    s.src = "https://unpkg.com/@elevenlabs/convai-widget-embed";
+    s.async = true;
+    s.type = "text/javascript";
+    document.body.appendChild(s);
+
+    convaiWidget = document.createElement("elevenlabs-convai");
+    convaiWidget.id = "convai-widget";
+    convaiWidget.setAttribute("agent-id", appConfig.elevenlabsAgentId);
+    convaiWidget.setAttribute("action-text", "Initiate sample call to patient");
+    convaiWidget.setAttribute("start-call-text", "Initiate sample call to patient");
+    document.body.appendChild(convaiWidget);
+
+    // Inject the selected patient's clinical background as dynamic variables
+    // right before the call connects. The agent's prompt/first-message can then
+    // reference {{patient_name}}, {{discharge_dx}}, {{history}}, {{meds}},
+    // {{days_since_discharge}}, {{age}}, {{gender}} to ask condition-specific
+    // questions. This event fires before the connection is established.
+    convaiWidget.addEventListener("elevenlabs-convai:call", (event) => {
+      const p = patients.find(x => x.id === (widgetActiveId || activeId));
+      if (!p) return;
+      const vars = {
+        patient_name: p.name || "",
+        age: String(p.age ?? ""),
+        gender: p.gender || "",
+        discharge_dx: p.dischargeDx || "",
+        history: (p.history || []).join(", "),
+        meds: (p.meds || []).join(", "),
+        days_since_discharge: String(p.daysSinceDischarge ?? ""),
+      };
+      event.detail.config = event.detail.config || {};
+      event.detail.config.dynamicVariables = vars;
+    });
+
+    // When the ElevenLabs conversation ends (via the widget's own End button),
+    // pull the transcript and run triage for whoever's call is active.
+    convaiWidget.addEventListener("conversationEnded", () => {
+      if (widgetActiveId) finishWidgetCall(widgetActiveId);
+    });
+  }
+}
 
 async function loadPatients() {
   const detailEl = document.getElementById("detail-panel");
   const queueEl = document.getElementById("queue-list");
   detailEl.innerHTML = `<div class="loading">Loading patients from the API…</div>`;
   try {
+    await loadConfig();
     const res = await fetch(`${API_BASE}/api/patients`);
     if (!res.ok) throw new Error(`API returned HTTP ${res.status}`);
     patients = await res.json();
@@ -345,11 +401,20 @@ function renderDetail() {
   const r = p.triage;
   const inProgress = p.callStatus === "in_progress";
 
-  const headBadge = r
-    ? `<span class="badge ${r.severity}" style="font-size:13px;padding:6px 14px;">${r.label}</span>`
-    : `<button class="call-btn" id="call-btn" onclick="startCall('${p.id}')" ${inProgress ? "disabled" : ""}>
-         📞 ${inProgress ? "Call in progress…" : "Start check-in call"}
-       </button>`;
+  let headBadge;
+  if (r) {
+    headBadge = `<span class="badge ${r.severity}" style="font-size:13px;padding:6px 14px;">${r.label}</span>`;
+  } else if (inProgress) {
+    headBadge = `<button class="call-btn" disabled>📞 Call in progress…</button>`;
+  } else if (appConfig.widgetEnabled) {
+    // Real voice conversation in the browser (no phone number needed).
+    headBadge = `<button class="call-btn" id="call-btn" onclick="startWidgetCall('${p.id}')">🎙️ Talk to the agent</button>
+       <div style="margin-top:6px;font-size:11.5px;">
+         <a href="#" onclick="startCall('${p.id}');return false;" style="color:var(--muted);">or run a simulated call</a>
+       </div>`;
+  } else {
+    headBadge = `<button class="call-btn" id="call-btn" onclick="startCall('${p.id}')">📞 Start check-in call</button>`;
+  }
 
   const flags = r ? r.flags : [];
   const transcriptHtml = (p.transcript || []).map(([who, line]) => {
@@ -357,13 +422,15 @@ function renderDetail() {
     return `<div class="line"><span class="who ${cls}">${who}:</span>${highlight(line, flags)}</div>`;
   }).join("");
 
+  const modeTag = {
+    simulated: `<span class="stub-tag">simulated call — add ElevenLabs keys for a real one</span>`,
+    live: `<span class="stub-tag">live phone call via ElevenLabs</span>`,
+    widget: `<span class="stub-tag">live voice call via ElevenLabs widget</span>`,
+    widget_sim: `<span class="stub-tag">voice widget (transcript simulated — add API key for the real one)</span>`,
+  };
   const transcriptTag = inProgress
-    ? `<span class="live-tag">● LIVE — transcribing</span>`
-    : (p.callMode === "simulated"
-        ? `<span class="stub-tag">simulated call — add ElevenLabs keys for a real one</span>`
-        : (p.callMode === "live"
-            ? `<span class="stub-tag">live call via ElevenLabs</span>`
-            : `<span class="stub-tag">stubbed — hand-written for demo</span>`));
+    ? `<span class="live-tag">● LIVE — on the call</span>`
+    : (modeTag[p.callMode] || `<span class="stub-tag">stubbed — hand-written for demo</span>`);
 
   const transcriptSection = (p.transcript && p.transcript.length)
     ? `<div class="section">
@@ -374,9 +441,17 @@ function renderDetail() {
          <div class="section-title">Check-in call transcript</div>
          <div class="call-placeholder">
            ${inProgress
-             ? "📞 Dialing… waiting for the conversation to start."
+             ? (p.callMode === "widget"
+                 ? `🎙️ On the call — talk to the agent out loud. If no microphone prompt
+                    appeared, click the ElevenLabs orb in the bottom-right corner and press
+                    <b>Start</b> (allow the mic when asked).<br/><br/>
+                    When you've finished the conversation, end it in the widget — or click here:
+                    <br/><button class="call-btn" style="margin-top:10px" onclick="finishWidgetCall('${p.id}')">✓ Finish &amp; get transcript</button>`
+                 : "📞 Dialing… waiting for the conversation to start.")
              : `No check-in call yet. ${p.phone ? `Patient's phone: <b>${p.phone}</b>.` : ""}
-                Press <b>Start check-in call</b> to begin — the transcript will appear here live.`}
+                ${appConfig.widgetEnabled
+                  ? "Press <b>Talk to the agent</b> to start a live voice conversation in your browser."
+                  : "Press <b>Start check-in call</b> to begin — the transcript will appear here live."}`}
          </div>
        </div>`;
 
@@ -402,7 +477,7 @@ function renderDetail() {
         <div class="tag-row">${p.history.map(h => `<span class="tag">${h}</span>`).join("")}</div>
         <div class="tag-row">${p.meds.map(m => `<span class="tag">💊 ${m}</span>`).join("")}</div>
       </div>
-      ${headBadge}
+      <div style="text-align:right">${headBadge}</div>
     </div>
     ${transcriptSection}
     ${triageSection}
@@ -421,6 +496,57 @@ function renderDetail() {
 // queue re-ranks.
 // ---------------------------------------------------------------------------
 let pollTimer = null;
+let convaiWidget = null;
+let widgetActiveId = null;   // patient whose widget call is in progress
+
+// --- Real voice conversation via the ElevenLabs browser widget ------------
+function startWidgetCall(id) {
+  // IMPORTANT: call startConversation() synchronously here, inside the click,
+  // so the browser still treats it as a user gesture and shows the mic prompt.
+  // Do NOT await anything before this line.
+  if (convaiWidget && typeof convaiWidget.startConversation === "function") {
+    try { convaiWidget.startConversation(); } catch (e) { /* widget UI still clickable */ }
+  }
+
+  widgetActiveId = id;
+  const p = patients.find(x => x.id === id);
+  p.callStatus = "in_progress";
+  p.callMode = "widget";
+  renderQueue(); renderDetail();
+
+  // Tell the backend a widget call has started (non-blocking).
+  fetch(`${API_BASE}/api/patients/${id}/call/widget`, { method: "POST" })
+    .catch(() => { /* the call still works; we just finalize from the transcript later */ });
+}
+
+async function finishWidgetCall(id) {
+  // Poll the finish endpoint until the transcript is processed and triaged.
+  clearInterval(pollTimer);
+  const tick = async () => {
+    try {
+      const res = await fetch(`${API_BASE}/api/patients/${id}/call/widget/finish`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({}),
+      });
+      if (!res.ok) return;
+      const call = await res.json();
+      const p = patients.find(x => x.id === id);
+      p.transcript = call.transcript;
+      p.callStatus = call.status;
+      p.triage = call.triage;
+      if (call.status !== "in_progress") {
+        clearInterval(pollTimer);
+        widgetActiveId = null;
+        await reloadQueue();
+      }
+      if (id === activeId) renderDetail();
+      renderQueue();
+    } catch (e) { /* keep polling */ }
+  };
+  tick();
+  pollTimer = setInterval(tick, 2000);
+}
 
 async function startCall(id) {
   const btn = document.getElementById("call-btn");

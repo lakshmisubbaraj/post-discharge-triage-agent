@@ -59,11 +59,56 @@ SIMULATED_TRANSCRIPT = [
 
 
 def elevenlabs_configured() -> bool:
+    """True when a real outbound *phone* call is possible (needs a number)."""
     cfg = current_app.config
     return all(
         cfg.get(k)
         for k in ("ELEVENLABS_API_KEY", "ELEVENLABS_AGENT_ID", "ELEVENLABS_PHONE_NUMBER_ID")
     )
+
+
+def widget_enabled() -> bool:
+    """True when the in-browser voice widget can run (just needs an agent id).
+
+    No phone number or carrier required — the widget talks through the
+    browser mic/speakers.
+    """
+    return bool(current_app.config.get("ELEVENLABS_AGENT_ID"))
+
+
+def _fetch_conversation(conversation_id: str):
+    """GET a single ElevenLabs conversation (transcript + status)."""
+    cfg = current_app.config
+    resp = requests.get(
+        f"{ELEVENLABS_BASE}/v1/convai/conversations/{conversation_id}",
+        headers={"xi-api-key": cfg["ELEVENLABS_API_KEY"]},
+        timeout=10,
+    )
+    resp.raise_for_status()
+    return resp.json()
+
+
+def _latest_conversation_id() -> str | None:
+    """Most recent conversation for our agent (used when the widget doesn't
+    hand us a conversation id directly)."""
+    cfg = current_app.config
+    resp = requests.get(
+        f"{ELEVENLABS_BASE}/v1/convai/conversations",
+        headers={"xi-api-key": cfg["ELEVENLABS_API_KEY"]},
+        params={"agent_id": cfg["ELEVENLABS_AGENT_ID"], "page_size": 1},
+        timeout=10,
+    )
+    resp.raise_for_status()
+    convos = resp.json().get("conversations") or []
+    return convos[0].get("conversation_id") if convos else None
+
+
+def _map_transcript(raw) -> list[list[str]]:
+    return [
+        ["AGENT" if t.get("role") == "agent" else "PT", t.get("message") or ""]
+        for t in (raw or [])
+        if t.get("message")
+    ]
 
 
 def _build_agent_prompt(patient, encounter) -> str:
@@ -207,3 +252,90 @@ def refresh_live_call(check_in: CheckIn) -> CheckIn:
         db.session.commit()
 
     return check_in
+
+
+# ---------------------------------------------------------------------------
+# Browser voice widget (no phone number needed)
+# ---------------------------------------------------------------------------
+
+def start_widget_call(patient) -> CheckIn:
+    """Open a check-in for a browser-widget voice conversation.
+
+    The actual voice happens client-side in the ElevenLabs widget; we just
+    track the check-in and, when the frontend reports the call ended, pull the
+    transcript and run triage.
+    """
+    encounter = patient.encounters[0]
+    check_in = CheckIn(status="in_progress", mode="widget", transcript=[])
+    encounter.check_ins.append(check_in)
+    db.session.commit()
+    return check_in
+
+
+def finalize_widget_call(check_in: CheckIn, conversation_id: str | None = None):
+    """Pull the widget conversation's transcript and run triage.
+
+    Returns the check_in. If ElevenLabs credentials aren't available (or the
+    transcript can't be fetched yet), falls back to the simulated transcript so
+    the demo still completes. If the real conversation is still processing,
+    leaves the check-in in_progress so the frontend keeps polling.
+    """
+    if check_in.status == "completed":
+        return check_in
+
+    cfg = current_app.config
+    api_key = cfg.get("ELEVENLABS_API_KEY")
+
+    # No API key → we can't read the real transcript. Use the canned one so
+    # the pipeline (triage + note + queue) still demonstrably runs.
+    if not api_key:
+        check_in.transcript = SIMULATED_TRANSCRIPT
+        check_in.mode = "widget_sim"
+        finalize_call(check_in.id)
+        return db.session.get(CheckIn, check_in.id)
+
+    try:
+        cid = conversation_id or check_in.conversation_id or _latest_conversation_id()
+        if not cid:
+            return check_in  # nothing to read yet; keep polling
+        check_in.conversation_id = cid
+        data = _fetch_conversation(cid)
+    except requests.RequestException:
+        return check_in  # transient; frontend will poll again
+
+    status = data.get("status")
+    transcript = _map_transcript(data.get("transcript"))
+    if transcript:
+        check_in.transcript = transcript
+        db.session.commit()
+
+    if status == "done":
+        finalize_call(check_in.id)
+    elif status == "failed":
+        check_in.status = "failed"
+        db.session.commit()
+    return db.session.get(CheckIn, check_in.id)
+
+
+def finalize_call(check_in_id: int):
+    """Run Agent 2 (triage) + Agent 3 (note) on the final transcript."""
+    check_in = db.session.get(CheckIn, check_in_id)
+    if check_in is None or check_in.triage_result is not None:
+        return
+
+    encounter = check_in.encounter
+    patient = encounter.patient
+
+    analysis = triage_service.analyze_transcript(check_in.transcript or [])
+    note = triage_service.draft_note(
+        patient.to_dict(), encounter.to_dict(), analysis
+    )
+    check_in.triage_result = TriageResult(
+        severity=analysis["severity"],
+        label=analysis["label"],
+        rationale=analysis["rationale"],
+        flags=analysis["flags"],
+        note=note,
+    )
+    check_in.status = "completed"
+    db.session.commit()

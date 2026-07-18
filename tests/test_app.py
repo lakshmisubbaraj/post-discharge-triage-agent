@@ -82,12 +82,13 @@ def test_list_patients_ranked(client):
     resp = client.get("/api/patients")
     assert resp.status_code == 200
     data = resp.get_json()
-    assert len(data) == 6
+    assert len(data) == 7
     # Ariane (red) should surface first.
     assert data[0]["id"] == "ariane"
     assert data[0]["triage"]["severity"] == "red"
-    # Hannah (not yet called, no triage) should trail the ranked patients.
-    assert data[-1]["id"] == "hannah"
+    # Not-yet-called patients (Robert, Hannah) trail the ranked patients.
+    trailing = {p["id"] for p in data[-2:]}
+    assert trailing == {"robert", "hannah"}
 
 
 def test_get_single_patient(client):
@@ -103,16 +104,17 @@ def test_get_unknown_patient_404(client):
     assert resp.status_code == 404
 
 
-def test_triage_endpoint(client):
+def test_triage_endpoint_requires_patient_slug(client):
+    # /triage now calls the real Claude agent grounded in the patient's FHIR
+    # record, so it needs a patient id (slug). Validation is testable offline.
     resp = client.post("/api/triage", json={
         "transcript": [["PT", "I have chest pain."]],
     })
-    assert resp.status_code == 200
-    assert resp.get_json()["severity"] == "red"
+    assert resp.status_code == 400
 
 
 def test_triage_endpoint_requires_transcript(client):
-    resp = client.post("/api/triage", json={})
+    resp = client.post("/api/triage", json={"patient": {"id": "hannah"}})
     assert resp.status_code == 400
 
 
@@ -167,13 +169,53 @@ def test_call_unknown_patient_404(client):
     assert client.post("/api/patients/nobody/call").status_code == 404
 
 
-def test_draft_note_endpoint(client):
+def test_config_endpoint(client):
+    resp = client.get("/api/config")
+    assert resp.status_code == 200
+    body = resp.get_json()
+    # TestConfig has no ElevenLabs creds, so both call-out modes are off.
+    assert body["widgetEnabled"] is False
+    assert body["phoneCallEnabled"] is False
+    assert body["elevenlabsAgentId"] is None
+
+
+def test_widget_call_finish_fallback(client):
+    """Without an API key, finishing a widget call falls back to the simulated
+    transcript so triage still runs end-to-end."""
+    start = client.post("/api/patients/hannah/call/widget")
+    assert start.status_code == 201
+    assert start.get_json()["checkInId"]
+
+    finish = client.post("/api/patients/hannah/call/widget/finish", json={})
+    assert finish.status_code == 200
+    body = finish.get_json()
+    assert body["status"] == "completed"
+    assert body["mode"] == "widget_sim"
+    assert len(body["transcript"]) > 0
+    assert body["triage"]["severity"] == "yellow"
+
+
+def test_widget_finish_without_start_400(client):
+    # Ariane's latest check-in is a seeded demo, not a widget call.
+    resp = client.post("/api/patients/ariane/call/widget/finish", json={})
+    assert resp.status_code == 400
+
+
+def test_draft_note_endpoint_with_explicit_triage(client):
+    # Providing the triage result skips the Claude call, exercising the
+    # template-based note drafting deterministically (no API key needed).
     resp = client.post("/api/draft-note", json={
-        "patient": {"name": "Test P.", "age": 60, "gender": "male"},
+        "patient": {"id": "test", "name": "Test P.", "age": 60, "gender": "male"},
         "encounter": {
             "dischargeDx": "Test dx",
             "daysSinceDischarge": 3,
             "transcript": [["PT", "I feel great, no concerns."]],
+        },
+        "triage": {
+            "severity": "green",
+            "label": "Routine follow-up",
+            "rationale": ["No concerns reported."],
+            "flags": [],
         },
     })
     assert resp.status_code == 200

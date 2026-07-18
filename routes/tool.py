@@ -82,6 +82,73 @@ def get_patient(slug):
     return jsonify(_serialize_patient(patient))
 
 
+@bp.get("/config")
+def config():
+    """Public front-end config: which call modes are available and the public
+    ElevenLabs agent id for the browser voice widget."""
+    from flask import current_app
+    return jsonify(
+        elevenlabsAgentId=current_app.config.get("ELEVENLABS_AGENT_ID"),
+        widgetEnabled=call_service.widget_enabled(),
+        phoneCallEnabled=call_service.elevenlabs_configured(),
+    )
+
+
+@bp.post("/patients/<slug>/call/widget")
+def start_widget_call(slug):
+    """Open a browser-widget voice check-in for this patient.
+
+    The frontend then runs the ElevenLabs widget conversation client-side and
+    calls the /finish endpoint when it ends.
+    Returns: { checkInId, agentId }
+    """
+    patient = Patient.query.filter_by(slug=slug).first()
+    if patient is None:
+        return jsonify(error="patient not found"), 404
+    if not patient.encounters:
+        return jsonify(error="patient has no encounter on file"), 400
+
+    existing = _latest_check_in(patient)
+    if existing and existing.status == "in_progress":
+        return jsonify(error="a call is already in progress for this patient"), 409
+
+    from flask import current_app
+    check_in = call_service.start_widget_call(patient)
+    return jsonify(
+        checkInId=check_in.id,
+        agentId=current_app.config.get("ELEVENLABS_AGENT_ID"),
+    ), 201
+
+
+@bp.post("/patients/<slug>/call/widget/finish")
+def finish_widget_call(slug):
+    """Called when the widget conversation ends. Pulls the transcript and runs
+    triage. May be polled: returns status='in_progress' while the transcript
+    is still processing.
+    Body (optional): { conversationId }
+    Returns: { status, transcript, triage? }
+    """
+    patient = Patient.query.filter_by(slug=slug).first()
+    if patient is None:
+        return jsonify(error="patient not found"), 404
+
+    check_in = _latest_check_in(patient)
+    if check_in is None or check_in.mode not in ("widget", "widget_sim"):
+        return jsonify(error="no widget call to finish"), 400
+
+    payload = request.get_json(silent=True) or {}
+    check_in = call_service.finalize_widget_call(
+        check_in, conversation_id=payload.get("conversationId")
+    )
+
+    return jsonify(
+        status=check_in.status,
+        mode=check_in.mode,
+        transcript=check_in.transcript or [],
+        triage=check_in.triage_result.to_dict() if check_in.triage_result else None,
+    )
+
+
 @bp.post("/patients/<slug>/call")
 def start_call(slug):
     """Tool: start a voice check-in call to the patient's phone.
