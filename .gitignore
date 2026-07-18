@@ -24,3 +24,5 @@ npm-debug.log*
 # Editors
 .vscode/
 .idea/
+gi_eval_report.html
+gi_eval_results.json

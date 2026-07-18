@@ -1,4 +1,4 @@
-"""Voice check-in call orchestration.
+"""Voice check-in call orchestration (Agent 1's real-world mechanics only).
 
 Target workflow:
     Call button → ElevenLabs agent dials the patient (via a Twilio number
@@ -20,8 +20,11 @@ Two modes, chosen automatically:
                (live UI updates → triage → note → queue re-rank) can be
                demoed with zero external services.
 
-Either way, when the call completes we run the same Agent 2 (triage) and
-Agent 3 (note) logic on the final transcript and persist a TriageResult.
+This file only owns the call itself — dialing/simulating, polling, and
+streaming the transcript into the DB. Once a call ends, it hands off to
+services/pipeline_service.finalize_call(), which runs Agent 2 (triage) then
+Agent 3 (note) in sequence and persists the TriageResult. That hand-off is
+intentionally not implemented in this file — see pipeline_service.py.
 """
 from __future__ import annotations
 
@@ -32,8 +35,8 @@ import requests
 from flask import current_app
 
 from extensions import db
-from models import CheckIn, TriageResult
-from services import triage_service
+from models import CheckIn
+from services import pipeline_service
 
 ELEVENLABS_BASE = "https://api.elevenlabs.io"
 
@@ -139,7 +142,8 @@ def _start_elevenlabs_call(patient, encounter, check_in):
 
 
 def _start_simulated_call(check_in_id: int):
-    """Stream the canned transcript into the DB, then finalize.
+    """Stream the canned transcript into the DB, then hand off to the
+    triage/note pipeline.
 
     delay==0 (tests) runs synchronously; otherwise a daemon thread paces the
     lines so the UI's polling visibly updates live.
@@ -156,7 +160,7 @@ def _start_simulated_call(check_in_id: int):
                 # Reassign (not append) so SQLAlchemy detects the JSON change.
                 check_in.transcript = SIMULATED_TRANSCRIPT[: i + 1]
                 db.session.commit()
-            finalize_call(check_in_id)
+            pipeline_service.finalize_call(check_in_id)
 
     if delay == 0:
         run()
@@ -165,7 +169,7 @@ def _start_simulated_call(check_in_id: int):
 
 
 # ---------------------------------------------------------------------------
-# Polling + finalization
+# Polling
 # ---------------------------------------------------------------------------
 
 def refresh_live_call(check_in: CheckIn) -> CheckIn:
@@ -197,33 +201,9 @@ def refresh_live_call(check_in: CheckIn) -> CheckIn:
 
     # ElevenLabs statuses: initiated / in-progress / processing / done / failed
     if data.get("status") == "done":
-        finalize_call(check_in.id)
+        pipeline_service.finalize_call(check_in.id)
     elif data.get("status") == "failed":
         check_in.status = "failed"
         db.session.commit()
 
     return check_in
-
-
-def finalize_call(check_in_id: int):
-    """Run Agent 2 (triage) + Agent 3 (note) on the final transcript."""
-    check_in = db.session.get(CheckIn, check_in_id)
-    if check_in is None or check_in.triage_result is not None:
-        return
-
-    encounter = check_in.encounter
-    patient = encounter.patient
-
-    analysis = triage_service.analyze_transcript(check_in.transcript or [])
-    note = triage_service.draft_note(
-        patient.to_dict(), encounter.to_dict(), analysis
-    )
-    check_in.triage_result = TriageResult(
-        severity=analysis["severity"],
-        label=analysis["label"],
-        rationale=analysis["rationale"],
-        flags=analysis["flags"],
-        note=note,
-    )
-    check_in.status = "completed"
-    db.session.commit()
