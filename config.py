@@ -28,9 +28,25 @@ class Config:
     ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY")
     ANTHROPIC_MODEL = os.environ.get("ANTHROPIC_MODEL", "claude-haiku-4-5")
 
+    # ElevenLabs Agents (voice check-in calls). If any of these are missing,
+    # the Call button falls back to a simulated call so the whole workflow
+    # can be demoed without credentials.
+    ELEVENLABS_API_KEY = os.environ.get("ELEVENLABS_API_KEY")
+    ELEVENLABS_AGENT_ID = os.environ.get("ELEVENLABS_AGENT_ID")
+    ELEVENLABS_PHONE_NUMBER_ID = os.environ.get("ELEVENLABS_PHONE_NUMBER_ID")
+
+    # Seconds between simulated transcript lines (0 = run synchronously,
+    # used by the test suite).
+    SIM_CALL_DELAY = float(os.environ.get("SIM_CALL_DELAY", "1.2"))
+
 
 class TestConfig(Config):
     """Config used by the test suite — in-memory DB, testing flag on."""
 
     TESTING = True
     SQLALCHEMY_DATABASE_URI = "sqlite:///:memory:"
+    SIM_CALL_DELAY = 0  # run simulated calls synchronously in tests
+    # Never hit the real ElevenLabs API from tests.
+    ELEVENLABS_API_KEY = None
+    ELEVENLABS_AGENT_ID = None
+    ELEVENLABS_PHONE_NUMBER_ID = None
