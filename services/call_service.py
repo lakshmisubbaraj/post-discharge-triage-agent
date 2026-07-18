@@ -291,7 +291,7 @@ def finalize_widget_call(check_in: CheckIn, conversation_id: str | None = None):
     if not api_key:
         check_in.transcript = SIMULATED_TRANSCRIPT
         check_in.mode = "widget_sim"
-        finalize_call(check_in.id)
+        pipeline_service.finalize_call(check_in.id)
         return db.session.get(CheckIn, check_in.id)
 
     try:
@@ -310,32 +310,8 @@ def finalize_widget_call(check_in: CheckIn, conversation_id: str | None = None):
         db.session.commit()
 
     if status == "done":
-        finalize_call(check_in.id)
+        pipeline_service.finalize_call(check_in.id)
     elif status == "failed":
         check_in.status = "failed"
         db.session.commit()
     return db.session.get(CheckIn, check_in.id)
-
-
-def finalize_call(check_in_id: int):
-    """Run Agent 2 (triage) + Agent 3 (note) on the final transcript."""
-    check_in = db.session.get(CheckIn, check_in_id)
-    if check_in is None or check_in.triage_result is not None:
-        return
-
-    encounter = check_in.encounter
-    patient = encounter.patient
-
-    analysis = triage_service.analyze_transcript(check_in.transcript or [])
-    note = triage_service.draft_note(
-        patient.to_dict(), encounter.to_dict(), analysis
-    )
-    check_in.triage_result = TriageResult(
-        severity=analysis["severity"],
-        label=analysis["label"],
-        rationale=analysis["rationale"],
-        flags=analysis["flags"],
-        note=note,
-    )
-    check_in.status = "completed"
-    db.session.commit()
