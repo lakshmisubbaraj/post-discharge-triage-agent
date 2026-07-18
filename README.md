@@ -163,3 +163,59 @@ Abridge's fully synthetic `synthetic-ambient-fhir-25` hackathon dataset — no
 real patient data anywhere in this project. Conditions and medications shown
 per patient come from that dataset's actual FHIR resources; the check-in
 transcripts are hand-written for this demo (see above).
+
+## Merging the `hannah` branch into `main`
+
+Work happens on the `hannah` branch; `main` is the shared/stable branch. To
+bring your `hannah` changes into `main`:
+
+```
+git checkout hannah          # make sure your work is committed first
+git status                    # should say "nothing to commit, working tree clean"
+
+git checkout main             # switch to main
+git pull origin main          # get the latest main from the remote first
+
+git merge hannah              # merge your branch in
+git push origin main          # publish the merged main
+```
+
+Pulling `main` before you merge matters — it means you resolve any conflicts
+locally rather than having your push rejected.
+
+### If you get merge conflicts
+
+When Git can't auto-combine changes to the same lines, `git merge hannah`
+stops and reports the conflicting files. To resolve them:
+
+1. **See what's conflicted:** run `git status` — conflicted files are listed
+   under "Unmerged paths".
+2. **Open each file.** Git marks the clashing regions like this:
+
+   ```
+   <<<<<<< HEAD
+   the version currently on main
+   =======
+   the version from your hannah branch
+   >>>>>>> hannah
+   ```
+
+3. **Edit the file** to the final version you want, then **delete all three
+   marker lines** (`<<<<<<<`, `=======`, `>>>>>>>`). Keep either side, combine
+   them, or rewrite entirely — whatever is correct.
+4. **Mark it resolved:** `git add <file>` for each file you fixed.
+5. **Finish the merge:** `git commit` (Git pre-fills a merge message; just
+   save), then `git push origin main`.
+
+Useful escape hatches:
+
+- **Bail out entirely:** `git merge --abort` returns you to the pre-merge
+  state, as if you never ran the merge.
+- **Take one whole side of a file:** `git checkout --theirs <file>` keeps the
+  `hannah` version, `git checkout --ours <file>` keeps the `main` version —
+  then `git add <file>`.
+- **List still-conflicted files:** `git diff --name-only --diff-filter=U`.
+
+> Tip: this repo has both `origin` and `upstream` remotes pointing at the same
+> GitHub repo. Use `origin` for your normal push/pull unless you specifically
+> mean to sync with `upstream`.
