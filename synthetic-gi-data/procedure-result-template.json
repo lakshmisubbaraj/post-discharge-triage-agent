@@ -1,0 +1,83 @@
+{
+  "id": "PT-000::proc-result",
+  "_synthetic": true,
+  "_note": "MOCK procedure result. Format template. Adapt content to the actual procedure the patient was referred for.",
+  "patient_id": "gi-synth-0000",
+  "procedure": {
+    "name": "Colonoscopy",
+    "code": {"system": "http://snomed.info/sct", "code": "73761001", "display": "Colonoscopy (procedure)"},
+    "date": "2026-07-05T08:20:00-07:00",
+    "indication": "Average-risk screening",
+    "sedation": "Moderate sedation (midazolam 3 mg, fentanyl 100 mcg)",
+    "prep_quality": "Boston Bowel Prep Scale 8/9 — adequate",
+    "extent_reached": "Cecum (confirmed by appendiceal orifice and ileocecal valve)",
+    "withdrawal_time_min": 9,
+    "status": "completed"
+  },
+  "procedure_report": "PROCEDURE: Colonoscopy. INDICATION: average-risk screening. SEDATION: moderate. PREP: adequate (BBPS 8). FINDINGS: The colonoscope was advanced to the cecum. A single 12 mm sessile polyp was identified in the sigmoid colon and removed by hot snare polypectomy; the specimen was retrieved and sent to pathology. Scattered diverticula were noted in the sigmoid without stigmata of bleeding. The remainder of the examined colon and terminal ileum were normal. No active bleeding. IMPRESSION: 12 mm sigmoid polyp removed; diverticulosis. Pathology pending.",
+  "findings": [
+    {"finding": "12 mm sessile polyp", "location": "sigmoid colon", "size_mm": 12, "action_taken": "hot snare polypectomy, retrieved", "specimen": "A"},
+    {"finding": "Diverticulosis, no stigmata of bleeding", "location": "sigmoid colon", "action_taken": "none"}
+  ],
+  "specimens": [{"id": "A", "site": "sigmoid polyp", "type": "polypectomy"}],
+  "pathology": {"status": "pending", "expected_back": "2026-07-09", "report": null, "diagnosis": null, "actionable": null},
+  "complications": [],
+  "disposition": "Discharged home same day in stable condition with escort. Post-polypectomy precautions reviewed.",
+  "followup": [
+    {"recommendation": "Review sigmoid polyp pathology; call patient with result and set surveillance interval", "timeframe": "within 2 weeks", "owner": "GI", "status": "open"},
+    {"recommendation": "Resume anticoagulation per pre-procedure plan if no bleeding", "timeframe": "48 hours", "owner": "patient / GI", "status": "open"}
+  ],
+  "planted_followup_items": [
+    {"id": "F1", "type": "pending_pathology", "description": "Sigmoid polypectomy pathology pending — result must be communicated to the patient and drive the surveillance interval", "urgency": "routine", "expected_action": "call patient with result + document surveillance interval", "status": "open"},
+    {"id": "F2", "type": "med_resume", "description": "Anticoagulation resumption instruction after polypectomy", "urgency": "routine", "expected_action": "confirm safe resumption timing", "status": "open"}
+  ],
+  "post_procedure_followup": {
+    "window": "day 0 to day 14",
+    "channels": ["automated_check_in", "patient_portal_message", "nurse_triage_call"],
+    "_note": "Patient-reported stream after the procedure — the inbound signal the LeftBehind product triages. Each contact is labeled ground truth so triage can be scored.",
+    "contacts": [
+      {
+        "id": "C1",
+        "day": 1,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "My throat is a little sore and I feel bloated and gassy.",
+        "clinical_signal": "Expected post-procedure sore throat + insufflation bloating",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; sore throat and bloating are expected and self-limited within 24-48h.",
+        "rationale": "Common benign post-endoscopy symptoms; no escalation."
+      },
+      {
+        "id": "C2",
+        "day": 2,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "When will I hear about my biopsy, and when can I restart my blood thinner?",
+        "clinical_signal": "Patient asking about pending pathology and anticoagulation resumption",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F1",
+        "expected_action": "Answer from the result: pathology pending (~day 4), team will call with result + surveillance interval; confirm anticoagulation resumption timing per plan.",
+        "rationale": "Answerable from the procedure result and follow-up plan; links to pending_pathology and med_resume items."
+      },
+      {
+        "id": "C3",
+        "day": 4,
+        "channel": "patient_portal_message",
+        "type": "complication",
+        "verbatim": "I've passed a fair amount of dark red blood twice this afternoon and feel a bit lightheaded.",
+        "clinical_signal": "Delayed post-polypectomy bleeding, possibly on resumed anticoagulation",
+        "red_flag": true,
+        "ground_truth_disposition": "escalate",
+        "urgency": "emergent",
+        "links_followup_item": "F2",
+        "expected_action": "Escalate for same-day evaluation / ED; hold anticoagulation; anticipate repeat colonoscopy for hemostasis.",
+        "rationale": "Delayed post-polypectomy hemorrhage with a hemodynamic symptom is a red-flag complication requiring urgent action."
+      }
+    ]
+  }
+}

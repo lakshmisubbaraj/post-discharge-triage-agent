@@ -1,0 +1,92 @@
+{
+  "id": "gi-synth-0012::proc-result",
+  "_synthetic": true,
+  "_note": "MOCK procedure result. No real patient. For PreChart development/eval. Result of the FIT-positive diagnostic colonoscopy Mr. DiMarco was referred for.",
+  "patient_id": "gi-synth-0012",
+  "procedure": {
+    "name": "Colonoscopy",
+    "code": {"system": "http://snomed.info/sct", "code": "73761001", "display": "Colonoscopy (procedure)"},
+    "date": "2026-07-29T08:40:00-07:00",
+    "indication": "Positive screening FIT (2026-06-15); asymptomatic — diagnostic colonoscopy on the FIT-positive pathway",
+    "sedation": "Moderate sedation (midazolam 2 mg, fentanyl 100 mcg)",
+    "prep_quality": "Boston Bowel Prep Scale 8/9 — adequate (right 3, transverse 2, left 3)",
+    "extent_reached": "Cecum (confirmed by appendiceal orifice and ileocecal valve); terminal ileum intubated",
+    "withdrawal_time_min": 11,
+    "status": "completed"
+  },
+  "procedure_report": "PROCEDURE: Colonoscopy with polypectomy. INDICATION: positive screening FIT (2026-06-15) in an asymptomatic 63-year-old man; FIT-positive diagnostic pathway. PERIPROCEDURAL: OTC aspirin 81 mg daily continued through the procedure (low-dose ASA does not require interruption for colonoscopy/polypectomy). SEDATION: moderate (midazolam/fentanyl), tolerated well. PREP: adequate, BBPS 8/9. FINDINGS: The colonoscope was advanced to the cecum with confirmation of the appendiceal orifice and ileocecal valve; the terminal ileum was intubated and normal. A 9 mm sessile polyp was identified in the ascending colon and removed by hot snare polypectomy; specimen retrieved (Specimen A). A 5 mm sessile polyp in the sigmoid colon was removed by cold snare polypectomy; specimen retrieved (Specimen B). A 3 mm rectal polyp was removed by cold forceps (Specimen C). Scattered non-complicated diverticula were noted in the sigmoid colon without stigmata of bleeding. There was no mass, no ulceration, and no source of active bleeding to explain the positive FIT; the polyps are the presumptive source. Hemostasis adequate at all polypectomy sites; a single prophylactic hemoclip was placed at the ascending colon site given continued aspirin. IMPRESSION: Three polyps removed (9 mm ascending, 5 mm sigmoid, 3 mm rectal); sigmoid diverticulosis. No malignancy or bleeding source identified. Pathology pending.",
+  "findings": [
+    {"finding": "9 mm sessile polyp", "location": "ascending colon", "size_mm": 9, "action_taken": "hot snare polypectomy, retrieved; prophylactic hemoclip placed", "specimen": "A"},
+    {"finding": "5 mm sessile polyp", "location": "sigmoid colon", "size_mm": 5, "action_taken": "cold snare polypectomy, retrieved", "specimen": "B"},
+    {"finding": "3 mm polyp", "location": "rectum", "size_mm": 3, "action_taken": "cold forceps polypectomy, retrieved", "specimen": "C"},
+    {"finding": "Diverticulosis, no stigmata of bleeding", "location": "sigmoid colon", "action_taken": "none"}
+  ],
+  "specimens": [
+    {"id": "A", "site": "ascending colon polyp", "type": "polypectomy"},
+    {"id": "B", "site": "sigmoid colon polyp", "type": "polypectomy"},
+    {"id": "C", "site": "rectal polyp", "type": "polypectomy"}
+  ],
+  "pathology": {"status": "pending", "expected_back": "2026-08-03", "report": null, "diagnosis": null, "actionable": null},
+  "complications": [],
+  "disposition": "Discharged home same day in stable condition with escort. Post-polypectomy precautions reviewed. Advised on return precautions for GI bleeding (rectal bleeding, black stools, abdominal pain, lightheadedness).",
+  "followup": [
+    {"recommendation": "Review pathology on all three polyps (ascending 9 mm, sigmoid 5 mm, rectal 3 mm); call patient with results and set surveillance interval based on histology, size, and count", "timeframe": "within 2 weeks", "owner": "GI", "status": "open"},
+    {"recommendation": "Continue OTC aspirin 81 mg daily as before — it was not held and no dose change is needed; confirm patient understands it is now documented in the record", "timeframe": "at discharge", "owner": "GI / patient", "status": "open"},
+    {"recommendation": "Ensure the mis-attributed active C. difficile infection is corrected/removed from the problem list (belongs to spouse); no stool testing or isolation indicated", "timeframe": "routine", "owner": "GI / PCP", "status": "open"}
+  ],
+  "planted_followup_items": [
+    {"id": "F1", "type": "pending_pathology", "description": "Histology pending on three polypectomy specimens (9 mm ascending, 5 mm sigmoid, 3 mm rectal). Results must be communicated to the patient and determine the surveillance colonoscopy interval.", "urgency": "routine", "expected_action": "call patient with pathology results and document surveillance interval per histology/size/count", "status": "open"},
+    {"id": "F2", "type": "surveillance_interval", "description": "Surveillance colonoscopy interval to be set once pathology returns (multiple polyps including a 9 mm lesion — likely 3-5 year interval if tubular adenomas, sooner if advanced histology).", "urgency": "routine", "expected_action": "assign and document surveillance interval; enter recall", "status": "open"},
+    {"id": "F3", "type": "med_reconciliation", "description": "Aspirin 81 mg was continued through the procedure (not held); confirm patient continues it and that this previously-undocumented antiplatelet is now recorded in the medication list.", "urgency": "routine", "expected_action": "verify aspirin documented and continued; no resumption action needed since not held", "status": "open"},
+    {"id": "F4", "type": "record_correction", "description": "Mis-attributed active Clostridioides difficile infection on the problem list actually belongs to the patient's spouse; patient asymptomatic and never diagnosed.", "urgency": "routine", "expected_action": "remove/reclassify C. difficile infection from patient problem list; no stool testing or isolation", "status": "open"}
+  ],
+  "post_procedure_followup": {
+    "window": "day 0 to day 14",
+    "channels": ["automated_check_in", "patient_portal_message", "nurse_triage_call"],
+    "_note": "Patient-reported stream after the procedure — the inbound signal the LeftBehind product triages. Each contact is labeled ground truth so triage can be scored.",
+    "contacts": [
+      {
+        "id": "C1",
+        "day": 1,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "Throat's a bit scratchy and I'm pretty gassy and bloated since yesterday. Otherwise okay.",
+        "clinical_signal": "Expected post-endoscopy sore throat and insufflation-related bloating; no red flags",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; sore throat and gas/bloating are expected after colonoscopy and self-resolve within 24-48h; encourage walking and hydration.",
+        "rationale": "Common benign post-endoscopy symptoms with no bleeding or pain; no escalation needed."
+      },
+      {
+        "id": "C2",
+        "day": 3,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "The doctor took out a few polyps. When will I know what they were, and is it okay that I kept taking my baby aspirin?",
+        "clinical_signal": "Patient asking about pending polyp pathology and about continued low-dose aspirin",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F1",
+        "expected_action": "Answer from the result: pathology expected ~2026-08-03, team will call with results and the surveillance interval; confirm the 81 mg aspirin was intentionally continued, is now documented, and no change is needed.",
+        "rationale": "Answerable from the procedure result and follow-up plan; maps to pending_pathology (F1) and reinforces the med reconciliation (F3)."
+      },
+      {
+        "id": "C3",
+        "day": 6,
+        "channel": "nurse_triage_call",
+        "type": "complication",
+        "verbatim": "I just passed a bunch of dark red blood in the toilet — twice in the last hour — and I'm feeling shaky and a little dizzy when I stand up.",
+        "clinical_signal": "Delayed post-polypectomy hemorrhage with orthostatic symptoms; bleeding risk heightened by uninterrupted low-dose aspirin and the 9 mm hot-snare ascending resection",
+        "red_flag": true,
+        "ground_truth_disposition": "escalate",
+        "urgency": "emergent",
+        "links_followup_item": "F3",
+        "expected_action": "Escalate immediately for same-day ED evaluation; assess hemodynamics/CBC; anticipate repeat colonoscopy for hemostasis at the ascending polypectomy site; review antiplatelet status.",
+        "rationale": "Delayed post-polypectomy bleeding with a hemodynamic symptom (lightheadedness) is a genuine red-flag complication requiring urgent evaluation; the continued aspirin (F3) is the relevant bleeding-risk factor."
+      }
+    ]
+  }
+}

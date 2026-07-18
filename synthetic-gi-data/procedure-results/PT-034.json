@@ -1,0 +1,104 @@
+{
+  "id": "gi-synth-0034::proc-result",
+  "_synthetic": true,
+  "_note": "MOCK procedure result. No real patient. For PreChart development/eval.",
+  "patient_id": "gi-synth-0034",
+  "procedure": {
+    "name": "Laparoscopic-assisted transgastric ERCP with sphincterotomy and stone extraction",
+    "code": {"system": "http://snomed.info/sct", "code": "35997008", "display": "Endoscopic retrograde cholangiopancreatography (procedure)"},
+    "date": "2026-08-12T07:45:00-07:00",
+    "indication": "Choledocholithiasis with biliary obstruction (9 mm distal CBD calculus, CBD dilated to 11 mm) in a patient with Roux-en-Y gastric bypass; standard per-oral ERCP not feasible in altered anatomy",
+    "sedation": "General anesthesia with endotracheal intubation (combined operative/endoscopic case)",
+    "prep_quality": "N/A (biliary procedure)",
+    "extent_reached": "Major papilla accessed via laparoscopic gastrostomy in the excluded (remnant) stomach; duodenoscope passed through transgastric port to the second portion of the duodenum; deep selective biliary cannulation achieved",
+    "withdrawal_time_min": null,
+    "status": "completed"
+  },
+  "procedure_report": "PROCEDURE: Laparoscopic-assisted transgastric ERCP with biliary sphincterotomy, balloon sweep, and stone extraction. INDICATION: choledocholithiasis with obstruction in Roux-en-Y gastric bypass anatomy; per-oral ERCP not feasible. ANESTHESIA: general endotracheal. APPROACH: Given altered anatomy and unavailable operative limb-length documentation, a laparoscopic-assisted transgastric approach was selected jointly with general/bariatric surgery. Laparoscopy was performed; the excluded remnant stomach was identified and a gastrotomy created, through which a 15 mm port was placed. The duodenoscope was introduced through the transgastric port and advanced to the major papilla in the second portion of the duodenum. FINDINGS: The major papilla was identified with a normal-appearing orifice. Deep selective biliary cannulation was achieved with a sphincterotome and wire. Cholangiogram demonstrated a dilated common bile duct (~11 mm) with a single ~9 mm filling defect in the distal CBD, consistent with the MRCP finding; no intrahepatic filling defects; pancreatic duct not opacified. A biliary sphincterotomy was performed. The stone was extracted with an extraction balloon; repeat balloon sweeps cleared the duct with no residual filling defects. Good drainage of bile and contrast was observed. A biliary stent was not required given complete duct clearance. The duodenoscope was withdrawn, the gastrotomy was closed by the surgical team, and the transgastric port site was closed. IMPRESSION: Successful laparoscopic-assisted transgastric ERCP with sphincterotomy and complete extraction of a distal CBD stone; duct cleared. Residual cholelithiasis noted on prior imaging — gallbladder in situ. Peri-procedural note: reported daily 'blood thinner' clarified pre-operatively as over-the-counter fish oil (omega-3); no therapeutic anticoagulant, no periprocedural hold required.",
+  "findings": [
+    {"finding": "Dilated common bile duct (~11 mm) with single ~9 mm distal CBD calculus on cholangiogram", "location": "distal common bile duct", "size_mm": 9, "action_taken": "biliary sphincterotomy, balloon extraction, duct cleared", "specimen": "A"},
+    {"finding": "Major papilla normal in appearance; deep biliary cannulation achieved", "location": "major papilla / second duodenum", "action_taken": "sphincterotomy"},
+    {"finding": "Cholelithiasis, gallbladder in situ (per prior MRCP; not addressed at this procedure)", "location": "gallbladder", "action_taken": "none — surgical referral for cholecystectomy"}
+  ],
+  "specimens": [{"id": "A", "site": "distal CBD calculus", "type": "stone fragment / biliary aspirate"}],
+  "pathology": {"status": "final", "expected_back": null, "report": "Extracted material consists of brown/black pigmented calculus fragments; no epithelial tissue submitted. No cytologic atypia in accompanying biliary aspirate.", "diagnosis": "Biliary calculus, no malignancy", "actionable": false},
+  "complications": [],
+  "disposition": "Admitted for overnight observation given combined operative/endoscopic case (transgastric access). Post-ERCP pancreatitis precautions and post-operative wound care reviewed. Tolerating diet; discharged post-operative day 1 in stable condition.",
+  "followup": [
+    {"recommendation": "Referral to general/bariatric surgery for interval cholecystectomy given residual cholelithiasis with gallbladder in situ (source of recurrent CBD stones)", "timeframe": "within 4-6 weeks", "owner": "GI / Surgery", "status": "open"},
+    {"recommendation": "Recheck liver function tests (bilirubin, ALP, ALT) to confirm resolution of obstructive pattern", "timeframe": "1-2 weeks", "owner": "GI", "status": "open"},
+    {"recommendation": "Monitor for post-ERCP pancreatitis and transgastric access complications (abdominal pain, fever, leukocytosis)", "timeframe": "first 72 hours", "owner": "patient / GI", "status": "open"},
+    {"recommendation": "Ensure 2019 RYGB operative record obtained is filed for future reference; document approach used for any future biliary access", "timeframe": "routine", "owner": "GI", "status": "open"},
+    {"recommendation": "Continue bariatric multivitamin and monthly B12; fish oil is not a therapeutic anticoagulant, no restriction", "timeframe": "routine", "owner": "patient", "status": "closed"}
+  ],
+  "planted_followup_items": [
+    {"id": "F1", "type": "referral", "description": "Interval cholecystectomy referral — gallbladder remains in situ with cholelithiasis after CBD clearance; ongoing source of recurrent choledocholithiasis if not removed", "urgency": "urgent", "expected_action": "place general/bariatric surgery referral for cholecystectomy and confirm patient scheduled", "status": "open"},
+    {"id": "F2", "type": "lab_followup", "description": "Confirm resolution of biliary obstruction — repeat LFTs after drainage; failure to normalize suggests retained stone or ongoing obstruction", "urgency": "urgent", "expected_action": "order and review follow-up bilirubin/ALP/ALT within 1-2 weeks", "status": "open"},
+    {"id": "F3", "type": "complication_watch", "description": "Post-ERCP pancreatitis and transgastric surgical access watch (leak, bleeding, infection) in a combined operative/endoscopic case", "urgency": "urgent", "expected_action": "monitor first 72 hours for abdominal pain, fever, leukocytosis; low threshold to image/admit", "status": "open"},
+    {"id": "F4", "type": "record_correction", "description": "Document biliary access approach used (laparoscopic-assisted transgastric) and file the obtained 2019 RYGB operative record for any future ERCP need", "urgency": "routine", "expected_action": "record approach and limb-length data in chart for future reference", "status": "open"},
+    {"id": "F5", "type": "med_reconciliation", "description": "Medication reconciliation — bariatric multivitamin and monthly B12 continued; daily 'blood thinner' is fish oil (omega-3), not a true anticoagulant, no hold or resumption instruction required", "urgency": "routine", "expected_action": "confirm no therapeutic anticoagulant mislabeled; no periprocedural hold needed", "status": "closed"}
+  ],
+  "post_procedure_followup": {
+    "window": "day 0 to day 14",
+    "channels": ["automated_check_in", "patient_portal_message", "nurse_triage_call"],
+    "_note": "Patient-reported stream after the procedure — the inbound signal the LeftBehind product triages. Each contact is labeled ground truth so triage can be scored.",
+    "contacts": [
+      {
+        "id": "C1",
+        "day": 1,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "My throat's a little scratchy from the breathing tube and the little cuts on my belly are sore, but nothing crazy.",
+        "clinical_signal": "Expected post-intubation sore throat and mild laparoscopic port-site soreness on POD1",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; sore throat and mild incision soreness are expected after general anesthesia and laparoscopic access; advise gentle wound care and return precautions.",
+        "rationale": "Common benign post-operative/post-endoscopy symptoms with no red flags; self-limited."
+      },
+      {
+        "id": "C2",
+        "day": 3,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "Can I go back to my regular food and start my fish oil and vitamins again? Nobody was totally clear on that.",
+        "clinical_signal": "Patient asking about diet advancement and resuming home supplements (fish oil, bariatric MVI, B12)",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F5",
+        "expected_action": "Answer from the record: advance diet as tolerated; fish oil is a supplement not a true anticoagulant with no hold needed; continue bariatric multivitamin and monthly B12.",
+        "rationale": "Answerable from the medication-reconciliation item; no held anticoagulant to resume."
+      },
+      {
+        "id": "C3",
+        "day": 6,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "There's a little pinkish-brown ooze on the dressing over one of the belly cuts and it looks kind of scary, but I feel fine, no fever.",
+        "clinical_signal": "Dangerous-sounding but benign — scant serosanguineous port-site drainage without fever, spreading redness, or systemic signs",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": "F3",
+        "expected_action": "Reassure; scant serosanguineous drainage is normal early port-site healing. Give explicit return precautions: fever, spreading redness, purulent drainage, or worsening abdominal pain warrant call/evaluation for leak or wound infection.",
+        "rationale": "Triage trap — alarming-sounding wound description that is benign healing, but must carry precise escalation criteria given transgastric access leak/infection risk."
+      },
+      {
+        "id": "C4",
+        "day": 12,
+        "channel": "nurse_triage_call",
+        "type": "complaint",
+        "verbatim": "I was told someone would call me about my follow-up liver blood tests and about setting up the gallbladder surgery, and it's been almost two weeks with no call.",
+        "clinical_signal": "Dropped follow-up — outstanding post-drainage LFT recheck loop and interval cholecystectomy referral not actioned/communicated",
+        "red_flag": false,
+        "ground_truth_disposition": "schedule",
+        "urgency": "routine",
+        "links_followup_item": "F2",
+        "expected_action": "Close the loop: order/obtain and review the follow-up LFTs to confirm resolution of the obstructive pattern, and confirm the general/bariatric surgery cholecystectomy referral was placed and scheduled; call the patient back with both.",
+        "rationale": "Dropped-ball contact flagging a pending lab-followup loop and an open surgical referral that were never communicated; requires scheduling/coordination rather than clinical escalation."
+      }
+    ]
+  }
+}

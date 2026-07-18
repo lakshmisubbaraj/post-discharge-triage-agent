@@ -1,0 +1,90 @@
+{
+  "id": "gi-synth-0003::proc-result",
+  "_synthetic": true,
+  "_note": "MOCK procedure result for PT-003. Clinically coherent with referral: 5-year surveillance colonoscopy for prior 2 tubular adenomas, asymptomatic, average-to-slightly-elevated risk (single FDR colon cancer >60).",
+  "patient_id": "gi-synth-0003",
+  "procedure": {
+    "name": "Colonoscopy",
+    "code": {"system": "http://snomed.info/sct", "code": "73761001", "display": "Colonoscopy (procedure)"},
+    "date": "2026-08-06T08:40:00-05:00",
+    "indication": "Surveillance colonoscopy — history of 2 tubular adenomas (2021); asymptomatic",
+    "sedation": "Moderate sedation (midazolam 2 mg, fentanyl 75 mcg)",
+    "prep_quality": "Boston Bowel Prep Scale 8/9 — adequate",
+    "extent_reached": "Cecum (confirmed by appendiceal orifice and ileocecal valve)",
+    "withdrawal_time_min": 11,
+    "status": "completed"
+  },
+  "procedure_report": "PROCEDURE: Colonoscopy. INDICATION: 5-year surveillance for prior 2 tubular adenomas (2021); patient asymptomatic. SEDATION: moderate (midazolam 2 mg, fentanyl 75 mcg). PREP: adequate (BBPS 8/9). Metformin was held on the day of prep and procedure per pre-procedure instructions; levothyroxine continued. FINDINGS: The colonoscope was advanced to the cecum with the appendiceal orifice and ileocecal valve identified; the terminal ileum was intubated and appeared normal. A 5 mm sessile polyp was identified in the ascending colon and removed by cold snare polypectomy; the specimen was retrieved and sent to pathology (specimen A). A 3 mm sessile polyp in the sigmoid colon was removed by cold forceps and retrieved (specimen B). No mass, no ulceration, and no active bleeding were seen. Scattered non-bleeding diverticula were noted in the sigmoid colon. IMPRESSION: Two small polyps removed on surveillance exam; sigmoid diverticulosis. Pathology pending. RECOMMENDATION: surveillance interval to be finalized once pathology returns.",
+  "findings": [
+    {"finding": "5 mm sessile polyp", "location": "ascending colon", "size_mm": 5, "action_taken": "cold snare polypectomy, retrieved", "specimen": "A"},
+    {"finding": "3 mm sessile polyp", "location": "sigmoid colon", "size_mm": 3, "action_taken": "cold forceps polypectomy, retrieved", "specimen": "B"},
+    {"finding": "Diverticulosis, no stigmata of bleeding", "location": "sigmoid colon", "action_taken": "none"},
+    {"finding": "Normal terminal ileum", "location": "terminal ileum", "action_taken": "none"}
+  ],
+  "specimens": [
+    {"id": "A", "site": "ascending colon polyp", "type": "polypectomy"},
+    {"id": "B", "site": "sigmoid colon polyp", "type": "polypectomy"}
+  ],
+  "pathology": {"status": "pending", "expected_back": "2026-08-11", "report": null, "diagnosis": null, "actionable": null},
+  "complications": [],
+  "disposition": "Discharged home same day in stable condition with escort. Post-polypectomy precautions reviewed. Resumed metformin with next scheduled dose after resuming normal diet.",
+  "followup": [
+    {"recommendation": "Review polyp pathology (specimens A and B); call patient with result and set surveillance interval based on histology and polyp count/size", "timeframe": "within 2 weeks", "owner": "GI", "status": "open"},
+    {"recommendation": "Resume metformin 1000 mg BID with resumption of normal diet (held only for prep/procedure day)", "timeframe": "same day", "owner": "patient / GI", "status": "open"},
+    {"recommendation": "Ensure problem list correction persists — 'Malignant tumor of colon' is FAMILY history (father, ~age 72), not a personal diagnosis; affects future risk stratification", "timeframe": "at result documentation", "owner": "GI", "status": "open"}
+  ],
+  "planted_followup_items": [
+    {"id": "F1", "type": "pending_pathology", "description": "Pathology pending for two retrieved polyps (ascending 5 mm, sigmoid 3 mm) — histology determines the surveillance interval and must be communicated to the patient", "urgency": "routine", "expected_action": "review pathology, call patient with result, document next surveillance interval", "status": "open"},
+    {"id": "F2", "type": "surveillance_interval", "description": "Surveillance interval must be set once pathology returns; if tubular adenomas as in 2021, interval per guideline (single FDR colon cancer >60 is a modifier). Do not let this default/drop", "urgency": "routine", "expected_action": "assign and document surveillance colonoscopy interval", "status": "open"},
+    {"id": "F3", "type": "med_reconciliation", "description": "Metformin was held only for prep/procedure day (not an anticoagulant/antiplatelet; nothing periprocedural was truly held to bridge); confirm the patient has resumed her home metformin 1000 mg BID after returning to normal diet and that no dose was missed", "urgency": "routine", "expected_action": "confirm metformin 1000 mg BID resumed after normal diet; reconcile that no other home meds were interrupted", "status": "open"}
+  ],
+  "post_procedure_followup": {
+    "window": "day 0 to day 14",
+    "channels": ["automated_check_in", "patient_portal_message", "nurse_triage_call"],
+    "_note": "Patient-reported stream after the procedure — the inbound signal the LeftBehind product triages. Each contact is labeled ground truth so triage can be scored.",
+    "contacts": [
+      {
+        "id": "C1",
+        "day": 1,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "My throat feels a bit scratchy and I'm real gassy and crampy in my belly. Is that normal?",
+        "clinical_signal": "Expected post-endoscopy sore throat plus insufflation-related bloating and mild cramping after a routine surveillance colonoscopy",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; scratchy throat, gas, and mild cramping are expected and self-limited over 24-48h. Walking and passing gas help. Return precautions for heavy bleeding, severe pain, or fever.",
+        "rationale": "Common benign post-colonoscopy symptoms after air insufflation; no red flag, no escalation."
+      },
+      {
+        "id": "C2",
+        "day": 2,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "I held my diabetes pill the day before and the day of the test like you said — am I okay to go back to taking it now that I'm eating normally?",
+        "clinical_signal": "Diabetic patient asking about resuming metformin that was held only for prep/procedure day",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F3",
+        "expected_action": "Confirm from the plan: metformin was held only for the prep/procedure day; resume metformin 1000 mg BID now that she is eating a normal diet. Reassure no bridging or other med changes needed.",
+        "rationale": "Directly answerable from the med-reconciliation follow-up item; benign continuation-of-care question, no escalation."
+      },
+      {
+        "id": "C3",
+        "day": 4,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "When will I hear back about the polyps you took out, and do I need another scope sooner because of my dad's colon cancer?",
+        "clinical_signal": "Patient asking about pending pathology turnaround and how family history affects her surveillance interval",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F1",
+        "expected_action": "Answer from the result: pathology pending (expected ~2026-08-11); the team will call with the result and set the surveillance interval based on histology and her single first-degree relative diagnosed after age 60. No action needed by the patient meanwhile.",
+        "rationale": "Answerable from pending_pathology and surveillance_interval items; benign informational question, no escalation."
+      }
+    ]
+  }
+}

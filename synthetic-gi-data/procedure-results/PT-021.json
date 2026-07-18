@@ -1,0 +1,110 @@
+{
+  "id": "gi-synth-0021::proc-result",
+  "_synthetic": true,
+  "_note": "MOCK procedure result generated for PT-021. No real patient. For PreChart/LeftBehind development/eval.",
+  "patient_id": "gi-synth-0021",
+  "procedure": {
+    "name": "Colonoscopy with polypectomy",
+    "code": {"system": "http://snomed.info/sct", "code": "73761001", "display": "Colonoscopy (procedure)"},
+    "date": "2026-07-30T08:10:00-07:00",
+    "indication": "Surveillance colonoscopy (2023 ascending-colon 15 mm tubulovillous adenoma with low-grade dysplasia, piecemeal EMR with clip; 3-year interval due 2026). High-complexity peri-procedural anticoagulation — mechanical mitral valve.",
+    "sedation": "Monitored anesthesia care (propofol), anesthesia-assisted given cardiac comorbidity",
+    "prep_quality": "Boston Bowel Prep Scale 8/9 — adequate (right 3, transverse 3, left 2)",
+    "extent_reached": "Cecum (confirmed by appendiceal orifice and ileocecal valve); terminal ileum intubated",
+    "withdrawal_time_min": 14,
+    "status": "completed",
+    "anticoagulation_management": "Warfarin held 5 days pre-procedure with therapeutic enoxaparin bridging per cardiology/anticoagulation clinic (mechanical MITRAL valve — no standard hold). Last LMWH dose >24 h pre-procedure; INR confirmed 1.3 on day of procedure. OTC aspirin 81 mg held 5 days pre-procedure per cardiology. Post-polypectomy resumption plan documented (see follow-up)."
+  },
+  "procedure_report": "PROCEDURE: Colonoscopy with polypectomy. INDICATION: surveillance (prior 15 mm ascending-colon tubulovillous adenoma with low-grade dysplasia, piecemeal EMR 2023) in a patient with a mechanical mitral valve on warfarin. ANTICOAGULATION: warfarin held with therapeutic enoxaparin bridging per cardiology; INR 1.3 day-of; OTC aspirin held. SEDATION: MAC/propofol, anesthesia-assisted. PREP: adequate (BBPS 8). FINDINGS: The colonoscope was advanced to the cecum and the terminal ileum was intubated and appeared normal. In the ascending colon, the prior EMR resection site was identified by a residual clip and mucosal scar; the scar was carefully inspected under high-definition white light and narrow-band imaging, biopsied, and tattooed distally for future localization — no visible residual or recurrent adenomatous tissue. A single 6 mm sessile polyp was found in the transverse colon and removed by cold snare polypectomy, retrieved. A 4 mm sessile polyp in the sigmoid colon was removed by cold snare polypectomy, retrieved. Scattered sigmoid diverticula without stigmata of bleeding. No mass, no active bleeding. Resection sites inspected with no immediate bleeding; given anticoagulation status, prophylactic hemostatic clips were placed at the transverse resection base. IMPRESSION: (1) Prior ascending-colon EMR scar — no visible residual, biopsied and tattooed; (2) 6 mm transverse polyp and 4 mm sigmoid polyp removed by cold snare; (3) diverticulosis. Pathology pending.",
+  "findings": [
+    {"finding": "Prior EMR resection scar with residual clip, no visible residual/recurrent adenoma", "location": "ascending colon", "action_taken": "high-definition/NBI inspection, biopsy of scar, tattoo placed distally", "specimen": "A"},
+    {"finding": "6 mm sessile polyp", "location": "transverse colon", "size_mm": 6, "action_taken": "cold snare polypectomy, retrieved; prophylactic clips placed given anticoagulation", "specimen": "B"},
+    {"finding": "4 mm sessile polyp", "location": "sigmoid colon", "size_mm": 4, "action_taken": "cold snare polypectomy, retrieved", "specimen": "C"},
+    {"finding": "Diverticulosis, no stigmata of bleeding", "location": "sigmoid colon", "action_taken": "none"}
+  ],
+  "specimens": [
+    {"id": "A", "site": "ascending colon prior EMR scar", "type": "biopsy"},
+    {"id": "B", "site": "transverse colon polyp", "type": "polypectomy"},
+    {"id": "C", "site": "sigmoid colon polyp", "type": "polypectomy"}
+  ],
+  "pathology": {"status": "pending", "expected_back": "2026-08-04", "report": null, "diagnosis": null, "actionable": null},
+  "complications": [],
+  "disposition": "Discharged home same day in stable condition with escort after extended post-anesthesia observation. Post-polypectomy and anticoagulation-resumption precautions reviewed. Delayed post-polypectomy bleeding risk emphasized given anticoagulation and recent clip resection.",
+  "followup": [
+    {"recommendation": "Review pathology from ascending-colon scar biopsy and transverse/sigmoid polypectomies; call patient with results and set surveillance interval", "timeframe": "within 2 weeks", "owner": "GI", "status": "open"},
+    {"recommendation": "Resume warfarin per cardiology/anticoagulation-clinic bridging plan with LMWH overlap until INR therapeutic (2.5-3.5); confirm timing given clip resection and delayed-bleeding risk", "timeframe": "cardiology-directed, typically evening of procedure / next day if hemostasis secure", "owner": "GI / Cardiology / anticoagulation clinic", "status": "open"},
+    {"recommendation": "Confirm OTC aspirin 81 mg resumption decision with cardiology (reconciled onto med list; additive bleeding risk on warfarin)", "timeframe": "within 1 week", "owner": "Cardiology / GI", "status": "open"},
+    {"recommendation": "Monitor for delayed post-polypectomy bleeding (hematochezia, lightheadedness) over 2 weeks given anticoagulation", "timeframe": "14 days", "owner": "patient / GI", "status": "open"}
+  ],
+  "planted_followup_items": [
+    {"id": "F1", "type": "pending_pathology", "description": "Pathology pending on ascending-colon EMR scar biopsy (residual/recurrent adenoma question — piecemeal 2023 margins were indeterminate) plus transverse and sigmoid polypectomies. Result determines whether residual advanced neoplasia is present and drives surveillance interval.", "urgency": "urgent", "expected_action": "review path when back (~2026-08-04), call patient, document surveillance interval; if residual/recurrent adenoma at scar, plan short-interval repeat", "status": "open"},
+    {"id": "F2", "type": "med_resume", "description": "Warfarin resumption after polypectomy in a mechanical MITRAL valve patient — highest-stakes item. Warfarin was genuinely held 5 days pre-procedure with therapeutic LMWH bridging; bridging must overlap until INR therapeutic (2.5-3.5). Premature/omitted resumption risks valve thrombosis, over-early resumption after clip resection risks delayed post-polypectomy bleed. Must be cardiology/anticoag-clinic co-managed, not a standard protocol.", "urgency": "critical", "expected_action": "confirm exact warfarin restart + LMWH bridge timing with cardiology/anticoag clinic; verify INR back in 2.5-3.5 range; ensure patient has written dates", "status": "open"},
+    {"id": "F3", "type": "med_resume", "description": "OTC aspirin 81 mg (previously undocumented, reconciled onto med list) was genuinely held 5 days peri-procedurally per cardiology — resumption-vs-discontinuation decision outstanding given additive bleeding risk on warfarin.", "urgency": "routine", "expected_action": "cardiology to decide whether to resume or discontinue OTC aspirin; document decision on med list", "status": "open"},
+    {"id": "F4", "type": "complication_watch", "description": "Delayed post-polypectomy bleeding watch — cold snare resections with prophylactic clips in an anticoagulated patient resuming warfarin/bridging; live risk window ~14 days.", "urgency": "urgent", "expected_action": "counsel patient on hematochezia/lightheadedness precautions; ensure clear return/ED instructions and anticoag-clinic contact", "status": "open"},
+    {"id": "F5", "type": "record_correction", "description": "Ascending-colon prior EMR scar tattooed distally for future localization; residual clip present — carry the tattoo/clip location forward in the chart for future endoscopy planning.", "urgency": "routine", "expected_action": "document tattoo location in chart and future endoscopy planning note", "status": "open"},
+    {"id": "F6", "type": "surveillance_interval", "description": "Surveillance interval to be set once current pathology returns; pending histology of scar biopsy and polyps, and prior TVA-with-LGD history.", "urgency": "routine", "expected_action": "set and document next colonoscopy interval after pathology; communicate to patient and PCP", "status": "open"}
+  ],
+  "post_procedure_followup": {
+    "window": "day 0 to day 14",
+    "channels": ["automated_check_in", "patient_portal_message", "nurse_triage_call"],
+    "_note": "Patient-reported stream after the procedure — the inbound signal the LeftBehind product triages. Each contact is labeled ground truth so triage can be scored.",
+    "contacts": [
+      {
+        "id": "C1",
+        "day": 1,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "My throat feels a little scratchy and I'm burping and gassy since yesterday. Is that normal?",
+        "clinical_signal": "Expected post-procedure sore throat and insufflation-related bloating/flatus",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; scratchy throat and gas/bloating are expected after colonoscopy and settle within 24-48h. Walking and warm fluids help.",
+        "rationale": "Common benign post-endoscopy symptoms with no red-flag features; no escalation."
+      },
+      {
+        "id": "C2",
+        "day": 2,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "When will I hear about the biopsies, and could you remind me exactly when I should start my warfarin injections back up? I don't want to get that wrong with my valve.",
+        "clinical_signal": "Patient asking about pending pathology timing and warfarin/LMWH bridging resumption schedule",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F2",
+        "expected_action": "Answer from the result: pathology expected ~2026-08-04, team will call with results and surveillance interval; restate the cardiology/anticoag-clinic bridging restart dates (LMWH overlap until INR 2.5-3.5) and confirm she has them in writing.",
+        "rationale": "Answerable from the procedure result and follow-up plan; links to the high-stakes warfarin resumption item. Correct info prevents both valve thrombosis and premature-resumption bleeding."
+      },
+      {
+        "id": "C3",
+        "day": 4,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "The pharmacy asked about my baby aspirin. Should I be taking it again yet or not?",
+        "clinical_signal": "Patient seeking guidance on held OTC aspirin resumption decision",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F3",
+        "expected_action": "Advise she should not resume the OTC aspirin on her own; the resume-vs-discontinue decision is pending cardiology given additive bleeding risk on warfarin. Relay to cardiology/GI to close out and document on the med list.",
+        "rationale": "Answerable and links to the aspirin reconciliation item; keeping her off aspirin until cardiology decides is the safe course, no escalation needed."
+      },
+      {
+        "id": "C4",
+        "day": 6,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "I noticed a small pink streak on the toilet paper once this morning. No dizziness, no more after that, and my stool looked normal. Should I worry?",
+        "clinical_signal": "Single small streak of blood without ongoing bleeding, hematochezia, or hemodynamic symptoms — dangerous-sounding-but-benign in context of a clean exam",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": "F4",
+        "expected_action": "Reassure: a one-time minor pink streak with normal stool and no lightheadedness is common after polypectomy. Reinforce delayed-bleeding return precautions — call/ED for repeated or larger volume dark-red blood, clots, lightheadedness, or fainting — given she is resuming anticoagulation.",
+        "rationale": "Benign minor spotting; but because she is anticoagulated with a ~14-day delayed-bleed window, the reassurance must be paired with explicit escalation triggers. No current red flag."
+      }
+    ]
+  }
+}

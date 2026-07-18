@@ -1,0 +1,89 @@
+{
+  "id": "gi-synth-0048::proc-result",
+  "_synthetic": true,
+  "_note": "MOCK procedure result. No real patient. For PreChart development/eval. Result of the Barrett's surveillance EGD PT-048 was referred for.",
+  "patient_id": "gi-synth-0048",
+  "procedure": {
+    "name": "Esophagogastroduodenoscopy (EGD) with Barrett's surveillance biopsies",
+    "code": {"system": "http://snomed.info/sct", "code": "235156006", "display": "Esophagogastroduodenoscopy (procedure)"},
+    "date": "2026-07-30T08:40:00-07:00",
+    "indication": "Surveillance of Barrett's esophagus (C2M4, no prior dysplasia); asymptomatic, scheduled surveillance due",
+    "sedation": "Moderate sedation (midazolam 3 mg, fentanyl 100 mcg)",
+    "prep_quality": "N/A (upper endoscopy); patient NPO >8 hours, adequate",
+    "extent_reached": "Second portion of the duodenum",
+    "withdrawal_time_min": null,
+    "status": "completed"
+  },
+  "procedure_report": "PROCEDURE: Esophagogastroduodenoscopy with Barrett's surveillance biopsies. INDICATION: Surveillance of known Barrett's esophagus (C2M4, no dysplasia on 2024 biopsies); patient asymptomatic. ANTICOAGULATION: Patient on apixaban 5 mg BID; last dose held 2 days pre-procedure per periprocedural plan (low thrombotic risk per hematology, no bridging). SEDATION: Moderate sedation, well tolerated. FINDINGS: The endoscope was passed under direct vision to the second portion of the duodenum. ESOPHAGUS: Salmon-colored columnar-lined mucosa extending in a tongue-like fashion in the distal esophagus, Prague classification C2M4, unchanged from prior. No visible nodularity, ulceration, or mucosal irregularity. No suspicious lesion for targeted biopsy. Four-quadrant biopsies obtained every 2 cm per Seattle protocol. Z-line at 38 cm, diaphragmatic hiatus at 40 cm (small hiatal hernia). STOMACH: Normal mucosa, no ulcer or mass; retroflexion normal. DUODENUM: Normal bulb and second portion. No active bleeding at any point. IMPRESSION: Barrett's esophagus C2M4, no visible dysplasia or nodularity, stable appearance. Small hiatal hernia. Seattle-protocol surveillance biopsies obtained; pathology pending. No complications.",
+  "findings": [
+    {"finding": "Barrett's esophagus, Prague C2M4, no visible dysplasia or nodularity, stable vs 2024", "location": "distal esophagus", "action_taken": "Seattle-protocol 4-quadrant biopsies every 2 cm", "specimen": "A"},
+    {"finding": "Small hiatal hernia", "location": "gastroesophageal junction", "action_taken": "none"},
+    {"finding": "Normal stomach and duodenum", "location": "stomach/duodenum", "action_taken": "none"}
+  ],
+  "specimens": [
+    {"id": "A", "site": "distal esophagus — Barrett's segment, Seattle protocol", "type": "surveillance biopsy"}
+  ],
+  "pathology": {"status": "pending", "expected_back": "2026-08-03", "report": null, "diagnosis": null, "actionable": null},
+  "complications": [],
+  "disposition": "Discharged home same day in stable condition with escort. Post-procedure and sedation precautions reviewed. Resume normal diet. Continue omeprazole 40 mg daily.",
+  "followup": [
+    {"recommendation": "Review Barrett's surveillance biopsy pathology; call patient with result and set surveillance interval (repeat EGD ~3 years if no dysplasia)", "timeframe": "within 2 weeks", "owner": "GI", "status": "open"},
+    {"recommendation": "Resume apixaban 5 mg BID per periprocedural plan given no bleeding and low-bleeding-risk procedure", "timeframe": "evening of procedure / next day", "owner": "patient / GI", "status": "open"},
+    {"recommendation": "Reconcile active medication list: discontinue warfarin, add apixaban 5 mg BID (per hematology 2026-03-10); ensure future periprocedural plans reference apixaban, not warfarin/INR", "timeframe": "at result communication", "owner": "GI / PCP", "status": "open"}
+  ],
+  "planted_followup_items": [
+    {"id": "F1", "type": "pending_pathology", "description": "Barrett's Seattle-protocol surveillance biopsy pathology pending — result must be communicated to patient and drive the surveillance interval; dysplasia would escalate management", "urgency": "routine", "expected_action": "call patient with pathology result and document surveillance interval", "status": "open"},
+    {"id": "F2", "type": "med_resume", "description": "Apixaban resumption after EGD with biopsies; the DOAC was truly held 2 days pre-procedure and must be restarted per the periprocedural plan (patient is on apixaban, not warfarin as charted)", "urgency": "routine", "expected_action": "confirm safe resumption timing of apixaban 5 mg BID", "status": "open"},
+    {"id": "F3", "type": "surveillance_interval", "description": "Set Barrett's surveillance interval (repeat EGD ~3 years if no dysplasia) contingent on pathology", "urgency": "routine", "expected_action": "document next surveillance EGD date after pathology returns", "status": "open"},
+    {"id": "F4", "type": "med_reconciliation", "description": "Active medication list still shows warfarin as active while patient is actually on apixaban 5 mg BID (hematology switch 2026-03-10 never reconciled); stale January INR should not guide anticoagulation. This is a med-list correction (discontinue warfarin, add apixaban), distinct from the actual apixaban resumption captured in F2.", "urgency": "urgent", "expected_action": "discontinue warfarin and add apixaban on the med list; remove reliance on stale INR", "status": "open"}
+  ],
+  "post_procedure_followup": {
+    "window": "day 0 to day 14",
+    "channels": ["automated_check_in", "patient_portal_message", "nurse_triage_call"],
+    "_note": "Patient-reported stream after the procedure — the inbound signal the LeftBehind product triages. Each contact is labeled ground truth so triage can be scored.",
+    "contacts": [
+      {
+        "id": "C1",
+        "day": 1,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "My throat feels a bit scratchy and I'm burping a lot with some bloating. Is that normal after the camera?",
+        "clinical_signal": "Expected post-EGD sore throat and insufflation-related bloating/belching",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; mild sore throat and bloating/gas are expected after upper endoscopy and settle within 24-48h. Warm saline gargles, light diet.",
+        "rationale": "Classic benign post-EGD symptoms with no red-flag features; self-care only."
+      },
+      {
+        "id": "C2",
+        "day": 2,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "When will I hear back about the biopsies, and did I restart the apixaban at the right time? I took it the evening after the scope.",
+        "clinical_signal": "Question about pending Barrett's pathology and confirming appropriate apixaban resumption timing",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F1",
+        "expected_action": "Answer from the result: Seattle-protocol biopsies pending (expected ~day 4-5, 2026-08-03), GI will call with the result and surveillance interval. Confirm apixaban restart the evening after a bleed-free low-risk EGD is per plan (F2) — timing was correct.",
+        "rationale": "Fully answerable from the procedure result and follow-up plan; links to the pending_pathology item and confirms the med_resume timing was appropriate (no escalation needed)."
+      },
+      {
+        "id": "C3",
+        "day": 5,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "I noticed a tiny bit of pink when I brushed my teeth this morning. No throat pain otherwise and I feel fine. Should I worry?",
+        "clinical_signal": "Trace blood-tinged saliva after biopsy, no dysphagia/odynophagia, no hematemesis, hemodynamically well — benign minor oropharyngeal/biopsy-site trace, not GI bleeding",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; a trace of pink in saliva a few days after Seattle-protocol biopsies is expected and self-limited. Return precautions: vomiting blood, black/tarry stools, chest pain, or trouble swallowing — call/seek care immediately.",
+        "rationale": "Dangerous-sounding-but-benign: minor trace pink after biopsy in an otherwise-well patient does not indicate significant bleeding; reassure with clear return precautions rather than escalate."
+      }
+    ]
+  }
+}

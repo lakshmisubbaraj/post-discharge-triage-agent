@@ -1,0 +1,89 @@
+{
+  "id": "gi-synth-0045::proc-result",
+  "_synthetic": true,
+  "_note": "MOCK procedure result. No real patient. Result of the procedure PT-045 was referred for (serial esophageal dilation #4 of radiation stricture under MAC).",
+  "patient_id": "gi-synth-0045",
+  "procedure": {
+    "name": "Esophageal dilation (serial #4, Savary/wire-guided)",
+    "code": {"system": "http://snomed.info/sct", "code": "76257004", "display": "Dilation of esophagus (procedure)"},
+    "date": "2026-07-28T08:10:00-07:00",
+    "indication": "Recurrent solid-food dysphagia from radiation-induced proximal-to-mid esophageal stricture; serial dilation program (#4)",
+    "sedation": "Monitored anesthesia care (MAC) with propofol; anesthesia team advised of codeine intolerance",
+    "prep_quality": "N/A (upper endoscopy; NPO >8 hours confirmed, aspiration precautions observed given post-radiation upper airway anatomy)",
+    "extent_reached": "Stomach and duodenum (second portion) after stricture traversal; full upper endoscopic survey completed",
+    "withdrawal_time_min": null,
+    "status": "completed"
+  },
+  "procedure_report": "PROCEDURE: Esophagogastroduodenoscopy with wire-guided (Savary) esophageal dilation, serial session #4. INDICATION: recurrent solid-food dysphagia with ~4 lb interval weight loss; known radiation-induced proximal-to-mid esophageal stricture s/p chemoradiation for laryngeal carcinoma (in remission). SEDATION: monitored anesthesia care (propofol); difficult post-radiation upper airway anatomy managed without event. ANTITHROMBOTICS: none on board (OTC fish oil is not a therapeutic anticoagulant; no hold required, none held). FINDINGS: The upper esophagus demonstrated expected post-radiation mucosal changes. A focal, benign-appearing fibrotic stricture was identified in the proximal-to-mid esophagus with an estimated pre-dilation luminal diameter of ~11-12 mm, restenosed from the 15 mm achieved at session #3. The stricture was non-traversable with the adult gastroscope on first pass. A guidewire was passed under fluoroscopic guidance and the stricture was dilated in graded fashion with Savary bougies to 16 mm; moderate resistance encountered, with a satisfactory dilation effect and only minor mucosal tearing, no significant bleeding. There was no perforation. Post-dilation the scope traversed the stricture and a complete survey of the distal esophagus, stomach, and duodenum to the second portion was normal. No mass, no ulcer, no active bleeding. Surveillance biopsies were taken from the stricture to exclude recurrent/second malignancy given the laryngeal carcinoma and radiation history. IMPRESSION: Benign-appearing recurrent radiation esophageal stricture successfully dilated to 16 mm (graded Savary); technically successful, no perforation. Surveillance biopsies pending. Continue serial dilation program.",
+  "findings": [
+    {"finding": "Recurrent benign-appearing fibrotic esophageal stricture, ~11-12 mm pre-dilation (restenosis from prior 15 mm)", "location": "proximal-to-mid esophagus", "size_mm": 12, "action_taken": "wire-guided graded Savary dilation to 16 mm; surveillance biopsies obtained", "specimen": "A"},
+    {"finding": "Post-radiation mucosal changes, no mass or ulceration", "location": "upper/proximal esophagus", "action_taken": "none"},
+    {"finding": "Normal distal esophagus, stomach, and duodenum to second portion; no bleeding source", "location": "distal esophagus / stomach / duodenum", "action_taken": "none"}
+  ],
+  "specimens": [{"id": "A", "site": "esophageal stricture (surveillance)", "type": "mucosal biopsy"}],
+  "pathology": {"status": "pending", "expected_back": "2026-08-01", "report": null, "diagnosis": null, "actionable": null},
+  "complications": [],
+  "disposition": "Discharged home same day in stable condition with escort. Tolerated sips post-procedure. Soft/liquid diet advanced as tolerated. Aspiration and return precautions reviewed (inability to swallow secretions, chest/back pain, fever, hematemesis). Codeine avoided for analgesia per documented intolerance.",
+  "followup": [
+    {"recommendation": "Review esophageal stricture surveillance biopsy pathology; call patient with result and document that recurrent malignancy was excluded", "timeframe": "within 2 weeks", "owner": "GI", "status": "open"},
+    {"recommendation": "Continue serial dilation program — schedule dilation #5, sooner if recurrent solid-food dysphagia; interval shortening (from ~10-12 wks) given earlier restenosis", "timeframe": "8-10 weeks", "owner": "GI", "status": "open"},
+    {"recommendation": "Nutrition follow-up for interval ~4 lb weight loss; reinforce caloric intake and monitor weight/albumin", "timeframe": "at next visit", "owner": "GI / nutrition", "status": "open"},
+    {"recommendation": "Continue ENT surveillance for laryngeal carcinoma in remission", "timeframe": "per ENT schedule", "owner": "ENT", "status": "open"}
+  ],
+  "planted_followup_items": [
+    {"id": "F1", "type": "pending_pathology", "description": "Esophageal stricture surveillance biopsy pathology pending — must be reviewed and communicated to confirm exclusion of recurrent/second malignancy given laryngeal cancer and radiation history", "urgency": "urgent", "expected_action": "review path when back (~2026-08-01), call patient with result, document malignancy excluded or escalate if dysplasia/carcinoma found", "status": "open"},
+    {"id": "F2", "type": "repeat_procedure", "description": "Serial dilation program continues — dilation #5 needs to be scheduled; restenosis occurred faster than prior interval", "urgency": "routine", "expected_action": "schedule next dilation in ~8-10 weeks or sooner for recurrent dysphagia", "status": "open"},
+    {"id": "F3", "type": "surveillance_interval", "description": "Shortened dilation surveillance interval due to earlier-than-expected restenosis and interval symptom progression", "urgency": "routine", "expected_action": "set and communicate shortened return interval; monitor symptom recurrence", "status": "open"},
+    {"id": "F4", "type": "care_coordination", "description": "Nutrition follow-up for interval ~4 lb weight loss with reduced solid intake", "urgency": "routine", "expected_action": "arrange nutrition support / dietitian and monitor weight and albumin", "status": "open"},
+    {"id": "F5", "type": "complication_watch", "description": "Post-dilation perforation/bleeding watch after graded dilation to 16 mm in difficult post-radiation anatomy", "urgency": "routine", "expected_action": "confirm patient tolerating secretions/diet, no chest pain, fever, or hematemesis at 24-48h", "status": "open"}
+  ],
+  "post_procedure_followup": {
+    "window": "day 0 to day 14",
+    "channels": ["automated_check_in", "patient_portal_message", "nurse_triage_call"],
+    "_note": "Patient-reported stream after the procedure — the inbound signal the LeftBehind product triages. Each contact is labeled ground truth so triage can be scored. SYNTHETIC.",
+    "contacts": [
+      {
+        "id": "C1",
+        "day": 1,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "My throat's pretty sore and it stings a little when I swallow, but I'm still getting my liquids and soft stuff down okay.",
+        "clinical_signal": "Expected post-dilation sore throat / mild transient odynophagia; tolerating secretions and soft/liquid diet",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": "F5",
+        "expected_action": "Reassure; mild sore throat and odynophagia are expected after esophageal dilation and settle over 24-72h. Confirm she is tolerating secretions and diet with no chest/back pain, fever, or vomiting blood; reinforce return precautions.",
+        "rationale": "Benign expected post-dilation symptom in a patient who is tolerating secretions and diet with no red-flag features; maps to the complication_watch item as the reassuring, non-escalation side."
+      },
+      {
+        "id": "C2",
+        "day": 3,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "When will I find out about the biopsy you took from my throat area? And was it alright that I kept taking my fish oil like you said?",
+        "clinical_signal": "Patient asking about pending surveillance pathology and confirming fish-oil (supplement) guidance",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F1",
+        "expected_action": "Answer from the result: surveillance biopsy pathology expected back ~2026-08-01; the team will call with the result and document that recurrent malignancy was excluded. Confirm OTC fish oil is not a true blood thinner and required no hold — continuing it was fine.",
+        "rationale": "Fully answerable from the procedure result and follow-up plan; links to the pending_pathology item and closes the D1 fish-oil misconception."
+      },
+      {
+        "id": "C3",
+        "day": 8,
+        "channel": "automated_check_in",
+        "type": "question",
+        "verbatim": "Food is going down a lot better now, thank you. When should I come in for the next stretching appointment?",
+        "clinical_signal": "Symptomatic improvement post-dilation; asking about scheduling next serial dilation",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F2",
+        "expected_action": "Reassure that improved swallowing is the expected result; advise that dilation #5 will be scheduled in ~8-10 weeks (interval shortened given earlier restenosis) and to call sooner if solid-food sticking returns.",
+        "rationale": "Answerable scheduling question mapping to the repeat_procedure item; no clinical concern."
+      }
+    ]
+  }
+}

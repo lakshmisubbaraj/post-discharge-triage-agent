@@ -1,0 +1,88 @@
+{
+  "id": "gi-synth-0009::proc-result",
+  "_synthetic": true,
+  "_note": "MOCK procedure result for PT-009. First-time average-risk screening colonoscopy in a robust, asymptomatic 76-year-old. No real patient. For PreChart development/eval.",
+  "patient_id": "gi-synth-0009",
+  "procedure": {
+    "name": "Colonoscopy",
+    "code": {"system": "http://snomed.info/sct", "code": "73761001", "display": "Colonoscopy (procedure)"},
+    "date": "2026-07-31T08:40:00-07:00",
+    "indication": "First-time average-risk colorectal cancer screening",
+    "sedation": "Moderate sedation (midazolam 2 mg, fentanyl 75 mcg)",
+    "prep_quality": "Boston Bowel Prep Scale 8/9 — adequate (right 3, transverse 2, left 3)",
+    "extent_reached": "Cecum (confirmed by appendiceal orifice and ileocecal valve; terminal ileum intubated)",
+    "withdrawal_time_min": 11,
+    "status": "completed"
+  },
+  "procedure_report": "PROCEDURE: Colonoscopy. INDICATION: first-time average-risk colorectal cancer screening in a 76-year-old, asymptomatic, no prior screening. SEDATION: moderate (midazolam 2 mg, fentanyl 75 mcg), well tolerated; hemodynamically stable throughout with BP well controlled. PREP: adequate, BBPS 8/9. FINDINGS: The colonoscope was advanced to the cecum and the terminal ileum was intubated and appeared normal. A single 6 mm sessile polyp was identified in the ascending colon and removed by cold snare polypectomy; the specimen was retrieved intact and sent to pathology (specimen A). A 4 mm sessile polyp in the sigmoid colon was removed by cold snare polypectomy and retrieved (specimen B). Scattered small-mouthed diverticula were noted in the sigmoid colon without stigmata of recent bleeding. There was no mass, no ulceration, no luminal narrowing, and no active bleeding. Internal hemorrhoids noted on retroflexion, non-bleeding. IMPRESSION: 6 mm ascending colon polyp and 4 mm sigmoid polyp removed by cold snare; sigmoid diverticulosis; internal hemorrhoids. No malignancy identified. Pathology pending.",
+  "findings": [
+    {"finding": "6 mm sessile polyp", "location": "ascending colon", "size_mm": 6, "action_taken": "cold snare polypectomy, retrieved", "specimen": "A"},
+    {"finding": "4 mm sessile polyp", "location": "sigmoid colon", "size_mm": 4, "action_taken": "cold snare polypectomy, retrieved", "specimen": "B"},
+    {"finding": "Diverticulosis, no stigmata of bleeding", "location": "sigmoid colon", "action_taken": "none"},
+    {"finding": "Internal hemorrhoids, non-bleeding", "location": "rectum", "action_taken": "none"}
+  ],
+  "specimens": [
+    {"id": "A", "site": "ascending colon polyp", "type": "polypectomy"},
+    {"id": "B", "site": "sigmoid polyp", "type": "polypectomy"}
+  ],
+  "pathology": {"status": "pending", "expected_back": "2026-08-05", "report": null, "diagnosis": null, "actionable": null},
+  "complications": [],
+  "disposition": "Discharged home same day in stable condition with escort. Post-polypectomy precautions reviewed. Tolerated procedure and sedation well. Resumed regular diet. Instructed to resume losartan on the day after procedure per pre-procedure hold guidance.",
+  "followup": [
+    {"recommendation": "Review pathology on both polypectomy specimens; call patient with results and set the colonoscopy surveillance interval accordingly (likely 7-10 years if both are ≤2 low-risk tubular adenomas / hyperplastic, per age and health status)", "timeframe": "within 2 weeks", "owner": "GI", "status": "open"},
+    {"recommendation": "Resume losartan 50 mg every morning the day after the procedure; no anticoagulant/antiplatelet agents were held (patient on none)", "timeframe": "next day", "owner": "patient / GI", "status": "open"}
+  ],
+  "planted_followup_items": [
+    {"id": "F1", "type": "pending_pathology", "description": "Pathology pending on two polypectomy specimens (6 mm ascending colon, 4 mm sigmoid). Result must be communicated to the patient and must drive the surveillance interval.", "urgency": "routine", "expected_action": "call patient with pathology result + document surveillance interval in chart", "status": "open"},
+    {"id": "F2", "type": "surveillance_interval", "description": "Surveillance colonoscopy interval to be set once pathology returns; must weigh patient's age (76) and life expectancy against a standard 7-10 year interval — a repeat scope may not be indicated if adenomas are low-risk given age.", "urgency": "routine", "expected_action": "document individualized surveillance recommendation after pathology; reconcile with USPSTF age considerations", "status": "open"}
+  ],
+  "post_procedure_followup": {
+    "window": "day 0 to day 14",
+    "channels": ["automated_check_in", "patient_portal_message", "nurse_triage_call"],
+    "_note": "Patient-reported stream after the procedure — the inbound signal the LeftBehind product triages. Each contact is labeled ground truth so triage can be scored. Synthetic; no real patient.",
+    "contacts": [
+      {
+        "id": "C1",
+        "day": 1,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "My throat feels a little scratchy and I've been really gassy and bloated since I got home. Is that normal?",
+        "clinical_signal": "Expected post-procedure sore throat + insufflation bloating after colonoscopy",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; mild throat irritation and gas/bloating from insufflation are expected and typically resolve within 24-48h. Walking and warm fluids help.",
+        "rationale": "Common benign post-endoscopy symptoms; no red flags, no escalation."
+      },
+      {
+        "id": "C2",
+        "day": 3,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "The doctor said he took out two little polyps. When will I find out what they were, and do I need another colonoscopy? I'm 76 so I wasn't sure if I'd need one again.",
+        "clinical_signal": "Patient asking about pending pathology and the surveillance interval",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F1",
+        "expected_action": "Answer from the result: pathology pending (expected ~2026-08-05); team will call with the result and then set an individualized surveillance interval that accounts for her age and health status.",
+        "rationale": "Answerable from the procedure result and follow-up plan; maps to the pending_pathology item and the surveillance_interval item."
+      },
+      {
+        "id": "C3",
+        "day": 6,
+        "channel": "nurse_triage_call",
+        "type": "complication",
+        "verbatim": "I passed a big amount of bright red blood into the toilet twice this afternoon, with some clots, and now I feel dizzy and a bit sweaty when I stand up.",
+        "clinical_signal": "Delayed post-polypectomy hemorrhage with orthostatic/hemodynamic symptoms; ascending-colon cold-snare site within the typical delayed-bleed window",
+        "red_flag": true,
+        "ground_truth_disposition": "escalate",
+        "urgency": "emergent",
+        "links_followup_item": null,
+        "expected_action": "Escalate for same-day evaluation / send to ED; assess vitals and hemoglobin, IV access, type and screen; anticipate repeat colonoscopy for hemostasis of the polypectomy site.",
+        "rationale": "Substantial hematochezia with clots plus a hemodynamic symptom days after polypectomy is a red-flag delayed post-polypectomy bleed requiring urgent action; no anticoagulant was held, so this is a spontaneous post-polypectomy bleed."
+      }
+    ]
+  }
+}

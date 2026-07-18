@@ -97,6 +97,20 @@ DEMO_PATIENTS = [
         ],
     },
     {
+        # Dummy patient for the live-call demo: no transcript seeded — her
+        # check-in happens through the Call button (ElevenLabs or simulated).
+        "slug": "hannah",
+        "name": "Hannah K.",
+        "age": 24,
+        "gender": "female",
+        "phone": "+16782217469",
+        "discharge_dx": "Discharge after laparoscopic appendectomy",
+        "history": ["No chronic conditions", "Post-operative day 3"],
+        "meds": ["Acetaminophen 500mg PRN", "Ibuprofen 400mg PRN"],
+        "days_since_discharge": 3,
+        "transcript": None,
+    },
+    {
         "slug": "dick",
         "name": "Dick L.",
         "age": 37,
@@ -129,6 +143,7 @@ def seed():
             name=row["name"],
             age=row["age"],
             gender=row["gender"],
+            phone=row.get("phone"),
         )
         encounter = Encounter(
             discharge_dx=row["discharge_dx"],
@@ -136,25 +151,28 @@ def seed():
             meds=row["meds"],
             days_since_discharge=row["days_since_discharge"],
         )
-        check_in = CheckIn(transcript=row["transcript"])
-
-        # Run the (stubbed) triage + note agents at seed time and persist the
-        # result, mirroring how the backend would precompute the queue.
-        analysis = triage_service.analyze_transcript(row["transcript"])
-        note = triage_service.draft_note(
-            patient.to_dict(), encounter.to_dict(), analysis
-        )
-        result = TriageResult(
-            severity=analysis["severity"],
-            label=analysis["label"],
-            rationale=analysis["rationale"],
-            flags=analysis["flags"],
-            note=note,
-        )
-
-        check_in.triage_result = result
-        encounter.check_ins.append(check_in)
         patient.encounters.append(encounter)
+
+        # Patients with a seeded transcript get triage + a note precomputed at
+        # seed time. Patients without one (e.g. Hannah) start with no check-in;
+        # theirs is created live by the Call button.
+        if row["transcript"] is not None:
+            check_in = CheckIn(
+                transcript=row["transcript"], status="completed", mode="demo"
+            )
+            analysis = triage_service.analyze_transcript(row["transcript"])
+            note = triage_service.draft_note(
+                patient.to_dict(), encounter.to_dict(), analysis
+            )
+            check_in.triage_result = TriageResult(
+                severity=analysis["severity"],
+                label=analysis["label"],
+                rationale=analysis["rationale"],
+                flags=analysis["flags"],
+                note=note,
+            )
+            encounter.check_ins.append(check_in)
+
         db.session.add(patient)
 
     db.session.commit()

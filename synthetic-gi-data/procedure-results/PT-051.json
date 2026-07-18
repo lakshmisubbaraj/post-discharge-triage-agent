@@ -1,0 +1,87 @@
+{
+  "id": "gi-synth-0051::proc-result",
+  "_synthetic": true,
+  "_note": "MOCK procedure result for PT-051. Result of the EGD with balloon dilation this follow-up patient is following up FROM. No real patient. For PreChart development/eval.",
+  "patient_id": "gi-synth-0051",
+  "procedure": {
+    "name": "Esophagogastroduodenoscopy (EGD) with balloon dilation of esophageal stricture",
+    "code": {"system": "http://snomed.info/sct", "code": "235159006", "display": "Endoscopic balloon dilatation of stricture of esophagus (procedure)"},
+    "date": "2026-07-16T09:10:00-07:00",
+    "indication": "Progressive solid-food dysphagia with suspected peptic (reflux-related) distal esophageal stricture; long-standing GERD",
+    "sedation": "Monitored anesthesia care (propofol)",
+    "prep_quality": "NPO per protocol; adequate for upper endoscopy",
+    "extent_reached": "Second portion of the duodenum",
+    "withdrawal_time_min": null,
+    "status": "completed"
+  },
+  "procedure_report": "PROCEDURE: Esophagogastroduodenoscopy with through-the-scope balloon dilation. INDICATION: progressive solid-food dysphagia, suspected peptic esophageal stricture, long-standing GERD. SEDATION: monitored anesthesia care (propofol). FINDINGS: The endoscope was passed without difficulty into the esophagus. A smooth, tapered stricture was identified in the distal esophagus at approximately 36 cm, appearance consistent with a reflux-related (peptic) stricture; no malignant-appearing tissue, mass, or ulceration. LA Grade A esophagitis noted in the distal esophagus. Targeted biopsies were obtained from the stricture and distal esophagus. Through-the-scope balloon dilation was performed to 15 mm with a good luminal result; the scope traversed the segment easily after dilation. No immediate bleeding, mucosal tear beyond expected dilation effect, or perforation. The stomach was examined in forward and retroflexed views and was unremarkable; no significant hiatal hernia. The pylorus, duodenal bulb, and second portion of the duodenum were normal. No active bleeding. IMPRESSION: Distal peptic esophageal stricture successfully dilated to 15 mm; LA Grade A esophagitis; biopsies obtained. Technical success. Pathology pending.",
+  "findings": [
+    {"finding": "Smooth tapered peptic (reflux-related) esophageal stricture", "location": "distal esophagus (~36 cm)", "action_taken": "through-the-scope balloon dilation to 15 mm with good luminal result", "specimen": "A"},
+    {"finding": "LA Grade A esophagitis", "location": "distal esophagus", "action_taken": "biopsy; medical therapy (PPI)", "specimen": "A"},
+    {"finding": "Normal stomach, duodenal bulb, and second portion of duodenum", "location": "stomach/duodenum", "action_taken": "none"}
+  ],
+  "specimens": [{"id": "A", "site": "distal esophagus / stricture", "type": "mucosal biopsy"}],
+  "pathology": {"status": "preliminary", "expected_back": "2026-07-21", "report": "Distal esophageal biopsies: reflux-associated (peptic) changes; no dysplasia, no malignancy, no eosinophilic infiltrate (eosinophil count within normal limits). Final report pending confirmation.", "diagnosis": "Reflux-associated esophageal mucosal changes; no dysplasia or malignancy", "actionable": false},
+  "complications": [],
+  "disposition": "Discharged home same day in stable condition with escort. Tolerated clear liquids in recovery. Soft diet x48h then advance as tolerated. Resume home medications including pantoprazole 40 mg twice daily; resume amlodipine. Return precautions (fever, chest pain, inability to swallow liquids, hematemesis, melena) reviewed. Routine GI clinic follow-up.",
+  "followup": [
+    {"recommendation": "Confirm final esophageal biopsy pathology (preliminary benign, reflux changes; no dysplasia/malignancy) and document result", "timeframe": "within 1 week", "owner": "GI", "status": "open"},
+    {"recommendation": "Continue pantoprazole 40 mg twice daily to reduce risk of stricture recurrence; monitor swallowing", "timeframe": "ongoing", "owner": "GI / patient", "status": "open"},
+    {"recommendation": "Anticipate likely need for repeat endoscopic dilation for recurrent/refractory peptic stricture; re-dilate if dysphagia recurs", "timeframe": "as symptoms dictate", "owner": "GI", "status": "open"}
+  ],
+  "planted_followup_items": [
+    {"id": "F1", "type": "pending_pathology", "description": "Distal esophageal biopsy pathology preliminary (reflux-associated changes, no dysplasia or malignancy); final report must be confirmed and documented", "urgency": "routine", "expected_action": "confirm final pathology report and document; no malignancy expected", "status": "open"},
+    {"id": "F2", "type": "repeat_procedure", "description": "Peptic esophageal strictures commonly recur; anticipate possible repeat balloon dilation", "urgency": "routine", "expected_action": "re-dilate if dysphagia recurs; monitor swallowing at follow-up", "status": "open"},
+    {"id": "F3", "type": "med_reconciliation", "description": "Post-procedure resumption of home medications (pantoprazole 40 mg twice daily, amlodipine 5 mg daily); no anticoagulant/antiplatelet was held. Twice-daily PPI is disease-modifying to prevent stricture recurrence", "urgency": "routine", "expected_action": "confirm PPI resumed twice daily and antihypertensive resumed; reconcile active med list", "status": "closed"},
+    {"id": "F4", "type": "care_coordination", "description": "Routine GI clinic follow-up to assess swallowing and reflux control", "urgency": "routine", "expected_action": "schedule routine follow-up; reassess symptoms", "status": "open"}
+  ],
+  "post_procedure_followup": {
+    "window": "day 0 to day 14",
+    "channels": ["automated_check_in", "patient_portal_message", "nurse_triage_call"],
+    "_note": "Patient-reported stream after the procedure — the inbound signal the LeftBehind product triages. Each contact is labeled ground truth so triage can be scored. Negative-control / benign-only case: do NOT over-escalate an expected uncomplicated post-dilation course.",
+    "contacts": [
+      {
+        "id": "C1",
+        "day": 1,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "My throat feels a bit scratchy and raw when I swallow, is that normal after the stretching?",
+        "clinical_signal": "Expected post-EGD/dilation sore throat; tolerating swallowing, no red-flag features",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; mild sore throat is expected for a few days after dilation. Acetaminophen and soft/cool foods as needed; self-limited.",
+        "rationale": "Common benign post-endoscopy/post-dilation symptom with no dysphagia to liquids, chest pain, or fever; no escalation."
+      },
+      {
+        "id": "C2",
+        "day": 3,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "When will I hear about my biopsy results, and do I keep taking the pantoprazole twice a day?",
+        "clinical_signal": "Patient asking about pending pathology and post-procedure PPI/med plan",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F1",
+        "expected_action": "Answer from the result: biopsies preliminary benign (reflux changes, no dysplasia/malignancy), final expected ~2026-07-21 and team will document/communicate. Confirm pantoprazole 40 mg twice daily continues to prevent stricture recurrence.",
+        "rationale": "Fully answerable from the procedure result and follow-up plan; links to the pending_pathology item and med reconciliation."
+      },
+      {
+        "id": "C3",
+        "day": 6,
+        "channel": "automated_check_in",
+        "type": "question",
+        "verbatim": "Swallowing is a lot better and food isn't catching anymore. Can I start eating normal food again yet?",
+        "clinical_signal": "Improving dysphagia with good functional result; diet-advancement question, no alarm features",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Answer: advance from soft to regular textures over the next several days as tolerated, chewing thoroughly. Reinforce return precautions (fever, chest pain, inability to swallow liquids, hematemesis, melena).",
+        "rationale": "Expected favorable post-dilation course; a routine diet-advancement question answerable from the disposition instructions, no escalation."
+      }
+    ]
+  }
+}

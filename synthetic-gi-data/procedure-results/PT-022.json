@@ -1,0 +1,112 @@
+{
+  "id": "gi-synth-0022::proc-result",
+  "_synthetic": true,
+  "_note": "MOCK procedure result for PT-022. No real patient. For PreChart development/eval. Clinically consistent with pre-procedure referral (positive FIT + new hematochezia + mild anemia; DAPT after recent DES).",
+  "patient_id": "gi-synth-0022",
+  "procedure": {
+    "name": "Colonoscopy",
+    "code": {"system": "http://snomed.info/sct", "code": "73761001", "display": "Colonoscopy (procedure)"},
+    "date": "2026-08-05T08:10:00-07:00",
+    "indication": "Positive FIT with new intermittent hematochezia and mild anemia (Hgb 12.3 g/dL); evaluate colonic bleeding source",
+    "sedation": "Monitored anesthesia care (propofol), anesthesia-directed given cardiac history",
+    "prep_quality": "Boston Bowel Prep Scale 8/9 (right 2, transverse 3, left 3) — adequate",
+    "extent_reached": "Cecum (confirmed by appendiceal orifice and ileocecal valve); terminal ileum intubated",
+    "withdrawal_time_min": 21,
+    "status": "completed",
+    "periprocedural_antithrombotic": "Coordinated with cardiology prior to procedure given drug-eluting stents placed Dec 2025 (<12 months). Aspirin 81 mg CONTINUED throughout. Ticagrelor 90 mg BID held for 3 days pre-procedure per cardiology instruction; cardiology approved short hold with plan to resume promptly. No bridging. INR 1.0; not on systemic anticoagulant."
+  },
+  "procedure_report": "PROCEDURE: Colonoscopy with polypectomy, endoscopic mucosal resection, and prophylactic clip placement. INDICATION: Positive FIT plus new intermittent hematochezia and mild anemia in a 62-year-old man; high pretest concern for a colonic source. ANTITHROMBOTIC: High-risk cardiac patient with two drug-eluting stents (Dec 2025) on dual antiplatelet therapy. Periprocedural plan coordinated with cardiology: aspirin continued; ticagrelor held 3 days pre-procedure with cardiology approval and a plan for prompt resumption. SEDATION: MAC/propofol, anesthesia-directed. PREP: adequate (BBPS 8). FINDINGS: The colonoscope was advanced to the cecum and the terminal ileum was intubated and normal. In the sigmoid colon a 22 mm laterally spreading, granular sessile lesion was identified; it was lifted with submucosal injection and removed piecemeal by endoscopic mucosal resection. The resection base appeared complete; two prophylactic hemostatic clips were placed given continued aspirin and pending ticagrelor resumption. A separate 6 mm sessile polyp in the descending colon was removed by cold snare. Moderate sigmoid diverticulosis was present without active bleeding or stigmata. Small non-bleeding internal hemorrhoids were noted on retroflexion in the rectum. No active bleeding at completion; adequate hemostasis confirmed. IMPRESSION: (1) 22 mm sigmoid laterally spreading lesion removed by piecemeal EMR, clips placed — pathology pending, concerning for advanced adenoma; (2) 6 mm descending colon polyp removed; (3) diverticulosis; (4) small internal hemorrhoids (likely source of bright red blood on tissue). The sigmoid lesion is the probable source of the positive FIT and anemia. Pathology pending. Delayed post-polypectomy bleeding risk elevated on continued aspirin and resumed antiplatelet therapy.",
+  "findings": [
+    {"finding": "22 mm laterally spreading granular sessile lesion", "location": "sigmoid colon", "size_mm": 22, "action_taken": "piecemeal endoscopic mucosal resection with submucosal lift; 2 prophylactic hemostatic clips placed", "specimen": "A"},
+    {"finding": "6 mm sessile polyp", "location": "descending colon", "size_mm": 6, "action_taken": "cold snare polypectomy, retrieved", "specimen": "B"},
+    {"finding": "Diverticulosis, no stigmata of bleeding", "location": "sigmoid colon", "action_taken": "none"},
+    {"finding": "Small non-bleeding internal hemorrhoids", "location": "rectum", "action_taken": "none (likely source of bright red blood per rectum)"},
+    {"finding": "Normal terminal ileum", "location": "terminal ileum", "action_taken": "none"}
+  ],
+  "specimens": [
+    {"id": "A", "site": "sigmoid laterally spreading lesion", "type": "piecemeal EMR"},
+    {"id": "B", "site": "descending colon polyp", "type": "cold snare polypectomy"}
+  ],
+  "pathology": {"status": "pending", "expected_back": "2026-08-11", "report": null, "diagnosis": null, "actionable": null},
+  "complications": [],
+  "disposition": "Discharged home same day in stable condition with escort after uneventful recovery. Post-polypectomy and post-EMR precautions reviewed. Given DES <12 months, cardiology-directed antiplatelet resumption emphasized. Return precautions for significant rectal bleeding, lightheadedness, or chest pain.",
+  "followup": [
+    {"recommendation": "Review sigmoid EMR and descending colon polyp pathology; call patient with results and set surveillance interval", "timeframe": "within 1 week", "owner": "GI", "status": "open"},
+    {"recommendation": "Coordinate with cardiology to resume ticagrelor 90 mg BID promptly after procedure given drug-eluting stents <12 months; balance stent-thrombosis risk against post-EMR delayed bleeding risk", "timeframe": "within 24-48 hours", "owner": "GI / Cardiology", "status": "open"},
+    {"recommendation": "Monitor for delayed post-EMR/post-polypectomy bleeding on continued aspirin plus resumed ticagrelor; patient counseled on warning signs", "timeframe": "up to 2 weeks", "owner": "patient / GI", "status": "open"},
+    {"recommendation": "Repeat CBC to reassess mild anemia after treating colonic source; consider iron studies", "timeframe": "4-6 weeks", "owner": "GI / PCP", "status": "open"},
+    {"recommendation": "Plan surveillance colonoscopy at ~6 months to confirm complete resection of piecemeal EMR site", "timeframe": "6 months (pending pathology)", "owner": "GI", "status": "open"}
+  ],
+  "planted_followup_items": [
+    {"id": "F1", "type": "pending_pathology", "description": "22 mm sigmoid laterally spreading lesion removed by piecemeal EMR — pathology pending; concerning for advanced adenoma, possible high-grade dysplasia or worse. Result drives surveillance interval and any need for further resection/referral.", "urgency": "urgent", "expected_action": "review pathology within 1 week, call patient with result, document surveillance/repeat-EMR plan", "status": "open"},
+    {"id": "F2", "type": "med_resume", "description": "Ticagrelor 90 mg BID was held 3 days pre-procedure. Patient has two drug-eluting stents placed <12 months ago (Dec 2025) — high stent-thrombosis risk with any prolonged antiplatelet interruption. Resumption must be coordinated with cardiology and not left dropped.", "urgency": "critical", "expected_action": "confirm with cardiology and instruct patient to resume ticagrelor promptly (24-48h) unless active bleeding; document resumption date", "status": "open"},
+    {"id": "F3", "type": "complication_watch", "description": "Elevated delayed post-EMR/post-polypectomy bleeding risk on continued aspirin plus resumed ticagrelor after a 22 mm piecemeal sigmoid EMR with clips.", "urgency": "urgent", "expected_action": "counsel on warning signs; ensure patient can reach GI; low threshold for evaluation of rebleeding for up to 2 weeks", "status": "open"},
+    {"id": "F4", "type": "repeat_procedure", "description": "Piecemeal EMR of the sigmoid lesion requires a surveillance colonoscopy at ~6 months to confirm complete resection of the EMR scar.", "urgency": "routine", "expected_action": "schedule 6-month surveillance colonoscopy once pathology confirms adenoma; coordinate periprocedural antiplatelet plan with cardiology", "status": "open"},
+    {"id": "F5", "type": "surveillance_interval", "description": "Overall colonoscopy surveillance interval pending final pathology of sigmoid EMR and descending polyp specimens.", "urgency": "routine", "expected_action": "set and document interval once pathology finalizes", "status": "open"},
+    {"id": "F6", "type": "lab_followup", "description": "Mild anemia (Hgb 12.3 g/dL) with an identified colonic bleeding source now treated; requires confirmation that hemoglobin recovers after resection.", "urgency": "routine", "expected_action": "repeat CBC in 4-6 weeks; consider iron studies; escalate if anemia worsens", "status": "open"},
+    {"id": "F7", "type": "incidental_finding", "description": "Small non-bleeding internal hemorrhoids and sigmoid diverticulosis noted; hemorrhoids are the likely source of the bright red blood on tissue.", "urgency": "routine", "expected_action": "conservative management counseling; no urgent action", "status": "open"}
+  ],
+  "post_procedure_followup": {
+    "window": "day 0 to day 14",
+    "channels": ["automated_check_in", "patient_portal_message", "nurse_triage_call"],
+    "_note": "Patient-reported stream after the procedure — the inbound signal the LeftBehind product triages. Each contact is labeled ground truth so triage can be scored.",
+    "contacts": [
+      {
+        "id": "C1",
+        "day": 1,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "My throat's a little scratchy and I'm burping and bloated from all the air. Otherwise okay.",
+        "clinical_signal": "Expected post-endoscopy sore throat and insufflation bloating; no red flags",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; sore throat and gas/bloating are expected and self-limited over 24-48h; walking and warm fluids help.",
+        "rationale": "Common benign post-colonoscopy symptoms; no escalation."
+      },
+      {
+        "id": "C2",
+        "day": 2,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "The heart office said I could start my Brilinta back up. Is that alright after they took that big polyp, and when do I hear about the biopsy?",
+        "clinical_signal": "Patient confirming ticagrelor resumption timing (held 3 days pre-procedure, DES <12 months) and asking about pending EMR pathology",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F2",
+        "expected_action": "Confirm cardiology-directed prompt resumption of ticagrelor is appropriate given DES <12 months; counsel that this raises delayed post-EMR bleeding risk so watch for warning signs; note pathology expected ~day 6 and the team will call with results and surveillance interval.",
+        "rationale": "Answerable from the antithrombotic plan and follow-up items; links to med_resume (F2) and touches pending pathology (F1)."
+      },
+      {
+        "id": "C3",
+        "day": 6,
+        "channel": "nurse_triage_call",
+        "type": "complication",
+        "verbatim": "I've passed a good amount of dark red blood and some clots into the toilet twice this afternoon and I'm feeling dizzy when I stand up.",
+        "clinical_signal": "Delayed post-EMR/post-polypectomy hemorrhage after 22 mm piecemeal sigmoid EMR, on continued aspirin plus resumed ticagrelor, with orthostatic/hemodynamic symptom",
+        "red_flag": true,
+        "ground_truth_disposition": "escalate",
+        "urgency": "emergent",
+        "links_followup_item": "F3",
+        "expected_action": "Escalate for immediate ED evaluation; assess hemodynamics/CBC; hold ticagrelor pending evaluation and coordinate urgently with cardiology given DES; anticipate repeat colonoscopy for hemostasis at the clipped EMR site.",
+        "rationale": "Delayed post-EMR hemorrhage with lightheadedness is a genuine red-flag complication amplified by resumed antiplatelet therapy — the anticipated one_complication event for this high-risk EMR."
+      },
+      {
+        "id": "C4",
+        "day": 12,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "I saw a little pink on the toilet paper after a bowel movement today. No dizziness, feeling fine. Should I worry?",
+        "clinical_signal": "Minor streaking on tissue consistent with known internal hemorrhoids; no volume of blood, no hemodynamic symptoms, well outside the highest-risk delayed-bleed window",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": "F7",
+        "expected_action": "Reassure; scant pink on tissue is consistent with the documented internal hemorrhoids; advise fiber/hydration and to call back or seek care if there is a larger volume of dark red blood, clots, or lightheadedness.",
+        "rationale": "Dangerous-sounding-but-benign triage trap — a small amount of pink on the tissue in an asymptomatic patient with known hemorrhoids should be reassured, not escalated, and contrasts with the true bleed in C3."
+      }
+    ]
+  }
+}

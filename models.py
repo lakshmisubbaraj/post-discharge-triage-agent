@@ -24,6 +24,8 @@ class Patient(db.Model):
     name = db.Column(db.String(128), nullable=False)
     age = db.Column(db.Integer, nullable=False)
     gender = db.Column(db.String(16), nullable=False)
+    # E.164 format, e.g. "+16782217469". Used for outbound check-in calls.
+    phone = db.Column(db.String(32), nullable=True)
 
     encounters = db.relationship(
         "Encounter", back_populates="patient", cascade="all, delete-orphan"
@@ -35,6 +37,7 @@ class Patient(db.Model):
             "name": self.name,
             "age": self.age,
             "gender": self.gender,
+            "phone": self.phone,
         }
 
 
@@ -74,6 +77,14 @@ class CheckIn(db.Model):
     transcript = db.Column(db.JSON, nullable=False, default=list)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
+    # Call lifecycle. "completed" for seeded demo transcripts; live/simulated
+    # calls move through in_progress -> completed (or failed).
+    status = db.Column(db.String(24), nullable=False, default="completed")
+    # "demo" (seeded), "simulated" (no ElevenLabs keys), or "live" (real call).
+    mode = db.Column(db.String(16), nullable=False, default="demo")
+    # ElevenLabs conversation id, for polling the live transcript.
+    conversation_id = db.Column(db.String(128), nullable=True)
+
     encounter = db.relationship("Encounter", back_populates="check_ins")
     triage_result = db.relationship(
         "TriageResult",
@@ -86,6 +97,8 @@ class CheckIn(db.Model):
         return {
             "id": self.id,
             "transcript": self.transcript or [],
+            "status": self.status,
+            "mode": self.mode,
             "createdAt": self.created_at.isoformat() if self.created_at else None,
         }
 

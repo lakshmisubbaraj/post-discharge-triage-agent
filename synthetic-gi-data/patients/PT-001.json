@@ -1,0 +1,86 @@
+{
+  "id": "gi-synth-0060::enc-2026-0060",
+  "_synthetic": true,
+  "_note": "MOCK GI patient in the style of synthetic-ambient-fhir-25. No real patient. For PreChart development/eval. Negative control: routine average-risk screening, no planted conflicts.",
+  "metadata": {
+    "source": "synthetic-gi-mock-v1",
+    "synthetic": true,
+    "patient_id": "gi-synth-0060",
+    "encounter_id": "enc-2026-0060",
+    "date": "2026-07-18T10:20:00-07:00",
+    "status": "finished",
+    "visit_type": "Gastroenterology consultation (procedure)",
+    "visit_title": "GI clinic — pre-procedure consult for average-risk screening colonoscopy",
+    "related_resource_counts": {"Condition": 1, "MedicationRequest": 1, "Observation": 11, "Procedure": 1, "DiagnosticReport": 0, "AllergyIntolerance": 0},
+    "planted_discrepancies": [
+      {"id": "C1", "type": "confirmed", "source_of_error": "none", "chart_state": "lisinopril 10 mg daily = active", "spoken_truth": "patient confirms taking lisinopril every morning for blood pressure", "significance": "low", "expected_state": "CONFIRMED", "note": "medication list matches patient report"},
+      {"id": "C2", "type": "confirmed", "source_of_error": "none", "chart_state": "no anticoagulant or antiplatelet on file", "spoken_truth": "patient confirms no blood thinners, no aspirin; takes a daily multivitamin only", "significance": "low", "expected_state": "CONFIRMED", "note": "anticoagulation/anesthesia clearance — no agents to hold; routine confirmation, no fish-oil or 'blood thinner' trap present"},
+      {"id": "C3", "type": "confirmed", "source_of_error": "none", "chart_state": "Hypertension (well controlled) = active", "spoken_truth": "patient confirms hypertension, home readings around 120s/70s on lisinopril", "significance": "low", "expected_state": "CONFIRMED", "note": "stable comorbidity; no anesthesia concern"},
+      {"id": "C4", "type": "confirmed", "source_of_error": "none", "chart_state": "no GI symptoms documented; average-risk screening indication", "spoken_truth": "patient denies rectal bleeding, weight loss, change in bowel habits, or abdominal pain", "significance": "low", "expected_state": "CONFIRMED", "note": "average-risk screening indication upheld by interview"},
+      {"id": "C5", "type": "confirmed", "source_of_error": "none", "chart_state": "no AllergyIntolerance on file", "spoken_truth": "patient reports no known drug allergies", "significance": "low", "expected_state": "CONFIRMED", "note": "no allergy discrepancy; NKDA confirmed"}
+    ]
+  },
+  "patient_context": {
+    "patient": {
+      "resourceType": "Patient",
+      "id": "gi-synth-0060",
+      "name": [{"use": "official", "family": "Delgado", "given": ["Maria"], "prefix": ["Ms."]}],
+      "gender": "female",
+      "birthDate": "1974-03-22",
+      "address": [{"city": "San Jose", "state": "CA", "country": "US"}],
+      "communication": [{"language": {"coding": [{"system": "urn:ietf:bcp:47", "code": "en-US", "display": "English (United States)"}], "text": "English (United States)"}}]
+    },
+    "longitudinal_summary": {
+      "resource_counts": {"Condition": 1, "DiagnosticReport": 0, "DocumentReference": 2, "Encounter": 4, "MedicationRequest": 1, "Observation": 14, "Procedure": 0, "Patient": 1},
+      "condition_labels": ["Essential hypertension (disorder)"],
+      "medication_labels": ["lisinopril 10 MG Oral Tablet"]
+    },
+    "prior_notes": [
+      {
+        "document_type": "Primary care note",
+        "date": "2026-05-04",
+        "provider_specialty": "Family Medicine",
+        "text": "Routine adult wellness visit. 52-year-old woman, generally well. Hypertension well controlled on lisinopril 10 mg daily; home and office readings at goal (today 122/76). No GI complaints — denies rectal bleeding, melena, weight loss, or change in bowel habits. Never had a colonoscopy. Due for average-risk colorectal cancer screening at age 52. Referred to Gastroenterology for screening colonoscopy. Discussed options; patient prefers colonoscopy. Labs ordered. Return in 1 year for annual exam."
+      },
+      {
+        "document_type": "Primary care note",
+        "date": "2025-05-12",
+        "provider_specialty": "Family Medicine",
+        "text": "Annual physical. Hypertension stable on lisinopril 10 mg daily. BP 124/78. No tobacco, occasional alcohol. Family history noncontributory for colorectal cancer. No GI symptoms. Continue current regimen; will address colorectal screening at next visit as she approaches recommended screening timing."
+      }
+    ]
+  },
+  "encounter_fhir": {
+    "encounter": {"resourceType": "Encounter", "id": "enc-2026-0060", "status": "finished", "class": {"code": "AMB", "display": "ambulatory"}, "type": [{"text": "Gastroenterology consultation"}], "subject": {"reference": "urn:uuid:gi-synth-0060"}, "period": {"start": "2026-07-18T10:20:00-07:00", "end": "2026-07-18T10:41:00-07:00"}},
+    "related_resources": {
+      "Condition": [
+        {"resourceType": "Condition", "id": "cond-htn", "clinicalStatus": {"coding": [{"code": "active"}]}, "verificationStatus": {"coding": [{"code": "confirmed"}]}, "code": {"coding": [{"system": "http://snomed.info/sct", "code": "59621000", "display": "Essential hypertension (disorder)"}], "text": "Essential hypertension (disorder)"}, "subject": {"reference": "urn:uuid:gi-synth-0060"}, "onsetDateTime": "2021-09-15"}
+      ],
+      "MedicationRequest": [
+        {"resourceType": "MedicationRequest", "id": "med-lisinopril", "status": "active", "intent": "order", "medicationCodeableConcept": {"coding": [{"system": "http://www.nlm.nih.gov/research/umls/rxnorm", "code": "314076", "display": "lisinopril 10 MG Oral Tablet"}], "text": "lisinopril 10 MG Oral Tablet"}, "subject": {"reference": "urn:uuid:gi-synth-0060"}, "authoredOn": "2025-05-12", "dosageInstruction": [{"text": "Take 1 tablet by mouth once daily"}]}
+      ],
+      "Observation": [
+        {"resourceType": "Observation", "id": "obs-hgb", "status": "final", "category": [{"coding": [{"code": "laboratory"}]}], "code": {"coding": [{"system": "http://loinc.org", "code": "718-7", "display": "Hemoglobin [Mass/volume] in Blood"}], "text": "Hemoglobin"}, "subject": {"reference": "urn:uuid:gi-synth-0060"}, "effectiveDateTime": "2026-05-04", "valueQuantity": {"value": 13.6, "unit": "g/dL", "system": "http://unitsofmeasure.org", "code": "g/dL"}, "interpretation": []},
+        {"resourceType": "Observation", "id": "obs-plt", "status": "final", "category": [{"coding": [{"code": "laboratory"}]}], "code": {"coding": [{"system": "http://loinc.org", "code": "777-3", "display": "Platelets [#/volume] in Blood by Automated count"}], "text": "Platelet count"}, "subject": {"reference": "urn:uuid:gi-synth-0060"}, "effectiveDateTime": "2026-05-04", "valueQuantity": {"value": 268, "unit": "10*3/uL", "system": "http://unitsofmeasure.org", "code": "10*3/uL"}, "interpretation": []},
+        {"resourceType": "Observation", "id": "obs-cr", "status": "final", "category": [{"coding": [{"code": "laboratory"}]}], "code": {"coding": [{"system": "http://loinc.org", "code": "2160-0", "display": "Creatinine [Mass/volume] in Serum or Plasma"}], "text": "Creatinine"}, "subject": {"reference": "urn:uuid:gi-synth-0060"}, "effectiveDateTime": "2026-05-04", "valueQuantity": {"value": 0.82, "unit": "mg/dL", "system": "http://unitsofmeasure.org", "code": "mg/dL"}, "interpretation": []},
+        {"resourceType": "Observation", "id": "obs-bp", "status": "final", "category": [{"coding": [{"code": "vital-signs"}]}], "code": {"coding": [{"system": "http://loinc.org", "code": "85354-9", "display": "Blood pressure panel with all children optional"}], "text": "Blood pressure"}, "subject": {"reference": "urn:uuid:gi-synth-0060"}, "effectiveDateTime": "2026-07-18", "component": [{"code": {"coding": [{"system": "http://loinc.org", "code": "8480-6", "display": "Systolic blood pressure"}]}, "valueQuantity": {"value": 124, "unit": "mm[Hg]", "system": "http://unitsofmeasure.org", "code": "mm[Hg]"}}, {"code": {"coding": [{"system": "http://loinc.org", "code": "8462-4", "display": "Diastolic blood pressure"}]}, "valueQuantity": {"value": 78, "unit": "mm[Hg]", "system": "http://unitsofmeasure.org", "code": "mm[Hg]"}}]},
+        {"resourceType": "Observation", "id": "obs-vital-ht", "status": "final", "category": [{"coding": [{"code": "vital-signs"}]}], "code": {"coding": [{"system": "http://loinc.org", "code": "8302-2", "display": "Body height"}], "text": "Body height"}, "subject": {"reference": "urn:uuid:gi-synth-0060"}, "effectiveDateTime": "2026-07-18", "valueQuantity": {"value": 163, "unit": "cm", "system": "http://unitsofmeasure.org", "code": "cm"}},
+        {"resourceType": "Observation", "id": "obs-vital-wt", "status": "final", "category": [{"coding": [{"code": "vital-signs"}]}], "code": {"coding": [{"system": "http://loinc.org", "code": "29463-7", "display": "Body weight"}], "text": "Body weight"}, "subject": {"reference": "urn:uuid:gi-synth-0060"}, "effectiveDateTime": "2026-07-18", "valueQuantity": {"value": 66, "unit": "kg", "system": "http://unitsofmeasure.org", "code": "kg"}},
+        {"resourceType": "Observation", "id": "obs-vital-bmi", "status": "final", "category": [{"coding": [{"code": "vital-signs"}]}], "code": {"coding": [{"system": "http://loinc.org", "code": "39156-5", "display": "Body mass index (BMI) [Ratio]"}], "text": "Body mass index (BMI) [Ratio]"}, "subject": {"reference": "urn:uuid:gi-synth-0060"}, "effectiveDateTime": "2026-07-18", "valueQuantity": {"value": 24.8, "unit": "kg/m2", "system": "http://unitsofmeasure.org", "code": "kg/m2"}},
+        {"resourceType": "Observation", "id": "obs-vital-temp", "status": "final", "category": [{"coding": [{"code": "vital-signs"}]}], "code": {"coding": [{"system": "http://loinc.org", "code": "8310-5", "display": "Body temperature"}], "text": "Body temperature"}, "subject": {"reference": "urn:uuid:gi-synth-0060"}, "effectiveDateTime": "2026-07-18", "valueQuantity": {"value": 36.8, "unit": "Cel", "system": "http://unitsofmeasure.org", "code": "Cel"}},
+        {"resourceType": "Observation", "id": "obs-vital-hr", "status": "final", "category": [{"coding": [{"code": "vital-signs"}]}], "code": {"coding": [{"system": "http://loinc.org", "code": "8867-4", "display": "Heart rate"}], "text": "Heart rate"}, "subject": {"reference": "urn:uuid:gi-synth-0060"}, "effectiveDateTime": "2026-07-18", "valueQuantity": {"value": 72, "unit": "/min", "system": "http://unitsofmeasure.org", "code": "/min"}},
+        {"resourceType": "Observation", "id": "obs-vital-rr", "status": "final", "category": [{"coding": [{"code": "vital-signs"}]}], "code": {"coding": [{"system": "http://loinc.org", "code": "9279-1", "display": "Respiratory rate"}], "text": "Respiratory rate"}, "subject": {"reference": "urn:uuid:gi-synth-0060"}, "effectiveDateTime": "2026-07-18", "valueQuantity": {"value": 14, "unit": "/min", "system": "http://unitsofmeasure.org", "code": "/min"}},
+        {"resourceType": "Observation", "id": "obs-vital-spo2", "status": "final", "category": [{"coding": [{"code": "vital-signs"}]}], "code": {"coding": [{"system": "http://loinc.org", "code": "2708-6", "display": "Oxygen saturation in Arterial blood"}], "text": "Oxygen saturation in Arterial blood"}, "subject": {"reference": "urn:uuid:gi-synth-0060"}, "effectiveDateTime": "2026-07-18", "valueQuantity": {"value": 98, "unit": "%", "system": "http://unitsofmeasure.org", "code": "%"}}
+      ],
+      "Procedure": [
+        {"resourceType": "Procedure", "id": "proc-colo-planned", "status": "preparation", "code": {"coding": [{"system": "http://snomed.info/sct", "code": "73761001", "display": "Colonoscopy (procedure)"}], "text": "Colonoscopy (screening, average-risk, planned)"}, "subject": {"reference": "urn:uuid:gi-synth-0060"}}
+      ],
+      "DiagnosticReport": [],
+      "AllergyIntolerance": []
+    }
+  },
+  "transcript": "DR: Good morning, Ms. Delgado — I'm Dr. Okafor. You were referred over for a screening colonoscopy. Is this your first one?\nPT: Yes, my very first. My doctor said now that I'm fifty-two it's time.\nDR: That's right, that's the standard recommendation. Before we schedule, I want to make sure this is really just screening. Any belly pain, any changes in your bowel habits?\nPT: No, nothing like that. Everything's normal, regular.\nDR: Any blood in the stool, or black stools? Anything on the toilet paper?\nPT: No, none of that. I'd have noticed.\nDR: Any unexplained weight loss, or fatigue?\nPT: No, I feel good, honestly. Same as always.\nDR: Great. And any family history of colon cancer or polyps — parents, siblings?\nPT: No, no one in my family that I know of.\nNURSE: Let me get her vitals down — height's five foot four, weight one hundred forty-six pounds, temp thirty-six point eight, heart rate seventy-two, respirations fourteen, oxygen ninety-eight percent on room air, and blood pressure today was 124 over 78.\nDR: Perfect, that's right at goal. Let me go over your medications. The chart shows lisinopril, ten milligrams, once a day. Still taking that?\nPT: Yes, every morning for my blood pressure.\nDR: Anything else — any aspirin, any blood thinners like warfarin or Eliquis, or fish oil, anything like that?\nPT: No, nothing like that. Just the lisinopril and a multivitamin.\nDR: Good — that makes the prep and the procedure simpler, nothing to hold beforehand. Any allergies to medications?\nPT: No, none that I know of.\nDR: Wonderful. So this is a straightforward average-risk screening. Your bloodwork from May looked normal too. I'll have you keep taking your lisinopril, even the morning of, with a small sip of water. The team will send you the bowel prep instructions and a date.\nPT: Sounds good. How long does the prep take?\nDR: We'll walk you through it — it's the evening before and the morning of. Any questions, just call us.\nPT: Thank you, doctor.",
+  "note": "**Subjective:** Ms. Delgado is a 52-year-old woman referred to GI clinic for her first, average-risk screening colonoscopy. She is asymptomatic: denies hematochezia, melena, abdominal pain, weight loss, change in bowel habits, or fatigue. No personal history of polyps or colorectal cancer, and no family history of colorectal cancer or polyps. Past medical history is notable for hypertension, well controlled on lisinopril 10 mg daily (confirmed by patient). She denies use of aspirin, antiplatelet agents, or anticoagulants, including over-the-counter fish oil; takes only a daily multivitamin in addition to lisinopril. No known drug allergies.\n\n**Objective:** Vitals (today): T 36.8 C, HR 72, RR 14, BP 124/78, SpO2 98% on RA; Ht 163 cm (5'4\"), Wt 66 kg (146 lb), BMI 24.8. Recent labs (2026-05-04): hemoglobin 13.6 g/dL, platelets 268 x10^3/uL, creatinine 0.82 mg/dL — all within normal limits.\n\n**Assessment & Plan:**\n- Average-risk colorectal cancer screening, first colonoscopy — appropriate indication; asymptomatic on interview.\n- No anticoagulant or antiplatelet therapy — nothing to hold; no bridging or anesthesia anticoagulation concern.\n- Hypertension, well controlled — continue lisinopril 10 mg daily; may take morning of procedure with a sip of water.\n- No known drug allergies; normal baseline labs.\n- Schedule screening colonoscopy; bowel prep instructions and date to follow. Return precautions reviewed.",
+  "after_visit_summary": "Visit summary\n\nWhat we discussed\n• Your first colonoscopy for routine colon cancer screening\n• You have no stomach or bowel symptoms\n• Your blood pressure and bloodwork look good\n• You are not on any blood thinners\n\nNext steps\n• We will schedule your screening colonoscopy; the team will send prep instructions and your date.\n• Keep taking your lisinopril each morning, including the morning of the procedure with a small sip of water.\n• No medications need to be stopped before the procedure.\n• Follow the bowel prep instructions the evening before and the morning of.\n• Call us with any questions, or if you develop new rectal bleeding, belly pain, or other concerns before the procedure.",
+  "after_visit_summary_provenance": {"method": "deterministic_extractive_v1", "source": "clinical_note_assessment_and_plan", "review_status": "not_clinically_reviewed"}
+}

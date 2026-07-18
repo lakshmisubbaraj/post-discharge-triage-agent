@@ -1,0 +1,84 @@
+{
+  "id": "gi-synth-0060::proc-result",
+  "_synthetic": true,
+  "_note": "MOCK procedure result for PT-001 (Maria Delgado). Average-risk screening colonoscopy, first-time, asymptomatic. Negative-control routine case. No real patient.",
+  "patient_id": "gi-synth-0060",
+  "procedure": {
+    "name": "Colonoscopy",
+    "code": {"system": "http://snomed.info/sct", "code": "73761001", "display": "Colonoscopy (procedure)"},
+    "date": "2026-08-05T08:10:00-07:00",
+    "indication": "Average-risk colorectal cancer screening (first colonoscopy, asymptomatic)",
+    "sedation": "Moderate sedation (midazolam 2 mg, fentanyl 75 mcg)",
+    "prep_quality": "Boston Bowel Prep Scale 8/9 — adequate",
+    "extent_reached": "Cecum (confirmed by appendiceal orifice and ileocecal valve; terminal ileum intubated)",
+    "withdrawal_time_min": 11,
+    "status": "completed"
+  },
+  "procedure_report": "PROCEDURE: Colonoscopy. INDICATION: average-risk screening, first colonoscopy in an asymptomatic 52-year-old woman. SEDATION: moderate (midazolam 2 mg, fentanyl 75 mcg), tolerated well. PREP: adequate (BBPS 8/9). FINDINGS: The colonoscope was advanced to the cecum with confirmation of the appendiceal orifice and ileocecal valve; the terminal ileum was intubated and appeared normal. A single 5 mm sessile polyp was identified in the ascending colon and removed in its entirety by cold snare polypectomy; the specimen was retrieved and sent to pathology. The remainder of the examined colon was normal with good mucosal visualization. No masses, no ulceration, no active bleeding, and no significant diverticulosis. Retroflexion in the rectum was normal; no internal hemorrhoids of note. IMPRESSION: Single 5 mm ascending colon polyp removed by cold snare; otherwise normal screening colonoscopy to the cecum. Pathology pending.",
+  "findings": [
+    {"finding": "5 mm sessile polyp", "location": "ascending colon", "size_mm": 5, "action_taken": "cold snare polypectomy, retrieved", "specimen": "A"},
+    {"finding": "Normal terminal ileum, colon, and rectum on retroflexion", "location": "colon/terminal ileum", "action_taken": "none"}
+  ],
+  "specimens": [{"id": "A", "site": "ascending colon polyp", "type": "polypectomy"}],
+  "pathology": {"status": "pending", "expected_back": "2026-08-09", "report": null, "diagnosis": null, "actionable": null},
+  "complications": [],
+  "disposition": "Discharged home same day in stable condition with escort. Post-polypectomy precautions reviewed. Resumed regular diet.",
+  "followup": [
+    {"recommendation": "Review ascending colon polypectomy pathology; call patient with result and set surveillance interval", "timeframe": "within 2 weeks", "owner": "GI", "status": "open"},
+    {"recommendation": "Surveillance colonoscopy interval to be finalized by histology; if 1-2 tubular adenomas <10 mm, plan repeat in 7-10 years per average-risk guidance", "timeframe": "per pathology", "owner": "GI", "status": "open"},
+    {"recommendation": "Continue lisinopril 10 mg daily as before; no anticoagulant/antiplatelet was held, none to resume", "timeframe": "n/a", "owner": "patient", "status": "open"}
+  ],
+  "planted_followup_items": [
+    {"id": "F1", "type": "pending_pathology", "description": "Ascending colon polypectomy pathology pending — result must be communicated to the patient and drive the surveillance interval", "urgency": "routine", "expected_action": "call patient with result + document surveillance interval", "status": "open"},
+    {"id": "F2", "type": "surveillance_interval", "description": "Colorectal cancer surveillance interval to be set once histology returns (likely 7-10 years if 1-2 small tubular adenomas or hyperplastic; sooner if advanced histology)", "urgency": "routine", "expected_action": "document and communicate next screening/surveillance date after pathology", "status": "open"}
+  ],
+  "post_procedure_followup": {
+    "window": "day 0 to day 14",
+    "channels": ["automated_check_in", "patient_portal_message", "nurse_triage_call"],
+    "_note": "Patient-reported stream after the procedure — the inbound signal the LeftBehind product triages. Each contact is labeled ground truth so triage can be scored. SYNTHETIC.",
+    "contacts": [
+      {
+        "id": "C1",
+        "day": 0,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "My throat feels scratchy and I'm burping up a lot of gas since I got home. Is that normal?",
+        "clinical_signal": "Expected post-endoscopy sore throat and insufflation-related bloating/flatus",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; mild sore throat and gas/bloating from air insufflation are expected and typically resolve within 24-48h. Walking and warm fluids help.",
+        "rationale": "Classic benign post-colonoscopy symptoms with no red flags; self-care only."
+      },
+      {
+        "id": "C2",
+        "day": 2,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "The doctor said you took out a small polyp. When will I find out what it was, and do I need another colonoscopy sooner now?",
+        "clinical_signal": "Patient asking about pending pathology and future surveillance interval",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F1",
+        "expected_action": "Answer from the result: a single 5 mm polyp was removed and pathology is pending (expected ~2026-08-09); the team will call with the result and set the surveillance interval, likely 7-10 years if 1-2 small tubular adenomas.",
+        "rationale": "Directly answerable from the procedure result and follow-up plan; maps to the pending_pathology item F1 and the surveillance-interval item F2."
+      },
+      {
+        "id": "C3",
+        "day": 3,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "I noticed a tiny bit of pink when I wiped after a bowel movement today. No pain, and it stopped. Should I worry?",
+        "clinical_signal": "Trace spotting after cold-snare polypectomy of a small polyp; no ongoing bleeding, no clot, no hemodynamic symptoms",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; minor self-limited spotting can occur after a small cold-snare polypectomy. Advise return precautions: call or seek care for repeated passage of dark/red blood, clots, lightheadedness, or severe abdominal pain.",
+        "rationale": "Dangerous-sounding-but-benign trap: a small amount of pink after a clean cold-snare polypectomy in a patient on no anticoagulants is expected; the correct disposition is reassurance with clear return precautions rather than escalation."
+      }
+    ]
+  }
+}

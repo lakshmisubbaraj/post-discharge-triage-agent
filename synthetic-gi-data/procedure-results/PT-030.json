@@ -1,0 +1,95 @@
+{
+  "id": "gi-synth-0030::proc-result",
+  "_synthetic": true,
+  "_note": "MOCK procedure result. No real patient. For PreChart development/eval. Result of the urgent/emergent ERCP with biliary decompression this patient was referred for.",
+  "patient_id": "gi-synth-0030",
+  "procedure": {
+    "name": "ERCP with sphincterotomy, stone extraction, and biliary stent placement",
+    "code": {"system": "http://snomed.info/sct", "code": "43711007", "display": "Endoscopic retrograde cholangiopancreatography (procedure)"},
+    "date": "2026-07-18T15:40:00-07:00",
+    "indication": "Acute ascending cholangitis with suspected choledocholithiasis (CBD 12 mm, total bilirubin 6.2 mg/dL) — urgent/emergent biliary decompression",
+    "sedation": "General endotracheal anesthesia given emergent status, sepsis, and aspiration risk",
+    "prep_quality": "N/A (upper endoscopic procedure)",
+    "extent_reached": "Second portion of duodenum; major papilla identified and cannulated; biliary tree opacified to the intrahepatic ducts",
+    "withdrawal_time_min": null,
+    "status": "completed"
+  },
+  "procedure_report": "PROCEDURE: ERCP with biliary sphincterotomy, balloon stone extraction, and plastic biliary stent placement. INDICATION: acute cholangitis secondary to choledocholithiasis, emergent decompression. ANESTHESIA: general endotracheal (emergent, septic patient). PERIPROCEDURAL: Patient on apixaban 5 mg BID for atrial fibrillation with last dose today ~07:00 (near-peak effect). Per multidisciplinary discussion with anesthesia and pharmacy, given life-threatening cholangitis requiring emergent decompression, procedure proceeded without delay; apixaban held and 4-factor prothrombin complex concentrate (PCC) administered pre-procedure for reversal prior to sphincterotomy. Documented iodinated contrast reaction (hives) — premedicated with corticosteroids and antihistamine; low-osmolar contrast used with minimized volume. Broad-spectrum IV antibiotics and fluids continued. FINDINGS: The duodenoscope was advanced to the major papilla without difficulty. The papilla appeared bulging/edematous consistent with an impacted stone. The bile duct was deeply cannulated. Cholangiogram demonstrated a dilated common bile duct to 12 mm with a single obstructing 9 mm filling defect in the distal CBD and intrahepatic biliary dilation. A biliary sphincterotomy was performed with controlled cut; hemostasis was intact with no post-sphincterotomy bleeding. Balloon sweep of the duct extracted one pigmented stone with prompt drainage of purulent bile (frank pus), confirming cholangitis. Occlusion cholangiogram showed no residual filling defects. A 10 Fr x 7 cm plastic biliary stent was placed across the sphincterotomy to ensure ongoing drainage. IMPRESSION: Successful emergent biliary decompression — sphincterotomy, extraction of one CBD stone, drainage of purulent bile, and biliary stent placement. Technically successful. No immediate complication.",
+  "findings": [
+    {"finding": "Bulging, edematous major papilla suggestive of impacted stone", "location": "major duodenal papilla", "action_taken": "biliary sphincterotomy"},
+    {"finding": "Dilated common bile duct (12 mm) with single 9 mm obstructing distal CBD stone and intrahepatic biliary dilation", "location": "distal common bile duct", "size_mm": 9, "action_taken": "balloon stone extraction"},
+    {"finding": "Purulent bile (frank pus) on duct drainage — confirms suppurative cholangitis", "location": "common bile duct", "action_taken": "decompression / drainage"},
+    {"finding": "Occlusion cholangiogram with no residual filling defect", "location": "biliary tree", "action_taken": "10 Fr x 7 cm plastic biliary stent placement"}
+  ],
+  "specimens": [
+    {"id": "A", "site": "bile", "type": "aspirated bile for Gram stain and culture"}
+  ],
+  "pathology": {"status": "pending", "expected_back": "2026-07-21", "report": null, "diagnosis": null, "actionable": "Bile culture and sensitivities pending — narrow antibiotics when results return"},
+  "complications": [],
+  "disposition": "Admitted to inpatient medicine/monitored bed post-procedure in stable condition. Continue IV antibiotics and fluids, sepsis monitoring. NPO advanced as tolerated. Serial post-ERCP monitoring for pancreatitis and delayed bleeding given periprocedural anticoagulation reversal.",
+  "followup": [
+    {"recommendation": "Bile culture and sensitivities pending — tailor/de-escalate antibiotics when final results return", "timeframe": "within 3 days", "owner": "GI / Inpatient team", "status": "open"},
+    {"recommendation": "Repeat ERCP for biliary stent removal/exchange after cholangitis resolution", "timeframe": "4-6 weeks", "owner": "GI", "status": "open"},
+    {"recommendation": "Referral for interval cholecystectomy for cholelithiasis (source of stones) once recovered from acute illness", "timeframe": "after recovery, per surgery", "owner": "GI / General Surgery", "status": "open"},
+    {"recommendation": "Resume apixaban after confirming hemostasis and acceptable bleeding risk post-sphincterotomy; coordinate timing given atrial fibrillation stroke risk", "timeframe": "48-72 hours post-procedure per bleeding risk", "owner": "GI / Cardiology", "status": "open"},
+    {"recommendation": "Reconcile allergy list — add iodinated contrast reaction (hives); ensure premedication documented for future contrast studies", "timeframe": "this admission", "owner": "Inpatient team", "status": "open"},
+    {"recommendation": "Monitor for post-ERCP pancreatitis and delayed post-sphincterotomy bleeding, heightened due to periprocedural anticoagulation", "timeframe": "24-48 hours", "owner": "Inpatient team", "status": "open"}
+  ],
+  "planted_followup_items": [
+    {"id": "F1", "type": "repeat_procedure", "description": "Plastic biliary stent placed at index ERCP requires scheduled removal/exchange after cholangitis resolves — retained stent risks occlusion, recurrent cholangitis, and stone/stent migration if dropped", "urgency": "urgent", "expected_action": "schedule follow-up ERCP for stent removal/exchange in 4-6 weeks and confirm patient is booked", "status": "open"},
+    {"id": "F2", "type": "med_resume", "description": "Apixaban (atrial fibrillation, CHA2DS2-VASc 3) held and reversed with PCC for emergent sphincterotomy — resumption must be actively re-decided; failure to resume leaves patient at stroke risk, resuming too early risks post-sphincterotomy bleeding", "urgency": "critical", "expected_action": "document explicit apixaban resumption plan with timing after hemostasis confirmed; coordinate GI and Cardiology", "status": "open"},
+    {"id": "F3", "type": "pending_pathology", "description": "Bile Gram stain and culture/sensitivities pending from aspirated purulent bile", "urgency": "urgent", "expected_action": "review culture results and de-escalate/tailor antibiotics accordingly", "status": "open"},
+    {"id": "F4", "type": "referral", "description": "Interval cholecystectomy needed for gallstone source to prevent recurrent choledocholithiasis and cholangitis", "urgency": "routine", "expected_action": "place General Surgery referral for cholecystectomy after recovery from acute illness", "status": "open"},
+    {"id": "F5", "type": "complication_watch", "description": "Post-ERCP pancreatitis and delayed post-sphincterotomy bleeding watch — bleeding risk elevated by recent apixaban dose despite PCC reversal", "urgency": "urgent", "expected_action": "monitor symptoms, abdominal pain, lipase, hemoglobin, and stool over 24-48 hours", "status": "open"},
+    {"id": "F6", "type": "record_correction", "description": "Iodinated contrast allergy (hives) confirmed on interview but absent from the allergy list; must be reconciled into the chart for future contrast-based studies", "urgency": "routine", "expected_action": "add contrast allergy to allergy list and document required premedication", "status": "open"}
+  ],
+  "post_procedure_followup": {
+    "window": "day 0 to day 14",
+    "channels": ["automated_check_in", "patient_portal_message", "nurse_triage_call"],
+    "_note": "Patient-reported stream after the procedure — the inbound signal the LeftBehind product triages. Each contact is labeled ground truth so triage can be scored.",
+    "contacts": [
+      {
+        "id": "C1",
+        "day": 1,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "My throat is scratchy and I'm a little sore and gassy in my belly, but nothing sharp. Is that normal after the scope?",
+        "clinical_signal": "Expected post-ERCP sore throat and mild insufflation-related abdominal soreness; no features of post-ERCP pancreatitis (no severe/persistent epigastric or back pain, no vomiting)",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; mild sore throat and transient bloating/soreness are expected and self-limited. Give return precautions for severe or worsening abdominal/back pain, fever, or vomiting (post-ERCP pancreatitis).",
+        "rationale": "Benign expected post-endoscopy symptoms without red-flag features; safe to reassure with clear escalation criteria."
+      },
+      {
+        "id": "C2",
+        "day": 3,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "The team held my blood thinner for the procedure. When am I supposed to start the apixaban again, and who tells me it's okay?",
+        "clinical_signal": "Patient asking about resumption of held/reversed anticoagulation after sphincterotomy",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F2",
+        "expected_action": "Answer from the plan: apixaban was held and reversed for the sphincterotomy; GI and Cardiology will set resumption timing (~48-72h) once hemostasis is confirmed. Counsel NOT to self-restart before the team confirms, given post-sphincterotomy bleeding risk.",
+        "rationale": "Answerable from the follow-up plan; links to the med_resume item. Reinforces not restarting anticoagulation too early."
+      },
+      {
+        "id": "C3",
+        "day": 5,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "Did the fluid you took from my bile duct grow anything? I'm still on the antibiotics and wanted to know if they'll change.",
+        "clinical_signal": "Patient asking about pending bile culture results and antibiotic plan",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F3",
+        "expected_action": "Answer from the result: bile culture/sensitivities pending (expected ~2026-07-21); the team will tailor or de-escalate antibiotics when final results return and will contact the patient with any change.",
+        "rationale": "Answerable from the procedure result and follow-up plan; links to the pending_pathology item."
+      }
+    ]
+  }
+}

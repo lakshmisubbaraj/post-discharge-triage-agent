@@ -1,0 +1,2900 @@
+{
+  "_synthetic": true,
+  "description": "LeftBehind follow-up benchmark — labeled droppable follow-up items per patient",
+  "patients": [
+    {
+      "id": "PT-001",
+      "procedure": "Colonoscopy",
+      "followup_items": [
+        {
+          "id": "F1",
+          "type": "pending_pathology",
+          "description": "Ascending colon polypectomy pathology pending — result must be communicated to the patient and drive the surveillance interval",
+          "urgency": "routine",
+          "expected_action": "call patient with result + document surveillance interval",
+          "status": "open"
+        },
+        {
+          "id": "F2",
+          "type": "surveillance_interval",
+          "description": "Colorectal cancer surveillance interval to be set once histology returns (likely 7-10 years if 1-2 small tubular adenomas or hyperplastic; sooner if advanced histology)",
+          "urgency": "routine",
+          "expected_action": "document and communicate next screening/surveillance date after pathology",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "id": "PT-002",
+      "procedure": "Colonoscopy",
+      "followup_items": [
+        {
+          "id": "F1",
+          "type": "pending_pathology",
+          "description": "Polypectomy pathology pending for ascending (5 mm) and descending (3 mm) colon polyps — result must be communicated to the patient and drive the surveillance interval",
+          "urgency": "routine",
+          "expected_action": "call patient with result + document surveillance interval",
+          "status": "open"
+        },
+        {
+          "id": "F2",
+          "type": "surveillance_interval",
+          "description": "Colorectal cancer surveillance interval must be set once polyp histology returns (dependent on adenoma vs hyperplastic, size, count)",
+          "urgency": "routine",
+          "expected_action": "document and communicate next colonoscopy interval per USMSTF guidelines",
+          "status": "open"
+        },
+        {
+          "id": "F3",
+          "type": "med_reconciliation",
+          "description": "OTC ibuprofen (NSAID) was held peri-procedurally for bleeding risk — patient to resume after 5-7 days only if no rectal bleeding. Low-dose aspirin was continued throughout (never held; no anticoagulant/antiplatelet was held). OTC fish oil is a supplement and was not held — no resumption action needed; reconcile it onto the supplement list",
+          "urgency": "routine",
+          "expected_action": "confirm patient understands safe resumption timing for the held NSAID and that aspirin/fish oil were never held",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "id": "PT-003",
+      "procedure": "Colonoscopy",
+      "followup_items": [
+        {
+          "id": "F1",
+          "type": "pending_pathology",
+          "description": "Pathology pending for two retrieved polyps (ascending 5 mm, sigmoid 3 mm) — histology determines the surveillance interval and must be communicated to the patient",
+          "urgency": "routine",
+          "expected_action": "review pathology, call patient with result, document next surveillance interval",
+          "status": "open"
+        },
+        {
+          "id": "F2",
+          "type": "surveillance_interval",
+          "description": "Surveillance interval must be set once pathology returns; if tubular adenomas as in 2021, interval per guideline (single FDR colon cancer >60 is a modifier). Do not let this default/drop",
+          "urgency": "routine",
+          "expected_action": "assign and document surveillance colonoscopy interval",
+          "status": "open"
+        },
+        {
+          "id": "F3",
+          "type": "med_reconciliation",
+          "description": "Metformin was held only for prep/procedure day (not an anticoagulant/antiplatelet; nothing periprocedural was truly held to bridge); confirm the patient has resumed her home metformin 1000 mg BID after returning to normal diet and that no dose was missed",
+          "urgency": "routine",
+          "expected_action": "confirm metformin 1000 mg BID resumed after normal diet; reconcile that no other home meds were interrupted",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "id": "PT-004",
+      "procedure": "Colonoscopy",
+      "followup_items": [
+        {
+          "id": "F1",
+          "type": "pending_pathology",
+          "description": "Transverse colon polypectomy pathology pending (specimen A) — result must be communicated to the patient and drive the surveillance interval",
+          "urgency": "routine",
+          "expected_action": "call patient with result + document surveillance interval",
+          "status": "open"
+        },
+        {
+          "id": "F2",
+          "type": "surveillance_interval",
+          "description": "Next surveillance colonoscopy interval to be set based on final polyp pathology (histology and count); prior lesion was a sessile serrated lesion",
+          "urgency": "routine",
+          "expected_action": "document and communicate next colonoscopy due date",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "id": "PT-005",
+      "procedure": "Bidirectional endoscopy (EGD + Colonoscopy)",
+      "followup_items": [
+        {
+          "id": "F1",
+          "type": "pending_pathology",
+          "description": "Duodenal second-portion biopsy (specimen C) pending to evaluate for celiac disease as part of the iron-deficiency anemia workup — result must be reviewed and communicated",
+          "urgency": "routine",
+          "expected_action": "review celiac biopsy result, call patient, document",
+          "status": "open"
+        },
+        {
+          "id": "F2",
+          "type": "pending_pathology",
+          "description": "Gastric H. pylori biopsy (specimen B) pending — positive result requires eradication therapy and post-treatment confirmation",
+          "urgency": "routine",
+          "expected_action": "review H. pylori result; if positive treat and arrange test-of-cure",
+          "status": "open"
+        },
+        {
+          "id": "F3",
+          "type": "pending_pathology",
+          "description": "Ascending colon polyp (specimen A) pathology pending — drives colonoscopy surveillance interval",
+          "urgency": "routine",
+          "expected_action": "review polyp histology and set surveillance interval",
+          "status": "open"
+        },
+        {
+          "id": "F4",
+          "type": "med_reconciliation",
+          "description": "Self-directed daily aspirin 81 mg and OTC ibuprofen held peri-procedure — decision needed on permanent NSAID discontinuation and whether to resume/stop the self-started aspirin given the identified occult GI bleeding source and low-risk primary-prevention indication (do-not-resume guidance likely)",
+          "urgency": "urgent",
+          "expected_action": "reconcile med list; clarify antiplatelet/NSAID plan with patient, PCP, and cardiology; document decision (avoid NSAIDs; likely do not resume aspirin)",
+          "status": "open"
+        },
+        {
+          "id": "F5",
+          "type": "known_lesion_followup",
+          "description": "8 mm clean-based duodenal bulb ulcer identified as the probable occult blood-loss source for severe IDA (ferritin 6) in a patient on daily aspirin plus NSAIDs — requires PPI escalation, NSAID cessation, and endoscopic healing confirmation to prevent recurrent/overt bleeding",
+          "urgency": "urgent",
+          "expected_action": "escalate PPI, ensure NSAID cessation, arrange healing reassessment",
+          "status": "open"
+        },
+        {
+          "id": "F6",
+          "type": "repeat_procedure",
+          "description": "Repeat EGD in 8-12 weeks to confirm duodenal ulcer healing",
+          "urgency": "routine",
+          "expected_action": "schedule follow-up EGD and confirm healing",
+          "status": "open"
+        },
+        {
+          "id": "F7",
+          "type": "surveillance_interval",
+          "description": "Colonoscopy surveillance interval to be set once ascending colon polyp histology returns",
+          "urgency": "routine",
+          "expected_action": "assign surveillance interval based on polyp pathology",
+          "status": "open"
+        },
+        {
+          "id": "F8",
+          "type": "lab_followup",
+          "description": "Anemia response monitoring — recheck CBC/ferritin after iron repletion and source control to confirm hemoglobin recovery and exclude ongoing blood loss",
+          "urgency": "routine",
+          "expected_action": "recheck labs in 6-8 weeks and confirm response",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "id": "PT-006",
+      "procedure": "Colonoscopy",
+      "followup_items": [
+        {
+          "id": "F1",
+          "type": "pending_pathology",
+          "description": "Sigmoid mass biopsy pathology pending (specimen A) — result highly likely to confirm malignancy and must be communicated to the patient and drive cancer workup",
+          "urgency": "critical",
+          "expected_action": "call patient with result urgently + document diagnosis and initiate oncology/surgical pathway",
+          "status": "open"
+        },
+        {
+          "id": "F2",
+          "type": "critical_result",
+          "description": "Endoscopically visible partially obstructing sigmoid mass highly suspicious for colorectal adenocarcinoma",
+          "urgency": "critical",
+          "expected_action": "ensure result is escalated and not lost; confirm patient reached and workup started",
+          "status": "open"
+        },
+        {
+          "id": "F3",
+          "type": "referral",
+          "description": "Referral to colorectal surgery and multidisciplinary oncology/tumor board for suspected sigmoid cancer",
+          "urgency": "urgent",
+          "expected_action": "place and confirm referrals; track that patient is seen",
+          "status": "open"
+        },
+        {
+          "id": "F4",
+          "type": "referral",
+          "description": "Staging imaging (CT chest/abdomen/pelvis) and baseline CEA ordered as part of colorectal cancer workup",
+          "urgency": "urgent",
+          "expected_action": "order staging CT + CEA and confirm results reviewed",
+          "status": "open"
+        },
+        {
+          "id": "F5",
+          "type": "complication_watch",
+          "description": "Partially obstructing lesion — risk of progression to complete large-bowel obstruction before definitive treatment",
+          "urgency": "urgent",
+          "expected_action": "counsel obstruction precautions; expedite surgical evaluation",
+          "status": "open"
+        },
+        {
+          "id": "F6",
+          "type": "med_reconciliation",
+          "description": "Daily aspirin 81 mg (self-started, previously missing from chart) must be documented and reconciled, with peri-operative management guidance ahead of anticipated surgery; no antiplatelet was held for this diagnostic scope, and patient-reported 'blood thinner' clarified as OTC fish oil (omega-3), not therapeutic anticoagulation",
+          "urgency": "routine",
+          "expected_action": "document aspirin on the medication list, reconcile, and provide a peri-operative hold/resume plan for surgery",
+          "status": "open"
+        },
+        {
+          "id": "F7",
+          "type": "incidental_finding",
+          "description": "Sigmoid diverticulosis noted incidentally",
+          "urgency": "routine",
+          "expected_action": "document; no specific intervention",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "id": "PT-007",
+      "procedure": "Colonoscopy",
+      "followup_items": [
+        {
+          "id": "F1",
+          "type": "pending_pathology",
+          "description": "Histology pending on two polypectomy specimens (ascending 4 mm, descending 3 mm); result must be communicated to patient and drive surveillance planning",
+          "urgency": "routine",
+          "expected_action": "call patient with result + document surveillance interval",
+          "status": "open"
+        },
+        {
+          "id": "F2",
+          "type": "surveillance_interval",
+          "description": "Surveillance interval must incorporate first-degree relative (father) with colorectal cancer at ~68 — patient is above average risk, so the average-risk 10-year interval on the referral does not apply; likely 5-year interval, to be finalized with pathology",
+          "urgency": "routine",
+          "expected_action": "set and document risk-appropriate surveillance interval; correct the average-risk classification on record",
+          "status": "open"
+        },
+        {
+          "id": "F3",
+          "type": "record_correction",
+          "description": "Anesthesia/sedation record should reflect postoperative nausea and vomiting (PONV) rather than motion sickness so future sedation includes anti-emetic prophylaxis",
+          "urgency": "routine",
+          "expected_action": "verify PONV documented as active problem; carry forward prophylaxis plan",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "id": "PT-008",
+      "procedure": "Colonoscopy",
+      "followup_items": [
+        {
+          "id": "F1",
+          "type": "pending_pathology",
+          "description": "Sigmoid mass biopsy (specimen A) pathology pending — lesion is endoscopically suspicious for malignancy; result must be personally reviewed and communicated, and drives staging/referral",
+          "urgency": "critical",
+          "expected_action": "expedite pathology, disclose result to patient, initiate staging + surgical/oncology referral if malignant",
+          "status": "open"
+        },
+        {
+          "id": "F2",
+          "type": "critical_result",
+          "description": "Ulcerated partially obstructing sigmoid mass suspicious for colorectal cancer in a 45M with FDR CRC — a critical endoscopic finding that must not be dropped even before histology returns",
+          "urgency": "critical",
+          "expected_action": "ensure patient is tracked to staging workup and multidisciplinary referral; confirm no loss to follow-up",
+          "status": "open"
+        },
+        {
+          "id": "F3",
+          "type": "referral",
+          "description": "Colorectal surgery and oncology referral contingent on/anticipating malignant pathology; tattoo placed to localize lesion for surgical planning",
+          "urgency": "urgent",
+          "expected_action": "place referrals promptly once malignancy confirmed; communicate tattoo location",
+          "status": "open"
+        },
+        {
+          "id": "F4",
+          "type": "pending_pathology",
+          "description": "Descending colon (7 mm, specimen B) and ascending colon (4 mm, specimen C) polypectomy pathology pending",
+          "urgency": "routine",
+          "expected_action": "review histology and factor into surveillance interval",
+          "status": "open"
+        },
+        {
+          "id": "F5",
+          "type": "surveillance_interval",
+          "description": "Surveillance interval must account for confirmed first-degree relative with colorectal cancer plus index findings; interval cannot be set until all pathology returns",
+          "urgency": "routine",
+          "expected_action": "set and document surveillance interval after full pathology and any surgical pathology",
+          "status": "open"
+        },
+        {
+          "id": "F6",
+          "type": "med_reconciliation",
+          "description": "OTC ibuprofen intentionally held; given active GI bleeding and pending malignancy workup, it should NOT be resumed without GI sign-off (do-not-resume guidance; ibuprofen is an NSAID, not an anticoagulant/antiplatelet, so no true anticoagulation hold occurred). Fish oil is a supplement (mislabeled by patient as a 'blood thinner'), no anticoagulant hold/resume applies",
+          "urgency": "routine",
+          "expected_action": "confirm ibuprofen remains held pending diagnosis; document fish oil as supplement, clarify no anticoagulant on board",
+          "status": "open"
+        },
+        {
+          "id": "F7",
+          "type": "incidental_finding",
+          "description": "Non-bleeding internal hemorrhoids noted — incidental; explicitly NOT the source of the hematochezia, so the prior unconfirmed hemorrhoid label must not be used to close out the bleeding workup",
+          "urgency": "routine",
+          "expected_action": "document as incidental; ensure bleeding is attributed to the sigmoid lesion, not premature hemorrhoid closure",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "id": "PT-009",
+      "procedure": "Colonoscopy",
+      "followup_items": [
+        {
+          "id": "F1",
+          "type": "pending_pathology",
+          "description": "Pathology pending on two polypectomy specimens (6 mm ascending colon, 4 mm sigmoid). Result must be communicated to the patient and must drive the surveillance interval.",
+          "urgency": "routine",
+          "expected_action": "call patient with pathology result + document surveillance interval in chart",
+          "status": "open"
+        },
+        {
+          "id": "F2",
+          "type": "surveillance_interval",
+          "description": "Surveillance colonoscopy interval to be set once pathology returns; must weigh patient's age (76) and life expectancy against a standard 7-10 year interval — a repeat scope may not be indicated if adenomas are low-risk given age.",
+          "urgency": "routine",
+          "expected_action": "document individualized surveillance recommendation after pathology; reconcile with USPSTF age considerations",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "id": "PT-010",
+      "procedure": "Colonoscopy",
+      "followup_items": [
+        {
+          "id": "F1",
+          "type": "pending_pathology",
+          "description": "Ascending colon polypectomy (specimen A) pathology pending — result must be communicated to the patient and drive the surveillance interval",
+          "urgency": "routine",
+          "expected_action": "call patient with result + document surveillance interval",
+          "status": "open"
+        },
+        {
+          "id": "F2",
+          "type": "surveillance_interval",
+          "description": "Surveillance interval to be finalized once polyp histology returns; average-risk 7-10 years expected for a single small adenoma/hyperplastic polyp",
+          "urgency": "routine",
+          "expected_action": "document and communicate next colonoscopy interval",
+          "status": "open"
+        },
+        {
+          "id": "F3",
+          "type": "care_coordination",
+          "description": "Care-coordination flag: patient is a portal non-responder and requests phone-only contact — result call and prep/surveillance communication must route to phone",
+          "urgency": "routine",
+          "expected_action": "ensure result notification uses phone channel, not portal",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "id": "PT-011",
+      "procedure": "Colonoscopy",
+      "followup_items": [
+        {
+          "id": "F1",
+          "type": "pending_pathology",
+          "description": "Sigmoid (7 mm) and transverse (4 mm) polypectomy pathology pending — results must be communicated to the patient and drive the surveillance interval",
+          "urgency": "routine",
+          "expected_action": "call patient with results + document surveillance interval",
+          "status": "open"
+        },
+        {
+          "id": "F2",
+          "type": "med_resume",
+          "description": "Warfarin resumption after cold snare polypectomy in a high stroke-risk AF patient (CHA2DS2-VASc 4); warfarin was held 5 days pre-procedure",
+          "urgency": "urgent",
+          "expected_action": "confirm warfarin restarted evening of procedure and arrange follow-up INR with anticoagulation clinic within 5-7 days",
+          "status": "open"
+        },
+        {
+          "id": "F3",
+          "type": "complication_watch",
+          "description": "Post-polypectomy delayed bleeding risk elevated by re-anticoagulation with warfarin",
+          "urgency": "routine",
+          "expected_action": "ensure patient has bleeding precautions and knows when to seek care during 14-day post-polypectomy window",
+          "status": "open"
+        },
+        {
+          "id": "F4",
+          "type": "surveillance_interval",
+          "description": "Surveillance interval to be finalized once pathology returns; prior tubular adenomas with LGD plus current polyps may shorten the next interval",
+          "urgency": "routine",
+          "expected_action": "set and document next colonoscopy interval per pathology and polyp count",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "id": "PT-012",
+      "procedure": "Colonoscopy",
+      "followup_items": [
+        {
+          "id": "F1",
+          "type": "pending_pathology",
+          "description": "Histology pending on three polypectomy specimens (9 mm ascending, 5 mm sigmoid, 3 mm rectal). Results must be communicated to the patient and determine the surveillance colonoscopy interval.",
+          "urgency": "routine",
+          "expected_action": "call patient with pathology results and document surveillance interval per histology/size/count",
+          "status": "open"
+        },
+        {
+          "id": "F2",
+          "type": "surveillance_interval",
+          "description": "Surveillance colonoscopy interval to be set once pathology returns (multiple polyps including a 9 mm lesion — likely 3-5 year interval if tubular adenomas, sooner if advanced histology).",
+          "urgency": "routine",
+          "expected_action": "assign and document surveillance interval; enter recall",
+          "status": "open"
+        },
+        {
+          "id": "F3",
+          "type": "med_reconciliation",
+          "description": "Aspirin 81 mg was continued through the procedure (not held); confirm patient continues it and that this previously-undocumented antiplatelet is now recorded in the medication list.",
+          "urgency": "routine",
+          "expected_action": "verify aspirin documented and continued; no resumption action needed since not held",
+          "status": "open"
+        },
+        {
+          "id": "F4",
+          "type": "record_correction",
+          "description": "Mis-attributed active Clostridioides difficile infection on the problem list actually belongs to the patient's spouse; patient asymptomatic and never diagnosed.",
+          "urgency": "routine",
+          "expected_action": "remove/reclassify C. difficile infection from patient problem list; no stool testing or isolation",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "id": "PT-013",
+      "procedure": "Esophagogastroduodenoscopy (EGD)",
+      "followup_items": [
+        {
+          "id": "F1",
+          "type": "pending_pathology",
+          "description": "Distal esophageal biopsy pending — must confirm erosive esophagitis and, importantly, exclude intestinal metaplasia (Barrett's esophagus); result drives whether Barrett's surveillance is needed",
+          "urgency": "routine",
+          "expected_action": "review path, call patient with result, document Barrett's status and any surveillance interval",
+          "status": "open"
+        },
+        {
+          "id": "F2",
+          "type": "pending_pathology",
+          "description": "Gastric antral biopsy pending — histology and H. pylori (prior stool antigen negative; confirm on tissue)",
+          "urgency": "routine",
+          "expected_action": "review path; if H. pylori positive, initiate eradication therapy",
+          "status": "open"
+        },
+        {
+          "id": "F3",
+          "type": "repeat_procedure",
+          "description": "Follow-up EGD in 8-12 weeks after optimized PPI therapy to confirm healing of LA Grade B erosive esophagitis and reassess GE junction for Barrett's on healed mucosa",
+          "urgency": "routine",
+          "expected_action": "schedule surveillance/healing EGD once PPI optimized",
+          "status": "open"
+        },
+        {
+          "id": "F4",
+          "type": "med_reconciliation",
+          "description": "Medication reconciliation and optimization (no anticoagulant/antiplatelet held for this EGD): correct PPI to BID pre-meal dosing, discontinue famotidine (already stopped by patient), and stop/minimize OTC ibuprofen (contributor to erosive disease); substitute acetaminophen for headaches",
+          "urgency": "routine",
+          "expected_action": "update med list, counsel patient, coordinate NSAID cessation with PCP",
+          "status": "open"
+        },
+        {
+          "id": "F5",
+          "type": "incidental_finding",
+          "description": "Small sliding hiatal hernia noted — contributes to reflux; relevant if symptoms persist despite optimized medical therapy (consider anti-reflux surgery evaluation)",
+          "urgency": "routine",
+          "expected_action": "document; revisit surgical evaluation only if refractory after true PPI optimization",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "id": "PT-014",
+      "procedure": "Esophagogastroduodenoscopy (EGD) with biopsy",
+      "followup_items": [
+        {
+          "id": "F1",
+          "type": "critical_result",
+          "description": "Biopsy of obstructing distal esophageal / GE-junction mass highly suspicious for malignancy — tissue diagnosis is a critical result that must be communicated and drive the oncology pathway",
+          "urgency": "critical",
+          "expected_action": "expedite pathology; disclose result to patient; initiate oncology referral on confirmation",
+          "status": "open"
+        },
+        {
+          "id": "F2",
+          "type": "pending_pathology",
+          "description": "Esophageal mass biopsy (specimen A) pathology pending — result outstanding and must be tracked to closure",
+          "urgency": "critical",
+          "expected_action": "track pathology to completion; do not let result go unread",
+          "status": "open"
+        },
+        {
+          "id": "F3",
+          "type": "referral",
+          "description": "GI oncology / thoracic multidisciplinary tumor board referral for suspected esophageal cancer",
+          "urgency": "urgent",
+          "expected_action": "place referral upon pathology confirmation",
+          "status": "open"
+        },
+        {
+          "id": "F4",
+          "type": "repeat_procedure",
+          "description": "Staging endoscopic ultrasound (EUS) and CT chest/abdomen/pelvis for locoregional and distant staging",
+          "urgency": "urgent",
+          "expected_action": "order staging imaging and EUS pending tissue diagnosis",
+          "status": "open"
+        },
+        {
+          "id": "F5",
+          "type": "med_resume",
+          "description": "OTC aspirin 81 mg held periprocedurally (not on original chart — reconciled at consult) — needs resumption instruction after biopsies",
+          "urgency": "routine",
+          "expected_action": "confirm safe resumption at 48h and document on medication list",
+          "status": "open"
+        },
+        {
+          "id": "F6",
+          "type": "care_coordination",
+          "description": "Alcohol intake heavier than charted (~6-8 drinks/day) — withdrawal monitoring and counseling; relevant to sedation and upcoming treatment",
+          "urgency": "urgent",
+          "expected_action": "monitor for withdrawal; provide cessation counseling/support",
+          "status": "open"
+        },
+        {
+          "id": "F7",
+          "type": "complication_watch",
+          "description": "Post-biopsy bleeding watch in a patient on chronic OTC aspirin with an ulcerated friable mass",
+          "urgency": "routine",
+          "expected_action": "counsel on hematemesis/melena return precautions",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "id": "PT-015",
+      "procedure": "Esophagogastroduodenoscopy (EGD) with esophageal dilation",
+      "followup_items": [
+        {
+          "id": "F1",
+          "type": "pending_pathology",
+          "description": "Distal esophageal/stricture biopsy pending to exclude eosinophilic esophagitis and malignancy given recurrent stricture; result must be communicated and drive further management",
+          "urgency": "routine",
+          "expected_action": "call patient with result, document EoE/malignancy exclusion and next steps",
+          "status": "open"
+        },
+        {
+          "id": "F2",
+          "type": "med_resume",
+          "description": "Resume held apixaban 2.5 mg BID (corrected reduced dose) after higher-bleed-risk dilation, coordinated with cardiology and keyed to bleeding risk; on a DOAC so resumption timing is safety-critical",
+          "urgency": "urgent",
+          "expected_action": "confirm and document safe apixaban resumption date/time with cardiology",
+          "status": "open"
+        },
+        {
+          "id": "F3",
+          "type": "med_resume",
+          "description": "Resume held aspirin 81 mg after dilation per cardiology plan; additive bleed risk was the reason for hold",
+          "urgency": "routine",
+          "expected_action": "confirm aspirin resumption timing with cardiology",
+          "status": "open"
+        },
+        {
+          "id": "F4",
+          "type": "surveillance_interval",
+          "description": "Recurrent peptic stricture pattern (second symptomatic recurrence) — establish repeat dilation / EGD plan and PPI optimization for recurrent dysphagia",
+          "urgency": "routine",
+          "expected_action": "set PRN repeat-dilation plan and reinforce high-dose PPI adherence",
+          "status": "open"
+        },
+        {
+          "id": "F5",
+          "type": "complication_watch",
+          "description": "Post-dilation perforation/bleeding watch, heightened by periprocedural DOAC and antiplatelet exposure",
+          "urgency": "urgent",
+          "expected_action": "monitor for chest pain, fever, odynophagia, hematemesis, melena; act if positive",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "id": "PT-016",
+      "procedure": "Esophagogastroduodenoscopy (EGD) with duodenal biopsy",
+      "followup_items": [
+        {
+          "id": "F1",
+          "type": "pending_pathology",
+          "description": "Duodenal biopsy pathology pending (Marsh grade) — the confirmatory test for celiac disease; result must be communicated to the patient and drive the diagnosis",
+          "urgency": "urgent",
+          "expected_action": "call patient with pathology result; confirm or exclude celiac; update problem list from suspected/provisional to final",
+          "status": "open"
+        },
+        {
+          "id": "F2",
+          "type": "referral",
+          "description": "Dietitian referral for gluten-free diet counseling contingent on positive biopsy",
+          "urgency": "routine",
+          "expected_action": "place dietitian referral once celiac confirmed; initiate gluten-free diet",
+          "status": "open"
+        },
+        {
+          "id": "F3",
+          "type": "lab_followup",
+          "description": "Post-diagnosis follow-up: repeat tTG-IgA and iron studies to assess response to gluten-free diet",
+          "urgency": "routine",
+          "expected_action": "schedule follow-up labs (tTG-IgA, Hgb, ferritin) at ~3 months and clinic visit",
+          "status": "open"
+        },
+        {
+          "id": "F4",
+          "type": "lab_followup",
+          "description": "Iron deficiency (Hgb 12.9, ferritin 18) — no bleeding source or mass on upper endoscopy; attribute to malabsorption if celiac confirmed, otherwise reassess and consider further workup",
+          "urgency": "routine",
+          "expected_action": "recheck iron studies after treatment; if not resolving or celiac excluded, pursue additional GI evaluation",
+          "status": "open"
+        },
+        {
+          "id": "F5",
+          "type": "med_reconciliation",
+          "description": "OTC omega-3 (fish oil), misreported by patient as a 'blood thinner' — not a true anticoagulant, no periprocedural hold required; ensure it is added to the medication list",
+          "urgency": "routine",
+          "expected_action": "reconcile medication list to include OTC fish oil",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "id": "PT-017",
+      "procedure": "Esophagogastroduodenoscopy (EGD) with variceal band ligation",
+      "followup_items": [
+        {
+          "id": "F1",
+          "type": "critical_result",
+          "description": "High-risk esophageal varices (grade 2-3, red wale marks) with a healed bleeding stigma corroborating the reported prior melena — a bleeding source in a Child-Pugh B cirrhotic; must not be dropped as it drives secondary prophylaxis and urgent surveillance",
+          "urgency": "critical",
+          "expected_action": "ensure hepatology/GI informed, patient counseled on urgent return precautions, and secondary-prophylaxis plan initiated",
+          "status": "open"
+        },
+        {
+          "id": "F2",
+          "type": "repeat_procedure",
+          "description": "Repeat EGD for serial variceal band ligation until eradication",
+          "urgency": "urgent",
+          "expected_action": "schedule follow-up banding session in 2-4 weeks and track through eradication",
+          "status": "open"
+        },
+        {
+          "id": "F3",
+          "type": "med_reconciliation",
+          "description": "Initiate non-selective beta-blocker (carvedilol) for secondary prophylaxis of variceal bleeding, coordinated with hepatology",
+          "urgency": "urgent",
+          "expected_action": "start and titrate NSBB; document blood pressure/ascites tolerance",
+          "status": "open"
+        },
+        {
+          "id": "F4",
+          "type": "incidental_finding",
+          "description": "Portal hypertensive gastropathy noted — reinforces portal hypertension severity; relevant to future anemia/bleeding workup",
+          "urgency": "routine",
+          "expected_action": "document; monitor for iron-deficiency anemia",
+          "status": "open"
+        },
+        {
+          "id": "F5",
+          "type": "med_reconciliation",
+          "description": "Spironolactone dose discrepancy — chart 100 mg vs patient-reported 50 mg; reconcile and reassess ascites/electrolytes",
+          "urgency": "routine",
+          "expected_action": "reconcile actual dose with hepatology and adjust diuretic plan",
+          "status": "open"
+        },
+        {
+          "id": "F6",
+          "type": "surveillance_interval",
+          "description": "Continue HCC surveillance imaging per cirrhosis protocol",
+          "urgency": "routine",
+          "expected_action": "confirm next surveillance imaging is scheduled q6 months",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "id": "PT-018",
+      "procedure": "Esophagogastroduodenoscopy (EGD) with esophageal biopsies",
+      "followup_items": [
+        {
+          "id": "F1",
+          "type": "pending_pathology",
+          "description": "Esophageal EoE-protocol biopsy pathology pending — peak eosinophil count/hpf will confirm or refute eosinophilic esophagitis and is the reason for the procedure; result must be communicated and drive the treatment plan",
+          "urgency": "urgent",
+          "expected_action": "review histology, call patient with diagnosis, initiate/adjust EoE therapy",
+          "status": "open"
+        },
+        {
+          "id": "F2",
+          "type": "pending_pathology",
+          "description": "Active OTC omeprazole exposure (self-started ~3 weeks pre-procedure, not held) can suppress tissue eosinophilia and confound the biopsy — if the count is low/borderline the result may be a false negative or PPI-responsive esophageal eosinophilia rather than true EoE exclusion",
+          "urgency": "urgent",
+          "expected_action": "flag PPI status to pathologist and at result review; do not interpret a low count as ruling out EoE without accounting for PPI; decide on hold-and-rebiopsy if needed",
+          "status": "open"
+        },
+        {
+          "id": "F3",
+          "type": "known_lesion_followup",
+          "description": "Mild non-obstructing mid-esophageal stricture / narrow-caliber esophagus identified; not dilated this session",
+          "urgency": "routine",
+          "expected_action": "track dysphagia response to therapy; plan endoscopic dilation if symptoms persist",
+          "status": "open"
+        },
+        {
+          "id": "F4",
+          "type": "repeat_procedure",
+          "description": "Follow-up EGD with biopsies to assess histologic response after starting EoE-directed therapy, with possible dilation",
+          "urgency": "routine",
+          "expected_action": "schedule surveillance EGD 8-12 weeks after therapy initiation",
+          "status": "open"
+        },
+        {
+          "id": "F5",
+          "type": "med_reconciliation",
+          "description": "Definitive decision on PPI/topical steroid vs dietary therapy pending histology; patient currently on unsupervised OTC omeprazole",
+          "urgency": "routine",
+          "expected_action": "set formal medication plan and stop unsupervised self-medication once diagnosis confirmed",
+          "status": "open"
+        },
+        {
+          "id": "F6",
+          "type": "care_coordination",
+          "description": "Recurrent food impaction risk persists until EoE is treated; two impaction events including one ED presentation with near-endoscopic disimpaction",
+          "urgency": "routine",
+          "expected_action": "reinforce ED return precautions for impaction or inability to swallow secretions",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "id": "PT-019",
+      "procedure": "Esophagogastroduodenoscopy (EGD)",
+      "followup_items": [
+        {
+          "id": "F1",
+          "type": "pending_pathology",
+          "description": "Gastric antral ulcer-margin biopsy pending to exclude gastric malignancy — every gastric ulcer requires histologic malignancy exclusion and the result must be communicated and reconciled",
+          "urgency": "urgent",
+          "expected_action": "review path, call patient/daughter with result, exclude malignancy, document",
+          "status": "open"
+        },
+        {
+          "id": "F2",
+          "type": "pending_pathology",
+          "description": "H. pylori biopsy result pending — positive result requires renal-adjusted eradication therapy and post-treatment confirmation of eradication",
+          "urgency": "routine",
+          "expected_action": "review H. pylori result; if positive, prescribe eradication regimen and schedule test-of-cure",
+          "status": "open"
+        },
+        {
+          "id": "F3",
+          "type": "med_resume",
+          "description": "Rivaroxaban resumption decision after a documented NSAID/DOAC-associated ulcer bleed in an anticoagulated afib patient — held peri-procedure, must be actively coordinated with cardiology and not silently dropped",
+          "urgency": "critical",
+          "expected_action": "GI/cardiology jointly set safe resumption timing at correct renal dose (15 mg daily)",
+          "status": "open"
+        },
+        {
+          "id": "F4",
+          "type": "repeat_procedure",
+          "description": "Repeat EGD in 8-12 weeks to confirm gastric ulcer healing (standard of care for gastric ulcers)",
+          "urgency": "routine",
+          "expected_action": "schedule surveillance EGD to document healing",
+          "status": "open"
+        },
+        {
+          "id": "F5",
+          "type": "med_reconciliation",
+          "description": "Rivaroxaban dose reconciliation — chart still lists stale 20 mg; correct active dose is 15 mg daily (CKD renal reduction). Wrong dose on resumption drives bleeding risk",
+          "urgency": "urgent",
+          "expected_action": "update medication list to rivaroxaban 15 mg daily and ensure resumption uses correct dose",
+          "status": "open"
+        },
+        {
+          "id": "F6",
+          "type": "referral",
+          "description": "Cardiology coordination for periprocedural/post-bleed anticoagulation management in afib + CKD stage 3",
+          "urgency": "urgent",
+          "expected_action": "cardiology consult/communication to finalize anticoagulation plan",
+          "status": "open"
+        },
+        {
+          "id": "F7",
+          "type": "complication_watch",
+          "description": "Rebleeding surveillance after Forrest IIc ulcer off anticoagulation — recheck CBC and monitor for hematemesis/melena",
+          "urgency": "urgent",
+          "expected_action": "recheck CBC within 1 week; ED return precautions reviewed with daughter",
+          "status": "open"
+        },
+        {
+          "id": "F8",
+          "type": "med_reconciliation",
+          "description": "Permanent NSAID discontinuation and alternative analgesia for chronic knee pain (undocumented OTC ibuprofen was the likely mucosal culprit) — do-not-resume/avoid guidance to be recorded on the medication list",
+          "urgency": "routine",
+          "expected_action": "confirm NSAIDs stopped on medication list; PCP to arrange non-NSAID knee analgesia",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "id": "PT-020",
+      "procedure": "Esophagogastroduodenoscopy (EGD) with gastric biopsy and H. pylori culture/susceptibility",
+      "followup_items": [
+        {
+          "id": "F1",
+          "type": "pending_pathology",
+          "description": "Gastric biopsy H. pylori culture and antimicrobial susceptibility pending (10-14 days) — the entire purpose of the EGD; result must drive selection of the salvage eradication regimen",
+          "urgency": "urgent",
+          "expected_action": "review culture/susceptibility, call patient, prescribe susceptibility-guided regimen",
+          "status": "open"
+        },
+        {
+          "id": "F2",
+          "type": "pending_pathology",
+          "description": "Gastric biopsy histology pending (Sydney protocol) — assess gastritis severity, intestinal metaplasia/atrophy, exclude MALT/dysplasia",
+          "urgency": "routine",
+          "expected_action": "review histology and document; escalate if atrophy/IM/dysplasia found",
+          "status": "open"
+        },
+        {
+          "id": "F3",
+          "type": "referral",
+          "description": "Allergy-constrained salvage antibiotic selection — penicillin/amoxicillin allergy (rash) newly identified; must avoid amoxicillin-based regimens; ID co-management referral in place",
+          "urgency": "routine",
+          "expected_action": "select non-amoxicillin regimen with GI/ID per susceptibility",
+          "status": "open"
+        },
+        {
+          "id": "F4",
+          "type": "lab_followup",
+          "description": "Test-of-cure required after salvage eradication (>=4 weeks post-therapy, >=2 weeks off PPI) — non-invasive stool antigen or urea breath test; repeat EGD only if therapy again fails or alarm features develop",
+          "urgency": "routine",
+          "expected_action": "schedule non-invasive test-of-cure and confirm eradication",
+          "status": "open"
+        },
+        {
+          "id": "F5",
+          "type": "med_reconciliation",
+          "description": "Pantoprazole management — PPI was held 2 weeks pre-procedure for biopsy accuracy (not an anticoagulant hold); resume for symptom control now that biopsies are obtained, then re-hold 2 weeks before any test-of-cure to avoid false-negative",
+          "urgency": "routine",
+          "expected_action": "instruct patient on PPI resume/hold timing around test-of-cure",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "id": "PT-021",
+      "procedure": "Colonoscopy with polypectomy",
+      "followup_items": [
+        {
+          "id": "F1",
+          "type": "pending_pathology",
+          "description": "Pathology pending on ascending-colon EMR scar biopsy (residual/recurrent adenoma question — piecemeal 2023 margins were indeterminate) plus transverse and sigmoid polypectomies. Result determines whether residual advanced neoplasia is present and drives surveillance interval.",
+          "urgency": "urgent",
+          "expected_action": "review path when back (~2026-08-04), call patient, document surveillance interval; if residual/recurrent adenoma at scar, plan short-interval repeat",
+          "status": "open"
+        },
+        {
+          "id": "F2",
+          "type": "med_resume",
+          "description": "Warfarin resumption after polypectomy in a mechanical MITRAL valve patient — highest-stakes item. Warfarin was genuinely held 5 days pre-procedure with therapeutic LMWH bridging; bridging must overlap until INR therapeutic (2.5-3.5). Premature/omitted resumption risks valve thrombosis, over-early resumption after clip resection risks delayed post-polypectomy bleed. Must be cardiology/anticoag-clinic co-managed, not a standard protocol.",
+          "urgency": "critical",
+          "expected_action": "confirm exact warfarin restart + LMWH bridge timing with cardiology/anticoag clinic; verify INR back in 2.5-3.5 range; ensure patient has written dates",
+          "status": "open"
+        },
+        {
+          "id": "F3",
+          "type": "med_resume",
+          "description": "OTC aspirin 81 mg (previously undocumented, reconciled onto med list) was genuinely held 5 days peri-procedurally per cardiology — resumption-vs-discontinuation decision outstanding given additive bleeding risk on warfarin.",
+          "urgency": "routine",
+          "expected_action": "cardiology to decide whether to resume or discontinue OTC aspirin; document decision on med list",
+          "status": "open"
+        },
+        {
+          "id": "F4",
+          "type": "complication_watch",
+          "description": "Delayed post-polypectomy bleeding watch — cold snare resections with prophylactic clips in an anticoagulated patient resuming warfarin/bridging; live risk window ~14 days.",
+          "urgency": "urgent",
+          "expected_action": "counsel patient on hematochezia/lightheadedness precautions; ensure clear return/ED instructions and anticoag-clinic contact",
+          "status": "open"
+        },
+        {
+          "id": "F5",
+          "type": "record_correction",
+          "description": "Ascending-colon prior EMR scar tattooed distally for future localization; residual clip present — carry the tattoo/clip location forward in the chart for future endoscopy planning.",
+          "urgency": "routine",
+          "expected_action": "document tattoo location in chart and future endoscopy planning note",
+          "status": "open"
+        },
+        {
+          "id": "F6",
+          "type": "surveillance_interval",
+          "description": "Surveillance interval to be set once current pathology returns; pending histology of scar biopsy and polyps, and prior TVA-with-LGD history.",
+          "urgency": "routine",
+          "expected_action": "set and document next colonoscopy interval after pathology; communicate to patient and PCP",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "id": "PT-022",
+      "procedure": "Colonoscopy",
+      "followup_items": [
+        {
+          "id": "F1",
+          "type": "pending_pathology",
+          "description": "22 mm sigmoid laterally spreading lesion removed by piecemeal EMR — pathology pending; concerning for advanced adenoma, possible high-grade dysplasia or worse. Result drives surveillance interval and any need for further resection/referral.",
+          "urgency": "urgent",
+          "expected_action": "review pathology within 1 week, call patient with result, document surveillance/repeat-EMR plan",
+          "status": "open"
+        },
+        {
+          "id": "F2",
+          "type": "med_resume",
+          "description": "Ticagrelor 90 mg BID was held 3 days pre-procedure. Patient has two drug-eluting stents placed <12 months ago (Dec 2025) — high stent-thrombosis risk with any prolonged antiplatelet interruption. Resumption must be coordinated with cardiology and not left dropped.",
+          "urgency": "critical",
+          "expected_action": "confirm with cardiology and instruct patient to resume ticagrelor promptly (24-48h) unless active bleeding; document resumption date",
+          "status": "open"
+        },
+        {
+          "id": "F3",
+          "type": "complication_watch",
+          "description": "Elevated delayed post-EMR/post-polypectomy bleeding risk on continued aspirin plus resumed ticagrelor after a 22 mm piecemeal sigmoid EMR with clips.",
+          "urgency": "urgent",
+          "expected_action": "counsel on warning signs; ensure patient can reach GI; low threshold for evaluation of rebleeding for up to 2 weeks",
+          "status": "open"
+        },
+        {
+          "id": "F4",
+          "type": "repeat_procedure",
+          "description": "Piecemeal EMR of the sigmoid lesion requires a surveillance colonoscopy at ~6 months to confirm complete resection of the EMR scar.",
+          "urgency": "routine",
+          "expected_action": "schedule 6-month surveillance colonoscopy once pathology confirms adenoma; coordinate periprocedural antiplatelet plan with cardiology",
+          "status": "open"
+        },
+        {
+          "id": "F5",
+          "type": "surveillance_interval",
+          "description": "Overall colonoscopy surveillance interval pending final pathology of sigmoid EMR and descending polyp specimens.",
+          "urgency": "routine",
+          "expected_action": "set and document interval once pathology finalizes",
+          "status": "open"
+        },
+        {
+          "id": "F6",
+          "type": "lab_followup",
+          "description": "Mild anemia (Hgb 12.3 g/dL) with an identified colonic bleeding source now treated; requires confirmation that hemoglobin recovers after resection.",
+          "urgency": "routine",
+          "expected_action": "repeat CBC in 4-6 weeks; consider iron studies; escalate if anemia worsens",
+          "status": "open"
+        },
+        {
+          "id": "F7",
+          "type": "incidental_finding",
+          "description": "Small non-bleeding internal hemorrhoids and sigmoid diverticulosis noted; hemorrhoids are the likely source of the bright red blood on tissue.",
+          "urgency": "routine",
+          "expected_action": "conservative management counseling; no urgent action",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "id": "PT-023",
+      "procedure": "Colonoscopy",
+      "followup_items": [
+        {
+          "id": "F1",
+          "type": "pending_pathology",
+          "description": "Ascending colon polypectomy pathology pending — result must be communicated to the patient and drive the next surveillance colonoscopy interval",
+          "urgency": "routine",
+          "expected_action": "call patient with result and document surveillance interval",
+          "status": "open"
+        },
+        {
+          "id": "F2",
+          "type": "surveillance_interval",
+          "description": "Next surveillance colonoscopy interval to be set once pathology returns (prior low-grade tubular adenoma; small polyp removed this exam)",
+          "urgency": "routine",
+          "expected_action": "assign and document interval (likely 3-5 years pending final histology)",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "id": "PT-024",
+      "procedure": "Colonoscopy",
+      "followup_items": [
+        {
+          "id": "F1",
+          "type": "pending_pathology",
+          "description": "Ascending-colon mass biopsy (specimen A) pathology pending — lesion is ulcerated/friable and suspicious for malignancy; result must be actively tracked and communicated",
+          "urgency": "critical",
+          "expected_action": "track pathology, call patient promptly with result, initiate oncology/surgical pathway if malignant",
+          "status": "open"
+        },
+        {
+          "id": "F2",
+          "type": "critical_result",
+          "description": "Suspicious colonic mass identified as likely bleeding source and probable cause of the anemia / GI blood loss in a 78-year-old — high pretest probability of colorectal cancer",
+          "urgency": "critical",
+          "expected_action": "ensure result is escalated to a responsible clinician and not dropped; do not close encounter without disposition",
+          "status": "open"
+        },
+        {
+          "id": "F3",
+          "type": "referral",
+          "description": "Colorectal surgery + oncology referral and staging CT chest/abdomen/pelvis contingent on biopsy result",
+          "urgency": "urgent",
+          "expected_action": "place referrals and staging order once pathology confirms malignancy",
+          "status": "open"
+        },
+        {
+          "id": "F4",
+          "type": "med_resume",
+          "description": "Dabigatran (75 mg BID, renally cleared, CKD4/eGFR 22) held periprocedurally and resumption DEFERRED due to active occult bleeding source; high-risk decision requiring nephrology coordination — must not be resumed on a standard interval or forgotten",
+          "urgency": "critical",
+          "expected_action": "explicit GI/nephrology decision on hold-vs-resume before restarting anticoagulation; also address fish-oil resumption",
+          "status": "open"
+        },
+        {
+          "id": "F5",
+          "type": "complication_watch",
+          "description": "Post-biopsy/post-APC bleeding risk in an anticoagulated CKD4 patient; monitor for overt bleeding and recheck hemoglobin",
+          "urgency": "urgent",
+          "expected_action": "recheck CBC, review return precautions, watch for delayed bleeding",
+          "status": "open"
+        },
+        {
+          "id": "F6",
+          "type": "incidental_finding",
+          "description": "Right-colon angioectasias (one treated with APC) — potential additional/ongoing blood-loss source relevant to anemia",
+          "urgency": "routine",
+          "expected_action": "note as contributing source; reassess if anemia persists after mass management",
+          "status": "open"
+        },
+        {
+          "id": "F7",
+          "type": "repeat_procedure",
+          "description": "Possible EGD to evaluate an upper GI source of melena if colonic pathology does not fully explain blood loss",
+          "urgency": "routine",
+          "expected_action": "decide on EGD based on clinical course and hemoglobin trend",
+          "status": "open"
+        },
+        {
+          "id": "F8",
+          "type": "surveillance_interval",
+          "description": "Post-treatment colonoscopic surveillance interval to be defined once mass pathology/oncologic management is established",
+          "urgency": "routine",
+          "expected_action": "set surveillance plan after definitive management",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "id": "PT-025",
+      "procedure": "Colonoscopy",
+      "followup_items": [
+        {
+          "id": "F1",
+          "type": "pending_pathology",
+          "description": "Polypectomy pathology pending for Specimens A (5 mm ascending) and B (3 mm descending) — result must be communicated to the patient and drive the surveillance interval",
+          "urgency": "routine",
+          "expected_action": "call patient with histology result and document final surveillance interval",
+          "status": "open"
+        },
+        {
+          "id": "F2",
+          "type": "surveillance_interval",
+          "description": "Set colorectal cancer surveillance interval based on final polyp histology (provisionally 7-10 years for 1-2 small tubular adenomas)",
+          "urgency": "routine",
+          "expected_action": "record surveillance interval in chart and communicate to patient/PCP once pathology finalized",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "id": "PT-026",
+      "procedure": "Bidirectional endoscopy (EGD + colonoscopy)",
+      "followup_items": [
+        {
+          "id": "F1",
+          "type": "critical_result",
+          "description": "High-risk bleeding duodenal ulcer (Forrest IIa, visible vessel) treated endoscopically in a patient on a DOAC (edoxaban) with symptomatic anemia — high rebleeding risk requiring inpatient monitoring and IV PPI",
+          "urgency": "critical",
+          "expected_action": "admit/observe, high-dose IV PPI, serial CBC, ensure rebleed plan communicated and documented",
+          "status": "open"
+        },
+        {
+          "id": "F2",
+          "type": "med_resume",
+          "description": "Edoxaban resumption after high-risk ulcer hemostasis — load-bearing decision balancing rebleeding vs. thromboembolic (AF, CHA2DS2-VASc 4, CKD3a) risk; correct dose is 30 mg daily (chart still shows stale 60 mg)",
+          "urgency": "critical",
+          "expected_action": "GI + cardiology jointly set restart date/dose; do not resume without sign-off; update chart to 30 mg",
+          "status": "open"
+        },
+        {
+          "id": "F3",
+          "type": "pending_pathology",
+          "description": "Gastric biopsy / H. pylori result (RUT + histology) pending — drives eradication therapy and rebleeding-risk reduction",
+          "urgency": "urgent",
+          "expected_action": "review result; if positive, prescribe eradication regimen and arrange test-of-cure",
+          "status": "open"
+        },
+        {
+          "id": "F4",
+          "type": "pending_pathology",
+          "description": "Ascending colon polypectomy pathology pending — determines colonoscopy surveillance interval",
+          "urgency": "routine",
+          "expected_action": "call patient with result + document surveillance interval",
+          "status": "open"
+        },
+        {
+          "id": "F5",
+          "type": "repeat_procedure",
+          "description": "Interval healing EGD in 6-8 weeks to confirm healing of the high-risk duodenal (bulbar) bleeding ulcer (Forrest IIa; ulcer edge not biopsied at index procedure)",
+          "urgency": "urgent",
+          "expected_action": "schedule repeat EGD with ulcer-edge biopsies at ~6-8 weeks",
+          "status": "open"
+        },
+        {
+          "id": "F6",
+          "type": "surveillance_interval",
+          "description": "Set colonoscopy surveillance interval once ascending polyp histology returns",
+          "urgency": "routine",
+          "expected_action": "document next colonoscopy date based on polyp pathology",
+          "status": "open"
+        },
+        {
+          "id": "F7",
+          "type": "lab_followup",
+          "description": "Ongoing anemia / rebleeding surveillance — symptomatic IDA, 1 unit PRBC given; continue IV iron and monitor hemoglobin trend",
+          "urgency": "urgent",
+          "expected_action": "serial CBC, continue IV iron repletion, transfuse per threshold, watch for recurrent melena/hemodynamic change",
+          "status": "open"
+        },
+        {
+          "id": "F8",
+          "type": "med_reconciliation",
+          "description": "OTC fish oil ('natural blood thinner') contributes to periprocedural bleeding risk and was not on the medication list",
+          "urgency": "routine",
+          "expected_action": "advise holding fish oil during active ulcer/anticoagulation; reconcile medication list",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "id": "PT-027",
+      "procedure": "Colonoscopy (surveillance) — DEFERRED, not performed",
+      "followup_items": [
+        {
+          "id": "F1",
+          "type": "referral",
+          "description": "Mandatory cardiology consultation required before any elective endoscopy or polypectomy given DES to RCA ~2 months ago on DAPT; cardiology must define acceptable procedure timing and peri-procedural antiplatelet management",
+          "urgency": "urgent",
+          "expected_action": "place/obtain cardiology consult and confirm safe timing before rescheduling the colonoscopy",
+          "status": "open"
+        },
+        {
+          "id": "F2",
+          "type": "med_reconciliation",
+          "description": "Patient self-discontinued aspirin (DAPT component) ~2 weeks ago without informing cardiology — unsanctioned interruption ~2 months post-DES; ticagrelor continues. Clarify true antithrombotic status and resumption plan; patient must not stop or restart antiplatelets independently",
+          "urgency": "urgent",
+          "expected_action": "reconcile active antiplatelet list, message cardiology same day for aspirin resumption guidance, and counsel patient to await instructions",
+          "status": "open"
+        },
+        {
+          "id": "F3",
+          "type": "repeat_procedure",
+          "description": "Elective surveillance colonoscopy deferred and to be rescheduled to approximately month 12 post-stent (~mid-2027), contingent on cardiology clearance",
+          "urgency": "routine",
+          "expected_action": "reschedule the deferred surveillance colonoscopy after cardiology clears timing",
+          "status": "open"
+        },
+        {
+          "id": "F4",
+          "type": "care_coordination",
+          "description": "Coordinate colonoscopy timing and antiplatelet plan between GI and cardiology; ensure cardiology receives today's urgent message about the aspirin interruption and that the reschedule is tracked so the surveillance exam is not lost to follow-up",
+          "urgency": "urgent",
+          "expected_action": "confirm cardiology communication is sent/acknowledged and schedule the coordinated follow-up",
+          "status": "open"
+        },
+        {
+          "id": "F5",
+          "type": "record_correction",
+          "description": "Add newly reported codeine intolerance (nausea/vomiting) to the allergy/intolerance list; correct the record to reflect that the aspirin is currently NOT being taken despite showing active on the med list",
+          "urgency": "routine",
+          "expected_action": "document codeine intolerance and update aspirin status in the chart",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "id": "PT-028",
+      "procedure": "Colonoscopy",
+      "followup_items": [
+        {
+          "id": "F1",
+          "type": "pending_pathology",
+          "description": "Polypectomy pathology pending for two specimens (7 mm ascending, 4 mm descending colon) — results must be communicated to the patient and drive the surveillance interval",
+          "urgency": "routine",
+          "expected_action": "call patient with pathology results and document surveillance colonoscopy interval",
+          "status": "open"
+        },
+        {
+          "id": "F2",
+          "type": "surveillance_interval",
+          "description": "Post-polypectomy surveillance colonoscopy interval to be set once histology returns (adenoma vs. serrated vs. hyperplastic determines 3-10 year interval)",
+          "urgency": "routine",
+          "expected_action": "assign and document surveillance interval per pathology and polyp count/size",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "id": "PT-029",
+      "procedure": "Endoscopic retrograde cholangiopancreatography (ERCP) with sphincterotomy and stone extraction",
+      "followup_items": [
+        {
+          "id": "F1",
+          "type": "repeat_procedure",
+          "description": "Prophylactic 5 Fr pancreatic duct stent placed intra-procedure — must be confirmed passed on KUB in 1-2 weeks or removed endoscopically; a retained pancreatic stent can cause ductal injury/obstruction if forgotten",
+          "urgency": "urgent",
+          "expected_action": "order KUB in 1-2 weeks; arrange endoscopic removal if stent not spontaneously passed",
+          "status": "open"
+        },
+        {
+          "id": "F2",
+          "type": "complication_watch",
+          "description": "Post-ERCP pancreatitis watch — patient has recent gallstone pancreatitis and underwent sphincterotomy/PD instrumentation, elevating risk; this is a live post-procedure risk from THIS procedure, not a complication that has occurred",
+          "urgency": "urgent",
+          "expected_action": "serial lipase and abdominal exam over 24-48h; escalate if worsening pain/vomiting",
+          "status": "open"
+        },
+        {
+          "id": "F3",
+          "type": "referral",
+          "description": "Interval laparoscopic cholecystectomy — planned next step after duct clearance; must be scheduled with surgery to prevent recurrent biliary events",
+          "urgency": "routine",
+          "expected_action": "refer/schedule cholecystectomy within 4-6 weeks",
+          "status": "open"
+        },
+        {
+          "id": "F4",
+          "type": "med_reconciliation",
+          "description": "Antithrombotic reconciliation — aspirin 81 mg was CONTINUED through the sphincterotomy (never held), so no resumption is required; confirm continued daily aspirin, reconcile the OTC fish oil (held pre-procedure, resume after cholecystectomy per surgeon), and confirm no prescription anticoagulant on file",
+          "urgency": "routine",
+          "expected_action": "confirm aspirin continuation and reconcile supplement/anticoagulant status in the medication list",
+          "status": "open"
+        },
+        {
+          "id": "F5",
+          "type": "record_correction",
+          "description": "Confirmed IV iodinated contrast allergy (pruritic reaction) surfaced at pre-procedure visit and premedicated for this ERCP — must be added to the chart allergy list for all future contrast imaging/procedures",
+          "urgency": "routine",
+          "expected_action": "add iodinated contrast allergy to chart AllergyIntolerance list",
+          "status": "open"
+        },
+        {
+          "id": "F6",
+          "type": "lab_followup",
+          "description": "Post-clearance LFT follow-up to confirm resolution of obstructive picture (bili trending down 5.6 -> 2.8)",
+          "urgency": "routine",
+          "expected_action": "recheck LFTs after procedure to confirm normalization",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "id": "PT-030",
+      "procedure": "ERCP with sphincterotomy, stone extraction, and biliary stent placement",
+      "followup_items": [
+        {
+          "id": "F1",
+          "type": "repeat_procedure",
+          "description": "Plastic biliary stent placed at index ERCP requires scheduled removal/exchange after cholangitis resolves — retained stent risks occlusion, recurrent cholangitis, and stone/stent migration if dropped",
+          "urgency": "urgent",
+          "expected_action": "schedule follow-up ERCP for stent removal/exchange in 4-6 weeks and confirm patient is booked",
+          "status": "open"
+        },
+        {
+          "id": "F2",
+          "type": "med_resume",
+          "description": "Apixaban (atrial fibrillation, CHA2DS2-VASc 3) held and reversed with PCC for emergent sphincterotomy — resumption must be actively re-decided; failure to resume leaves patient at stroke risk, resuming too early risks post-sphincterotomy bleeding",
+          "urgency": "critical",
+          "expected_action": "document explicit apixaban resumption plan with timing after hemostasis confirmed; coordinate GI and Cardiology",
+          "status": "open"
+        },
+        {
+          "id": "F3",
+          "type": "pending_pathology",
+          "description": "Bile Gram stain and culture/sensitivities pending from aspirated purulent bile",
+          "urgency": "urgent",
+          "expected_action": "review culture results and de-escalate/tailor antibiotics accordingly",
+          "status": "open"
+        },
+        {
+          "id": "F4",
+          "type": "referral",
+          "description": "Interval cholecystectomy needed for gallstone source to prevent recurrent choledocholithiasis and cholangitis",
+          "urgency": "routine",
+          "expected_action": "place General Surgery referral for cholecystectomy after recovery from acute illness",
+          "status": "open"
+        },
+        {
+          "id": "F5",
+          "type": "complication_watch",
+          "description": "Post-ERCP pancreatitis and delayed post-sphincterotomy bleeding watch — bleeding risk elevated by recent apixaban dose despite PCC reversal",
+          "urgency": "urgent",
+          "expected_action": "monitor symptoms, abdominal pain, lipase, hemoglobin, and stool over 24-48 hours",
+          "status": "open"
+        },
+        {
+          "id": "F6",
+          "type": "record_correction",
+          "description": "Iodinated contrast allergy (hives) confirmed on interview but absent from the allergy list; must be reconciled into the chart for future contrast-based studies",
+          "urgency": "routine",
+          "expected_action": "add contrast allergy to allergy list and document required premedication",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "id": "PT-031",
+      "procedure": "EUS-FNA of pancreatic head mass with same-session ERCP and biliary stent placement",
+      "followup_items": [
+        {
+          "id": "F1",
+          "type": "pending_pathology",
+          "description": "EUS-FNA cytology and cell block pending; ROSE already positive for malignant cells consistent with pancreatic adenocarcinoma. Final result must be communicated and the chart diagnosis (currently 'suspected/provisional') updated to tissue-confirmed.",
+          "urgency": "critical",
+          "expected_action": "call patient with final cytology; document tissue confirmation; trigger oncology pathway",
+          "status": "open"
+        },
+        {
+          "id": "F2",
+          "type": "critical_result",
+          "description": "Positive malignant cytology on ROSE for a pancreatic head mass — a critical result requiring expedited oncology/tumor board handoff and staging.",
+          "urgency": "critical",
+          "expected_action": "present at MDT/tumor board; refer to oncology; complete staging imaging",
+          "status": "open"
+        },
+        {
+          "id": "F3",
+          "type": "referral",
+          "description": "Medical/surgical oncology referral for treatment planning (resectable vs neoadjuvant vs palliative).",
+          "urgency": "urgent",
+          "expected_action": "place oncology referral once cytology finalized",
+          "status": "open"
+        },
+        {
+          "id": "F4",
+          "type": "repeat_procedure",
+          "description": "Plastic biliary stent placed; likely stent exchange to self-expanding metal stent depending on resectability/neoadjuvant plan, and plastic stents require exchange to avoid occlusion/cholangitis.",
+          "urgency": "routine",
+          "expected_action": "schedule ERCP stent exchange per oncologic plan or if signs of occlusion",
+          "status": "open"
+        },
+        {
+          "id": "F5",
+          "type": "complication_watch",
+          "description": "Post-ERCP pancreatitis watch after biliary cannulation/stenting; prophylactic rectal indomethacin given.",
+          "urgency": "urgent",
+          "expected_action": "monitor for abdominal pain/vomiting; instruct patient on return precautions",
+          "status": "open"
+        },
+        {
+          "id": "F6",
+          "type": "med_reconciliation",
+          "description": "Metformin 500 mg BID held on procedure day for NPO; not an anticoagulant/antiplatelet. Resume once tolerating oral intake, with attention to post-procedure pancreatitis risk.",
+          "urgency": "routine",
+          "expected_action": "confirm safe metformin resumption timing with patient/PCP",
+          "status": "open"
+        },
+        {
+          "id": "F7",
+          "type": "lab_followup",
+          "description": "Bilirubin trend must be rechecked post-stent to confirm biliary decompression is effective.",
+          "urgency": "urgent",
+          "expected_action": "recheck LFTs/bilirubin in 1-2 weeks; escalate if not improving",
+          "status": "open"
+        },
+        {
+          "id": "F8",
+          "type": "known_lesion_followup",
+          "description": "9 mm rounded peripancreatic lymph node noted on EUS; a suspicious pending-workup lesion relevant to nodal staging of the pancreatic malignancy.",
+          "urgency": "routine",
+          "expected_action": "incorporate into tumor-board staging assessment",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "id": "PT-032",
+      "procedure": "Endoscopic ultrasound (EUS) of the pancreas, cyst protocol, with EUS-guided fine-needle aspiration",
+      "followup_items": [
+        {
+          "id": "F1",
+          "type": "pending_pathology",
+          "description": "Pancreatic cyst-fluid analysis pending — CEA, amylase, cytology, and KRAS/GNAS molecular. Result determines whether the cyst is mucinous (premalignant) vs serous (benign) and drives all downstream management. Must be communicated to the patient.",
+          "urgency": "urgent",
+          "expected_action": "review cyst-fluid CEA/amylase/cytology/molecular, classify cyst, call patient with result and plan",
+          "status": "open"
+        },
+        {
+          "id": "F2",
+          "type": "surveillance_interval",
+          "description": "Pancreatic cyst surveillance interval must be established once cyst type is known; a 13 mm body cyst with a first-degree family history of pancreatic cancer warrants imaging surveillance rather than discharge.",
+          "urgency": "urgent",
+          "expected_action": "set MRI/MRCP or EUS surveillance interval per guideline and enter recall",
+          "status": "open"
+        },
+        {
+          "id": "F3",
+          "type": "record_correction",
+          "description": "Family history of pancreatic cancer in father (first-degree relative) elevates baseline risk; ensure it is documented and factored into surveillance and any consideration of familial pancreatic cancer screening — but attributed to the father, not the patient.",
+          "urgency": "routine",
+          "expected_action": "document family history as risk factor; consider referral to high-risk pancreatic screening program",
+          "status": "open"
+        },
+        {
+          "id": "F4",
+          "type": "complication_watch",
+          "description": "Post-EUS-FNA of a pancreatic cyst carries small risk of post-procedure pancreatitis and cyst infection; patient counseled on return precautions.",
+          "urgency": "routine",
+          "expected_action": "confirm no post-procedure pancreatitis/infection; ensure prophylactic antibiotic course completed if prescribed",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "id": "PT-033",
+      "procedure": "ERCP with plastic biliary stent exchange",
+      "followup_items": [
+        {
+          "id": "F1",
+          "type": "pending_pathology",
+          "description": "Repeat brush cytology of the distal CBD stricture is pending; result must be communicated and reconciled with the prior benign (April 2026) brushings",
+          "urgency": "routine",
+          "expected_action": "call patient with cytology result; if atypical/suspicious/malignant, escalate to EUS/repeat sampling and multidisciplinary review",
+          "status": "open"
+        },
+        {
+          "id": "F2",
+          "type": "repeat_procedure",
+          "description": "Next routine scheduled plastic biliary stent exchange to maintain patency of the indwelling 10 Fr plastic stent and reassess the benign stricture",
+          "urgency": "routine",
+          "expected_action": "book ERCP plastic stent exchange in ~3 months (approx 2026-10) so the stent does not occlude",
+          "status": "open"
+        },
+        {
+          "id": "F3",
+          "type": "surveillance_interval",
+          "description": "Ongoing surveillance of the benign distal CBD stricture pending resolution or definitive management",
+          "urgency": "routine",
+          "expected_action": "track stricture course across exchanges; reassess need for continued stenting vs definitive intervention",
+          "status": "open"
+        },
+        {
+          "id": "F4",
+          "type": "med_reconciliation",
+          "description": "Clopidogrel was continued (not held) for this low-bleeding-risk exchange; confirm no hold instruction was erroneously issued and that the single-agent stroke-prevention indication (not DAPT for a coronary stent) is reflected",
+          "urgency": "routine",
+          "expected_action": "verify clopidogrel uninterrupted; ensure chart indication corrected to TIA/secondary stroke prevention",
+          "status": "open"
+        },
+        {
+          "id": "F5",
+          "type": "complication_watch",
+          "description": "Post-ERCP pancreatitis and delayed cholangitis watch after biliary instrumentation",
+          "urgency": "routine",
+          "expected_action": "advise patient to report fever/chills, jaundice, dark urine, or worsening abdominal pain within 48-72h",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "id": "PT-034",
+      "procedure": "Laparoscopic-assisted transgastric ERCP with sphincterotomy and stone extraction",
+      "followup_items": [
+        {
+          "id": "F1",
+          "type": "referral",
+          "description": "Interval cholecystectomy referral — gallbladder remains in situ with cholelithiasis after CBD clearance; ongoing source of recurrent choledocholithiasis if not removed",
+          "urgency": "urgent",
+          "expected_action": "place general/bariatric surgery referral for cholecystectomy and confirm patient scheduled",
+          "status": "open"
+        },
+        {
+          "id": "F2",
+          "type": "lab_followup",
+          "description": "Confirm resolution of biliary obstruction — repeat LFTs after drainage; failure to normalize suggests retained stone or ongoing obstruction",
+          "urgency": "urgent",
+          "expected_action": "order and review follow-up bilirubin/ALP/ALT within 1-2 weeks",
+          "status": "open"
+        },
+        {
+          "id": "F3",
+          "type": "complication_watch",
+          "description": "Post-ERCP pancreatitis and transgastric surgical access watch (leak, bleeding, infection) in a combined operative/endoscopic case",
+          "urgency": "urgent",
+          "expected_action": "monitor first 72 hours for abdominal pain, fever, leukocytosis; low threshold to image/admit",
+          "status": "open"
+        },
+        {
+          "id": "F4",
+          "type": "record_correction",
+          "description": "Document biliary access approach used (laparoscopic-assisted transgastric) and file the obtained 2019 RYGB operative record for any future ERCP need",
+          "urgency": "routine",
+          "expected_action": "record approach and limb-length data in chart for future reference",
+          "status": "open"
+        },
+        {
+          "id": "F5",
+          "type": "med_reconciliation",
+          "description": "Medication reconciliation — bariatric multivitamin and monthly B12 continued; daily 'blood thinner' is fish oil (omega-3), not a true anticoagulant, no hold or resumption instruction required",
+          "urgency": "routine",
+          "expected_action": "confirm no therapeutic anticoagulant mislabeled; no periprocedural hold needed",
+          "status": "closed"
+        }
+      ]
+    },
+    {
+      "id": "PT-035",
+      "procedure": "Endoscopic ultrasound (EUS), upper GI, with FNA",
+      "followup_items": [
+        {
+          "id": "F1",
+          "type": "pending_pathology",
+          "description": "EUS-FNB histopathology/IHC of gastric muscularis-propria lesion pending — GIST is the leading diagnosis; result determines whether staging and surgical referral are triggered",
+          "urgency": "urgent",
+          "expected_action": "review path + IHC, call patient with result, and if GIST confirmed initiate staging CT and surgical oncology/MDT referral",
+          "status": "open"
+        },
+        {
+          "id": "F2",
+          "type": "referral",
+          "description": "Conditional surgical oncology / MDT referral for resection if GIST confirmed on pathology",
+          "urgency": "urgent",
+          "expected_action": "place surgical oncology referral and obtain staging CT once GIST confirmed",
+          "status": "open"
+        },
+        {
+          "id": "F3",
+          "type": "surveillance_interval",
+          "description": "If lesion proves benign or biopsy non-diagnostic, an EUS surveillance interval for the subepithelial lesion must be set",
+          "urgency": "routine",
+          "expected_action": "document EUS follow-up interval based on final pathology",
+          "status": "open"
+        },
+        {
+          "id": "F4",
+          "type": "record_correction",
+          "description": "Outside EGD report/images still outstanding; lesion size discrepancy (18 mm referral vs 19 mm EUS vs ~2 cm patient recollection) to be reconciled",
+          "urgency": "routine",
+          "expected_action": "obtain outside records and reconcile documented lesion size/location",
+          "status": "open"
+        },
+        {
+          "id": "F5",
+          "type": "med_reconciliation",
+          "description": "No prescription anticoagulant/antiplatelet in use (\"blood thinner\" = OTC fish oil); no periprocedural hold required — documented for completeness",
+          "urgency": "routine",
+          "expected_action": "confirm no anticoagulant hold needed; document OTC fish oil on the medication list, may continue per patient preference",
+          "status": "closed"
+        }
+      ]
+    },
+    {
+      "id": "PT-036",
+      "procedure": "ERCP with cholangiography, dominant stricture assessment, biliary brushing cytology, and biliary stent placement",
+      "followup_items": [
+        {
+          "id": "F1",
+          "type": "pending_pathology",
+          "description": "Dominant common hepatic duct stricture brush cytology + FISH pending — performed specifically to exclude cholangiocarcinoma in a PSC patient with a new dominant stricture, rising ALP/bilirubin, and MRCP that could not exclude malignancy. Result must be communicated and must drive the oncologic vs surveillance pathway.",
+          "urgency": "critical",
+          "expected_action": "track cytology/FISH result; communicate to patient and hepatology; if positive/suspicious escalate to hepatobiliary/oncology for staging; if negative determine repeat sampling vs surveillance",
+          "status": "open"
+        },
+        {
+          "id": "F2",
+          "type": "known_lesion_followup",
+          "description": "Suspected cholangiocarcinoma remains unresolved (SUSPICION ONLY, not tissue-confirmed). A negative or indeterminate brushing does NOT exclude malignancy given brush cytology's low sensitivity — must not be dropped or falsely reassured.",
+          "urgency": "critical",
+          "expected_action": "ensure definitive disposition of malignancy question; consider cholangioscopy with directed biopsy if suspicion persists despite non-diagnostic cytology",
+          "status": "open"
+        },
+        {
+          "id": "F3",
+          "type": "repeat_procedure",
+          "description": "Plastic biliary stent (10 Fr x 9 cm) placed across dominant stricture — requires scheduled exchange/removal to prevent stent occlusion and cholangitis.",
+          "urgency": "urgent",
+          "expected_action": "schedule stent exchange or removal ERCP in 8-12 weeks",
+          "status": "open"
+        },
+        {
+          "id": "F4",
+          "type": "complication_watch",
+          "description": "Post-ERCP pancreatitis and cholangitis risk after sphincterotomy, dilation, and stenting; jaundice/fever/RUQ pain must prompt urgent evaluation.",
+          "urgency": "urgent",
+          "expected_action": "monitor 24-72h; return precautions reviewed; low threshold for evaluation and antibiotics if cholangitis",
+          "status": "open"
+        },
+        {
+          "id": "F5",
+          "type": "surveillance_interval",
+          "description": "PSC-IBD dysplasia surveillance colonoscopy interval (annual) and ongoing PSC cholangiocarcinoma surveillance (MRCP/CA 19-9) to be maintained regardless of this result.",
+          "urgency": "routine",
+          "expected_action": "ensure annual surveillance colonoscopy and PSC imaging surveillance are scheduled",
+          "status": "open"
+        },
+        {
+          "id": "F6",
+          "type": "med_reconciliation",
+          "description": "Peri-procedure med reconciliation: OTC fish oil (patient's mislabeled 'blood thinner') may resume per instructions; no prescription anticoagulant exists to resume; confirm mesalamine 1.2 g daily is added to the active medication list (was missing).",
+          "urgency": "routine",
+          "expected_action": "resume fish oil per instructions; reconcile and correct active medication list to include mesalamine",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "id": "PT-037",
+      "procedure": "Colonoscopy",
+      "followup_items": [
+        {
+          "id": "F1",
+          "type": "pending_pathology",
+          "description": "Ascending (5 mm) and sigmoid (4 mm) polypectomy pathology pending — result must be communicated to the patient and drive the surveillance interval",
+          "urgency": "routine",
+          "expected_action": "call patient with result + document surveillance interval",
+          "status": "open"
+        },
+        {
+          "id": "F2",
+          "type": "surveillance_interval",
+          "description": "Surveillance interval must be set once pathology returns (prior tubular adenomas with LGD; likely 3-5 year interval depending on histology)",
+          "urgency": "routine",
+          "expected_action": "document next surveillance colonoscopy date after path review",
+          "status": "open"
+        },
+        {
+          "id": "F3",
+          "type": "referral",
+          "description": "Sleep medicine follow-up for CPAP compliance download and adherence optimization — severe OSA (AHI 42) with poor/unverified CPAP use is the anesthesia risk driver for any future sedated procedure",
+          "urgency": "routine",
+          "expected_action": "refer to sleep medicine; obtain objective compliance data",
+          "status": "open"
+        },
+        {
+          "id": "F4",
+          "type": "med_reconciliation",
+          "description": "Latex contact allergy and unlisted hydrochlorothiazide identified pre-procedure — reconcile into permanent allergy/medication record",
+          "urgency": "routine",
+          "expected_action": "update chart allergy list (latex) and medication list (hydrochlorothiazide)",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "id": "PT-038",
+      "procedure": "Esophagogastroduodenoscopy (EGD) with biopsy",
+      "followup_items": [
+        {
+          "id": "F1",
+          "type": "pending_pathology",
+          "description": "Esophageal/GEJ mass biopsy pathology pending on a lesion endoscopically suspicious for malignancy — result must be communicated and drive staging/oncology pathway",
+          "urgency": "critical",
+          "expected_action": "expedite path, personally notify patient, initiate oncology referral on result",
+          "status": "open"
+        },
+        {
+          "id": "F2",
+          "type": "critical_result",
+          "description": "Endoscopically suspicious partially obstructing distal esophageal/GEJ mass identified — critical finding requiring staging and multidisciplinary management regardless of biopsy timing",
+          "urgency": "critical",
+          "expected_action": "order CT c/a/p + EUS, refer to tumor board",
+          "status": "open"
+        },
+        {
+          "id": "F3",
+          "type": "referral",
+          "description": "Thoracic/GI oncology multidisciplinary referral pending pathology confirmation",
+          "urgency": "urgent",
+          "expected_action": "place oncology/tumor board referral once tissue diagnosis returns",
+          "status": "open"
+        },
+        {
+          "id": "F4",
+          "type": "med_resume",
+          "description": "Apixaban held peri-procedure and not yet resumed; afib patient off anticoagulation — resumption must be confirmed and true dose reconciled (chart 5 mg BID vs patient-reported once daily)",
+          "urgency": "urgent",
+          "expected_action": "confirm resumption timing with cardiology and reconcile home dose",
+          "status": "open"
+        },
+        {
+          "id": "F5",
+          "type": "repeat_procedure",
+          "description": "EUS for locoregional staging and possible therapeutic dilation/stent deferred until tissue diagnosis obtained",
+          "urgency": "urgent",
+          "expected_action": "schedule staging EUS after pathology",
+          "status": "open"
+        },
+        {
+          "id": "F6",
+          "type": "incidental_finding",
+          "description": "Mild antral gastritis noted incidentally",
+          "urgency": "routine",
+          "expected_action": "consider H. pylori testing / PPI; low priority relative to primary finding",
+          "status": "open"
+        },
+        {
+          "id": "F7",
+          "type": "complication_watch",
+          "description": "Post-biopsy bleeding watch — live procedural risk from x8 esophageal biopsies of a friable lesion in an afib patient whose apixaban will be resumed",
+          "urgency": "routine",
+          "expected_action": "counsel on bleeding red flags before anticoagulation resumption",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "id": "PT-039",
+      "procedure": "Colonoscopy",
+      "followup_items": [
+        {
+          "id": "F1",
+          "type": "pending_pathology",
+          "description": "Histology pending on all four polypectomy specimens (ascending 9 mm pedunculated, sigmoid 6 mm, two descending diminutive). Result determines whether any advanced histology (villous features, high-grade dysplasia) is present and drives the surveillance interval; must be communicated to the patient.",
+          "urgency": "routine",
+          "expected_action": "call patient with pathology result and document surveillance interval per histology, size, and polyp count",
+          "status": "open"
+        },
+        {
+          "id": "F2",
+          "type": "med_resume",
+          "description": "Therapeutic apixaban 5 mg BID was held 3 days pre-procedure and remains held post-polypectomy. Patient has new-onset atrial fibrillation with elevated CHA2DS2-VASc and EF 25% (high stroke risk) but underwent multiple polypectomies including a pedunculated stalk with clip during interrupted anticoagulation (delayed-bleeding risk). Restart timing must be set and communicated in writing; if dropped, patient is left off stroke prophylaxis indefinitely or restarts unsafely.",
+          "urgency": "critical",
+          "expected_action": "GI and cardiology/EP jointly set and document exact apixaban restart date; give patient written instructions; confirm resumption occurred",
+          "status": "open"
+        },
+        {
+          "id": "F3",
+          "type": "surveillance_interval",
+          "description": "Multiple polyps removed; surveillance colonoscopy interval must be set once pathology returns (contingent on F1). Positive-FIT diagnostic exam with adenomatous polyps typically warrants a shortened interval.",
+          "urgency": "routine",
+          "expected_action": "assign and document next colonoscopy interval after pathology; enter into recall/reminder system",
+          "status": "open"
+        },
+        {
+          "id": "F4",
+          "type": "complication_watch",
+          "description": "Delayed post-polypectomy bleeding risk elevated due to interrupted therapeutic anticoagulation, pedunculated ascending polyp with stalk resection (clip placed), and continued aspirin. Bleeding can present up to ~2 weeks post-procedure.",
+          "urgency": "urgent",
+          "expected_action": "patient counseled on hematochezia/melena/lightheadedness; ensure return precautions and a reachable contact; reassess before apixaban restart",
+          "status": "open"
+        },
+        {
+          "id": "F5",
+          "type": "lab_followup",
+          "description": "Reduced-dose spironolactone (12.5 mg) with prior hyperkalemia (K 5.4), creatinine 1.3, and HFrEF; bowel prep and periprocedural fasting can shift electrolytes/volume, warranting post-procedure electrolyte monitoring.",
+          "urgency": "routine",
+          "expected_action": "recheck BMP post-procedure; coordinate with primary care/cardiology on electrolyte and volume management",
+          "status": "open"
+        },
+        {
+          "id": "F6",
+          "type": "care_coordination",
+          "description": "Close-the-loop with cardiology/EP: ICD tolerated the procedure without arrhythmic event; anticoagulation was held periprocedurally. Cardiology/EP must be informed to co-manage apixaban restart and confirm device status.",
+          "urgency": "routine",
+          "expected_action": "send procedure summary to cardiology/EP; confirm receipt and shared plan for apixaban resumption",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "id": "PT-040",
+      "procedure": "EGD (esophagogastroduodenoscopy) + Colonoscopy",
+      "followup_items": [
+        {
+          "id": "F1",
+          "type": "critical_result",
+          "description": "Gastric antral ulcer margin biopsies pending to exclude malignancy; margins were irregular. Result must be reviewed and communicated regardless of endoscopic hemostasis.",
+          "urgency": "critical",
+          "expected_action": "review path within 1 week; if dysplasia/malignancy, urgent oncology/surgical referral and staging; if benign, ensure healing follow-up",
+          "status": "open"
+        },
+        {
+          "id": "F2",
+          "type": "repeat_procedure",
+          "description": "Mandatory repeat EGD in 8-12 weeks to document gastric ulcer healing and re-biopsy if unhealed — standard of care for any gastric ulcer to exclude occult malignancy.",
+          "urgency": "urgent",
+          "expected_action": "schedule surveillance EGD with anesthesiology-directed difficult-airway plan",
+          "status": "open"
+        },
+        {
+          "id": "F3",
+          "type": "complication_watch",
+          "description": "Forrest IIa gastric ulcer with non-bleeding visible vessel post-hemostasis — rebleeding risk in first 72 hours from the endoscopic hemostasis performed at this procedure. Continue high-dose PPI; monitor for hematemesis/recurrent melena and hemoglobin drop.",
+          "urgency": "urgent",
+          "expected_action": "inpatient observation, serial CBC, PPI; re-scope if rebleeding",
+          "status": "open"
+        },
+        {
+          "id": "F4",
+          "type": "pending_pathology",
+          "description": "H. pylori biopsy result pending — if positive requires eradication therapy and post-treatment confirmation of eradication.",
+          "urgency": "routine",
+          "expected_action": "review result; treat and confirm eradication if positive",
+          "status": "open"
+        },
+        {
+          "id": "F5",
+          "type": "pending_pathology",
+          "description": "Ascending colon polypectomy pathology pending — drives colon surveillance interval.",
+          "urgency": "routine",
+          "expected_action": "review path; document surveillance interval per histology/size",
+          "status": "open"
+        },
+        {
+          "id": "F6",
+          "type": "med_reconciliation",
+          "description": "Weekly semaglutide (Wegovy) was held 3 weeks pre-procedure (GLP-1, not an anticoagulant/antiplatelet) and remains held during acute ulcer-bleed observation; resumption timing must be actively decided and communicated.",
+          "urgency": "routine",
+          "expected_action": "confirm safe resumption timing with patient after recovery; reconcile on active med list",
+          "status": "open"
+        },
+        {
+          "id": "F7",
+          "type": "lab_followup",
+          "description": "Bleeding source for iron-deficiency anemia identified and treated (gastric ulcer). Anemia workup loop must be closed: recheck Hgb/ferritin to confirm response and continue iron.",
+          "urgency": "routine",
+          "expected_action": "repeat CBC/iron studies in 4-6 weeks; escalate if no response",
+          "status": "open"
+        },
+        {
+          "id": "F8",
+          "type": "referral",
+          "description": "Incidental but active safety issue surfaced at pre-procedure: untreated severe OSA (AHI 42, CPAP declined) plus class III obesity and known difficult airway. Relevant to any future sedation/anesthesia and overall health.",
+          "urgency": "routine",
+          "expected_action": "re-refer to sleep medicine / reinforce OSA treatment; keep difficult-airway flag active",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "id": "PT-041",
+      "procedure": "Colonoscopy with biopsy",
+      "followup_items": [
+        {
+          "id": "F1",
+          "type": "critical_result",
+          "description": "Ascending colon fungating ~4 cm mass suspicious for malignancy identified on colonoscopy — the likely source of the iron-deficiency anemia and occult bleeding; must not be dropped.",
+          "urgency": "critical",
+          "expected_action": "Ensure biopsy result is tracked and communicated to POA; escalate to multidisciplinary colorectal surgery/oncology review",
+          "status": "open"
+        },
+        {
+          "id": "F2",
+          "type": "pending_pathology",
+          "description": "Ascending colon mass biopsy pathology (specimen A) pending — result determines diagnosis and drives staging/treatment decisions.",
+          "urgency": "critical",
+          "expected_action": "Track pathology, communicate result to POA, initiate staging if malignant",
+          "status": "open"
+        },
+        {
+          "id": "F3",
+          "type": "referral",
+          "description": "Referral to colorectal surgery and oncology, plus staging CT chest/abdomen/pelvis and CEA, contingent on pathology and goals of care.",
+          "urgency": "urgent",
+          "expected_action": "Place referrals and staging orders once pathology confirms; frame within frailty/dementia goals of care",
+          "status": "open"
+        },
+        {
+          "id": "F4",
+          "type": "med_resume",
+          "description": "Apixaban held 48h peri-procedurally (patient actually on 5 mg BID; chart listed 2.5 mg BID). Resumption after biopsy/polypectomy plus unresolved dose-reconciliation with cardiology (low weight ~47 kg, age >=80 favor reduced dose).",
+          "urgency": "urgent",
+          "expected_action": "Confirm safe resumption timing and reconcile intended apixaban dose with cardiology",
+          "status": "open"
+        },
+        {
+          "id": "F5",
+          "type": "pending_pathology",
+          "description": "Sigmoid polyp pathology (specimen B) pending — determines polyp histology and any surveillance implications.",
+          "urgency": "routine",
+          "expected_action": "Review polyp histology; document any surveillance interval (subordinate to oncologic plan)",
+          "status": "open"
+        },
+        {
+          "id": "F6",
+          "type": "lab_followup",
+          "description": "Iron-deficiency anemia (Hgb 9.1) with a friable contact-bleeding mass in a patient on full-dose DOAC — ongoing anemia/blood-loss risk requires Hgb monitoring and iron repletion independent of oncologic decisions.",
+          "urgency": "urgent",
+          "expected_action": "Monitor Hgb, arrange iron repletion (oral vs IV), set transfusion threshold, weigh anticoagulation net benefit",
+          "status": "open"
+        },
+        {
+          "id": "F7",
+          "type": "incidental_finding",
+          "description": "Suboptimal right-colon prep (BBPS right segment 1) in the setting of a right-sided mass — if pathology is non-diagnostic or lesion incompletely characterized, consider repeat/cross-sectional imaging.",
+          "urgency": "routine",
+          "expected_action": "Ensure mass adequately characterized; consider repeat evaluation only if clinically warranted and consistent with goals of care",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "id": "PT-042",
+      "procedure": "Esophagogastroduodenoscopy (EGD)",
+      "followup_items": [
+        {
+          "id": "F1",
+          "type": "pending_pathology",
+          "description": "H. pylori biopsy (gastric antrum/body) pending — a positive result requires eradication therapy and confirmatory cure testing",
+          "urgency": "routine",
+          "expected_action": "review result; if positive start eradication therapy and schedule test-of-cure",
+          "status": "open"
+        },
+        {
+          "id": "F2",
+          "type": "pending_pathology",
+          "description": "Distal esophageal biopsies pending (eosinophilic esophagitis vs reflux esophagitis) and duodenal biopsies pending (celiac disease)",
+          "urgency": "routine",
+          "expected_action": "review pathology and communicate results to patient",
+          "status": "open"
+        },
+        {
+          "id": "F3",
+          "type": "repeat_procedure",
+          "description": "LA Grade B erosive esophagitis warrants repeat EGD in 8-12 weeks after PPI step-up to confirm healing and exclude Barrett's esophagus obscured by active inflammation",
+          "urgency": "urgent",
+          "expected_action": "schedule follow-up EGD after acid-suppression optimization",
+          "status": "open"
+        },
+        {
+          "id": "F4",
+          "type": "med_reconciliation",
+          "description": "Acid suppression step-up: increase omeprazole from 20 mg to 40 mg daily (or BID) for erosive esophagitis; ensure order placed and patient instructed. (No anticoagulant/antiplatelet was held — this is a PPI dose titration, not a medication resumption.)",
+          "urgency": "routine",
+          "expected_action": "place updated PPI order and counsel patient",
+          "status": "open"
+        },
+        {
+          "id": "F5",
+          "type": "record_correction",
+          "description": "Anesthesiology propofol allergy adjudication outcome (2021 reaction was unconfirmed urticaria, not anaphylaxis) must be reconciled into the durable AllergyIntolerance record to guide future sedation",
+          "urgency": "urgent",
+          "expected_action": "update allergy record with adjudicated sedation plan; close out the discrepancy",
+          "status": "open"
+        },
+        {
+          "id": "F6",
+          "type": "surveillance_interval",
+          "description": "If repeat EGD confirms healed mucosa with no Barrett's, place on symptom-driven follow-up; if Barrett's is found on repeat exam, enter appropriate surveillance program",
+          "urgency": "routine",
+          "expected_action": "set surveillance interval based on repeat EGD findings",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "id": "PT-043",
+      "procedure": "Peroral endoscopic myotomy (POEM)",
+      "followup_items": [
+        {
+          "id": "F1",
+          "type": "complication_watch",
+          "description": "POD1 water-soluble contrast esophagram to rule out esophageal leak/perforation before advancing diet — dropping this risks feeding through an undetected leak",
+          "urgency": "urgent",
+          "expected_action": "obtain esophagram POD1, confirm no leak, then advance diet",
+          "status": "open"
+        },
+        {
+          "id": "F2",
+          "type": "med_resume",
+          "description": "Nifedipine held peri-operatively for anesthesia BP lability; must decide whether to resume (likely no longer needed after myotomy) and communicate to patient",
+          "urgency": "routine",
+          "expected_action": "make and document resume/discontinue decision at discharge",
+          "status": "open"
+        },
+        {
+          "id": "F3",
+          "type": "med_resume",
+          "description": "Fish oil (omega-3) held pre-procedure per bleeding protocol — instruct on resumption timing",
+          "urgency": "routine",
+          "expected_action": "confirm safe resumption timing with patient",
+          "status": "open"
+        },
+        {
+          "id": "F4",
+          "type": "referral",
+          "description": "Nutrition follow-up for significant weight loss (~20 lb), BMI 18.4, albumin 3.3 — ensure nutritional recovery is tracked post-myotomy",
+          "urgency": "routine",
+          "expected_action": "nutrition referral/visit and weight monitoring",
+          "status": "open"
+        },
+        {
+          "id": "F5",
+          "type": "med_reconciliation",
+          "description": "Post-POEM high-dose PPI for reflux prophylaxis must be started and continued; reconcile against patient's prior OTC omeprazole to avoid duplication or gap",
+          "urgency": "routine",
+          "expected_action": "prescribe and reconcile PPI at discharge",
+          "status": "open"
+        },
+        {
+          "id": "F6",
+          "type": "repeat_procedure",
+          "description": "Post-POEM GERD surveillance — asymptomatic reflux is common after myotomy; planned upper endoscopy at 6-12 months to assess for reflux esophagitis",
+          "urgency": "routine",
+          "expected_action": "schedule surveillance EGD and reflux assessment",
+          "status": "open"
+        },
+        {
+          "id": "F7",
+          "type": "surveillance_interval",
+          "description": "Objective achalasia outcome assessment (Eckardt score + timed barium esophagram) at 3 months to confirm treatment success",
+          "urgency": "routine",
+          "expected_action": "schedule 3-month outcome assessment",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "id": "PT-044",
+      "procedure": "Endoscopic submucosal dissection (ESD), gastric antrum",
+      "followup_items": [
+        {
+          "id": "F1",
+          "type": "pending_pathology",
+          "description": "ESD en-bloc specimen pathology pending — depth of invasion and lateral/deep margin status determine whether resection was curative; a positive deep margin or unsuspected submucosal invasion would upstage to carcinoma and trigger oncology/surgical referral",
+          "urgency": "critical",
+          "expected_action": "review margins and depth on final pathology, communicate result to patient, escalate to multidisciplinary/surgical review if non-curative",
+          "status": "open"
+        },
+        {
+          "id": "F2",
+          "type": "complication_watch",
+          "description": "Delayed post-ESD bleeding and perforation watch after high-bleed-risk gastric antral resection",
+          "urgency": "urgent",
+          "expected_action": "counsel patient on melena/hematemesis/abdominal pain; ensure access to care; assess before restarting any antithrombotic/NSAID",
+          "status": "open"
+        },
+        {
+          "id": "F3",
+          "type": "med_resume",
+          "description": "Held aspirin (primary prevention, antiplatelet) plus OTC fish oil and OTC ibuprofen must be resumed only after confirmed hemostasis; NSAID need should be reassessed given post-ESD ulcer",
+          "urgency": "routine",
+          "expected_action": "confirm hemostasis then give explicit resume-or-hold instructions; coordinate NSAID alternative with PCP",
+          "status": "open"
+        },
+        {
+          "id": "F4",
+          "type": "repeat_procedure",
+          "description": "Surveillance EGD to assess artificial ulcer healing and exclude residual/recurrent dysplasia",
+          "urgency": "routine",
+          "expected_action": "schedule surveillance EGD in 3-6 months on high-dose PPI",
+          "status": "open"
+        },
+        {
+          "id": "F5",
+          "type": "surveillance_interval",
+          "description": "Post-resection gastric neoplasia surveillance interval to be set once curative status confirmed by pathology",
+          "urgency": "routine",
+          "expected_action": "document surveillance interval after final pathology",
+          "status": "open"
+        },
+        {
+          "id": "F6",
+          "type": "med_reconciliation",
+          "description": "Medication reconciliation gap: amlodipine 5 mg daily taken but absent from chart medication list; undocumented OTC ibuprofen also identified",
+          "urgency": "routine",
+          "expected_action": "add amlodipine and OTC ibuprofen to reconciled medication list; continue amlodipine for hypertension",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "id": "PT-045",
+      "procedure": "Esophageal dilation (serial #4, Savary/wire-guided)",
+      "followup_items": [
+        {
+          "id": "F1",
+          "type": "pending_pathology",
+          "description": "Esophageal stricture surveillance biopsy pathology pending — must be reviewed and communicated to confirm exclusion of recurrent/second malignancy given laryngeal cancer and radiation history",
+          "urgency": "urgent",
+          "expected_action": "review path when back (~2026-08-01), call patient with result, document malignancy excluded or escalate if dysplasia/carcinoma found",
+          "status": "open"
+        },
+        {
+          "id": "F2",
+          "type": "repeat_procedure",
+          "description": "Serial dilation program continues — dilation #5 needs to be scheduled; restenosis occurred faster than prior interval",
+          "urgency": "routine",
+          "expected_action": "schedule next dilation in ~8-10 weeks or sooner for recurrent dysphagia",
+          "status": "open"
+        },
+        {
+          "id": "F3",
+          "type": "surveillance_interval",
+          "description": "Shortened dilation surveillance interval due to earlier-than-expected restenosis and interval symptom progression",
+          "urgency": "routine",
+          "expected_action": "set and communicate shortened return interval; monitor symptom recurrence",
+          "status": "open"
+        },
+        {
+          "id": "F4",
+          "type": "care_coordination",
+          "description": "Nutrition follow-up for interval ~4 lb weight loss with reduced solid intake",
+          "urgency": "routine",
+          "expected_action": "arrange nutrition support / dietitian and monitor weight and albumin",
+          "status": "open"
+        },
+        {
+          "id": "F5",
+          "type": "complication_watch",
+          "description": "Post-dilation perforation/bleeding watch after graded dilation to 16 mm in difficult post-radiation anatomy",
+          "urgency": "routine",
+          "expected_action": "confirm patient tolerating secretions/diet, no chest pain, fever, or hematemesis at 24-48h",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "id": "PT-046",
+      "procedure": "Percutaneous endoscopic gastrostomy (PEG) placement",
+      "followup_items": [
+        {
+          "id": "F1",
+          "type": "complication_watch",
+          "description": "Aspiration pneumonia surveillance — pre-procedure choking episode with thin liquids plus low-grade fever and FVC 43% predicted put patient at elevated peri-procedural aspiration/respiratory risk",
+          "urgency": "urgent",
+          "expected_action": "monitor respiratory status, maintain NIV availability and HOB elevation, obtain chest imaging if symptomatic, coordinate with pulmonology",
+          "status": "open"
+        },
+        {
+          "id": "F2",
+          "type": "complication_watch",
+          "description": "PEG site complication watch — bleeding, buried bumper syndrome, wound infection, peristomal leak, or peritonitis after fresh gastrostomy",
+          "urgency": "routine",
+          "expected_action": "site checks and bolster positioning at 48-72 hours and 1 week; educate patient/spouse on warning signs",
+          "status": "open"
+        },
+        {
+          "id": "F3",
+          "type": "referral",
+          "description": "Nutrition follow-up to establish and titrate enteral feeding regimen; monitor weight (13 lb loss over 2 months) and albumin (3.4 g/dL)",
+          "urgency": "urgent",
+          "expected_action": "nutrition consult completes feeding plan; begin feeds per protocol and reassess intake",
+          "status": "open"
+        },
+        {
+          "id": "F4",
+          "type": "med_reconciliation",
+          "description": "Convert medications to enteral route via PEG (riluzole) and reconcile chart-omitted edaravone (Radicava) infusions into the medication list",
+          "urgency": "routine",
+          "expected_action": "pharmacy/neurology confirm enteral formulations and update medication list",
+          "status": "open"
+        },
+        {
+          "id": "F5",
+          "type": "referral",
+          "description": "Coordinate ongoing pulmonary follow-up including nocturnal NIV initiation now that enteral access is established",
+          "urgency": "routine",
+          "expected_action": "pulmonology confirms NIV setup and continued respiratory surveillance",
+          "status": "open"
+        },
+        {
+          "id": "F6",
+          "type": "med_reconciliation",
+          "description": "OTC fish oil (omega-3) resumption guidance — clarified as non-prescription supplement; no anticoagulant was held so no bridging is required",
+          "urgency": "routine",
+          "expected_action": "advise patient it may be resumed after 48 hours if no bleeding",
+          "status": "closed"
+        }
+      ]
+    },
+    {
+      "id": "PT-047",
+      "procedure": "Colonoscopy",
+      "followup_items": [
+        {
+          "id": "F1",
+          "type": "critical_result",
+          "description": "Diverticular hemorrhage in a patient on rivaroxaban with orthostasis and anemia (Hgb 9.6) — active lower GI bleed on a DOAC treated with hemoclips; hemodynamic and rebleed status must be actively followed",
+          "urgency": "critical",
+          "expected_action": "admit for monitoring; serial Hgb, transfuse per threshold, escalate if rebleed",
+          "status": "open"
+        },
+        {
+          "id": "F2",
+          "type": "complication_watch",
+          "description": "Post-hemostasis rebleeding risk from diverticular vessel after hemoclip placement",
+          "urgency": "urgent",
+          "expected_action": "monitor for recurrent hematochezia, falling Hgb, orthostasis; repeat colonoscopy or IR/angiography if rebleeds",
+          "status": "open"
+        },
+        {
+          "id": "F3",
+          "type": "med_resume",
+          "description": "Rivaroxaban was held peri-procedurally; resumption timing must be decided with cardiology given nonvalvular afib stroke risk vs. rebleed risk",
+          "urgency": "urgent",
+          "expected_action": "cardiology + GI joint decision and documented resumption plan before discharge",
+          "status": "open"
+        },
+        {
+          "id": "F4",
+          "type": "care_coordination",
+          "description": "Cardiology coordination for anticoagulation management around the GI bleed",
+          "urgency": "urgent",
+          "expected_action": "contact cardiology for stroke-risk-informed anticoagulation plan",
+          "status": "open"
+        },
+        {
+          "id": "F5",
+          "type": "surveillance_interval",
+          "description": "Outpatient GI follow-up to confirm bleed resolution and set colon surveillance interval (last full screening 2019)",
+          "urgency": "routine",
+          "expected_action": "schedule GI follow-up and document surveillance plan",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "id": "PT-048",
+      "procedure": "Esophagogastroduodenoscopy (EGD) with Barrett's surveillance biopsies",
+      "followup_items": [
+        {
+          "id": "F1",
+          "type": "pending_pathology",
+          "description": "Barrett's Seattle-protocol surveillance biopsy pathology pending — result must be communicated to patient and drive the surveillance interval; dysplasia would escalate management",
+          "urgency": "routine",
+          "expected_action": "call patient with pathology result and document surveillance interval",
+          "status": "open"
+        },
+        {
+          "id": "F2",
+          "type": "med_resume",
+          "description": "Apixaban resumption after EGD with biopsies; the DOAC was truly held 2 days pre-procedure and must be restarted per the periprocedural plan (patient is on apixaban, not warfarin as charted)",
+          "urgency": "routine",
+          "expected_action": "confirm safe resumption timing of apixaban 5 mg BID",
+          "status": "open"
+        },
+        {
+          "id": "F3",
+          "type": "surveillance_interval",
+          "description": "Set Barrett's surveillance interval (repeat EGD ~3 years if no dysplasia) contingent on pathology",
+          "urgency": "routine",
+          "expected_action": "document next surveillance EGD date after pathology returns",
+          "status": "open"
+        },
+        {
+          "id": "F4",
+          "type": "med_reconciliation",
+          "description": "Active medication list still shows warfarin as active while patient is actually on apixaban 5 mg BID (hematology switch 2026-03-10 never reconciled); stale January INR should not guide anticoagulation. This is a med-list correction (discontinue warfarin, add apixaban), distinct from the actual apixaban resumption captured in F2.",
+          "urgency": "urgent",
+          "expected_action": "discontinue warfarin and add apixaban on the med list; remove reliance on stale INR",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "id": "PT-049",
+      "procedure": "Colonoscopy with endoscopic mucosal resection (EMR)",
+      "followup_items": [
+        {
+          "id": "F1",
+          "type": "critical_result",
+          "description": "Piecemeal EMR pathology shows tubulovillous adenoma with FOCAL HIGH-GRADE DYSPLASIA; margins not assessable due to piecemeal resection. Must be communicated to patient and must drive a short-interval scar surveillance plan.",
+          "urgency": "critical",
+          "expected_action": "call patient with high-grade dysplasia result, document, and book early EMR-scar surveillance colonoscopy",
+          "status": "open"
+        },
+        {
+          "id": "F2",
+          "type": "repeat_procedure",
+          "description": "Early follow-up colonoscopy to inspect and biopsy the sigmoid EMR scar for residual/recurrent adenoma after piecemeal resection of a 22 mm high-grade lesion",
+          "urgency": "urgent",
+          "expected_action": "schedule scar-check colonoscopy at 3-6 months",
+          "status": "open"
+        },
+        {
+          "id": "F3",
+          "type": "surveillance_interval",
+          "description": "Surveillance interval must be set based on the high-grade dysplasia / large piecemeal-resected lesion (short-interval scar check, then risk-adjusted ongoing surveillance)",
+          "urgency": "urgent",
+          "expected_action": "document surveillance interval in chart and communicate to patient",
+          "status": "open"
+        },
+        {
+          "id": "F4",
+          "type": "complication_watch",
+          "description": "Delayed post-polypectomy hemorrhage watch (Day 1-14) after 22 mm piecemeal EMR with visible vessels, markedly elevated by apixaban resumption on Day 2. NOTE: this risk was subsequently realized as a Day-4 delayed bleed (see follow-up encounter).",
+          "urgency": "critical",
+          "expected_action": "counsel bleeding precautions; if bleeding occurs, hold apixaban, ED evaluation, and repeat colonoscopy for hemostasis",
+          "status": "open"
+        },
+        {
+          "id": "F5",
+          "type": "med_resume",
+          "description": "Apixaban 5 mg BID resumption on post-procedure Day 2 (2026-07-16) per anticoagulation plan — a confirmed active DOAC that is the principal driver of post-polypectomy bleeding risk and must not be de-prioritized",
+          "urgency": "urgent",
+          "expected_action": "confirm resumption timing and align with bleeding-risk monitoring / hold instructions if bleeding",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "id": "PT-050",
+      "procedure": "ERCP with biliary sphincterotomy and stone extraction",
+      "followup_items": [
+        {
+          "id": "F1",
+          "type": "complication_watch",
+          "description": "Suspected post-ERCP pancreatitis on post-op day 1 — new epigastric pain radiating to back with emesis ~8h after sphincterotomy; requires same-day evaluation and clinician callback",
+          "urgency": "critical",
+          "expected_action": "review STAT lipase + CBC, call patient within the hour, escalate to IV fluids/admission if lipase >3x ULN or deterioration",
+          "status": "open"
+        },
+        {
+          "id": "F2",
+          "type": "lab_followup",
+          "description": "STAT lipase + CBC ordered but not yet resulted — pending order that must be resulted and acted on same day to confirm or exclude post-ERCP pancreatitis",
+          "urgency": "critical",
+          "expected_action": "resulted STAT; clinician reviews and contacts patient with disposition within the hour",
+          "status": "open"
+        },
+        {
+          "id": "F3",
+          "type": "med_reconciliation",
+          "description": "Oxycodone held to avoid masking symptoms — analgesia plan must be revisited once pancreatitis workup resolves",
+          "urgency": "urgent",
+          "expected_action": "reassess and re-instruct analgesia after lipase reviewed",
+          "status": "open"
+        },
+        {
+          "id": "F4",
+          "type": "referral",
+          "description": "Outpatient cholecystectomy referral for cholelithiasis (gallbladder in situ) after biliary clearance",
+          "urgency": "routine",
+          "expected_action": "place surgery referral once recovered from acute post-ERCP event",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "id": "PT-051",
+      "procedure": "Esophagogastroduodenoscopy (EGD) with balloon dilation of esophageal stricture",
+      "followup_items": [
+        {
+          "id": "F1",
+          "type": "pending_pathology",
+          "description": "Distal esophageal biopsy pathology preliminary (reflux-associated changes, no dysplasia or malignancy); final report must be confirmed and documented",
+          "urgency": "routine",
+          "expected_action": "confirm final pathology report and document; no malignancy expected",
+          "status": "open"
+        },
+        {
+          "id": "F2",
+          "type": "repeat_procedure",
+          "description": "Peptic esophageal strictures commonly recur; anticipate possible repeat balloon dilation",
+          "urgency": "routine",
+          "expected_action": "re-dilate if dysphagia recurs; monitor swallowing at follow-up",
+          "status": "open"
+        },
+        {
+          "id": "F3",
+          "type": "med_reconciliation",
+          "description": "Post-procedure resumption of home medications (pantoprazole 40 mg twice daily, amlodipine 5 mg daily); no anticoagulant/antiplatelet was held. Twice-daily PPI is disease-modifying to prevent stricture recurrence",
+          "urgency": "routine",
+          "expected_action": "confirm PPI resumed twice daily and antihypertensive resumed; reconcile active med list",
+          "status": "closed"
+        },
+        {
+          "id": "F4",
+          "type": "care_coordination",
+          "description": "Routine GI clinic follow-up to assess swallowing and reflux control",
+          "urgency": "routine",
+          "expected_action": "schedule routine follow-up; reassess symptoms",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "id": "PT-052",
+      "procedure": "Colonoscopy",
+      "followup_items": [
+        {
+          "id": "F1",
+          "type": "pending_pathology",
+          "description": "Polypectomy pathology pending for two diminutive polyps (ascending + sigmoid, specimens A and B) — result must be communicated to the patient and drive the surveillance interval",
+          "urgency": "routine",
+          "expected_action": "call patient with result + document surveillance interval",
+          "status": "open"
+        },
+        {
+          "id": "F2",
+          "type": "surveillance_interval",
+          "description": "Colorectal surveillance interval to be finalized once pathology returns — expected extended interval given diminutive polyps in an average-risk patient",
+          "urgency": "routine",
+          "expected_action": "set and document next colonoscopy due date after pathology",
+          "status": "open"
+        },
+        {
+          "id": "F3",
+          "type": "med_reconciliation",
+          "description": "TERMINOLOGY TRAP: patient's 'blood thinner' is over-the-counter fish oil (omega-3), not a prescription anticoagulant. No periprocedural hold was indicated and none is required. Do NOT infer a missing anticoagulant resume from the patient's phrasing.",
+          "urgency": "routine",
+          "expected_action": "reassure patient may restart fish oil anytime; no anticoagulation action needed",
+          "status": "closed"
+        }
+      ]
+    },
+    {
+      "id": "PT-053",
+      "procedure": "Flexible sigmoidoscopy (limited, unprepped)",
+      "followup_items": [
+        {
+          "id": "F1",
+          "type": "pending_pathology",
+          "description": "CMV immunohistochemistry/PCR and histology on colonic biopsies pending — a positive CMV result mandates antiviral therapy and changes management in this steroid-treated acute severe UC patient",
+          "urgency": "critical",
+          "expected_action": "review CMV result when back; if positive start antiviral (ganciclovir) and notify IBD team; document histology",
+          "status": "open"
+        },
+        {
+          "id": "F2",
+          "type": "complication_watch",
+          "description": "Acute severe UC on IV steroids — assess steroid response at day 3; if inadequate, escalate to rescue therapy (infliximab or cyclosporine) or surgery. Risk of colonic decompensation/toxic megacolon during admission",
+          "urgency": "critical",
+          "expected_action": "daily monitoring of stool frequency/CRP/albumin; day-3 rescue-therapy decision; watch for perforation/toxic megacolon",
+          "status": "open"
+        },
+        {
+          "id": "F3",
+          "type": "referral",
+          "description": "Colorectal surgery co-management for colectomy contingency in refractory acute severe colitis",
+          "urgency": "urgent",
+          "expected_action": "obtain surgical consult during admission",
+          "status": "open"
+        },
+        {
+          "id": "F4",
+          "type": "complication_watch",
+          "description": "Anemia (Hgb 10.9 g/dL) with ongoing hematochezia — monitor for worsening GI blood loss requiring transfusion",
+          "urgency": "urgent",
+          "expected_action": "serial CBC, transfuse per threshold, reassess iron studies",
+          "status": "open"
+        },
+        {
+          "id": "F5",
+          "type": "med_reconciliation",
+          "description": "Medication reconciliation: prednisone 40 mg daily not on prior med list must be added; reinforce mesalamine adherence (missed ~1 week preceded flare). No true anticoagulant to hold/resume — reported 'blood thinner' is OTC fish oil",
+          "urgency": "routine",
+          "expected_action": "update med list to include prednisone; counsel and confirm mesalamine continuity",
+          "status": "open"
+        },
+        {
+          "id": "F6",
+          "type": "surveillance_interval",
+          "description": "Post-flare disease reassessment and mucosal healing follow-up (repeat endoscopic evaluation after acute management)",
+          "urgency": "routine",
+          "expected_action": "schedule outpatient IBD follow-up and interval endoscopic reassessment once flare controlled",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "id": "PT-054",
+      "procedure": "Colonoscopy",
+      "followup_items": [
+        {
+          "id": "F1",
+          "type": "pending_pathology",
+          "description": "Polypectomy pathology pending for ascending (A) and sigmoid (B) polyps — results must be communicated to patient and drive the surveillance interval",
+          "urgency": "routine",
+          "expected_action": "call patient with results via certified Cantonese interpreter + document surveillance interval",
+          "status": "open"
+        },
+        {
+          "id": "F2",
+          "type": "med_resume",
+          "description": "Resumption of dual antiplatelet therapy (clopidogrel + patient-disclosed OTC aspirin 81 mg) after polypectomy with a prophylactic clip at the ascending site; elevated post-polypectomy bleed risk on DAPT",
+          "urgency": "urgent",
+          "expected_action": "confirm safe resumption timing and counsel on delayed post-polypectomy bleeding precautions",
+          "status": "open"
+        },
+        {
+          "id": "F3",
+          "type": "surveillance_interval",
+          "description": "Surveillance colonoscopy interval to be set pending pathology (small tubular adenomas would typically warrant repeat in 3-5 years)",
+          "urgency": "routine",
+          "expected_action": "document next surveillance colonoscopy date once pathology final",
+          "status": "open"
+        },
+        {
+          "id": "F4",
+          "type": "complication_watch",
+          "description": "Delayed post-polypectomy bleeding watch given resumption of dual antiplatelet therapy; clip placed at ascending polypectomy site",
+          "urgency": "routine",
+          "expected_action": "counsel patient (via interpreter) on delayed bleeding signs and return precautions",
+          "status": "open"
+        },
+        {
+          "id": "F5",
+          "type": "care_coordination",
+          "description": "Certified interpreter required for all result communication and future procedural consent — family interpretation not acceptable",
+          "urgency": "routine",
+          "expected_action": "flag chart so certified Cantonese interpreter is scheduled for any follow-up contact",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "id": "PT-055",
+      "procedure": "ERCP with sphincterotomy and stone extraction (fluoro-minimization protocol in pregnancy)",
+      "followup_items": [
+        {
+          "id": "F1",
+          "type": "repeat_procedure",
+          "description": "Indwelling 7 Fr plastic biliary stent must be removed or exchanged by a planned repeat ERCP/endoscopy; if forgotten, risks stent occlusion, recurrent cholangitis, and sepsis in a pregnant patient",
+          "urgency": "urgent",
+          "expected_action": "schedule stent removal/exchange and track to completion; coordinate timing with pregnancy",
+          "status": "open"
+        },
+        {
+          "id": "F2",
+          "type": "complication_watch",
+          "description": "Post-ERCP pancreatitis watch and post-sphincterotomy bleeding risk (low-dose aspirin continued through sphincterotomy)",
+          "urgency": "urgent",
+          "expected_action": "monitor 24-48h for abdominal pain/lipase rise and delayed bleeding; escalate if positive",
+          "status": "open"
+        },
+        {
+          "id": "F3",
+          "type": "critical_result",
+          "description": "Early ascending cholangitis confirmed intra-procedurally (purulent bile) in a 24-week pregnant patient — requires completed antibiotic course and review/de-escalation of blood cultures",
+          "urgency": "critical",
+          "expected_action": "ensure blood culture results reviewed, antibiotics completed, clinical resolution confirmed",
+          "status": "open"
+        },
+        {
+          "id": "F4",
+          "type": "referral",
+          "description": "Interval laparoscopic cholecystectomy for retained gallbladder stones to prevent recurrent choledocholithiasis/biliary events",
+          "urgency": "routine",
+          "expected_action": "surgical referral with timing coordinated with MFM (2nd trimester vs postpartum)",
+          "status": "open"
+        },
+        {
+          "id": "F5",
+          "type": "med_reconciliation",
+          "description": "Low-dose aspirin 81 mg (preeclampsia prophylaxis) was continued through the sphincterotomy and never held — reconcile onto the active med list (previously missing) and confirm continuation post-procedure",
+          "urgency": "urgent",
+          "expected_action": "add aspirin to medication list; confirm it was continued (no hold needed) and continue through 36 weeks per MFM",
+          "status": "open"
+        },
+        {
+          "id": "F6",
+          "type": "record_correction",
+          "description": "Prior IV iodinated contrast reaction (pruritus/hives) not on chart — document allergy for future contrast imaging and any repeat ERCP",
+          "urgency": "routine",
+          "expected_action": "add AllergyIntolerance entry for iodinated contrast",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "id": "PT-056",
+      "procedure": "Colonoscopy with ileal intubation and biopsies",
+      "followup_items": [
+        {
+          "id": "F1",
+          "type": "pending_pathology",
+          "description": "Segmental ileocolonic and rectal biopsies (specimens A-D) pending — histology is the confirming step for the still-provisional Crohn's diagnosis and gates treatment initiation",
+          "urgency": "urgent",
+          "expected_action": "review histology, confirm/refute Crohn's, contact patient, update chart diagnosis label",
+          "status": "open"
+        },
+        {
+          "id": "F2",
+          "type": "known_lesion_followup",
+          "description": "Endoscopic findings highly consistent with Crohn's disease with fistulizing perianal phenotype in a treatment-naive young patient — strongly suspected but not yet histologically confirmed; must be acted upon (not dropped) to start timely therapy and prevent complications",
+          "urgency": "urgent",
+          "expected_action": "escalate to IBD team for therapy planning once histology confirms; ensure patient is contacted",
+          "status": "open"
+        },
+        {
+          "id": "F3",
+          "type": "care_coordination",
+          "description": "MR enterography (with pelvis) still outstanding — needed to define small-bowel extent and perianal fistula anatomy before therapy; an initial planned study, not yet performed",
+          "urgency": "urgent",
+          "expected_action": "schedule and complete MR enterography; review results",
+          "status": "open"
+        },
+        {
+          "id": "F4",
+          "type": "referral",
+          "description": "Colorectal surgery referral for perianal fistula (EUA/seton) coordinated with medical therapy",
+          "urgency": "urgent",
+          "expected_action": "place and track surgical referral",
+          "status": "open"
+        },
+        {
+          "id": "F5",
+          "type": "med_reconciliation",
+          "description": "NSAID (ibuprofen) discontinuation counseling — undocumented OTC ibuprofen use; patient is on no anticoagulant/antiplatelet (the reported 'blood thinner' is OTC fish oil), so nothing was held or resumed. Ensure patient stopped ibuprofen and is using acetaminophen instead",
+          "urgency": "routine",
+          "expected_action": "confirm NSAID cessation and document in med list",
+          "status": "open"
+        },
+        {
+          "id": "F6",
+          "type": "lab_followup",
+          "description": "Pre-biologic workup and treatment initiation labs (TB/hepatitis serologies, recheck Hgb/CRP, nutrition assessment for weight loss)",
+          "urgency": "routine",
+          "expected_action": "order pre-biologic labs and nutrition referral ahead of therapy start",
+          "status": "open"
+        },
+        {
+          "id": "F7",
+          "type": "surveillance_interval",
+          "description": "Establish IBD disease-monitoring/surveillance plan (including future colonoscopic reassessment/dysplasia surveillance appropriate to eventual disease duration and extent)",
+          "urgency": "routine",
+          "expected_action": "document longitudinal IBD monitoring plan once diagnosis confirmed",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "id": "PT-057",
+      "procedure": "Colonoscopy",
+      "followup_items": [
+        {
+          "id": "F1",
+          "type": "pending_pathology",
+          "description": "Polypectomy pathology pending for two specimens (ascending colon 5 mm, sigmoid colon 4 mm); results must be communicated to the patient and drive the surveillance interval",
+          "urgency": "routine",
+          "expected_action": "call patient with results + document surveillance interval",
+          "status": "open"
+        },
+        {
+          "id": "F2",
+          "type": "surveillance_interval",
+          "description": "Surveillance interval must incorporate newly reported first-degree family history of colorectal cancer (father, early 70s) alongside polyp histology; risk is above average, so a shorter interval than standard low-risk screening may apply",
+          "urgency": "routine",
+          "expected_action": "set and document surveillance interval at pathology review, factoring family history",
+          "status": "open"
+        },
+        {
+          "id": "F3",
+          "type": "record_correction",
+          "description": "Newly reported first-degree family history of CRC (father, ~70s) surfaced pre-procedure and is not in the chart problem list; must be documented to inform future screening",
+          "urgency": "routine",
+          "expected_action": "add family history of colorectal cancer to problem list",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "id": "PT-058",
+      "procedure": "Esophagogastroduodenoscopy (EGD) with hemostasis",
+      "followup_items": [
+        {
+          "id": "F1",
+          "type": "pending_pathology",
+          "description": "Gastric ulcer margin biopsies pending to exclude malignancy — gastric ulcers require histologic and endoscopic confirmation of benignity; result must be communicated and acted upon",
+          "urgency": "urgent",
+          "expected_action": "review path, call patient, ensure malignancy excluded and healing confirmed on repeat EGD",
+          "status": "open"
+        },
+        {
+          "id": "F2",
+          "type": "pending_pathology",
+          "description": "H. pylori antral biopsy pending — if positive, eradication therapy is required to reduce ulcer recurrence",
+          "urgency": "routine",
+          "expected_action": "review H. pylori result; treat and confirm eradication if positive",
+          "status": "open"
+        },
+        {
+          "id": "F3",
+          "type": "critical_result",
+          "description": "Endoscopically treated gastric ulcer with a Forrest IIa non-bleeding visible vessel in a patient with recent melena — high rebleeding risk; pending CBC/hemoglobin must be reviewed to assess anemia and transfusion need",
+          "urgency": "critical",
+          "expected_action": "review hemoglobin promptly; monitor for rebleeding; escalate/admit if Hgb low or symptomatic",
+          "status": "open"
+        },
+        {
+          "id": "F4",
+          "type": "med_reconciliation",
+          "description": "Naproxen must NOT be resumed — it is the likely ulcer culprit; patient (on no anticoagulant/antiplatelet) needs an alternative back-pain analgesia plan and NSAID-cessation reinforcement, with permanent NSAID-avoidance documented on the reconciled medication list",
+          "urgency": "urgent",
+          "expected_action": "document permanent NSAID avoidance on the medication list; coordinate alternative analgesia with PCP",
+          "status": "open"
+        },
+        {
+          "id": "F5",
+          "type": "repeat_procedure",
+          "description": "Repeat EGD in 8-12 weeks to confirm gastric ulcer healing (standard of care for gastric ulcers)",
+          "urgency": "urgent",
+          "expected_action": "schedule surveillance EGD to document healing and re-biopsy if not healed",
+          "status": "open"
+        },
+        {
+          "id": "F6",
+          "type": "complication_watch",
+          "description": "Post-hemostasis rebleeding watch — early rebleeding after epinephrine + clip therapy; patient counseled on return precautions",
+          "urgency": "urgent",
+          "expected_action": "ensure patient understands return precautions; consider next-day check-in call",
+          "status": "open"
+        },
+        {
+          "id": "F7",
+          "type": "incidental_finding",
+          "description": "LA Grade A reflux esophagitis — continue PPI and reassess reflux control",
+          "urgency": "routine",
+          "expected_action": "continue PPI, reassess GERD symptoms at follow-up",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "id": "PT-059",
+      "procedure": "Endoscopic ultrasound with fine-needle aspiration (EUS-FNA) of mediastinal station 7 lymph node",
+      "followup_items": [
+        {
+          "id": "F1",
+          "type": "pending_pathology",
+          "description": "Station 7 EUS-FNA cytology/cell block with immunostains pending; ROSE showed malignant-appearing cells — result must be finalized, communicated to patient, and forwarded to oncology/pulmonology",
+          "urgency": "critical",
+          "expected_action": "track final cytology, call patient with result, route to oncology/pulmonology for staging",
+          "status": "open"
+        },
+        {
+          "id": "F2",
+          "type": "critical_result",
+          "description": "Positive ROSE for malignancy in a mediastinal (N2) node — high-suspicion malignant finding in an expedited cancer workup; must not be dropped",
+          "urgency": "critical",
+          "expected_action": "ensure malignancy result reaches oncology and patient; do not close until oncology handoff documented",
+          "status": "open"
+        },
+        {
+          "id": "F3",
+          "type": "referral",
+          "description": "Expedited oncology referral for staging and treatment planning contingent on final tissue diagnosis",
+          "urgency": "urgent",
+          "expected_action": "place/confirm oncology referral and PET/staging on final path",
+          "status": "open"
+        },
+        {
+          "id": "F4",
+          "type": "med_resume",
+          "description": "Resume PROPHYLACTIC enoxaparin 40 mg SC daily after periprocedural hold; do NOT apply therapeutic bridging (dose is prophylactic per D1)",
+          "urgency": "routine",
+          "expected_action": "confirm no bleeding and resume prophylactic LMWH at correct dose/intent",
+          "status": "open"
+        },
+        {
+          "id": "F5",
+          "type": "repeat_procedure",
+          "description": "Contingency repeat sampling (EUS-FNA/EBUS/CT-guided RUL biopsy) if final cytology returns non-diagnostic despite suspicious ROSE and imaging",
+          "urgency": "urgent",
+          "expected_action": "arrange repeat tissue acquisition if non-diagnostic",
+          "status": "open"
+        },
+        {
+          "id": "F6",
+          "type": "known_lesion_followup",
+          "description": "RUL primary nodule was not sampled transesophageally and remains a known, radiographically suspicious primary lesion requiring staging correlation",
+          "urgency": "urgent",
+          "expected_action": "ensure RUL nodule addressed in staging (PET/biopsy) and not lost to follow-up",
+          "status": "open"
+        }
+      ]
+    },
+    {
+      "id": "PT-060",
+      "procedure": "Colonoscopy",
+      "followup_items": [
+        {
+          "id": "F1",
+          "type": "pending_pathology",
+          "description": "Histology of the ascending and transverse colon polypectomy specimens is pending; results must be communicated to the patient and drive the surveillance interval",
+          "urgency": "routine",
+          "expected_action": "call patient with pathology results and document surveillance interval",
+          "status": "open"
+        },
+        {
+          "id": "F2",
+          "type": "surveillance_interval",
+          "description": "Surveillance interval must be shortened from average-risk given two first-degree relatives with young-onset colorectal cancer (mother 48, brother 52); plan ~5-year interval, adjusted by polyp pathology",
+          "urgency": "routine",
+          "expected_action": "document and schedule shortened surveillance colonoscopy interval",
+          "status": "open"
+        },
+        {
+          "id": "F3",
+          "type": "referral",
+          "description": "Genetic counseling / Lynch syndrome (HNPCC) germline evaluation referral is proposed but not yet completed; young-onset CRC in two first-degree relatives meets criteria",
+          "urgency": "routine",
+          "expected_action": "place and complete genetics referral for hereditary cancer evaluation",
+          "status": "open"
+        }
+      ]
+    }
+  ],
+  "totals": {
+    "patients": 60,
+    "followup_items": 310,
+    "by_type": {
+      "pending_pathology": 62,
+      "surveillance_interval": 39,
+      "med_reconciliation": 37,
+      "known_lesion_followup": 6,
+      "repeat_procedure": 26,
+      "lab_followup": 14,
+      "critical_result": 15,
+      "referral": 27,
+      "complication_watch": 31,
+      "incidental_finding": 9,
+      "record_correction": 12,
+      "care_coordination": 10,
+      "med_resume": 22
+    },
+    "by_urgency": {
+      "routine": 180,
+      "urgent": 92,
+      "critical": 38
+    },
+    "by_status": {
+      "open": 305,
+      "closed": 5
+    },
+    "patients_with_critical_item": [
+      "PT-006",
+      "PT-008",
+      "PT-014",
+      "PT-017",
+      "PT-019",
+      "PT-021",
+      "PT-022",
+      "PT-024",
+      "PT-026",
+      "PT-030",
+      "PT-031",
+      "PT-036",
+      "PT-038",
+      "PT-039",
+      "PT-040",
+      "PT-041",
+      "PT-044",
+      "PT-047",
+      "PT-049",
+      "PT-050",
+      "PT-053",
+      "PT-055",
+      "PT-058",
+      "PT-059"
+    ]
+  }
+}

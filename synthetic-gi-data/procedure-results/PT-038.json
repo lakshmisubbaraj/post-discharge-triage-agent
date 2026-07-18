@@ -1,0 +1,90 @@
+{
+  "id": "gi-synth-0038::proc-result",
+  "_synthetic": true,
+  "_note": "MOCK procedure result. No real patient. For PreChart/LeftBehind development/eval.",
+  "patient_id": "gi-synth-0038",
+  "procedure": {
+    "name": "Esophagogastroduodenoscopy (EGD) with biopsy",
+    "code": {"system": "http://snomed.info/sct", "code": "235156007", "display": "Esophagogastroduodenoscopy (procedure)"},
+    "date": "2026-08-04T09:10:00-07:00",
+    "indication": "Progressive solid-food dysphagia with unintentional ~12 lb weight loss (alarm features)",
+    "sedation": "Monitored anesthesia care (anesthesiologist-administered propofol) in hospital-based endoscopy suite due to severe COPD on home O2, cor pulmonale, and reported prior sedation intolerance; supplemental O2 titrated, continuous capnography",
+    "prep_quality": "N/A (upper endoscopy) — NPO x8h confirmed",
+    "extent_reached": "Second portion of duodenum",
+    "withdrawal_time_min": null,
+    "status": "completed"
+  },
+  "procedure_report": "PROCEDURE: Esophagogastroduodenoscopy with biopsies. INDICATION: progressive solid-food dysphagia with unintentional weight loss (alarm features). ANESTHESIA: MAC with anesthesia team present given high respiratory/cardiac risk; apixaban held for 3 days pre-procedure per cardiology/anesthesia guidance. FINDINGS: The endoscope was passed under direct vision. In the distal esophagus, extending from approximately 34 to 39 cm from the incisors, there was a firm, partially circumferential, ulcerated and friable mass causing luminal narrowing; the endoscope traversed the narrowing with mild resistance. No active bleeding, though the lesion was friable to contact. The mass extended distally to involve the gastroesophageal junction at its distal margin (~39 cm). The stomach was examined in forward and retroflexed views without additional mass; mild antral gastritis noted. The duodenum to the second portion was normal. Targeted biopsies (x8) were obtained from the esophageal mass. No dilation performed given need for staging and tissue diagnosis first. IMPRESSION: Distal esophageal / GE-junction mass, partially obstructing, ulcerated and friable — suspicious for malignancy. Biopsies obtained, pathology pending. Mild antral gastritis. Recommend staging (EUS, cross-sectional imaging) and multidisciplinary referral.",
+  "findings": [
+    {"finding": "Partially circumferential ulcerated friable mass, luminal narrowing, suspicious for malignancy", "location": "distal esophagus / GE junction (34-39 cm from incisors)", "size_mm": null, "action_taken": "targeted biopsies x8, retrieved", "specimen": "A"},
+    {"finding": "Mild antral gastritis", "location": "gastric antrum", "action_taken": "none"}
+  ],
+  "specimens": [{"id": "A", "site": "distal esophageal / GEJ mass", "type": "endoscopic biopsy"}],
+  "pathology": {"status": "pending", "expected_back": "2026-08-08", "report": null, "diagnosis": null, "actionable": null},
+  "complications": [],
+  "disposition": "Recovered in PACU with anesthesia; extended monitoring given severe COPD and cor pulmonale. Returned to home O2 at 2 L/min at pre-procedure saturation. Discharged same day in stable condition with escort. Advised to resume soft/liquid diet and to report any worsening dysphagia, inability to swallow saliva, chest pain, bleeding, or breathing decline.",
+  "followup": [
+    {"recommendation": "Expedite esophageal biopsy pathology; personally contact patient with result and next steps", "timeframe": "within 3-5 days", "owner": "GI", "status": "open"},
+    {"recommendation": "Order staging cross-sectional imaging (CT chest/abdomen/pelvis) and EUS; refer to thoracic/GI oncology multidisciplinary tumor board pending pathology", "timeframe": "within 1-2 weeks", "owner": "GI / Oncology", "status": "open"},
+    {"recommendation": "Resume apixaban after post-biopsy bleeding risk window per cardiology; reconcile true home dose (chart 5 mg BID vs patient self-reduced to once daily) and afib anticoagulation plan", "timeframe": "48-72 hours", "owner": "Cardiology / patient", "status": "open"},
+    {"recommendation": "Coordinate peri-procedure stress-dose steroid wean and pulmonary optimization with pulmonology (current prednisone 20 mg daily)", "timeframe": "within 1 week", "owner": "Pulmonology / GI", "status": "open"}
+  ],
+  "planted_followup_items": [
+    {"id": "F1", "type": "pending_pathology", "description": "Esophageal/GEJ mass biopsy pathology pending on a lesion endoscopically suspicious for malignancy — result must be communicated and drive staging/oncology pathway", "urgency": "critical", "expected_action": "expedite path, personally notify patient, initiate oncology referral on result", "status": "open"},
+    {"id": "F2", "type": "critical_result", "description": "Endoscopically suspicious partially obstructing distal esophageal/GEJ mass identified — critical finding requiring staging and multidisciplinary management regardless of biopsy timing", "urgency": "critical", "expected_action": "order CT c/a/p + EUS, refer to tumor board", "status": "open"},
+    {"id": "F3", "type": "referral", "description": "Thoracic/GI oncology multidisciplinary referral pending pathology confirmation", "urgency": "urgent", "expected_action": "place oncology/tumor board referral once tissue diagnosis returns", "status": "open"},
+    {"id": "F4", "type": "med_resume", "description": "Apixaban held peri-procedure and not yet resumed; afib patient off anticoagulation — resumption must be confirmed and true dose reconciled (chart 5 mg BID vs patient-reported once daily)", "urgency": "urgent", "expected_action": "confirm resumption timing with cardiology and reconcile home dose", "status": "open"},
+    {"id": "F5", "type": "repeat_procedure", "description": "EUS for locoregional staging and possible therapeutic dilation/stent deferred until tissue diagnosis obtained", "urgency": "urgent", "expected_action": "schedule staging EUS after pathology", "status": "open"},
+    {"id": "F6", "type": "incidental_finding", "description": "Mild antral gastritis noted incidentally", "urgency": "routine", "expected_action": "consider H. pylori testing / PPI; low priority relative to primary finding", "status": "open"},
+    {"id": "F7", "type": "complication_watch", "description": "Post-biopsy bleeding watch — live procedural risk from x8 esophageal biopsies of a friable lesion in an afib patient whose apixaban will be resumed", "urgency": "routine", "expected_action": "counsel on bleeding red flags before anticoagulation resumption", "status": "open"}
+  ],
+  "post_procedure_followup": {
+    "window": "day 0 to day 14",
+    "channels": ["automated_check_in", "patient_portal_message", "nurse_triage_call"],
+    "_note": "Patient-reported stream after the procedure — the inbound signal the LeftBehind product triages. Each contact is labeled ground truth so triage can be scored.",
+    "contacts": [
+      {
+        "id": "C1",
+        "day": 1,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "My throat's a bit scratchy and I was pretty foggy and worn out the rest of yesterday after the sedation. Feeling more like myself today.",
+        "clinical_signal": "Expected post-endoscopy sore throat and transient post-anesthesia grogginess, already improving; no respiratory red flag",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; sore throat and lingering grogginess after MAC/propofol are expected and self-limited over 24-48h. Advise return precautions if breathing worsens below baseline or fever develops.",
+        "rationale": "Common benign post-procedure symptoms, already resolving; prior sedation intolerance was anticipated and monitored, no active concern."
+      },
+      {
+        "id": "C2",
+        "day": 2,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "When will I hear back about the biopsies from that spot they found? And when am I supposed to start my blood thinner up again — nobody's told me a day yet.",
+        "clinical_signal": "Patient asking about pending pathology on the suspicious esophageal mass and about apixaban resumption timing",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F1",
+        "expected_action": "Answer from the result: pathology expected ~2026-08-08; GI will personally call with the result and next steps. For apixaban, confirm the cardiology-directed resumption timing (~48-72h post-biopsy if no bleeding) and reconcile the true home dose (chart 5 mg BID vs self-reduced once daily) per F4.",
+        "rationale": "Answerable from the procedure result and follow-up plan; links to pending_pathology (F1) and to the anticoagulation resumption/reconciliation task (F4)."
+      },
+      {
+        "id": "C3",
+        "day": 3,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "There was a little pink tinge in my spit once when I brushed my teeth this morning. Nothing since, no real bleeding, and I feel okay otherwise.",
+        "clinical_signal": "Single episode of minimal blood-tinged saliva after x8 esophageal biopsies, self-resolved, no ongoing bleeding, no lightheadedness or melena",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": "F7",
+        "expected_action": "Reassure; a one-time trace of blood-tinged saliva after multiple esophageal biopsies is expected and benign. Reinforce bleeding red flags (repeated vomiting of blood, black/tarry stools, lightheadedness) and to call/seek care if any occur, especially once apixaban is resumed.",
+        "rationale": "Dangerous-sounding but benign: minimal, single, self-resolved spotting is within normal post-biopsy expectation; links to the post-biopsy bleeding watch (F7) as counseling, not escalation. No hemodynamic or ongoing-bleeding signal present."
+      }
+    ]
+  }
+}

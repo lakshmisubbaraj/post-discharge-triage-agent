@@ -1,0 +1,92 @@
+{
+  "id": "gi-synth-0055::proc-result",
+  "_synthetic": true,
+  "_note": "MOCK procedure result. No real patient. For PreChart development/eval. Result of the urgent ERCP the patient was referred for.",
+  "patient_id": "gi-synth-0055",
+  "procedure": {
+    "name": "ERCP with sphincterotomy and stone extraction (fluoro-minimization protocol in pregnancy)",
+    "code": {"system": "http://snomed.info/sct", "code": "45170000", "display": "Endoscopic retrograde cholangiopancreatography (procedure)"},
+    "date": "2026-07-19T07:40:00-07:00",
+    "indication": "Symptomatic choledocholithiasis with rising cholestatic LFTs and features concerning for early ascending cholangitis, at 24 weeks gestation",
+    "sedation": "General endotracheal anesthesia with OB-experienced anesthesia team; MFM present, continuous fetal heart rate monitoring pre- and post-procedure",
+    "prep_quality": "N/A (ERCP)",
+    "extent_reached": "Major papilla cannulated; common bile duct selectively accessed",
+    "withdrawal_time_min": null,
+    "status": "completed"
+  },
+  "procedure_report": "PROCEDURE: ERCP with biliary sphincterotomy and stone extraction. INDICATION: symptomatic choledocholithiasis with rising LFTs and overnight rigors/subjective fever concerning for early ascending cholangitis, at 24 weeks gestation. Case expedited from routine queue to urgent tier after referral review. ANESTHESIA: general endotracheal, OB-experienced anesthesia; MFM coordinated peri-procedure with continuous fetal heart rate monitoring; patient positioned with left lateral tilt to avoid aortocaval compression; abdominal/pelvic lead shielding applied. RADIATION MINIMIZATION: fluoro-minimization protocol used — bile duct cannulation confirmed by bile aspiration and wire-guided technique; a single brief low-dose spot fluoroscopy image obtained (total fluoro time <10 seconds) with collimation. CONTRAST: given prior iodinated-contrast reaction (pruritus/hives), corticosteroid + antihistamine premedication administered per allergy protocol and contrast injection minimized (diluted, small-volume cholangiogram). ANTIPLATELET: low-dose aspirin 81 mg (preeclampsia prophylaxis) continued per plan — not held for sphincterotomy. FINDINGS: The major papilla was identified and selectively cannulated. Cholangiogram demonstrated a dilated common bile duct (~8 mm) with a single filling defect in the distal CBD consistent with an obstructing stone; purulent/cloudy bile expressed on access, supporting early cholangitis. A biliary sphincterotomy was performed; a single ~6 mm stone was extracted with a balloon sweep with clearance of the duct and brisk bile drainage. Occlusion balloon sweep confirmed no residual filling defect. Given cholangitis physiology, a 7 Fr x 7 cm plastic biliary stent was placed to ensure ongoing drainage. Hemostasis at the sphincterotomy site was adequate with no active bleeding. IMPRESSION: Obstructing distal CBD stone extracted; biliary sphincterotomy performed; plastic biliary stent placed for early cholangitis. Duct clearance confirmed. No immediate complication; fetal heart tones reassuring post-procedure.",
+  "findings": [
+    {"finding": "Dilated common bile duct (~8 mm) with single distal obstructing stone", "location": "distal common bile duct", "size_mm": 6, "action_taken": "biliary sphincterotomy and balloon extraction; duct cleared", "specimen": null},
+    {"finding": "Cloudy/purulent bile on access, consistent with early ascending cholangitis", "location": "common bile duct", "action_taken": "bile drainage; blood cultures and empiric antibiotics per inpatient team"},
+    {"finding": "Plastic biliary stent placed to ensure drainage", "location": "common bile duct / major papilla", "action_taken": "7 Fr x 7 cm plastic biliary stent deployed"}
+  ],
+  "specimens": [],
+  "pathology": {"status": "not_applicable", "expected_back": null, "report": null, "diagnosis": null, "actionable": null},
+  "complications": [],
+  "disposition": "Admitted to obstetric/medical service for observation with continued fetal monitoring, IV antibiotics for cholangitis, and post-ERCP pancreatitis watch. Hemodynamically stable post-procedure; reassuring fetal heart tones. MFM co-managing.",
+  "followup": [
+    {"recommendation": "Complete course of IV/oral antibiotics for ascending cholangitis; ensure blood culture results reviewed and de-escalated appropriately", "timeframe": "during admission and at discharge", "owner": "Inpatient medicine / GI / MFM", "status": "open"},
+    {"recommendation": "Post-ERCP pancreatitis monitoring — serial abdominal exam and lipase if symptomatic; watch for post-sphincterotomy bleeding (low-dose aspirin continued)", "timeframe": "24-48 hours", "owner": "Inpatient team / GI", "status": "open"},
+    {"recommendation": "Retained plastic biliary stent requires planned removal/exchange (repeat ERCP or endoscopy) to avoid stent occlusion/cholangitis; schedule postpartum vs. earlier per clinical course", "timeframe": "4-8 weeks (individualize; coordinate with pregnancy timeline)", "owner": "GI", "status": "open"},
+    {"recommendation": "Interval laparoscopic cholecystectomy for retained gallbladder stones to prevent recurrent biliary events — timing coordinated with MFM (2nd trimester currently, or postpartum)", "timeframe": "per surgery/MFM", "owner": "General surgery / MFM", "status": "open"},
+    {"recommendation": "Continue low-dose aspirin 81 mg for preeclampsia prophylaxis; ensure it is reconciled onto the active medication list (was missing pre-procedure)", "timeframe": "ongoing through 36 weeks", "owner": "MFM / GI", "status": "open"},
+    {"recommendation": "Document IV iodinated contrast allergy (pruritus/hives) on the chart for future imaging and any repeat ERCP", "timeframe": "now", "owner": "GI / clinic", "status": "open"}
+  ],
+  "planted_followup_items": [
+    {"id": "F1", "type": "repeat_procedure", "description": "Indwelling 7 Fr plastic biliary stent must be removed or exchanged by a planned repeat ERCP/endoscopy; if forgotten, risks stent occlusion, recurrent cholangitis, and sepsis in a pregnant patient", "urgency": "urgent", "expected_action": "schedule stent removal/exchange and track to completion; coordinate timing with pregnancy", "status": "open"},
+    {"id": "F2", "type": "complication_watch", "description": "Post-ERCP pancreatitis watch and post-sphincterotomy bleeding risk (low-dose aspirin continued through sphincterotomy)", "urgency": "urgent", "expected_action": "monitor 24-48h for abdominal pain/lipase rise and delayed bleeding; escalate if positive", "status": "open"},
+    {"id": "F3", "type": "critical_result", "description": "Early ascending cholangitis confirmed intra-procedurally (purulent bile) in a 24-week pregnant patient — requires completed antibiotic course and review/de-escalation of blood cultures", "urgency": "critical", "expected_action": "ensure blood culture results reviewed, antibiotics completed, clinical resolution confirmed", "status": "open"},
+    {"id": "F4", "type": "referral", "description": "Interval laparoscopic cholecystectomy for retained gallbladder stones to prevent recurrent choledocholithiasis/biliary events", "urgency": "routine", "expected_action": "surgical referral with timing coordinated with MFM (2nd trimester vs postpartum)", "status": "open"},
+    {"id": "F5", "type": "med_reconciliation", "description": "Low-dose aspirin 81 mg (preeclampsia prophylaxis) was continued through the sphincterotomy and never held — reconcile onto the active med list (previously missing) and confirm continuation post-procedure", "urgency": "urgent", "expected_action": "add aspirin to medication list; confirm it was continued (no hold needed) and continue through 36 weeks per MFM", "status": "open"},
+    {"id": "F6", "type": "record_correction", "description": "Prior IV iodinated contrast reaction (pruritus/hives) not on chart — document allergy for future contrast imaging and any repeat ERCP", "urgency": "routine", "expected_action": "add AllergyIntolerance entry for iodinated contrast", "status": "open"}
+  ],
+  "post_procedure_followup": {
+    "window": "day 0 to day 14",
+    "channels": ["automated_check_in", "patient_portal_message", "nurse_triage_call"],
+    "_note": "Patient-reported stream after the procedure — the inbound signal the LeftBehind product triages. Each contact is labeled ground truth so triage can be scored. SYNTHETIC.",
+    "contacts": [
+      {
+        "id": "C1",
+        "day": 1,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "My throat feels scratchy from the breathing tube and my belly is a little sore and bloated, but nothing severe. No fever and the baby's been moving fine.",
+        "clinical_signal": "Expected post-intubation sore throat plus mild post-ERCP abdominal soreness/air insufflation; no pancreatitis or bleeding features, reassuring fetal movement",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; sore throat and mild bloating/soreness are expected and self-limited over 24-72h. Reinforce return precautions for severe/worsening epigastric or back pain, persistent vomiting, fever/chills, black or bloody stools, or decreased fetal movement.",
+        "rationale": "Common benign post-ERCP/post-intubation symptoms without red-flag features; no escalation, but return precautions matter given post-sphincterotomy pancreatitis/bleeding risk."
+      },
+      {
+        "id": "C2",
+        "day": 3,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "I take my baby aspirin (81 mg) that my pregnancy doctor started for my blood pressure. Should I keep taking it after the procedure, or was I supposed to stop it?",
+        "clinical_signal": "Patient asking about continuation of low-dose aspirin after ERCP with sphincterotomy — the aspirin was continued through the procedure, not held",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F5",
+        "expected_action": "Answer from the result: low-dose aspirin 81 mg was intentionally continued through the sphincterotomy and should be continued for preeclampsia prophylaxis through 36 weeks per MFM. Confirm it is now reconciled onto the active med list. No resumption action is needed because it was never held.",
+        "rationale": "Answerable from the procedure record; maps to the med_reconciliation/continuation item (F5) — no hold occurred, so this is reassurance/education, not a resumption instruction."
+      },
+      {
+        "id": "C3",
+        "day": 6,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "They told me there's a stent in my bile duct and that I'll need my gallbladder out at some point. When does the stent come out, and when will the surgery be?",
+        "clinical_signal": "Patient asking about indwelling biliary stent removal/exchange and timing of interval cholecystectomy",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F1",
+        "expected_action": "Answer and schedule: the 7 Fr plastic biliary stent requires a planned removal/exchange procedure (repeat ERCP/endoscopy) so it does not occlude — ensure this is on the books and tracked. Explain interval laparoscopic cholecystectomy timing is coordinated with MFM/surgery (2nd trimester vs postpartum). Confirm both are entered as pending follow-ups.",
+        "rationale": "Answerable from the follow-up plan; links to the stent removal repeat_procedure item (F1) and touches the cholecystectomy referral (F4). Ensures the retained stent is not lost to follow-up in a pregnant patient."
+      }
+    ]
+  }
+}

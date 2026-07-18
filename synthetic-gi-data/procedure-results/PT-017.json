@@ -1,0 +1,93 @@
+{
+  "id": "gi-synth-0017::proc-result",
+  "_synthetic": true,
+  "_note": "MOCK procedure result for PT-017. No real patient. For PreChart development/eval.",
+  "patient_id": "gi-synth-0017",
+  "procedure": {
+    "name": "Esophagogastroduodenoscopy (EGD) with variceal band ligation",
+    "code": {"system": "http://snomed.info/sct", "code": "235156006", "display": "Esophagogastroduodenoscopy (procedure)"},
+    "date": "2026-07-23T09:10:00-07:00",
+    "indication": "Variceal screening in NASH cirrhosis (Child-Pugh B); single episode of melena ~2 weeks prior raising concern for possible prior variceal bleed",
+    "sedation": "Monitored anesthesia care (anesthesiology-directed propofol) given Child-Pugh B cirrhosis, thrombocytopenia, possible hepatic encephalopathy, and documented history of severe PONV / delayed emergence with prior anesthesia",
+    "prep_quality": "N/A (upper endoscopy) — NPO status adequate; clear oropharynx",
+    "extent_reached": "Second portion of the duodenum",
+    "withdrawal_time_min": null,
+    "status": "completed"
+  },
+  "procedure_report": "PROCEDURE: Esophagogastroduodenoscopy with esophageal variceal band ligation. INDICATION: variceal screening in NASH cirrhosis (Child-Pugh B); reported single melenic stool ~2 weeks prior. PRE-PROCEDURE: Platelets 88k and INR 1.4 reviewed and attributed to cirrhotic synthetic dysfunction/hypersplenism, not anticoagulation; patient on no prescription antiplatelet/anticoagulant (OTC fish oil only, not held). Anesthesia-directed MAC used given comorbidity and prior adverse anesthesia history. SEDATION: MAC (propofol), well tolerated. FINDINGS: The esophagus demonstrated three columns of medium-to-large (grade 2-3) esophageal varices extending from the mid-esophagus to the gastroesophageal junction, with red wale marks on two columns indicating high risk of bleeding. No active bleeding; a small pigmented (flat, healed) area suggestive of a prior bleeding stigma was noted near the GE junction without active oozing. Four endoscopic band ligations were applied to the larger, high-risk columns with good deployment. The stomach showed a mosaic mucosal pattern consistent with mild-to-moderate portal hypertensive gastropathy; no gastric varices, no ulcer, no active bleeding. The examined duodenum to the second portion was normal. IMPRESSION: Medium-to-large esophageal varices with high-risk stigmata (red wale marks) and a healed bleeding stigma, consistent with the reported prior melena; four bands placed. Portal hypertensive gastropathy. Plan for repeat EGD banding sessions until variceal eradication and initiation of non-selective beta-blocker.",
+  "findings": [
+    {"finding": "Grade 2-3 esophageal varices (3 columns) with red wale marks (high-risk stigmata)", "location": "mid-esophagus to GE junction", "action_taken": "endoscopic variceal band ligation x4", "specimen": null},
+    {"finding": "Flat pigmented spot suggestive of healed/prior bleeding stigma, no active oozing", "location": "near GE junction", "action_taken": "banded region / observed", "specimen": null},
+    {"finding": "Portal hypertensive gastropathy (mild-to-moderate, mosaic pattern)", "location": "gastric body/fundus", "action_taken": "none", "specimen": null},
+    {"finding": "Normal duodenum to second portion", "location": "duodenum", "action_taken": "none", "specimen": null}
+  ],
+  "specimens": [],
+  "pathology": {"status": "not_applicable", "expected_back": null, "report": null, "diagnosis": null, "actionable": null},
+  "complications": [],
+  "disposition": "Discharged home same day in stable condition with escort after uneventful recovery. Post-band-ligation precautions reviewed: soft diet advanced as tolerated, avoid NSAIDs, return immediately for hematemesis, melena, chest pain, or dysphagia. Given healed bleeding stigma and high-risk varices, counseled on urgent return precautions and provided direct GI/hepatology contact.",
+  "followup": [
+    {"recommendation": "Schedule repeat EGD for serial band ligation until variceal eradication (high-risk varices with evidence of prior bleed)", "timeframe": "2-4 weeks", "owner": "GI", "status": "open"},
+    {"recommendation": "Initiate non-selective beta-blocker (e.g., carvedilol) for secondary prophylaxis, titrate as tolerated given ascites/blood pressure; coordinate with hepatology", "timeframe": "within 1 week", "owner": "GI / Hepatology", "status": "open"},
+    {"recommendation": "Reconcile spironolactone dose — patient self-reduced to 50 mg daily; reassess ascites control and electrolytes with hepatology", "timeframe": "next hepatology visit", "owner": "Hepatology", "status": "open"},
+    {"recommendation": "Add hepatic encephalopathy to problem list (May 2026 episode); continue rifaximin 550 mg BID", "timeframe": "routine", "owner": "Hepatology", "status": "open"},
+    {"recommendation": "Continue HCC surveillance imaging per cirrhosis protocol", "timeframe": "per protocol (q6 months)", "owner": "Hepatology", "status": "open"},
+    {"recommendation": "Confirm no prescription anticoagulant/antiplatelet — OTC fish oil only, no bridging or resumption needed", "timeframe": "completed at pre-procedure", "owner": "GI", "status": "closed"}
+  ],
+  "planted_followup_items": [
+    {"id": "F1", "type": "critical_result", "description": "High-risk esophageal varices (grade 2-3, red wale marks) with a healed bleeding stigma corroborating the reported prior melena — a bleeding source in a Child-Pugh B cirrhotic; must not be dropped as it drives secondary prophylaxis and urgent surveillance", "urgency": "critical", "expected_action": "ensure hepatology/GI informed, patient counseled on urgent return precautions, and secondary-prophylaxis plan initiated", "status": "open"},
+    {"id": "F2", "type": "repeat_procedure", "description": "Repeat EGD for serial variceal band ligation until eradication", "urgency": "urgent", "expected_action": "schedule follow-up banding session in 2-4 weeks and track through eradication", "status": "open"},
+    {"id": "F3", "type": "med_reconciliation", "description": "Initiate non-selective beta-blocker (carvedilol) for secondary prophylaxis of variceal bleeding, coordinated with hepatology", "urgency": "urgent", "expected_action": "start and titrate NSBB; document blood pressure/ascites tolerance", "status": "open"},
+    {"id": "F4", "type": "incidental_finding", "description": "Portal hypertensive gastropathy noted — reinforces portal hypertension severity; relevant to future anemia/bleeding workup", "urgency": "routine", "expected_action": "document; monitor for iron-deficiency anemia", "status": "open"},
+    {"id": "F5", "type": "med_reconciliation", "description": "Spironolactone dose discrepancy — chart 100 mg vs patient-reported 50 mg; reconcile and reassess ascites/electrolytes", "urgency": "routine", "expected_action": "reconcile actual dose with hepatology and adjust diuretic plan", "status": "open"},
+    {"id": "F6", "type": "surveillance_interval", "description": "Continue HCC surveillance imaging per cirrhosis protocol", "urgency": "routine", "expected_action": "confirm next surveillance imaging is scheduled q6 months", "status": "open"}
+  ],
+  "post_procedure_followup": {
+    "window": "day 0 to day 14",
+    "channels": ["automated_check_in", "patient_portal_message", "nurse_triage_call"],
+    "_note": "Patient-reported stream after the procedure — the inbound signal the LeftBehind product triages. Each contact is labeled ground truth so triage can be scored. SYNTHETIC.",
+    "contacts": [
+      {
+        "id": "C1",
+        "day": 1,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "My throat's sore and it feels a little tight in my chest when I swallow, like the food sticks for a second.",
+        "clinical_signal": "Mild odynophagia/dysphagia and retrosternal discomfort day 1 after esophageal band ligation — expected post-banding symptom from band sites; no fever, no bleeding, no drooling/obstruction",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; transient sore throat, mild chest tightness and short-lived food-sticking are expected after band ligation. Advise soft/liquid diet, chew well, take meals slowly, sit upright, and use prescribed PPI/sucralfate. Return for high fever, severe or worsening chest pain, inability to swallow saliva, vomiting blood, or black stools.",
+        "rationale": "TRIAGE TRAP (dangerous-sounding, benign): 'chest tightness on swallowing' after banding sounds alarming but is a common self-limited post-band symptom; escalate only if accompanied by red-flag features (bleeding, obstruction, fever, severe pain)."
+      },
+      {
+        "id": "C2",
+        "day": 3,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "My daughter buys me the fish oil pills she calls my blood thinner. I stopped them for the test — should I start taking them again now, and is there a new heart pill I'm supposed to begin?",
+        "clinical_signal": "Medication reconciliation question — OTC omega-3 fish oil (mislabeled 'blood thinner', not a true anticoagulant, never required holding) plus query about starting the planned non-selective beta-blocker for variceal secondary prophylaxis",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F3",
+        "expected_action": "Answer/reconcile: the fish oil is an OTC supplement, not a prescription blood thinner, and never needed to be held — she may resume it, and it poses no post-band bleeding concern. Confirm the carvedilol (NSBB) start/titration plan with GI/hepatology and how to take it given blood pressure/ascites.",
+        "rationale": "Answerable from the chart and follow-up plan; links to the beta-blocker initiation item (F3) and closes the fish-oil 'blood thinner' confusion — no true anticoagulant was ever involved."
+      },
+      {
+        "id": "C3",
+        "day": 11,
+        "channel": "nurse_triage_call",
+        "type": "complication",
+        "verbatim": "I threw up some blood a little while ago and my stool this morning was black and tarry again. I feel weak and dizzy when I stand up.",
+        "clinical_signal": "Hematemesis plus melena with orthostatic lightheadedness ~11 days post-banding — classic timing for post-band ulcer bleeding / recurrent variceal hemorrhage in a Child-Pugh B cirrhotic with high-risk varices",
+        "red_flag": true,
+        "ground_truth_disposition": "escalate",
+        "urgency": "emergent",
+        "links_followup_item": "F1",
+        "expected_action": "Escalate immediately for emergency evaluation (call 911 / ED activation); anticipate urgent EGD for hemostasis, resuscitation, transfusion as needed, and hepatology/GI notification. Do not manage as outpatient.",
+        "rationale": "Post-band ulcer bleed/rebleed with active hematemesis, melena, and a hemodynamic symptom is a life-threatening red-flag complication in a cirrhotic with known high-risk varices (F1) requiring emergent action."
+      }
+    ]
+  }
+}

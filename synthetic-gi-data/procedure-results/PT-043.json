@@ -1,0 +1,109 @@
+{
+  "id": "gi-synth-0043::proc-result",
+  "_synthetic": true,
+  "_note": "MOCK procedure result. No real patient. For PreChart development/eval.",
+  "patient_id": "gi-synth-0043",
+  "procedure": {
+    "name": "Peroral endoscopic myotomy (POEM)",
+    "code": {"system": "http://snomed.info/sct", "code": "51981006", "display": "Esophagomyotomy (procedure)"},
+    "date": "2026-07-30T07:45:00-07:00",
+    "indication": "Achalasia, Chicago classification type II, refractory to pneumatic dilation, with ongoing nutritional decline (~20 lb loss, BMI 18.4, albumin 3.3)",
+    "sedation": "General endotracheal anesthesia (rapid-sequence induction given retained esophageal contents/aspiration risk); CO2 insufflation throughout",
+    "prep_quality": "Extended clear-liquid diet x48h; residual liquid/food debris in dilated esophagus lavaged and suctioned prior to myotomy — acceptable working field",
+    "extent_reached": "Esophagus, gastroesophageal junction, and proximal gastric cardia; submucosal tunnel extended ~3 cm onto the gastric side",
+    "withdrawal_time_min": null,
+    "status": "completed"
+  },
+  "procedure_report": "PROCEDURE: Peroral endoscopic myotomy (POEM). INDICATION: achalasia type II refractory to pneumatic dilation with nutritional decline. ANESTHESIA: general endotracheal with rapid-sequence induction; CO2 insufflation. PREP: extended clear-liquid diet; dilated esophagus contained residual liquid and food debris which was lavaged and suctioned to obtain an acceptable field. FINDINGS: Dilated esophageal body with a tight, non-relaxing gastroesophageal junction consistent with achalasia; no mucosal mass or suspicious lesion; no evidence of Candida esophagitis. Given prior LES botulinum toxin injection (~2 years ago) and prior pneumatic dilation, submucosal fibrosis was anticipated and encountered. TECHNIQUE: A mucosotomy was created on the posterior wall of the mid-esophagus at ~28 cm. A submucosal tunnel was dissected distally across the GEJ onto the gastric cardia. Submucosal fibrosis at the GEJ increased dissection difficulty and prolonged tunneling but the tunnel was completed. A selective (inner circular) myotomy was performed beginning ~10 cm above the GEJ and extended ~3 cm onto the gastric side (total myotomy length ~13 cm). Improved distensibility of the GEJ was noted after myotomy. The mucosotomy entry was closed with endoscopic clips without difficulty. No mucosal perforation of the tunnel was identified. No capnoperitoneum requiring decompression. Estimated blood loss minimal. IMPRESSION: Technically successful POEM for achalasia type II; increased technical difficulty due to post-botox/post-dilation submucosal fibrosis. No intraprocedural mucosal injury or perforation.",
+  "findings": [
+    {"finding": "Dilated esophageal body with tight non-relaxing GEJ, consistent with achalasia", "location": "esophagus / gastroesophageal junction", "action_taken": "posterior selective myotomy ~13 cm (10 cm esophageal + 3 cm gastric)"},
+    {"finding": "Submucosal fibrosis at the GEJ (anticipated after prior botulinum toxin injection and pneumatic dilation)", "location": "gastroesophageal junction", "action_taken": "careful submucosal dissection; tunnel completed"},
+    {"finding": "Retained liquid/food debris in dilated esophagus", "location": "esophageal body", "action_taken": "lavage and suction prior to myotomy"},
+    {"finding": "No mucosal mass, suspicious lesion, or Candida esophagitis", "location": "esophagus", "action_taken": "none"},
+    {"finding": "Mucosotomy entry site", "location": "mid-esophagus (~28 cm)", "action_taken": "closed with endoscopic clips"}
+  ],
+  "specimens": [],
+  "pathology": {"status": "not_applicable", "expected_back": null, "report": null, "diagnosis": null, "actionable": null},
+  "complications": [],
+  "disposition": "Admitted for overnight observation per POEM protocol. NPO overnight. Post-procedure contrast esophagram planned on POD1 to confirm no leak prior to advancing to clear liquids. IV proton pump inhibitor started. Anesthesia noted intra-procedural blood pressure lability; nifedipine held peri-operatively. Nutrition following.",
+  "followup": [
+    {"recommendation": "POD1 water-soluble contrast esophagram to exclude leak before advancing diet; if negative, advance to clear liquids then post-POEM soft diet", "timeframe": "POD1 (2026-07-31)", "owner": "GI / inpatient team", "status": "open"},
+    {"recommendation": "Start and continue high-dose PPI (post-POEM reflux prophylaxis); reconcile with patient's prior OTC omeprazole", "timeframe": "at discharge, ongoing", "owner": "GI", "status": "open"},
+    {"recommendation": "Reconcile home medications: resume/formalize nifedipine decision (held peri-op for BP lability under anesthesia — clarify whether still needed post-myotomy), document penicillin allergy, resume fish oil per bleeding protocol", "timeframe": "at discharge", "owner": "GI / patient", "status": "open"},
+    {"recommendation": "Nutrition follow-up given ~20 lb weight loss, BMI 18.4, albumin 3.3 — monitor intake and weight recovery after myotomy", "timeframe": "2-4 weeks", "owner": "GI / Nutrition", "status": "open"},
+    {"recommendation": "Objective outcome assessment: Eckardt score and timed barium esophagram at follow-up; consider repeat manometry/pH testing if reflux symptoms", "timeframe": "3 months", "owner": "GI", "status": "open"},
+    {"recommendation": "Surveillance for post-POEM GERD (asymptomatic reflux common); consider upper endoscopy at ~6-12 months to assess for reflux esophagitis given lifelong PPI/reflux risk", "timeframe": "6-12 months", "owner": "GI", "status": "open"}
+  ],
+  "planted_followup_items": [
+    {"id": "F1", "type": "complication_watch", "description": "POD1 water-soluble contrast esophagram to rule out esophageal leak/perforation before advancing diet — dropping this risks feeding through an undetected leak", "urgency": "urgent", "expected_action": "obtain esophagram POD1, confirm no leak, then advance diet", "status": "open"},
+    {"id": "F2", "type": "med_resume", "description": "Nifedipine held peri-operatively for anesthesia BP lability; must decide whether to resume (likely no longer needed after myotomy) and communicate to patient", "urgency": "routine", "expected_action": "make and document resume/discontinue decision at discharge", "status": "open"},
+    {"id": "F3", "type": "med_resume", "description": "Fish oil (omega-3) held pre-procedure per bleeding protocol — instruct on resumption timing", "urgency": "routine", "expected_action": "confirm safe resumption timing with patient", "status": "open"},
+    {"id": "F4", "type": "referral", "description": "Nutrition follow-up for significant weight loss (~20 lb), BMI 18.4, albumin 3.3 — ensure nutritional recovery is tracked post-myotomy", "urgency": "routine", "expected_action": "nutrition referral/visit and weight monitoring", "status": "open"},
+    {"id": "F5", "type": "med_reconciliation", "description": "Post-POEM high-dose PPI for reflux prophylaxis must be started and continued; reconcile against patient's prior OTC omeprazole to avoid duplication or gap", "urgency": "routine", "expected_action": "prescribe and reconcile PPI at discharge", "status": "open"},
+    {"id": "F6", "type": "repeat_procedure", "description": "Post-POEM GERD surveillance — asymptomatic reflux is common after myotomy; planned upper endoscopy at 6-12 months to assess for reflux esophagitis", "urgency": "routine", "expected_action": "schedule surveillance EGD and reflux assessment", "status": "open"},
+    {"id": "F7", "type": "surveillance_interval", "description": "Objective achalasia outcome assessment (Eckardt score + timed barium esophagram) at 3 months to confirm treatment success", "urgency": "routine", "expected_action": "schedule 3-month outcome assessment", "status": "open"}
+  ],
+  "post_procedure_followup": {
+    "window": "day 0 to day 14",
+    "channels": ["automated_check_in", "patient_portal_message", "nurse_triage_call"],
+    "_note": "Patient-reported stream after the procedure — the inbound signal the LeftBehind product triages. Each contact is labeled ground truth so triage can be scored.",
+    "contacts": [
+      {
+        "id": "C1",
+        "day": 1,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "My throat is scratchy and my chest feels a little sore right in the middle, kind of like I did too many sit-ups. No fever, and I'm sipping my liquids okay.",
+        "clinical_signal": "Expected post-POEM sore throat plus mild musculoskeletal-type chest soreness after tunneling/myotomy; no fever, tolerating liquids, no dysphagia to liquids or dyspnea",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; mild post-POEM chest soreness and sore throat are expected and self-limited. Reinforce return precautions: worsening/severe chest pain, fever, breathing trouble, neck/chest swelling or crackling, or inability to keep down liquids.",
+        "rationale": "Benign expected post-POEM discomfort with reassuring negatives (afebrile, tolerating liquids, no dyspnea); the POD1 esophagram already excluded a leak. No escalation."
+      },
+      {
+        "id": "C2",
+        "day": 3,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "When am I allowed to move from liquids to soft food? I don't want to eat something too early and mess up the repair.",
+        "clinical_signal": "Diet-advancement question tied to the post-POEM leak-exclusion/diet protocol",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F1",
+        "expected_action": "Answer from the result: POD1 esophagram was negative for leak, so advance clear liquids then to the post-POEM soft diet on the schedule provided; give specific timing and progression instructions.",
+        "rationale": "Answerable from the diet-advancement/leak-exclusion plan; links to the complication_watch esophagram item."
+      },
+      {
+        "id": "C3",
+        "day": 5,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "Can I start taking my fish oil again, and do I still need to bite the nifedipine capsule before meals now that the muscle was cut?",
+        "clinical_signal": "Patient asking about resuming the held fish oil supplement and whether the pre-meal nifedipine is still needed post-myotomy",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F3",
+        "expected_action": "Confirm safe fish-oil resumption timing per the bleeding protocol, and communicate the documented nifedipine decision (likely no longer needed for swallowing after myotomy) from the discharge med reconciliation.",
+        "rationale": "Answerable from the medication-resume/reconciliation plan; links to the fish-oil resumption item (F3) and relates to the nifedipine decision (F2)."
+      },
+      {
+        "id": "C4",
+        "day": 11,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "I got the new stomach acid pill. I already used to take drugstore omeprazole for heartburn — should I take both, or just the new one?",
+        "clinical_signal": "PPI reconciliation question — avoid duplicating the new prescription PPI with the prior OTC omeprazole",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F5",
+        "expected_action": "Clarify that the new prescription high-dose PPI replaces the OTC omeprazole (do not take both); confirm the single reconciled regimen for post-POEM reflux prophylaxis.",
+        "rationale": "Answerable from the PPI reconciliation plan; links to the med_reconciliation item (F5). Prevents an unsafe duplication."
+      }
+    ]
+  }
+}

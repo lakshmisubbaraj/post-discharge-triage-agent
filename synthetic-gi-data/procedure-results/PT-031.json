@@ -1,0 +1,97 @@
+{
+  "id": "gi-synth-0031::proc-result",
+  "_synthetic": true,
+  "_note": "MOCK procedure result. No real patient. For PreChart development/eval.",
+  "patient_id": "gi-synth-0031",
+  "procedure": {
+    "name": "EUS-FNA of pancreatic head mass with same-session ERCP and biliary stent placement",
+    "code": {"system": "http://snomed.info/sct", "code": "445682006", "display": "Endoscopic ultrasonography with fine needle aspiration (procedure)"},
+    "date": "2026-07-21T08:00:00-07:00",
+    "indication": "3.2 cm pancreatic head mass with painless obstructive jaundice (total bilirubin 4.1) and CA 19-9 890; tissue diagnosis and biliary decompression",
+    "sedation": "Monitored anesthesia care (MAC) with propofol, anesthesiology-administered; prone/semi-prone positioning for ERCP",
+    "prep_quality": "N/A (upper endoscopic procedure)",
+    "extent_reached": "Second portion of duodenum; pancreatic head fully interrogated by linear echoendoscope; major papilla cannulated at ERCP",
+    "withdrawal_time_min": null,
+    "status": "completed",
+    "periprocedural_notes": "Metformin 500 mg BID held morning of procedure per NPO plan. Documented prior rash to iodinated IV contrast — premedicated with methylprednisolone and diphenhydramine per protocol; low-osmolar contrast used sparingly under fluoroscopy with no reaction. OTC fish oil (omega-3) continued; not a clinically significant anticoagulant and did not require holding. No therapeutic anticoagulant/antiplatelet on file."
+  },
+  "procedure_report": "PROCEDURE: Linear EUS with fine needle aspiration of pancreatic head mass, followed by same-session ERCP with biliary stent placement. INDICATION: pancreatic head mass with obstructive jaundice; tissue diagnosis and decompression. SEDATION: MAC (propofol). CONTRAST ALLERGY: prior rash to iodinated contrast — premedicated (steroid + antihistamine); minimal low-osmolar contrast used without reaction.\n\nEUS FINDINGS: A hypoechoic, ill-defined mass measuring approximately 3.3 x 3.0 cm was identified in the pancreatic head. The mass abutted the portal confluence with preserved fat plane; no definite vascular invasion of the SMA/SMV was seen on this exam. Upstream main pancreatic duct and common bile duct were dilated (double-duct sign). A rounded 9 mm peripancreatic lymph node was noted. No ascites. Liver segments surveyed showed no discrete lesion. FNA was performed with a 22-gauge needle under Doppler guidance, 4 passes, with rapid on-site evaluation (ROSE) reporting atypical/malignant epithelial cells consistent with adenocarcinoma; additional passes collected for cell block and cytology.\n\nERCP FINDINGS: The major papilla was identified and cannulated selectively. Cholangiogram (limited contrast) demonstrated a tight ~2 cm distal common bile duct stricture at the level of the mass with marked upstream intra- and extrahepatic biliary dilation. A guidewire was advanced across the stricture. A 10 Fr x 9 cm plastic biliary stent was deployed across the stricture with brisk drainage of bile and contrast. Given the malignant appearance, metal stenting was deferred pending confirmed cytology and staging/resectability determination at tumor board. No sphincterotomy complication; prophylactic rectal indomethacin administered.\n\nIMPRESSION: (1) Pancreatic head mass, ROSE positive for malignant cells — cytology/cell block pending. (2) Malignant-appearing distal CBD stricture, decompressed with plastic biliary stent — technically successful. (3) Suspicious 9 mm peripancreatic lymph node. Await final cytology and staging for MDT review.",
+  "findings": [
+    {"finding": "Hypoechoic ill-defined pancreatic head mass, ~3.3 x 3.0 cm, abutting portal confluence without definite vascular invasion", "location": "pancreatic head", "size_mm": 33, "action_taken": "EUS-FNA, 22G, 4 passes; ROSE positive for malignant cells", "specimen": "A"},
+    {"finding": "Distal common bile duct stricture (~2 cm) with upstream biliary dilation (double-duct sign)", "location": "distal common bile duct", "action_taken": "guidewire crossing and 10 Fr x 9 cm plastic biliary stent placement with good drainage", "specimen": null},
+    {"finding": "Rounded 9 mm peripancreatic lymph node", "location": "peripancreatic", "size_mm": 9, "action_taken": "noted; not separately sampled", "specimen": null}
+  ],
+  "specimens": [
+    {"id": "A", "site": "pancreatic head mass", "type": "EUS-FNA cytology + cell block"}
+  ],
+  "pathology": {"status": "pending", "expected_back": "2026-07-24", "report": null, "diagnosis": "ROSE: positive for malignant cells, favor adenocarcinoma; final cytology and cell block (including immunostains) pending", "actionable": true},
+  "complications": [],
+  "disposition": "Discharged home same day in stable condition with escort after MAC recovery. Return precautions for post-ERCP pancreatitis (worsening abdominal pain, nausea/vomiting) reviewed. Biliary stent care and expected improvement in jaundice discussed.",
+  "followup": [
+    {"recommendation": "Review final EUS-FNA cytology/cell block; ROSE already positive for malignant cells — communicate confirmed result to patient and update chart from 'suspected' to tissue-confirmed once final", "timeframe": "within 1 week", "owner": "GI", "status": "open"},
+    {"recommendation": "Present at multidisciplinary pancreatic tumor board for staging and resectability; obtain pancreatic-protocol CT/MRI if not already staged", "timeframe": "within 1-2 weeks", "owner": "GI / Oncology", "status": "open"},
+    {"recommendation": "Medical/surgical oncology referral for treatment planning once cytology finalized", "timeframe": "within 1-2 weeks", "owner": "GI", "status": "open"},
+    {"recommendation": "Monitor bilirubin trend post-stent to confirm biliary decompression; plan for metal stent exchange if unresectable/neoadjuvant pathway", "timeframe": "1-2 weeks", "owner": "GI", "status": "open"},
+    {"recommendation": "Resume metformin 500 mg BID after procedure once tolerating oral intake; monitor for post-ERCP pancreatitis", "timeframe": "24-48 hours", "owner": "patient / PCP", "status": "open"},
+    {"recommendation": "Follow up 9 mm peripancreatic lymph node in staging workup", "timeframe": "with staging", "owner": "GI / Radiology", "status": "open"}
+  ],
+  "planted_followup_items": [
+    {"id": "F1", "type": "pending_pathology", "description": "EUS-FNA cytology and cell block pending; ROSE already positive for malignant cells consistent with pancreatic adenocarcinoma. Final result must be communicated and the chart diagnosis (currently 'suspected/provisional') updated to tissue-confirmed.", "urgency": "critical", "expected_action": "call patient with final cytology; document tissue confirmation; trigger oncology pathway", "status": "open"},
+    {"id": "F2", "type": "critical_result", "description": "Positive malignant cytology on ROSE for a pancreatic head mass — a critical result requiring expedited oncology/tumor board handoff and staging.", "urgency": "critical", "expected_action": "present at MDT/tumor board; refer to oncology; complete staging imaging", "status": "open"},
+    {"id": "F3", "type": "referral", "description": "Medical/surgical oncology referral for treatment planning (resectable vs neoadjuvant vs palliative).", "urgency": "urgent", "expected_action": "place oncology referral once cytology finalized", "status": "open"},
+    {"id": "F4", "type": "repeat_procedure", "description": "Plastic biliary stent placed; likely stent exchange to self-expanding metal stent depending on resectability/neoadjuvant plan, and plastic stents require exchange to avoid occlusion/cholangitis.", "urgency": "routine", "expected_action": "schedule ERCP stent exchange per oncologic plan or if signs of occlusion", "status": "open"},
+    {"id": "F5", "type": "complication_watch", "description": "Post-ERCP pancreatitis watch after biliary cannulation/stenting; prophylactic rectal indomethacin given.", "urgency": "urgent", "expected_action": "monitor for abdominal pain/vomiting; instruct patient on return precautions", "status": "open"},
+    {"id": "F6", "type": "med_reconciliation", "description": "Metformin 500 mg BID held on procedure day for NPO; not an anticoagulant/antiplatelet. Resume once tolerating oral intake, with attention to post-procedure pancreatitis risk.", "urgency": "routine", "expected_action": "confirm safe metformin resumption timing with patient/PCP", "status": "open"},
+    {"id": "F7", "type": "lab_followup", "description": "Bilirubin trend must be rechecked post-stent to confirm biliary decompression is effective.", "urgency": "urgent", "expected_action": "recheck LFTs/bilirubin in 1-2 weeks; escalate if not improving", "status": "open"},
+    {"id": "F8", "type": "known_lesion_followup", "description": "9 mm rounded peripancreatic lymph node noted on EUS; a suspicious pending-workup lesion relevant to nodal staging of the pancreatic malignancy.", "urgency": "routine", "expected_action": "incorporate into tumor-board staging assessment", "status": "open"}
+  ],
+  "post_procedure_followup": {
+    "window": "day 0 to day 14",
+    "channels": ["automated_check_in", "patient_portal_message", "nurse_triage_call"],
+    "_note": "Patient-reported stream after the procedure — the inbound signal the LeftBehind product triages. Each contact is labeled ground truth so triage can be scored.",
+    "contacts": [
+      {
+        "id": "C1",
+        "day": 1,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "My throat is a bit scratchy and I feel kind of bloated and burpy since the procedure.",
+        "clinical_signal": "Expected post-endoscopy sore throat and insufflation-related bloating/gas after EUS/ERCP; no abdominal pain, fever, or vomiting reported",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; scratchy throat and bloating/gas are expected after upper endoscopy and self-limited within 24-48h. Reinforce post-ERCP return precautions (worsening abdominal pain, nausea/vomiting, fever).",
+        "rationale": "Common benign post-endoscopy symptoms with no features of post-ERCP pancreatitis or cholangitis; no escalation needed."
+      },
+      {
+        "id": "C2",
+        "day": 2,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "When am I supposed to start my metformin again, and is it okay to keep taking my fish oil?",
+        "clinical_signal": "Patient asking about resuming metformin (held on procedure day for NPO) and continuing OTC fish oil",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F6",
+        "expected_action": "Answer from the plan: resume metformin 500 mg BID once tolerating oral intake (about 24-48h) if no abdominal pain or vomiting; fish oil is not a true blood thinner and may be continued.",
+        "rationale": "Directly answerable from the medication-reconciliation follow-up item; no clinical red flag."
+      },
+      {
+        "id": "C3",
+        "day": 6,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "My eyes and skin look less yellow and my urine is lighter — is that a good sign? And when will I hear about the biopsy results?",
+        "clinical_signal": "Improving jaundice consistent with successful biliary stent decompression; inquiry about pending EUS-FNA cytology",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F1",
+        "expected_action": "Reassure that lessening jaundice and lighter urine indicate the stent is draining as intended; explain final cytology is pending (expected ~2026-07-24) and the team will call with results and next steps; a follow-up bilirubin check is planned.",
+        "rationale": "Answerable from the procedure result and follow-up plan (pending pathology and post-stent bilirubin monitoring); improving jaundice is the expected benign course, not a red flag."
+      }
+    ]
+  }
+}

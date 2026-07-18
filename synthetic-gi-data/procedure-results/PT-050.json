@@ -1,0 +1,91 @@
+{
+  "id": "PT-050::proc-result",
+  "_synthetic": true,
+  "_note": "MOCK procedure result. No real patient. For PreChart development/eval. Result of the ERCP the patient is following up FROM.",
+  "patient_id": "gi-synth-0050",
+  "procedure": {
+    "name": "ERCP with biliary sphincterotomy and stone extraction",
+    "code": {"system": "http://snomed.info/sct", "code": "45903002", "display": "Endoscopic retrograde cholangiopancreatography (procedure)"},
+    "date": "2026-07-17T10:05:00-07:00",
+    "indication": "Choledocholithiasis — 7 mm distal CBD stone on MRCP with mild upstream ductal dilatation and transient jaundice",
+    "sedation": "Monitored anesthesia care (propofol), anesthesiology-directed",
+    "prep_quality": "N/A (upper endoscopy / ERCP)",
+    "extent_reached": "Second portion of duodenum; major papilla identified and cannulated",
+    "withdrawal_time_min": null,
+    "status": "completed"
+  },
+  "procedure_report": "PROCEDURE: ERCP with biliary sphincterotomy and stone extraction. INDICATION: choledocholithiasis (7 mm distal CBD stone on MRCP). SEDATION: monitored anesthesia care (propofol). FINDINGS: The duodenoscope was advanced to the second portion of the duodenum. The major papilla was identified and appeared normal. Selective deep cannulation of the common bile duct was achieved using a sphincterotome and guidewire; the pancreatic duct was not deeply instrumented. Occlusion cholangiogram demonstrated a single 7 mm filling defect in the distal CBD with mild upstream ductal dilatation, consistent with the known stone. A biliary sphincterotomy was performed with good bile flow. Balloon sweep of the duct extracted one stone; a repeat occlusion cholangiogram showed clearance with no residual filling defect and free flow of contrast. No biliary stent was placed. Estimated blood loss minimal. No immediate procedural complication. IMPRESSION: Successful biliary sphincterotomy with extraction of a single distal CBD stone and complete duct clearance. Patient not on antiplatelet/anticoagulant therapy. Gallbladder in situ with cholelithiasis — outpatient cholecystectomy referral to follow after biliary clearance.",
+  "findings": [
+    {"finding": "Single 7 mm filling defect (stone) in distal common bile duct with mild upstream ductal dilatation", "location": "distal common bile duct", "size_mm": 7, "action_taken": "biliary sphincterotomy + balloon sweep extraction; duct cleared", "specimen": null},
+    {"finding": "Normal major papilla", "location": "major duodenal papilla", "action_taken": "biliary sphincterotomy"},
+    {"finding": "Complete duct clearance on repeat occlusion cholangiogram, no residual defect", "location": "common bile duct", "action_taken": "none"}
+  ],
+  "specimens": [],
+  "pathology": {"status": "not_applicable", "expected_back": null, "report": null, "diagnosis": null, "actionable": null},
+  "complications": [
+    {"complication": "Suspected post-ERCP pancreatitis", "onset": "2026-07-18 (~8 hours post-sphincterotomy)", "severity": "pending grading", "detail": "New epigastric pain radiating to back with one episode of emesis on post-op day 1. STAT lipase + CBC ordered; diagnosis suspected, not yet confirmed pending enzyme results. Managed as urgent escalation.", "status": "under_evaluation"}
+  ],
+  "disposition": "Discharged home same day in stable condition after ERCP, tolerating sips, with oxycodone 5 mg PRN and return precautions for fever, worsening abdominal pain, or vomiting. Presented post-op day 1 with symptoms concerning for post-ERCP pancreatitis — escalated for same-day evaluation.",
+  "followup": [
+    {"recommendation": "STAT lipase + CBC to evaluate for post-ERCP pancreatitis; clinician to review and call patient within the hour", "timeframe": "same day", "owner": "GI", "status": "open"},
+    {"recommendation": "If lipase >3x ULN or clinical deterioration, arrange same-day IV crystalloid resuscitation and admission consideration", "timeframe": "same day", "owner": "GI", "status": "open"},
+    {"recommendation": "Hold further oxycodone until labs reviewed to avoid masking symptom trajectory; reassess analgesia once diagnosis clarified", "timeframe": "immediate", "owner": "GI / patient", "status": "open"},
+    {"recommendation": "Correct visit disposition in chart from routine follow-up to urgent post-procedure evaluation", "timeframe": "same day", "owner": "GI", "status": "open"},
+    {"recommendation": "Outpatient cholecystectomy referral after biliary clearance (gallbladder in situ with cholelithiasis)", "timeframe": "after recovery from acute event", "owner": "GI / Surgery", "status": "open"}
+  ],
+  "planted_followup_items": [
+    {"id": "F1", "type": "complication_watch", "description": "Suspected post-ERCP pancreatitis on post-op day 1 — new epigastric pain radiating to back with emesis ~8h after sphincterotomy; requires same-day evaluation and clinician callback", "urgency": "critical", "expected_action": "review STAT lipase + CBC, call patient within the hour, escalate to IV fluids/admission if lipase >3x ULN or deterioration", "status": "open"},
+    {"id": "F2", "type": "lab_followup", "description": "STAT lipase + CBC ordered but not yet resulted — pending order that must be resulted and acted on same day to confirm or exclude post-ERCP pancreatitis", "urgency": "critical", "expected_action": "resulted STAT; clinician reviews and contacts patient with disposition within the hour", "status": "open"},
+    {"id": "F3", "type": "med_reconciliation", "description": "Oxycodone held to avoid masking symptoms — analgesia plan must be revisited once pancreatitis workup resolves", "urgency": "urgent", "expected_action": "reassess and re-instruct analgesia after lipase reviewed", "status": "open"},
+    {"id": "F4", "type": "referral", "description": "Outpatient cholecystectomy referral for cholelithiasis (gallbladder in situ) after biliary clearance", "urgency": "routine", "expected_action": "place surgery referral once recovered from acute post-ERCP event", "status": "open"}
+  ],
+  "post_procedure_followup": {
+    "window": "day 0 to day 14",
+    "channels": ["automated_check_in", "patient_portal_message", "nurse_triage_call"],
+    "_note": "Patient-reported stream after the procedure — the inbound signal the LeftBehind product triages. Each contact is labeled ground truth so triage can be scored.",
+    "contacts": [
+      {
+        "id": "C1",
+        "day": 0,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "My throat feels a bit scratchy and I'm still kind of groggy from the sedation, but I made it home okay.",
+        "clinical_signal": "Expected post-endoscopy sore throat and residual sedation grogginess on the evening of the procedure",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; mild sore throat and lingering grogginess are expected after duodenoscopy under sedation and resolve within 24h. Advise rest, hydration, no driving.",
+        "rationale": "Common benign post-procedure symptoms; no escalation."
+      },
+      {
+        "id": "C2",
+        "day": 1,
+        "channel": "nurse_triage_call",
+        "type": "complication",
+        "verbatim": "Since around midnight I've got this bad pain up in the pit of my stomach that bores straight through to my back, and I threw up once. The pain pills barely touch it.",
+        "clinical_signal": "New epigastric pain radiating to back with emesis ~8h after biliary sphincterotomy — classic post-ERCP pancreatitis pattern",
+        "red_flag": true,
+        "ground_truth_disposition": "escalate",
+        "urgency": "emergent",
+        "links_followup_item": "F1",
+        "expected_action": "Escalate same-day: order/review STAT lipase + CBC, clinician callback within the hour, arrange in-person evaluation for IV crystalloid resuscitation and admission consideration; hold further oxycodone to avoid masking symptoms.",
+        "rationale": "New pain radiating to the back plus vomiting the day after sphincterotomy is the hallmark of post-ERCP pancreatitis — a true complication requiring urgent evaluation, not reassurance."
+      },
+      {
+        "id": "C3",
+        "day": 6,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "I'm feeling a lot better now — when can I go back to taking the pain tablets if I need them, and when do I see the surgeon about my gallbladder?",
+        "clinical_signal": "Recovering patient asking about resuming analgesia and timing of cholecystectomy referral",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F3",
+        "expected_action": "Answer from the plan: resume oxycodone PRN only as needed now that the pancreatitis workup is resolved and per clinician instruction; surgery (cholecystectomy) referral to be placed after recovery from the acute event — team will contact with an appointment.",
+        "rationale": "Answerable from the follow-up plan; links to the analgesia reconciliation item and reflects benign convalescent questions."
+      }
+    ]
+  }
+}

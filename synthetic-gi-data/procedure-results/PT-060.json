@@ -1,0 +1,89 @@
+{
+  "id": "gi-synth-0060::proc-result",
+  "_synthetic": true,
+  "_note": "MOCK procedure result. No real patient. For PreChart development/eval.",
+  "patient_id": "gi-synth-0060",
+  "procedure": {
+    "name": "Colonoscopy",
+    "code": {"system": "http://snomed.info/sct", "code": "73761001", "display": "Colonoscopy (procedure)"},
+    "date": "2026-08-05T08:00:00-07:00",
+    "indication": "Screening colonoscopy — high risk by family history (mother CRC age 48, brother CRC age 52); patient asymptomatic",
+    "sedation": "Moderate sedation (midazolam 2 mg, fentanyl 75 mcg)",
+    "prep_quality": "Boston Bowel Prep Scale 8/9 — adequate",
+    "extent_reached": "Cecum (confirmed by appendiceal orifice and ileocecal valve); terminal ileum intubated",
+    "withdrawal_time_min": 11,
+    "status": "completed"
+  },
+  "procedure_report": "PROCEDURE: Colonoscopy. INDICATION: screening colonoscopy in a 65-year-old man at increased risk due to two first-degree relatives with young-onset colorectal cancer (mother age 48, brother age 52); patient asymptomatic, first lifetime colonoscopy. SEDATION: moderate. PREP: adequate (BBPS 8, all segments >=2). FINDINGS: The colonoscope was advanced to the cecum with anatomic landmarks confirmed; the terminal ileum was intubated and appeared normal. Two diminutive polyps were identified and removed: a 4 mm sessile polyp in the ascending colon (cold snare polypectomy, specimen A) and a 3 mm sessile polyp in the transverse colon (cold forceps, specimen B). Both specimens were retrieved and sent to pathology. No mass, ulceration, stricture, or active bleeding was seen. No abnormal mucosa in the rectum. The remainder of the examined colon was normal. IMPRESSION: Two diminutive polyps removed (ascending and transverse colon). No malignancy or suspicious lesion. Pathology pending. Given the strong family history of young-onset colorectal cancer, a shortened surveillance interval and genetic counseling are recommended.",
+  "findings": [
+    {"finding": "4 mm sessile polyp", "location": "ascending colon", "size_mm": 4, "action_taken": "cold snare polypectomy, retrieved", "specimen": "A"},
+    {"finding": "3 mm sessile polyp", "location": "transverse colon", "size_mm": 3, "action_taken": "cold forceps polypectomy, retrieved", "specimen": "B"},
+    {"finding": "Normal terminal ileum, cecum, rectum; no mass, ulcer, stricture, or bleeding", "location": "colon / terminal ileum", "action_taken": "none"}
+  ],
+  "specimens": [
+    {"id": "A", "site": "ascending colon polyp", "type": "polypectomy"},
+    {"id": "B", "site": "transverse colon polyp", "type": "polypectomy"}
+  ],
+  "pathology": {"status": "pending", "expected_back": "2026-08-09", "report": null, "diagnosis": null, "actionable": null},
+  "complications": [],
+  "disposition": "Discharged home same day in stable condition with escort. Post-polypectomy precautions reviewed. No anticoagulation to resume (patient on no blood thinners).",
+  "followup": [
+    {"recommendation": "Review polyp pathology (ascending and transverse colon specimens); call patient with results and set surveillance interval accounting for family history", "timeframe": "within 2 weeks", "owner": "GI", "status": "open"},
+    {"recommendation": "Surveillance colonoscopy interval to be shortened due to two first-degree relatives with young-onset CRC — plan 5-year interval (or sooner per pathology / genetics results)", "timeframe": "5 years", "owner": "GI", "status": "open"},
+    {"recommendation": "Complete referral to genetic counseling / germline (Lynch syndrome) evaluation given young-onset CRC in two first-degree relatives", "timeframe": "within 4-6 weeks", "owner": "GI / patient", "status": "open"}
+  ],
+  "planted_followup_items": [
+    {"id": "F1", "type": "pending_pathology", "description": "Histology of the ascending and transverse colon polypectomy specimens is pending; results must be communicated to the patient and drive the surveillance interval", "urgency": "routine", "expected_action": "call patient with pathology results and document surveillance interval", "status": "open"},
+    {"id": "F2", "type": "surveillance_interval", "description": "Surveillance interval must be shortened from average-risk given two first-degree relatives with young-onset colorectal cancer (mother 48, brother 52); plan ~5-year interval, adjusted by polyp pathology", "urgency": "routine", "expected_action": "document and schedule shortened surveillance colonoscopy interval", "status": "open"},
+    {"id": "F3", "type": "referral", "description": "Genetic counseling / Lynch syndrome (HNPCC) germline evaluation referral is proposed but not yet completed; young-onset CRC in two first-degree relatives meets criteria", "urgency": "routine", "expected_action": "place and complete genetics referral for hereditary cancer evaluation", "status": "open"}
+  ],
+  "post_procedure_followup": {
+    "window": "day 0 to day 14",
+    "channels": ["automated_check_in", "patient_portal_message", "nurse_triage_call"],
+    "_note": "Patient-reported stream after the procedure — the inbound signal the LeftBehind product triages. Each contact is labeled ground truth so triage can be scored.",
+    "contacts": [
+      {
+        "id": "C1",
+        "day": 1,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "My throat feels a bit scratchy and I've been really gassy and bloated since I got home. Is that normal?",
+        "clinical_signal": "Expected post-procedure sore throat and insufflation-related bloating/flatulence after diagnostic colonoscopy",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; mild throat irritation and gas/bloating from air insufflation are expected and self-limited over 24-48h. Walking and warm fluids help. Return precautions for severe or worsening abdominal pain, fever, or bleeding.",
+        "rationale": "Classic benign post-endoscopy symptoms; no red flag, no escalation."
+      },
+      {
+        "id": "C2",
+        "day": 3,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "The doctor took out a couple of little polyps — when will I find out what they were, and how often do I need to come back given my mom and brother?",
+        "clinical_signal": "Patient asking about pending polyp pathology and shortened surveillance interval driven by family history",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F1",
+        "expected_action": "Answer from the result: two diminutive polyps removed, pathology expected back ~2026-08-09; team will call with results and confirm the shortened surveillance interval (planned ~5 years, adjusted by pathology/genetics). Reinforce the genetics referral offer.",
+        "rationale": "Answerable from the procedure result and follow-up plan; maps to the pending_pathology item (F1) and touches surveillance/genetics planning."
+      },
+      {
+        "id": "C3",
+        "day": 6,
+        "channel": "automated_check_in",
+        "type": "question",
+        "verbatim": "I noticed a tiny bit of pink on the toilet paper once yesterday. No real blood, just a little tinge. Should I worry?",
+        "clinical_signal": "Trace/minor spotting after diminutive cold-snare and cold-forceps polypectomy in a patient on no anticoagulation — within the benign expected range, no hemodynamic symptoms",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; a single episode of trace pink spotting after diminutive polypectomy (cold technique, no anticoagulant) is expected and self-limited. Give clear return precautions: escalate immediately for repeated or larger volumes of red/maroon blood, clots, dizziness, or abdominal pain.",
+        "rationale": "Dangerous-sounding-but-benign: minor spotting after cold polypectomy without anticoagulation is low risk; disposition is reassurance with explicit escalation criteria rather than escalation."
+      }
+    ]
+  }
+}

@@ -9,6 +9,7 @@ The factory pattern lets the test suite build an app bound to an in-memory DB
 without touching the dev database.
 """
 from flask import Flask, jsonify
+from flask_cors import CORS
 
 from config import Config
 from extensions import db
@@ -19,6 +20,10 @@ def create_app(config_object=Config):
     app.config.from_object(config_object)
 
     db.init_app(app)
+
+    # Allow the static index.html (opened via file:// or another origin) to
+    # fetch the /api/* endpoints. Scoped to /api/* only.
+    CORS(app, resources={r"/api/*": {"origins": "*"}})
 
     # Import models so SQLAlchemy is aware of them before create_all().
     from models import Patient, Encounter, CheckIn, TriageResult  # noqa: F401

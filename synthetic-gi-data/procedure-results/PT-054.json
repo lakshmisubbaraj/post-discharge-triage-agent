@@ -1,0 +1,93 @@
+{
+  "id": "PT-054::proc-result",
+  "_synthetic": true,
+  "_note": "MOCK procedure result. No real patient. For PreChart development/eval.",
+  "patient_id": "gi-synth-0054",
+  "procedure": {
+    "name": "Colonoscopy",
+    "code": {"system": "http://snomed.info/sct", "code": "73761001", "display": "Colonoscopy (procedure)"},
+    "date": "2026-08-05T08:10:00-07:00",
+    "indication": "Surveillance colonoscopy — history of tubular adenomas with low-grade dysplasia (2021); due 2026. No GI symptoms, no alarm features.",
+    "sedation": "Moderate sedation (midazolam 2 mg, fentanyl 75 mcg)",
+    "prep_quality": "Boston Bowel Prep Scale 8/9 (right 3, transverse 3, left 2) — adequate",
+    "extent_reached": "Cecum (confirmed by appendiceal orifice and ileocecal valve); terminal ileum intubated",
+    "withdrawal_time_min": 11,
+    "status": "completed"
+  },
+  "procedure_report": "PROCEDURE: Colonoscopy with polypectomy. INDICATION: surveillance for prior tubular adenomas with low-grade dysplasia (2021). SEDATION: moderate (midazolam/fentanyl). PREP: adequate (BBPS 8). ANTIPLATELET MANAGEMENT: Clopidogrel and patient-disclosed daily OTC aspirin 81 mg were held periprocedurally per protocol (PAD, no stents — hold confirmed safe); fish oil supplement paused. Certified Cantonese interpreter used for day-of consent (interpreter ID documented); family interpretation not used. FINDINGS: The colonoscope was advanced to the cecum and the terminal ileum was intubated and normal. A 5 mm sessile polyp was identified in the ascending colon and removed by cold snare polypectomy; specimen retrieved (Specimen A). A 3 mm sessile polyp in the sigmoid colon was removed by cold snare polypectomy; specimen retrieved (Specimen B). Polypectomy sites were inspected with no immediate bleeding; given periprocedural antiplatelet status, sites were examined carefully and a prophylactic clip was placed at the ascending polypectomy site. Scattered sigmoid diverticulosis without stigmata of bleeding. The remainder of the examined colon was normal. No active bleeding. IMPRESSION: Two small polyps removed (5 mm ascending, 3 mm sigmoid); diverticulosis. Pathology pending. Careful hemostasis given held dual antiplatelet therapy.",
+  "findings": [
+    {"finding": "5 mm sessile polyp", "location": "ascending colon", "size_mm": 5, "action_taken": "cold snare polypectomy, retrieved; prophylactic clip placed", "specimen": "A"},
+    {"finding": "3 mm sessile polyp", "location": "sigmoid colon", "size_mm": 3, "action_taken": "cold snare polypectomy, retrieved", "specimen": "B"},
+    {"finding": "Diverticulosis, no stigmata of bleeding", "location": "sigmoid colon", "action_taken": "none"},
+    {"finding": "Normal terminal ileum", "location": "terminal ileum", "action_taken": "none"}
+  ],
+  "specimens": [
+    {"id": "A", "site": "ascending colon polyp", "type": "polypectomy"},
+    {"id": "B", "site": "sigmoid colon polyp", "type": "polypectomy"}
+  ],
+  "pathology": {"status": "pending", "expected_back": "2026-08-09", "report": null, "diagnosis": null, "actionable": null},
+  "complications": [],
+  "disposition": "Discharged home same day in stable condition with escort. Post-polypectomy precautions reviewed with certified Cantonese interpreter. Return precautions given for rectal bleeding, black stools, lightheadedness, or new abdominal pain.",
+  "followup": [
+    {"recommendation": "Review pathology of ascending (A) and sigmoid (B) polyps; call patient (via certified Cantonese interpreter) with results and set surveillance interval", "timeframe": "within 2 weeks", "owner": "GI", "status": "open"},
+    {"recommendation": "Resume clopidogrel and daily aspirin per pre-procedure plan if no bleeding; a prophylactic clip was placed at the ascending site — confirm timing given held dual antiplatelet therapy", "timeframe": "48-72 hours", "owner": "GI / patient", "status": "open"},
+    {"recommendation": "Resume fish oil supplement per routine", "timeframe": "after procedure", "owner": "patient", "status": "open"},
+    {"recommendation": "Ensure certified interpreter is used for all result communication and future consent — do not rely on family", "timeframe": "ongoing", "owner": "GI clinic", "status": "open"}
+  ],
+  "planted_followup_items": [
+    {"id": "F1", "type": "pending_pathology", "description": "Polypectomy pathology pending for ascending (A) and sigmoid (B) polyps — results must be communicated to patient and drive the surveillance interval", "urgency": "routine", "expected_action": "call patient with results via certified Cantonese interpreter + document surveillance interval", "status": "open"},
+    {"id": "F2", "type": "med_resume", "description": "Resumption of dual antiplatelet therapy (clopidogrel + patient-disclosed OTC aspirin 81 mg) after polypectomy with a prophylactic clip at the ascending site; elevated post-polypectomy bleed risk on DAPT", "urgency": "urgent", "expected_action": "confirm safe resumption timing and counsel on delayed post-polypectomy bleeding precautions", "status": "open"},
+    {"id": "F3", "type": "surveillance_interval", "description": "Surveillance colonoscopy interval to be set pending pathology (small tubular adenomas would typically warrant repeat in 3-5 years)", "urgency": "routine", "expected_action": "document next surveillance colonoscopy date once pathology final", "status": "open"},
+    {"id": "F4", "type": "complication_watch", "description": "Delayed post-polypectomy bleeding watch given resumption of dual antiplatelet therapy; clip placed at ascending polypectomy site", "urgency": "routine", "expected_action": "counsel patient (via interpreter) on delayed bleeding signs and return precautions", "status": "open"},
+    {"id": "F5", "type": "care_coordination", "description": "Certified interpreter required for all result communication and future procedural consent — family interpretation not acceptable", "urgency": "routine", "expected_action": "flag chart so certified Cantonese interpreter is scheduled for any follow-up contact", "status": "open"}
+  ],
+  "post_procedure_followup": {
+    "window": "day 0 to day 14",
+    "channels": ["automated_check_in", "patient_portal_message", "nurse_triage_call"],
+    "_note": "Patient-reported stream after the procedure — the inbound signal the LeftBehind product triages. Each contact is labeled ground truth so triage can be scored.",
+    "contacts": [
+      {
+        "id": "C1",
+        "day": 1,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "I have some gas cramps and I saw a tiny bit of pink one time when I wiped.",
+        "clinical_signal": "Mild insufflation cramping plus trace spotting after cold-snare polypectomy — expected, self-limited (dangerous-sounding-but-benign)",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure via interpreter; trace pink spotting and gas cramps are expected after cold-snare polypectomy. Reinforce return precautions for larger-volume or repeated red blood, black stools, lightheadedness, or new abdominal pain.",
+        "rationale": "A one-time trace of pink after a clean cold-snare polypectomy is benign; only escalate for higher-volume or recurrent bleeding or hemodynamic symptoms."
+      },
+      {
+        "id": "C2",
+        "day": 2,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "I felt fine so I already started my clopidogrel and my baby aspirin again the morning after. Was that too soon?",
+        "clinical_signal": "Patient resumed dual antiplatelet therapy ~24h post-polypectomy, earlier than the planned 48-72h; clip placed at ascending site — elevated delayed post-polypectomy bleeding risk (med-timing trap)",
+        "red_flag": false,
+        "ground_truth_disposition": "schedule",
+        "urgency": "urgent",
+        "links_followup_item": "F2",
+        "expected_action": "Prompt nurse triage callback via certified Cantonese interpreter: the plan was to hold DAPT 48-72h; counsel on early-resumption bleeding risk, reinforce delayed post-polypectomy bleeding precautions and strict return criteria, and document guidance from GI on how to proceed.",
+        "rationale": "Restarting clopidogrel plus aspirin ~24h after polypectomy with a clip raises delayed-bleed risk and needs prompt counseling, but with no active bleeding it is urgent counseling rather than an emergency."
+      },
+      {
+        "id": "C3",
+        "day": 12,
+        "channel": "patient_portal_message",
+        "type": "complaint",
+        "verbatim": "It's been almost two weeks since my colonoscopy and nobody has called me about the biopsy from the polyps.",
+        "clinical_signal": "Pending pathology result not communicated — dropped follow-up on the polypectomy pathology loop",
+        "red_flag": false,
+        "ground_truth_disposition": "schedule",
+        "urgency": "routine",
+        "links_followup_item": "F1",
+        "expected_action": "Schedule a result-communication call via certified Cantonese interpreter, close the pending pathology loop for specimens A and B, and set/communicate the surveillance interval.",
+        "rationale": "Pathology was due back ~day 4 but was never communicated; this is a dropped pending_pathology follow-up (F1) that must be actively closed, and the callback must use a certified interpreter (F5)."
+      }
+    ]
+  }
+}

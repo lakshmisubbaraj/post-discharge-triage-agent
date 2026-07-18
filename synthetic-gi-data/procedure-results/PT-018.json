@@ -1,0 +1,97 @@
+{
+  "id": "gi-synth-0018::proc-result",
+  "_synthetic": true,
+  "_note": "MOCK procedure result. No real patient. For PreChart development/eval. Result of the EGD with esophageal biopsies this patient was referred for (suspected eosinophilic esophagitis after recurrent food impaction).",
+  "patient_id": "gi-synth-0018",
+  "procedure": {
+    "name": "Esophagogastroduodenoscopy (EGD) with esophageal biopsies",
+    "code": {"system": "http://snomed.info/sct", "code": "1919006", "display": "Fiberoptic esophagoscopy (procedure)"},
+    "date": "2026-07-28T08:40:00-07:00",
+    "indication": "Recurrent esophageal food (bolus) impaction and lifelong solid-food dysphagia in a highly atopic young man; evaluate for eosinophilic esophagitis (EoE protocol biopsies)",
+    "sedation": "Monitored anesthesia care (propofol), anesthesia-assisted",
+    "prep_quality": "NPO >8 hours; no retained food or secretions",
+    "extent_reached": "Second portion of the duodenum",
+    "withdrawal_time_min": null,
+    "status": "completed"
+  },
+  "procedure_report": "PROCEDURE: Esophagogastroduodenoscopy with esophageal biopsies (EoE protocol). INDICATION: recurrent esophageal food impaction and long-standing solid-food dysphagia; evaluate for eosinophilic esophagitis. SEDATION: MAC/propofol. FINDINGS: The endoscope was passed under direct vision into the esophagus. The esophageal mucosa demonstrated classic features of eosinophilic esophagitis: multiple fixed concentric rings (trachealization) throughout the mid and distal esophagus, diffuse longitudinal linear furrows, scattered white exudates/plaques, and decreased vascular pattern consistent with edema (EREFS: Edema 1, Rings 2, Exudates 1, Furrows 2, Stricture 1). A focal area of narrowing was noted in the mid esophagus; the standard adult gastroscope traversed it with mild resistance and no significant mucosal tear. No retained food bolus. Given a stable, non-flush-limiting caliber and plan to confirm histology and initiate anti-inflammatory therapy first, no dilation was performed this session. EoE protocol biopsies were obtained: >=6 fragments from the proximal/mid esophagus and distal esophagus in separate jars, plus gastric and duodenal biopsies to exclude other causes of eosinophilia. The stomach and examined duodenum were normal with no evidence of eosinophilic gastroenteritis on gross inspection. No active bleeding. IMPRESSION: Endoscopic findings highly consistent with eosinophilic esophagitis (rings, furrows, exudates) with a mild non-obstructing mid-esophageal stricture/narrow-caliber esophagus. Histology pending. NOTE FOR PATHOLOGY: patient self-started OTC omeprazole 20 mg daily ~3 weeks before the procedure and did NOT hold it pre-procedure — active PPI exposure may attenuate the tissue eosinophil count and must be considered in interpretation.",
+  "findings": [
+    {"finding": "Fixed concentric rings (trachealization/felinization), mid and distal esophagus", "location": "esophagus", "action_taken": "biopsied (EoE protocol)", "specimen": "A/B"},
+    {"finding": "Diffuse linear furrows and white exudates/plaques", "location": "esophagus", "action_taken": "biopsied (EoE protocol)", "specimen": "A/B"},
+    {"finding": "Mild non-obstructing mid-esophageal stricture / narrow-caliber esophagus", "location": "mid esophagus", "action_taken": "traversed with gastroscope; no dilation performed this session", "specimen": null},
+    {"finding": "Normal-appearing gastric mucosa", "location": "stomach", "action_taken": "biopsied to exclude other eosinophilic disease", "specimen": "C"},
+    {"finding": "Normal-appearing duodenum to second portion", "location": "duodenum", "action_taken": "biopsied to exclude other eosinophilic disease", "specimen": "D"}
+  ],
+  "specimens": [
+    {"id": "A", "site": "proximal/mid esophagus", "type": "mucosal biopsy (EoE protocol)"},
+    {"id": "B", "site": "distal esophagus", "type": "mucosal biopsy (EoE protocol)"},
+    {"id": "C", "site": "gastric antrum/body", "type": "mucosal biopsy"},
+    {"id": "D", "site": "duodenum", "type": "mucosal biopsy"}
+  ],
+  "pathology": {"status": "pending", "expected_back": "2026-08-01", "report": null, "diagnosis": null, "actionable": null},
+  "complications": [],
+  "disposition": "Discharged home same day in stable condition with escort after uneventful MAC recovery. Post-procedure and soft-diet precautions reviewed; return to ED for recurrent impaction or inability to swallow secretions.",
+  "followup": [
+    {"recommendation": "Review esophageal (and gastric/duodenal) biopsy pathology; confirm eosinophilic esophagitis vs PPI-responsive esophageal eosinophilia (peak eos/hpf) and call patient with result", "timeframe": "within 1-2 weeks", "owner": "GI", "status": "open"},
+    {"recommendation": "Reconcile active OTC omeprazole exposure with pathologist; document PPI status at time of biopsy so eosinophil count is interpreted correctly, and set definitive PPI/topical-steroid treatment plan based on histology", "timeframe": "at result review", "owner": "GI", "status": "open"},
+    {"recommendation": "Discuss initiation of EoE-directed therapy (topical swallowed corticosteroid, PPI, or dietary elimination) once histology confirms; counsel on plan given recurrent impactions", "timeframe": "at result review", "owner": "GI", "status": "open"},
+    {"recommendation": "Repeat EGD with biopsies to assess histologic response after therapy initiation; consider esophageal dilation of the mid-esophageal stricture at a future session if dysphagia persists despite medical therapy", "timeframe": "8-12 weeks after starting therapy", "owner": "GI", "status": "open"}
+  ],
+  "planted_followup_items": [
+    {"id": "F1", "type": "pending_pathology", "description": "Esophageal EoE-protocol biopsy pathology pending — peak eosinophil count/hpf will confirm or refute eosinophilic esophagitis and is the reason for the procedure; result must be communicated and drive the treatment plan", "urgency": "urgent", "expected_action": "review histology, call patient with diagnosis, initiate/adjust EoE therapy", "status": "open"},
+    {"id": "F2", "type": "pending_pathology", "description": "Active OTC omeprazole exposure (self-started ~3 weeks pre-procedure, not held) can suppress tissue eosinophilia and confound the biopsy — if the count is low/borderline the result may be a false negative or PPI-responsive esophageal eosinophilia rather than true EoE exclusion", "urgency": "urgent", "expected_action": "flag PPI status to pathologist and at result review; do not interpret a low count as ruling out EoE without accounting for PPI; decide on hold-and-rebiopsy if needed", "status": "open"},
+    {"id": "F3", "type": "known_lesion_followup", "description": "Mild non-obstructing mid-esophageal stricture / narrow-caliber esophagus identified; not dilated this session", "urgency": "routine", "expected_action": "track dysphagia response to therapy; plan endoscopic dilation if symptoms persist", "status": "open"},
+    {"id": "F4", "type": "repeat_procedure", "description": "Follow-up EGD with biopsies to assess histologic response after starting EoE-directed therapy, with possible dilation", "urgency": "routine", "expected_action": "schedule surveillance EGD 8-12 weeks after therapy initiation", "status": "open"},
+    {"id": "F5", "type": "med_reconciliation", "description": "Definitive decision on PPI/topical steroid vs dietary therapy pending histology; patient currently on unsupervised OTC omeprazole", "urgency": "routine", "expected_action": "set formal medication plan and stop unsupervised self-medication once diagnosis confirmed", "status": "open"},
+    {"id": "F6", "type": "care_coordination", "description": "Recurrent food impaction risk persists until EoE is treated; two impaction events including one ED presentation with near-endoscopic disimpaction", "urgency": "routine", "expected_action": "reinforce ED return precautions for impaction or inability to swallow secretions", "status": "open"}
+  ],
+  "post_procedure_followup": {
+    "window": "day 0 to day 14",
+    "channels": ["automated_check_in", "patient_portal_message", "nurse_triage_call"],
+    "_note": "Patient-reported stream after the procedure — the inbound signal the LeftBehind product triages. Each contact is labeled ground truth so triage can be scored.",
+    "contacts": [
+      {
+        "id": "C1",
+        "day": 1,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "My throat is scratchy and it felt a little sore when I swallowed last night, but it's already better this morning. Is that normal after the scope?",
+        "clinical_signal": "Expected post-EGD sore throat / mild transient odynophagia after esophageal biopsies; already improving, no fever, no trouble swallowing secretions",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; mild sore throat and transient soreness on swallowing are expected after EGD with biopsies and typically resolve within 24-48h. Cool/soft foods and fluids as needed.",
+        "rationale": "Common benign post-endoscopy symptom that is already improving; no red-flag features (no fever, chest pain at rest, or inability to swallow saliva)."
+      },
+      {
+        "id": "C2",
+        "day": 3,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "When will I hear about my biopsy results? And should I keep taking the drugstore omeprazole or stop it now?",
+        "clinical_signal": "Patient asking about pending pathology and how to manage the self-started OTC PPI",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F1",
+        "expected_action": "Answer from the result: pathology expected back ~2026-08-01; GI will call with the diagnosis and treatment plan. Advise not to change the omeprazole on his own — the team will set a definitive PPI/therapy plan at result review since PPI exposure affects biopsy interpretation.",
+        "rationale": "Answerable from the procedure result and follow-up plan; links to the pending pathology item and the medication-reconciliation plan (F1/F5)."
+      },
+      {
+        "id": "C3",
+        "day": 8,
+        "channel": "automated_check_in",
+        "type": "question",
+        "verbatim": "I feel back to normal. Can I go back to eating regular food, or do I still need to cut everything up small and take it slow?",
+        "clinical_signal": "Diet/return-to-activity question; untreated narrow-caliber esophagus means bolus-impaction precautions still apply until EoE is treated",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F6",
+        "expected_action": "Reinforce continued impaction precautions until EoE is diagnosed and treated: chew thoroughly, small bites, fluids with meals, avoid large solid boluses. Return to ED if food gets stuck or he cannot swallow his own saliva.",
+        "rationale": "Benign, answerable question; reinforces the standing return/safety-netting precautions given the persistent food-impaction risk (F6)."
+      }
+    ]
+  }
+}

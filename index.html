@@ -176,12 +176,73 @@
     color: var(--muted);
     font-size: 12px;
   }
+  .loading {
+    padding: 40px 8px;
+    color: var(--muted);
+    font-size: 14px;
+  }
+  .badge.none { background: #eef1f5; color: #5b6774; border: 1px solid #d8dee7; }
+  .call-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: var(--brand);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 9px 16px;
+    font-size: 13.5px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .call-btn:hover { background: var(--brand-dark); }
+  .call-btn:disabled { background: #9fb2cf; cursor: default; }
+  .live-tag {
+    font-size: 10px;
+    background: #fdecec;
+    color: #a3231d;
+    border: 1px solid #f3b9b6;
+    padding: 1px 7px;
+    border-radius: 100px;
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 700;
+    animation: pulse 1.4s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.45; } }
+  .call-placeholder {
+    background: #fafbfc;
+    border: 1px dashed var(--border);
+    border-radius: 8px;
+    padding: 28px 20px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 13.5px;
+  }
+  .error-box {
+    padding: 20px 4px;
+  }
+  .error-box h2 { margin: 0 0 8px; font-size: 18px; color: var(--red-text); }
+  .error-box p { margin: 6px 0; font-size: 13.5px; color: var(--text); }
+  .error-box pre {
+    background: #fafbfc;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: 13px;
+    overflow-x: auto;
+  }
+  .error-box code {
+    background: #eef1f5;
+    padding: 1px 6px;
+    border-radius: 5px;
+  }
 </style>
 </head>
 <body>
 
 <div class="banner">
-  🔧 <b>DEMO MODE</b> — the call transcripts and triage scoring below are stubbed with rule-based logic, not live Claude API calls. See README for what to wire up next.
+  🔧 <b>DEMO MODE</b> — data is served live from the Flask API, but triage scoring &amp; note drafting are still rule-based stubs, not Claude yet. See README for the remaining wiring.
 </div>
 
 <header>
@@ -206,244 +267,54 @@
 
 <script>
 // ---------------------------------------------------------------------------
-// DEMO DATA
-// Grounded in real records from synthetic-ambient-fhir-25.jsonl (conditions,
-// meds, ages pulled from the actual FHIR resources). The call transcripts
-// themselves are hand-written placeholders standing in for what would, in
-// production, be either a real telephony transcript or an LLM-simulated one.
+// DATA SOURCE — Flask backend API
+// The patient list, triage decisions, and drafted notes now come from the
+// backend (GET /api/patients), which returns patients already ranked by
+// severity, each with its triage result and drafted note. The triage/note
+// logic lives server-side in services/triage_service.py — currently the same
+// rule-based stub, with a marked seam for a real Claude call.
+// Start the backend first:  python seed_data.py && python app.py
 // ---------------------------------------------------------------------------
-const PATIENTS = [
-  {
-    id: "ariane",
-    name: "Ariane R.",
-    age: 81, gender: "female",
-    dischargeDx: "COVID-19 with pneumonia & hypoxemia (hospital admission for isolation)",
-    history: ["Prior MI", "Hypertension", "Hyperlipidemia", "Metabolic syndrome"],
-    meds: ["Aspirin 81mg", "Atenolol 50mg", "Rosuvastatin 40mg", "Lisinopril 20mg"],
-    daysSinceDischarge: 3,
-    transcript: [
-      ["AGENT", "Hi Ariane, this is your care team calling to check in after your hospital stay for COVID pneumonia. How are you feeling today?"],
-      ["PT", "Oh, honestly not great. I thought I'd be turning a corner by now."],
-      ["AGENT", "I'm sorry to hear that. Can you tell me more about your breathing?"],
-      ["PT", "It's gotten harder, not easier. Yesterday I could walk to the kitchen fine, today I'm short of breath just getting out of bed. My lips felt a little bluish this morning too, my daughter pointed it out."],
-      ["AGENT", "That's important to know. Any chest pain or tightness?"],
-      ["PT", "A little tightness when I take a deep breath, yes."],
-      ["AGENT", "Are you keeping up with your fluids and medications?"],
-      ["PT", "Trying to, but I feel too winded to eat much."],
-      ["AGENT", "Okay, thank you for telling me all this, Ariane. I want to make sure you're seen right away given the breathing changes."]
-    ],
-  },
-  {
-    id: "latoyia",
-    name: "Latoyia W.",
-    age: 75, gender: "female",
-    dischargeDx: "SNF admission after hospitalization (Type 2 diabetes, CKD stage 1, anemia)",
-    history: ["Type 2 diabetes", "Chronic kidney disease (stage 1)", "Anemia", "Hypertension"],
-    meds: ["Clopidogrel 75mg", "Simvastatin 20mg", "Metoprolol succinate 100mg ER", "Nitroglycerin spray PRN"],
-    daysSinceDischarge: 2,
-    transcript: [
-      ["AGENT", "Hi Latoyia, checking in now that you're settled at the skilled nursing facility. How's it going?"],
-      ["PT", "It's alright. The staff are nice. I'm just tired a lot."],
-      ["AGENT", "That's common early on. How's your appetite and thirst been?"],
-      ["PT", "Actually still pretty thirsty, and I've noticed some swelling in my ankles the last couple days."],
-      ["AGENT", "Any chest pain, or have you needed to use your nitroglycerin spray?"],
-      ["PT", "No, haven't needed to use that, and nothing like that."],
-      ["AGENT", "Good. And how's your blood sugar been tracking with the nursing staff?"],
-      ["PT", "They said it's been a bit high the last two mornings, low 200s."],
-      ["AGENT", "Understood — the ankle swelling and blood sugar trend are worth a closer look given your kidney history."]
-    ],
-  },
-  {
-    id: "monica",
-    name: "Monica H.",
-    age: 76, gender: "female",
-    dischargeDx: "SNF admission — rehabilitation and pain management",
-    history: ["Osteoporosis", "Obesity", "Hyperlipidemia", "Recent deconditioning after inpatient stay"],
-    meds: ["Meperidine 50mg", "Naproxen sodium 220mg"],
-    daysSinceDischarge: 4,
-    transcript: [
-      ["AGENT", "Hi Monica, wanted to check in on how rehab is going and how your pain is being managed."],
-      ["PT", "Physical therapy is going okay, slow but okay. The pain is the real problem though."],
-      ["AGENT", "Tell me more about that — where is the pain and how would you rate it?"],
-      ["PT", "It's my lower back and hip, mostly. I'd say it's a 7 out of 10 most of the day, even with the medication."],
-      ["AGENT", "Has the pain changed in character, or is it the same as when you were admitted?"],
-      ["PT", "Same kind of pain, just not really controlled. I mentioned it to the nurse but I don't think anything's changed with my meds."],
-      ["AGENT", "No fevers, no new numbness or weakness in your legs?"],
-      ["PT", "No, nothing like that. Just poorly controlled pain, it's wearing me down."],
-      ["AGENT", "That makes sense — let's get your physician to take another look at your pain regimen."]
-    ],
-  },
-  {
-    id: "traci",
-    name: "Traci W.",
-    age: 65, gender: "female",
-    dischargeDx: "SNF admission — type 2 diabetes stabilization and rehabilitation",
-    history: ["Type 2 diabetes", "Hyperglycemia", "Obesity", "Anemia"],
-    meds: ["Metformin (per facility MAR)", "Insulin sliding scale (per facility MAR)"],
-    daysSinceDischarge: 5,
-    transcript: [
-      ["AGENT", "Hi Traci, checking in on how things are going with your diabetes stabilization."],
-      ["PT", "Actually really good! The blurry vision is gone and my numbers have been steady, mostly 120s to 140s on the finger sticks."],
-      ["AGENT", "That's great to hear. How's the tingling in your hands and feet that you mentioned before?"],
-      ["PT", "Much better, almost back to normal. I've been walking a bit more each day too."],
-      ["AGENT", "Any dizziness, chest pain, shortness of breath, or new concerns?"],
-      ["PT", "No, none of that. I'm feeling like myself again, honestly."],
-      ["AGENT", "Wonderful. Sounds like you're recovering right on track."]
-    ],
-  },
-  {
-    id: "dick",
-    name: "Dick L.",
-    age: 37, gender: "male",
-    dischargeDx: "Follow-up after sepsis, septic shock & ARDS hospitalization",
-    history: ["Prediabetes", "Anemia", "Obesity", "Recent critical illness (sepsis/ARDS)"],
-    meds: ["None currently scheduled"],
-    daysSinceDischarge: 21,
-    transcript: [
-      ["AGENT", "Hi Dick, it's been a few weeks since your sepsis hospitalization — how have you been feeling?"],
-      ["PT", "Overall pretty good, actually. My energy's coming back and I can walk further each day."],
-      ["AGENT", "That's great progress. Any fevers, chills, or new shortness of breath?"],
-      ["PT", "No, nothing like that. I do still get more tired than I expected some days, but nothing severe."],
-      ["AGENT", "And how about the anemia we were tracking — any dizziness, or has anyone mentioned you looking pale?"],
-      ["PT", "A little — my sister said I still look pale sometimes, but I feel steady on my feet."],
-      ["AGENT", "Good to know. Given everything you went through, it's worth confirming your labs are trending the right way before your next visit."]
-    ],
-  },
-];
+const API_BASE = "http://127.0.0.1:5001";
 
-// ---------------------------------------------------------------------------
-// 🔧 STUB — TRIAGE ENGINE
-// This rule-based keyword scorer stands in for a real Claude API call. In
-// production, replace `analyzeTranscript()` with a server-side endpoint that
-// sends the transcript + patient FHIR context to Claude with a structured
-// prompt, and parses a JSON response of the same shape returned here:
-//   { severity, label, rationale: [...], flags: [...] }
-// IMPORTANT: never call the Anthropic API directly from browser JS — the key
-// would be exposed to anyone viewing page source. Route it through a small
-// backend (Flask/FastAPI/Node) that holds the key server-side.
-// ---------------------------------------------------------------------------
-const RED_FLAGS = [
-  "short of breath just getting out of bed", "bluish", "blue lips", "chest pain",
-  "chest tightness", "tightness when i take a deep breath", "coughing blood",
-  "confused", "fainted", "can't breathe", "cant breathe"
-];
-const ORANGE_FLAGS = [
-  "swelling in my ankles", "swelling", "poorly controlled", "not really controlled",
-  "7 out of 10", "8 out of 10", "9 out of 10", "dizzy", "numbness", "weakness in your legs",
-  "fever"
-];
-const YELLOW_FLAGS = [
-  "blood sugar", "low 200s", "thirsty", "blood sugars",
-  "still look pale", "more tired than i expected"
-];
+let patients = [];   // populated from the API, already severity-ranked
+let activeId = null;
 
-function analyzeTranscript(patient) {
-  // Only score what the PATIENT (or family member) actually said — not the
-  // agent's questions, which often contain the same clinical terms being
-  // asked ABOUT ("any chest pain?") and would otherwise cause false matches
-  // regardless of the patient's answer. Real semantic understanding (e.g. via
-  // Claude) would handle this naturally; this is the simplest fix available
-  // to a plain keyword scorer.
-  const fullText = patient.transcript
-    .filter(([who]) => who === "PT" || who === "FAMILY")
-    .map(([who, line]) => line)
-    .join(" ")
-    .toLowerCase();
-  const matched = { red: [], orange: [], yellow: [] };
-
-  RED_FLAGS.forEach(f => { if (fullText.includes(f)) matched.red.push(f); });
-  ORANGE_FLAGS.forEach(f => { if (fullText.includes(f)) matched.orange.push(f); });
-  YELLOW_FLAGS.forEach(f => { if (fullText.includes(f)) matched.yellow.push(f); });
-
-  if (matched.red.length > 0) {
-    return {
-      severity: "red",
-      label: "Urgent care referral",
-      rationale: [
-        "Patient reports worsening dyspnea and possible cyanosis since discharge — concerning for respiratory decompensation.",
-        "Recent hospitalization was specifically for hypoxemic pneumonia, raising the stakes of any respiratory change.",
-        "Recommend same-day evaluation; do not wait for scheduled follow-up."
-      ],
-      flags: matched.red,
-    };
+async function loadPatients() {
+  const detailEl = document.getElementById("detail-panel");
+  const queueEl = document.getElementById("queue-list");
+  detailEl.innerHTML = `<div class="loading">Loading patients from the API…</div>`;
+  try {
+    const res = await fetch(`${API_BASE}/api/patients`);
+    if (!res.ok) throw new Error(`API returned HTTP ${res.status}`);
+    patients = await res.json();
+    if (!patients.length) {
+      throw new Error("No patients returned — have you run `python seed_data.py`?");
+    }
+    activeId = patients[0].id;
+    renderQueue();
+    renderDetail();
+  } catch (err) {
+    queueEl.innerHTML = "";
+    detailEl.innerHTML = `
+      <div class="error-box">
+        <h2>Can't reach the backend</h2>
+        <p>${err.message}</p>
+        <p>Start the API, then reload this page:</p>
+        <pre>pip install -r requirements.txt
+python seed_data.py
+python app.py</pre>
+        <p>It should be serving at <code>${API_BASE}</code>.</p>
+      </div>`;
   }
-  if (matched.orange.length >= 2) {
-    return {
-      severity: "orange",
-      label: "Physician callback today",
-      rationale: [
-        "Multiple moderate-concern symptoms reported that are not yet emergent but warrant same-day clinician review.",
-        "Given the patient's comorbidities, these findings should not wait until the next scheduled visit.",
-        "Recommend physician or NP callback within 24 hours to reassess and adjust the care plan."
-      ],
-      flags: matched.orange,
-    };
-  }
-  if (matched.yellow.length > 0) {
-    return {
-      severity: "yellow",
-      label: "Labs recommended",
-      rationale: [
-        "Reported symptoms track with the patient's underlying condition and are worth confirming with objective data.",
-        "A basic metabolic panel / repeat glucose check would clarify whether the current regimen is adequate.",
-        "No acute red flags reported; this can be arranged through routine channels rather than urgent referral."
-      ],
-      flags: matched.yellow,
-    };
-  }
-  return {
-    severity: "green",
-    label: "Routine follow-up",
-    rationale: [
-      "No red-flag or moderate-concern symptoms reported during this check-in.",
-      "Patient describes steady or improving status consistent with expected recovery trajectory.",
-      "Schedule standard follow-up per care plan; no escalation needed at this time."
-    ],
-    flags: [],
-  };
-}
-
-// 🔧 STUB — NOTE DRAFTING
-// Stands in for a Claude call that would draft this note from the transcript
-// + FHIR context directly. Replace with a real API call using a prompt like:
-// "Draft a brief chart note from this post-discharge check-in transcript..."
-function draftNote(patient, result) {
-  const flagsText = result.flags.length
-    ? result.flags.map(f => `"${f}"`).join(", ")
-    : "none reported";
-  return `POST-DISCHARGE CHECK-IN NOTE
-Patient: ${patient.name}, ${patient.age}${patient.gender === "female" ? "F" : "M"}
-Days since discharge: ${patient.daysSinceDischarge}
-Discharge context: ${patient.dischargeDx}
-
-Subjective: Patient reached by phone for scheduled post-discharge check-in.
-Key statements flagged during call: ${flagsText}.
-
-Assessment: ${result.label}.
-${result.rationale.map(r => "- " + r).join("\n")}
-
-Plan: ${result.label} — see disposition above. Care team notified via queue.
-
-⚠️ This note was generated by rule-based demo logic, not a clinician-reviewed
-LLM output. Not for real clinical use.`;
 }
 
 // ---------------------------------------------------------------------------
 // RENDERING
 // ---------------------------------------------------------------------------
-const results = {};
-PATIENTS.forEach(p => { results[p.id] = analyzeTranscript(p); });
-
-const severityOrder = { red: 0, orange: 1, yellow: 2, green: 3 };
-const sortedPatients = [...PATIENTS].sort(
-  (a, b) => severityOrder[results[a.id].severity] - severityOrder[results[b.id].severity]
-);
-
-let activeId = sortedPatients[0].id;
-
 function highlight(line, flags) {
   let out = line;
-  flags.forEach(f => {
+  (flags || []).forEach(f => {
     const re = new RegExp(f.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "ig");
     out = out.replace(re, m => `<mark>${m}</mark>`);
   });
@@ -452,26 +323,76 @@ function highlight(line, flags) {
 
 function renderQueue() {
   const el = document.getElementById("queue-list");
-  el.innerHTML = sortedPatients.map(p => {
-    const r = results[p.id];
+  el.innerHTML = patients.map(p => {
+    const r = p.triage;
+    const badge = r
+      ? `<span class="badge ${r.severity}">${r.label}</span>`
+      : (p.callStatus === "in_progress"
+          ? `<span class="badge none">📞 Call in progress…</span>`
+          : `<span class="badge none">Not called yet</span>`);
     return `
       <div class="queue-item ${p.id === activeId ? 'active' : ''}" onclick="selectPatient('${p.id}')">
         <div class="name">${p.name} · ${p.age}${p.gender === 'female' ? 'F' : 'M'}</div>
         <div class="sub">${p.dischargeDx}</div>
-        <span class="badge ${r.severity}">${r.label}</span>
+        ${badge}
       </div>`;
   }).join("");
 }
 
 function renderDetail() {
-  const p = PATIENTS.find(x => x.id === activeId);
-  const r = results[p.id];
-  const note = draftNote(p, r);
+  const p = patients.find(x => x.id === activeId);
+  if (!p) return;
+  const r = p.triage;
+  const inProgress = p.callStatus === "in_progress";
 
-  const transcriptHtml = p.transcript.map(([who, line]) => {
+  const headBadge = r
+    ? `<span class="badge ${r.severity}" style="font-size:13px;padding:6px 14px;">${r.label}</span>`
+    : `<button class="call-btn" id="call-btn" onclick="startCall('${p.id}')" ${inProgress ? "disabled" : ""}>
+         📞 ${inProgress ? "Call in progress…" : "Start check-in call"}
+       </button>`;
+
+  const flags = r ? r.flags : [];
+  const transcriptHtml = (p.transcript || []).map(([who, line]) => {
     const cls = who === "AGENT" ? "agent-who" : "pt-who";
-    return `<div class="line"><span class="who ${cls}">${who}:</span>${highlight(line, r.flags)}</div>`;
+    return `<div class="line"><span class="who ${cls}">${who}:</span>${highlight(line, flags)}</div>`;
   }).join("");
+
+  const transcriptTag = inProgress
+    ? `<span class="live-tag">● LIVE — transcribing</span>`
+    : (p.callMode === "simulated"
+        ? `<span class="stub-tag">simulated call — add ElevenLabs keys for a real one</span>`
+        : (p.callMode === "live"
+            ? `<span class="stub-tag">live call via ElevenLabs</span>`
+            : `<span class="stub-tag">stubbed — hand-written for demo</span>`));
+
+  const transcriptSection = (p.transcript && p.transcript.length)
+    ? `<div class="section">
+         <div class="section-title">Check-in call transcript ${transcriptTag}</div>
+         <div class="transcript" id="transcript-box">${transcriptHtml}</div>
+       </div>`
+    : `<div class="section">
+         <div class="section-title">Check-in call transcript</div>
+         <div class="call-placeholder">
+           ${inProgress
+             ? "📞 Dialing… waiting for the conversation to start."
+             : `No check-in call yet. ${p.phone ? `Patient's phone: <b>${p.phone}</b>.` : ""}
+                Press <b>Start check-in call</b> to begin — the transcript will appear here live.`}
+         </div>
+       </div>`;
+
+  const triageSection = r ? `
+    <div class="section">
+      <div class="section-title">Triage decision <span class="stub-tag">from API — rule-based, not yet Claude</span></div>
+      <div class="disposition-card ${r.severity}">
+        <div class="disposition-title">${r.label}</div>
+        <ul class="rationale-list">${r.rationale.map(x => `<li>${x}</li>`).join("")}</ul>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Drafted chart note <span class="stub-tag">from API — template, not yet Claude</span></div>
+      <div class="note-box">${r.note}</div>
+    </div>` : "";
 
   document.getElementById("detail-panel").innerHTML = `
     <div class="patient-head">
@@ -481,27 +402,68 @@ function renderDetail() {
         <div class="tag-row">${p.history.map(h => `<span class="tag">${h}</span>`).join("")}</div>
         <div class="tag-row">${p.meds.map(m => `<span class="tag">💊 ${m}</span>`).join("")}</div>
       </div>
-      <span class="badge ${r.severity}" style="font-size:13px;padding:6px 14px;">${r.label}</span>
+      ${headBadge}
     </div>
-
-    <div class="section">
-      <div class="section-title">Check-in call transcript <span class="stub-tag">stubbed — hand-written for demo</span></div>
-      <div class="transcript">${transcriptHtml}</div>
-    </div>
-
-    <div class="section">
-      <div class="section-title">Triage decision <span class="stub-tag">stubbed — rule-based, not Claude</span></div>
-      <div class="disposition-card ${r.severity}">
-        <div class="disposition-title">${r.label}</div>
-        <ul class="rationale-list">${r.rationale.map(x => `<li>${x}</li>`).join("")}</ul>
-      </div>
-    </div>
-
-    <div class="section">
-      <div class="section-title">Drafted chart note <span class="stub-tag">stubbed — template, not Claude</span></div>
-      <div class="note-box">${note}</div>
-    </div>
+    ${transcriptSection}
+    ${triageSection}
   `;
+
+  // Keep the newest lines visible while a live transcript streams in.
+  const box = document.getElementById("transcript-box");
+  if (box && inProgress) box.scrollTop = box.scrollHeight;
+}
+
+// ---------------------------------------------------------------------------
+// CALL WORKFLOW
+// Call button → POST /api/patients/<id>/call (ElevenLabs dials the patient,
+// or a simulated call starts) → poll GET /api/patients/<id>/call every 2s →
+// transcript renders live → on completion, triage + note appear and the
+// queue re-ranks.
+// ---------------------------------------------------------------------------
+let pollTimer = null;
+
+async function startCall(id) {
+  const btn = document.getElementById("call-btn");
+  if (btn) { btn.disabled = true; btn.textContent = "📞 Dialing…"; }
+  try {
+    const res = await fetch(`${API_BASE}/api/patients/${id}/call`, { method: "POST" });
+    const body = await res.json();
+    if (!res.ok) throw new Error(body.error || `HTTP ${res.status}`);
+    const p = patients.find(x => x.id === id);
+    p.callStatus = "in_progress";
+    p.callMode = body.mode;
+    renderQueue(); renderDetail();
+    pollCall(id);
+  } catch (err) {
+    alert(`Couldn't start the call: ${err.message}`);
+    renderDetail();
+  }
+}
+
+function pollCall(id) {
+  clearInterval(pollTimer);
+  pollTimer = setInterval(async () => {
+    try {
+      const res = await fetch(`${API_BASE}/api/patients/${id}/call`);
+      if (!res.ok) return;
+      const call = await res.json();
+      const p = patients.find(x => x.id === id);
+      p.transcript = call.transcript;
+      p.callStatus = call.status;
+      p.triage = call.triage;
+      if (call.status !== "in_progress") {
+        clearInterval(pollTimer);
+        await reloadQueue();      // re-rank now that triage exists
+      }
+      if (id === activeId) renderDetail();
+      renderQueue();
+    } catch (e) { /* transient poll errors are fine */ }
+  }, 2000);
+}
+
+async function reloadQueue() {
+  const res = await fetch(`${API_BASE}/api/patients`);
+  if (res.ok) patients = await res.json();
 }
 
 function selectPatient(id) {
@@ -510,8 +472,7 @@ function selectPatient(id) {
   renderDetail();
 }
 
-renderQueue();
-renderDetail();
+loadPatients();
 </script>
 
 </body>

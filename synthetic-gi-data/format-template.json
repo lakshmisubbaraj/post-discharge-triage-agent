@@ -1,0 +1,777 @@
+{
+  "id": "gi-synth-0001::enc-2026-0001",
+  "_synthetic": true,
+  "_note": "MOCK GI patient in the style of synthetic-ambient-fhir-25. No real patient. For PreChart development/eval.",
+  "metadata": {
+    "source": "synthetic-gi-mock-v1",
+    "synthetic": true,
+    "patient_id": "gi-synth-0001",
+    "encounter_id": "enc-2026-0001",
+    "date": "2026-06-30T09:10:00-07:00",
+    "status": "finished",
+    "visit_type": "Gastroenterology consultation (procedure)",
+    "visit_title": "GI clinic — adenoma surveillance planning with new rectal bleeding and anemia",
+    "related_resource_counts": {
+      "Condition": 3,
+      "MedicationRequest": 2,
+      "Observation": 11,
+      "Procedure": 1,
+      "DiagnosticReport": 1,
+      "AllergyIntolerance": 0
+    },
+    "planted_discrepancies": [
+      {
+        "id": "D1",
+        "type": "medication_stopped",
+        "source_of_error": "chart",
+        "chart_state": "MedicationRequest ferrous sulfate 325 mg = active",
+        "spoken_truth": "patient stopped it ~4 months ago (constipation)",
+        "significance": "high",
+        "expected_state": "CONTRADICTED",
+        "note": "chart is stale; untreated iron-deficiency anemia"
+      },
+      {
+        "id": "D2",
+        "type": "missing_allergy",
+        "source_of_error": "chart",
+        "chart_state": "no AllergyIntolerance on file",
+        "spoken_truth": "amoxicillin caused hives",
+        "significance": "high",
+        "expected_state": "NEW",
+        "note": "chart incomplete; safety"
+      },
+      {
+        "id": "D3",
+        "type": "new_symptom",
+        "source_of_error": "chart",
+        "chart_state": "no bleeding documented",
+        "spoken_truth": "intermittent rectal bleeding for ~3 weeks",
+        "significance": "high",
+        "expected_state": "NEW",
+        "note": "clinically significant; reinforces colonoscopy"
+      },
+      {
+        "id": "C1",
+        "type": "confirmed",
+        "source_of_error": "none",
+        "chart_state": "pantoprazole 40 mg = active",
+        "spoken_truth": "patient confirms taking it for reflux",
+        "significance": "low",
+        "expected_state": "CONFIRMED"
+      }
+    ]
+  },
+  "patient_context": {
+    "patient": {
+      "resourceType": "Patient",
+      "id": "gi-synth-0001",
+      "name": [
+        {
+          "use": "official",
+          "family": "Vane",
+          "given": [
+            "Dolores",
+            "M"
+          ],
+          "prefix": [
+            "Ms."
+          ]
+        }
+      ],
+      "gender": "female",
+      "birthDate": "1971-08-14",
+      "address": [
+        {
+          "city": "San Francisco",
+          "state": "CA",
+          "country": "US"
+        }
+      ],
+      "communication": [
+        {
+          "language": {
+            "coding": [
+              {
+                "system": "urn:ietf:bcp:47",
+                "code": "en-US",
+                "display": "English (United States)"
+              }
+            ],
+            "text": "English (United States)"
+          }
+        }
+      ]
+    },
+    "longitudinal_summary": {
+      "resource_counts": {
+        "Condition": 6,
+        "DiagnosticReport": 4,
+        "DocumentReference": 5,
+        "Encounter": 7,
+        "MedicationRequest": 4,
+        "Observation": 31,
+        "Procedure": 3,
+        "Patient": 1
+      },
+      "condition_labels": [
+        "Adenomatous polyp of colon (disorder)",
+        "Iron deficiency anemia (disorder)",
+        "Gastroesophageal reflux disease (disorder)",
+        "Received higher education (finding)"
+      ],
+      "medication_labels": [
+        "ferrous sulfate 325 MG Oral Tablet",
+        "pantoprazole 40 MG Delayed Release Oral Tablet"
+      ]
+    },
+    "prior_notes": [
+      {
+        "document_type": "Colonoscopy report",
+        "date": "2023-05-18",
+        "provider_specialty": "Gastroenterology",
+        "text": "Screening/surveillance colonoscopy to cecum. Adequate prep. Findings: single 8 mm sessile polyp in the sigmoid colon, removed by snare polypectomy; retrieved. No other lesions. Pathology (separate report): tubular adenoma with low-grade dysplasia. Recommendation: repeat colonoscopy in 3 years (2026). No complications."
+      },
+      {
+        "document_type": "GI clinic note",
+        "date": "2024-11-02",
+        "provider_specialty": "Gastroenterology",
+        "text": "Follow-up. Reflux well controlled on pantoprazole 40 mg daily. Mild iron-deficiency anemia (Hgb 11.4) — started ferrous sulfate 325 mg daily, advised to take with vitamin C. Continue surveillance plan; next colonoscopy due 2026. Return in 1 year or sooner for new bleeding or worsening fatigue."
+      }
+    ]
+  },
+  "encounter_fhir": {
+    "encounter": {
+      "resourceType": "Encounter",
+      "id": "enc-2026-0001",
+      "status": "finished",
+      "class": {
+        "code": "AMB",
+        "display": "ambulatory"
+      },
+      "type": [
+        {
+          "text": "Gastroenterology consultation"
+        }
+      ],
+      "subject": {
+        "reference": "urn:uuid:gi-synth-0001"
+      },
+      "period": {
+        "start": "2026-06-30T09:10:00-07:00",
+        "end": "2026-06-30T09:34:00-07:00"
+      }
+    },
+    "related_resources": {
+      "Condition": [
+        {
+          "resourceType": "Condition",
+          "id": "cond-adenoma",
+          "clinicalStatus": {
+            "coding": [
+              {
+                "code": "active"
+              }
+            ]
+          },
+          "verificationStatus": {
+            "coding": [
+              {
+                "code": "confirmed"
+              }
+            ]
+          },
+          "code": {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "68496003",
+                "display": "Adenomatous polyp of colon (disorder)"
+              }
+            ],
+            "text": "Adenomatous polyp of colon (disorder)"
+          },
+          "subject": {
+            "reference": "urn:uuid:gi-synth-0001"
+          },
+          "onsetDateTime": "2023-05-18"
+        },
+        {
+          "resourceType": "Condition",
+          "id": "cond-ida",
+          "clinicalStatus": {
+            "coding": [
+              {
+                "code": "active"
+              }
+            ]
+          },
+          "verificationStatus": {
+            "coding": [
+              {
+                "code": "confirmed"
+              }
+            ]
+          },
+          "code": {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "87522002",
+                "display": "Iron deficiency anemia (disorder)"
+              }
+            ],
+            "text": "Iron deficiency anemia (disorder)"
+          },
+          "subject": {
+            "reference": "urn:uuid:gi-synth-0001"
+          },
+          "onsetDateTime": "2024-10-20"
+        },
+        {
+          "resourceType": "Condition",
+          "id": "cond-gerd",
+          "clinicalStatus": {
+            "coding": [
+              {
+                "code": "active"
+              }
+            ]
+          },
+          "verificationStatus": {
+            "coding": [
+              {
+                "code": "confirmed"
+              }
+            ]
+          },
+          "code": {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "235595009",
+                "display": "Gastroesophageal reflux disease (disorder)"
+              }
+            ],
+            "text": "Gastroesophageal reflux disease (disorder)"
+          },
+          "subject": {
+            "reference": "urn:uuid:gi-synth-0001"
+          }
+        }
+      ],
+      "MedicationRequest": [
+        {
+          "resourceType": "MedicationRequest",
+          "id": "med-iron",
+          "status": "active",
+          "intent": "order",
+          "medicationCodeableConcept": {
+            "coding": [
+              {
+                "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+                "code": "200349",
+                "display": "ferrous sulfate 325 MG Oral Tablet"
+              }
+            ],
+            "text": "ferrous sulfate 325 MG Oral Tablet"
+          },
+          "subject": {
+            "reference": "urn:uuid:gi-synth-0001"
+          },
+          "authoredOn": "2024-11-02",
+          "_discrepancy": "D1: chart shows active, patient reports stopped ~4 months ago"
+        },
+        {
+          "resourceType": "MedicationRequest",
+          "id": "med-ppi",
+          "status": "active",
+          "intent": "order",
+          "medicationCodeableConcept": {
+            "coding": [
+              {
+                "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+                "code": "40790",
+                "display": "pantoprazole 40 MG Delayed Release Oral Tablet"
+              }
+            ],
+            "text": "pantoprazole 40 MG Delayed Release Oral Tablet"
+          },
+          "subject": {
+            "reference": "urn:uuid:gi-synth-0001"
+          },
+          "authoredOn": "2024-11-02"
+        }
+      ],
+      "Observation": [
+        {
+          "resourceType": "Observation",
+          "id": "obs-hgb",
+          "status": "final",
+          "category": [
+            {
+              "coding": [
+                {
+                  "code": "laboratory"
+                }
+              ]
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "718-7",
+                "display": "Hemoglobin [Mass/volume] in Blood"
+              }
+            ],
+            "text": "Hemoglobin"
+          },
+          "subject": {
+            "reference": "urn:uuid:gi-synth-0001"
+          },
+          "effectiveDateTime": "2026-06-12",
+          "valueQuantity": {
+            "value": 10.2,
+            "unit": "g/dL",
+            "system": "http://unitsofmeasure.org",
+            "code": "g/dL"
+          },
+          "interpretation": []
+        },
+        {
+          "resourceType": "Observation",
+          "id": "obs-ferritin",
+          "status": "final",
+          "category": [
+            {
+              "coding": [
+                {
+                  "code": "laboratory"
+                }
+              ]
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "2276-4",
+                "display": "Ferritin [Mass/volume] in Serum or Plasma"
+              }
+            ],
+            "text": "Ferritin"
+          },
+          "subject": {
+            "reference": "urn:uuid:gi-synth-0001"
+          },
+          "effectiveDateTime": "2026-06-12",
+          "valueQuantity": {
+            "value": 8,
+            "unit": "ug/L",
+            "system": "http://unitsofmeasure.org",
+            "code": "ug/L"
+          },
+          "interpretation": []
+        },
+        {
+          "resourceType": "Observation",
+          "id": "obs-hct",
+          "status": "final",
+          "category": [
+            {
+              "coding": [
+                {
+                  "code": "laboratory"
+                }
+              ]
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "4544-3",
+                "display": "Hematocrit [Volume Fraction] of Blood"
+              }
+            ],
+            "text": "Hematocrit"
+          },
+          "subject": {
+            "reference": "urn:uuid:gi-synth-0001"
+          },
+          "effectiveDateTime": "2026-06-12",
+          "valueQuantity": {
+            "value": 31.4,
+            "unit": "%",
+            "system": "http://unitsofmeasure.org",
+            "code": "%"
+          },
+          "interpretation": []
+        },
+        {
+          "resourceType": "Observation",
+          "id": "obs-vital-ht",
+          "status": "final",
+          "category": [
+            {
+              "coding": [
+                {
+                  "code": "vital-signs"
+                }
+              ]
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "8302-2",
+                "display": "Body height"
+              }
+            ],
+            "text": "Body height"
+          },
+          "subject": {
+            "reference": "urn:uuid:gi-synth-0001"
+          },
+          "effectiveDateTime": "2026-06-30",
+          "valueQuantity": {
+            "value": 170,
+            "unit": "cm",
+            "system": "http://unitsofmeasure.org",
+            "code": "cm"
+          }
+        },
+        {
+          "resourceType": "Observation",
+          "id": "obs-vital-wt",
+          "status": "final",
+          "category": [
+            {
+              "coding": [
+                {
+                  "code": "vital-signs"
+                }
+              ]
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "29463-7",
+                "display": "Body weight"
+              }
+            ],
+            "text": "Body weight"
+          },
+          "subject": {
+            "reference": "urn:uuid:gi-synth-0001"
+          },
+          "effectiveDateTime": "2026-06-30",
+          "valueQuantity": {
+            "value": 72,
+            "unit": "kg",
+            "system": "http://unitsofmeasure.org",
+            "code": "kg"
+          }
+        },
+        {
+          "resourceType": "Observation",
+          "id": "obs-vital-bmi",
+          "status": "final",
+          "category": [
+            {
+              "coding": [
+                {
+                  "code": "vital-signs"
+                }
+              ]
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "39156-5",
+                "display": "Body mass index (BMI) [Ratio]"
+              }
+            ],
+            "text": "Body mass index (BMI) [Ratio]"
+          },
+          "subject": {
+            "reference": "urn:uuid:gi-synth-0001"
+          },
+          "effectiveDateTime": "2026-06-30",
+          "valueQuantity": {
+            "value": 24.9,
+            "unit": "kg/m2",
+            "system": "http://unitsofmeasure.org",
+            "code": "kg/m2"
+          }
+        },
+        {
+          "resourceType": "Observation",
+          "id": "obs-vital-temp",
+          "status": "final",
+          "category": [
+            {
+              "coding": [
+                {
+                  "code": "vital-signs"
+                }
+              ]
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "8310-5",
+                "display": "Body temperature"
+              }
+            ],
+            "text": "Body temperature"
+          },
+          "subject": {
+            "reference": "urn:uuid:gi-synth-0001"
+          },
+          "effectiveDateTime": "2026-06-30",
+          "valueQuantity": {
+            "value": 36.8,
+            "unit": "Cel",
+            "system": "http://unitsofmeasure.org",
+            "code": "Cel"
+          }
+        },
+        {
+          "resourceType": "Observation",
+          "id": "obs-vital-hr",
+          "status": "final",
+          "category": [
+            {
+              "coding": [
+                {
+                  "code": "vital-signs"
+                }
+              ]
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "8867-4",
+                "display": "Heart rate"
+              }
+            ],
+            "text": "Heart rate"
+          },
+          "subject": {
+            "reference": "urn:uuid:gi-synth-0001"
+          },
+          "effectiveDateTime": "2026-06-30",
+          "valueQuantity": {
+            "value": 72,
+            "unit": "/min",
+            "system": "http://unitsofmeasure.org",
+            "code": "/min"
+          }
+        },
+        {
+          "resourceType": "Observation",
+          "id": "obs-vital-rr",
+          "status": "final",
+          "category": [
+            {
+              "coding": [
+                {
+                  "code": "vital-signs"
+                }
+              ]
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "9279-1",
+                "display": "Respiratory rate"
+              }
+            ],
+            "text": "Respiratory rate"
+          },
+          "subject": {
+            "reference": "urn:uuid:gi-synth-0001"
+          },
+          "effectiveDateTime": "2026-06-30",
+          "valueQuantity": {
+            "value": 14,
+            "unit": "/min",
+            "system": "http://unitsofmeasure.org",
+            "code": "/min"
+          }
+        },
+        {
+          "resourceType": "Observation",
+          "id": "obs-vital-spo2",
+          "status": "final",
+          "category": [
+            {
+              "coding": [
+                {
+                  "code": "vital-signs"
+                }
+              ]
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "2708-6",
+                "display": "Oxygen saturation in Arterial blood"
+              }
+            ],
+            "text": "Oxygen saturation in Arterial blood"
+          },
+          "subject": {
+            "reference": "urn:uuid:gi-synth-0001"
+          },
+          "effectiveDateTime": "2026-06-30",
+          "valueQuantity": {
+            "value": 98,
+            "unit": "%",
+            "system": "http://unitsofmeasure.org",
+            "code": "%"
+          }
+        },
+        {
+          "resourceType": "Observation",
+          "id": "obs-vital-bp",
+          "status": "final",
+          "category": [
+            {
+              "coding": [
+                {
+                  "code": "vital-signs"
+                }
+              ]
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "85354-9",
+                "display": "Blood pressure panel with all children optional"
+              }
+            ],
+            "text": "Blood pressure"
+          },
+          "subject": {
+            "reference": "urn:uuid:gi-synth-0001"
+          },
+          "effectiveDateTime": "2026-06-30",
+          "component": [
+            {
+              "code": {
+                "coding": [
+                  {
+                    "system": "http://loinc.org",
+                    "code": "8480-6",
+                    "display": "Systolic blood pressure"
+                  }
+                ]
+              },
+              "valueQuantity": {
+                "value": 122,
+                "unit": "mm[Hg]",
+                "system": "http://unitsofmeasure.org",
+                "code": "mm[Hg]"
+              }
+            },
+            {
+              "code": {
+                "coding": [
+                  {
+                    "system": "http://loinc.org",
+                    "code": "8462-4",
+                    "display": "Diastolic blood pressure"
+                  }
+                ]
+              },
+              "valueQuantity": {
+                "value": 76,
+                "unit": "mm[Hg]",
+                "system": "http://unitsofmeasure.org",
+                "code": "mm[Hg]"
+              }
+            }
+          ]
+        }
+      ],
+      "Procedure": [
+        {
+          "resourceType": "Procedure",
+          "id": "proc-colo-planned",
+          "status": "preparation",
+          "code": {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "73761001",
+                "display": "Colonoscopy (procedure)"
+              }
+            ],
+            "text": "Colonoscopy (surveillance, planned)"
+          },
+          "subject": {
+            "reference": "urn:uuid:gi-synth-0001"
+          }
+        }
+      ],
+      "DiagnosticReport": [
+        {
+          "resourceType": "DiagnosticReport",
+          "id": "dr-path-2023",
+          "status": "final",
+          "category": [
+            {
+              "coding": [
+                {
+                  "code": "PAT",
+                  "display": "Pathology"
+                }
+              ]
+            }
+          ],
+          "code": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "60568-3",
+                "display": "Pathology Synoptic report"
+              }
+            ],
+            "text": "Surgical pathology — colon polyp"
+          },
+          "subject": {
+            "reference": "urn:uuid:gi-synth-0001"
+          },
+          "effectiveDateTime": "2023-05-19",
+          "conclusion": "Sigmoid colon polyp: tubular adenoma with low-grade dysplasia. Margins clear."
+        }
+      ],
+      "AllergyIntolerance": []
+    }
+  },
+  "transcript": "DR: Morning, Dolores — good to see you. You're here to plan the follow-up colonoscopy, and it looks like a few things have come up. How have you been?\nPT: Mostly okay, but honestly a little worried. The main thing is I've had some bleeding — when I go to the bathroom, there's been blood a few times over the last three weeks or so. Not every time, but enough that I noticed.\nDR: I'm glad you're telling me. Bright red, or darker?\nPT: Bright red, on the paper mostly. And I've been more tired than usual.\nDR: Okay. That's exactly the kind of thing we want to sort out with the scope. Let me go through your list. The chart has you on iron — the ferrous sulfate — for the low blood count. Are you still taking that?\nPT: No, I stopped that a while back. Maybe four months ago? It really backed me up, the constipation was rough, so I quit it and never restarted.\nDR: Got it — so no iron for about four months. That matters, because your last labs still show the anemia, hemoglobin around ten. We'll need to address that. And the pantoprazole for the reflux — still on that?\nPT: Yes, that one I take every morning, it works well.\nDR: Good. Any allergies I should have down? I don't see any listed.\nPT: Just — amoxicillin. I got hives from it once, years ago. I always tell people but I'm not sure it's written anywhere.\nDR: Thank you, I'll get that added. So: bleeding, ongoing anemia off iron, and we're due for the surveillance scope anyway from the 2023 polyp. Let's get you scheduled and I'll set up the prep.\nPT: That makes sense. Do I need to stop anything before?\nDR: We'll go over the prep instructions and what to hold. I'll have the team reach out.",
+  "note": "**Subjective:** Ms. Vane is a 54-year-old woman presenting to GI clinic to plan surveillance colonoscopy (tubular adenoma with low-grade dysplasia on 2023 colonoscopy, due 2026). She reports new intermittent hematochezia over the past ~3 weeks — bright red blood per rectum, not with every bowel movement — accompanied by increased fatigue. She reports she discontinued ferrous sulfate approximately 4 months ago due to constipation and has not restarted it. Reflux remains well controlled on pantoprazole 40 mg daily. She reports a prior hives reaction to amoxicillin, not previously documented.\n\n**Objective:** Recent labs (2026-06-12): hemoglobin 10.2 g/dL, ferritin 8 ug/L, hematocrit 31.4% — consistent with ongoing iron-deficiency anemia. \n\n**Assessment & Plan:**\n- New hematochezia with iron-deficiency anemia, off iron x4 months — will expedite surveillance/diagnostic colonoscopy.\n- Iron-deficiency anemia — restart oral iron with alternate-day dosing to improve tolerability; discuss if bleeding source found.\n- Update medication list: ferrous sulfate discontinued per patient.\n- Add allergy: amoxicillin (hives).\n- GERD — continue pantoprazole 40 mg daily.\n- Colonoscopy scheduling + bowel prep instructions to follow; return precautions for heavy bleeding.",
+  "after_visit_summary": "Visit summary\n\nWhat we discussed\n• New rectal bleeding and tiredness\n• Ongoing low blood count (anemia)\n• Follow-up colonoscopy (due this year)\n• Reflux\n\nNext steps\n• We will schedule your colonoscopy; the team will send prep instructions and what to stop before.\n• Restart iron, taking it every other day to be gentler on your stomach.\n• We updated your record: iron marked stopped; amoxicillin allergy (hives) added.\n• Keep taking pantoprazole each morning.\n• Call for heavy bleeding, lightheadedness, or worsening tiredness.",
+  "after_visit_summary_provenance": {
+    "method": "deterministic_extractive_v1",
+    "source": "clinical_note_assessment_and_plan",
+    "review_status": "not_clinically_reviewed"
+  }
+}

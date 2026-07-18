@@ -1,0 +1,95 @@
+{
+  "id": "gi-synth-0049::proc-result",
+  "_synthetic": true,
+  "_note": "MOCK procedure result. No real patient. Result of the colonoscopy with piecemeal EMR (2026-07-14) that PT-049's post-procedure follow-up encounter is following up FROM.",
+  "patient_id": "gi-synth-0049",
+  "procedure": {
+    "name": "Colonoscopy with endoscopic mucosal resection (EMR)",
+    "code": {"system": "http://snomed.info/sct", "code": "445894001", "display": "Endoscopic mucosal resection (procedure)"},
+    "date": "2026-07-14T08:15:00-07:00",
+    "indication": "Surveillance colonoscopy (prior sigmoid adenoma); large laterally spreading sigmoid lesion identified for resection",
+    "sedation": "Monitored anesthesia care (propofol), anesthesiologist-directed",
+    "prep_quality": "Boston Bowel Prep Scale 8/9 — adequate",
+    "extent_reached": "Cecum (confirmed by appendiceal orifice and ileocecal valve intubation)",
+    "withdrawal_time_min": 24,
+    "status": "completed"
+  },
+  "procedure_report": "PROCEDURE: Colonoscopy with piecemeal endoscopic mucosal resection. INDICATION: surveillance colonoscopy with a large laterally spreading sigmoid lesion identified for resection; history of paroxysmal atrial fibrillation on apixaban (held 48h pre-procedure per anticoagulation plan) and hypertension. SEDATION: monitored anesthesia care (propofol). PREP: adequate (BBPS 8/9). FINDINGS: The colonoscope was advanced to the cecum. In the sigmoid colon a single 22 mm laterally spreading, sessile/granular lesion (Paris 0-IIa + Is) was identified. Submucosal injection of lifted saline/methylene blue solution produced a good lift with no non-lifting sign. The lesion was removed by piecemeal endoscopic mucosal resection using a stiff snare; all visible tissue was resected and specimens retrieved for histology. The post-resection defect was inspected: several non-bleeding visible vessels were noted at the margin and base and were treated prophylactically with through-the-scope clips (5 clips placed). No immediate intraprocedural bleeding at completion. Scattered sigmoid diverticula without stigmata of bleeding. The remainder of the examined colon and terminal ileum were normal. IMPRESSION: 22 mm sigmoid laterally spreading lesion removed by piecemeal EMR; prophylactic clip closure of the resection base. Histology pending. Delayed post-polypectomy bleeding precautions given; apixaban to resume post-procedure Day 2 (2026-07-16) per plan.",
+  "findings": [
+    {"finding": "22 mm laterally spreading sessile granular lesion (Paris 0-IIa+Is)", "location": "sigmoid colon", "size_mm": 22, "action_taken": "piecemeal endoscopic mucosal resection after submucosal lift; specimens retrieved", "specimen": "A"},
+    {"finding": "Post-EMR mucosal defect with non-bleeding visible vessels", "location": "sigmoid colon", "action_taken": "prophylactic through-the-scope clip closure (5 clips)"},
+    {"finding": "Diverticulosis, no stigmata of bleeding", "location": "sigmoid colon", "action_taken": "none"}
+  ],
+  "specimens": [{"id": "A", "site": "22 mm sigmoid lesion", "type": "piecemeal EMR"}],
+  "pathology": {
+    "status": "final",
+    "expected_back": "2026-07-17",
+    "report": "Sigmoid colon, piecemeal EMR: tubulovillous adenoma with focal high-grade dysplasia. No definite submucosal invasion identified in the fragments examined; deep and lateral margins cannot be assessed due to the piecemeal nature of the resection. No high-risk features of invasive carcinoma (no lymphovascular invasion, no poor differentiation) seen in submitted material.",
+    "diagnosis": "Tubulovillous adenoma with focal high-grade dysplasia (piecemeal EMR, margins not assessable)",
+    "actionable": true
+  },
+  "complications": [],
+  "disposition": "Discharged home same day in stable condition with escort. Post-polypectomy and delayed-bleeding precautions reviewed (call clinic or present to ED for black stools, rectal bleeding, lightheadedness, or abdominal pain). Given resumption of apixaban on Day 2, delayed post-polypectomy hemorrhage risk explicitly counseled.",
+  "followup": [
+    {"recommendation": "Communicate high-grade dysplasia pathology result to patient; document that piecemeal EMR margins are not assessable", "timeframe": "within 1 week", "owner": "GI", "status": "open"},
+    {"recommendation": "Schedule early follow-up colonoscopy to evaluate/biopsy the EMR scar for residual/recurrent adenoma (piecemeal resection of high-grade lesion)", "timeframe": "3-6 months", "owner": "GI", "status": "open"},
+    {"recommendation": "Resume apixaban on post-procedure Day 2 (2026-07-16) per anticoagulation plan if no bleeding; counsel on delayed bleeding warning signs", "timeframe": "Day 2 post-procedure", "owner": "patient / GI", "status": "open"},
+    {"recommendation": "Monitor for delayed post-polypectomy hemorrhage (Day 1-14 window), heightened risk on resumed apixaban after 22 mm EMR", "timeframe": "14 days", "owner": "patient / GI", "status": "open"}
+  ],
+  "planted_followup_items": [
+    {"id": "F1", "type": "critical_result", "description": "Piecemeal EMR pathology shows tubulovillous adenoma with FOCAL HIGH-GRADE DYSPLASIA; margins not assessable due to piecemeal resection. Must be communicated to patient and must drive a short-interval scar surveillance plan.", "urgency": "critical", "expected_action": "call patient with high-grade dysplasia result, document, and book early EMR-scar surveillance colonoscopy", "status": "open"},
+    {"id": "F2", "type": "repeat_procedure", "description": "Early follow-up colonoscopy to inspect and biopsy the sigmoid EMR scar for residual/recurrent adenoma after piecemeal resection of a 22 mm high-grade lesion", "urgency": "urgent", "expected_action": "schedule scar-check colonoscopy at 3-6 months", "status": "open"},
+    {"id": "F3", "type": "surveillance_interval", "description": "Surveillance interval must be set based on the high-grade dysplasia / large piecemeal-resected lesion (short-interval scar check, then risk-adjusted ongoing surveillance)", "urgency": "urgent", "expected_action": "document surveillance interval in chart and communicate to patient", "status": "open"},
+    {"id": "F4", "type": "complication_watch", "description": "Delayed post-polypectomy hemorrhage watch (Day 1-14) after 22 mm piecemeal EMR with visible vessels, markedly elevated by apixaban resumption on Day 2. NOTE: this risk was subsequently realized as a Day-4 delayed bleed (see follow-up encounter).", "urgency": "critical", "expected_action": "counsel bleeding precautions; if bleeding occurs, hold apixaban, ED evaluation, and repeat colonoscopy for hemostasis", "status": "open"},
+    {"id": "F5", "type": "med_resume", "description": "Apixaban 5 mg BID resumption on post-procedure Day 2 (2026-07-16) per anticoagulation plan — a confirmed active DOAC that is the principal driver of post-polypectomy bleeding risk and must not be de-prioritized", "urgency": "urgent", "expected_action": "confirm resumption timing and align with bleeding-risk monitoring / hold instructions if bleeding", "status": "open"}
+  ],
+  "post_procedure_followup": {
+    "window": "day 0 to day 14",
+    "channels": ["automated_check_in", "patient_portal_message", "nurse_triage_call"],
+    "_note": "Patient-reported stream after the procedure — the inbound signal the LeftBehind product triages. Each contact is labeled ground truth so triage can be scored. Profile: one_complication (Day-4 delayed post-EMR hemorrhage on resumed apixaban).",
+    "contacts": [
+      {
+        "id": "C1",
+        "day": 1,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "Bit of cramping and a lot of gas today, and my backside feels a little tender. Is that normal after having the polyp taken out?",
+        "clinical_signal": "Expected post-EMR insufflation cramping/bloating and minor anorectal tenderness on Day 1; no bleeding, no orthostatic symptoms",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; cramping, gas, and mild tenderness are expected and self-limited. Reinforce delayed-bleeding return precautions (black/tarry stools, rectal bleeding, lightheadedness, belly pain).",
+        "rationale": "Common benign post-colonoscopy symptoms after insufflation; no red-flag features present."
+      },
+      {
+        "id": "C2",
+        "day": 2,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "The sheet says to start my apixaban back today, Day 2. Am I really supposed to restart the blood thinner already, and when will I hear about the biopsy?",
+        "clinical_signal": "Patient confirming anticoagulation resumption timing and asking about pending pathology — answerable from the plan",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F5",
+        "expected_action": "Confirm apixaban 5 mg BID resumes Day 2 (2026-07-16) per the anticoagulation plan since no bleeding; re-counsel on delayed-bleeding warning signs given resumed DOAC. Advise pathology and surveillance interval will be communicated by the GI team within the week.",
+        "rationale": "Answerable from the procedure result and follow-up plan; links to the med_resume item and reinforces bleeding precautions on a re-anticoagulated patient."
+      },
+      {
+        "id": "C3",
+        "day": 4,
+        "channel": "nurse_triage_call",
+        "type": "complication",
+        "verbatim": "Since this morning I've had two really dark, almost black tarry stools, and every time I stand up the room tips and I get dizzy. I've been back on the apixaban since Thursday like they told me.",
+        "clinical_signal": "Delayed post-polypectomy hemorrhage — melena x2 plus orthostatic lightheadedness on Day 4 after 22 mm piecemeal EMR, on apixaban resumed Day 2. Classic delayed-bleed window with a hemodynamic symptom.",
+        "red_flag": true,
+        "ground_truth_disposition": "escalate",
+        "urgency": "emergent",
+        "links_followup_item": "F4",
+        "expected_action": "Escalate to the ED now for resuscitation, CBC/type & screen, and hemodynamic monitoring; hold apixaban (no further doses until cleared) and discuss reversal per ED; notify the endoscopist and anticipate repeat colonoscopy for hemostasis.",
+        "rationale": "Melena with orthostatic vital signs on a resumed DOAC after a large EMR is a red-flag delayed post-polypectomy hemorrhage requiring emergent action, not a reassurance contact."
+      }
+    ]
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "id": "gi-synth-0047::proc-result",
+  "_synthetic": true,
+  "_note": "MOCK procedure result. No real patient. For PreChart development/eval.",
+  "patient_id": "gi-synth-0047",
+  "procedure": {
+    "name": "Colonoscopy",
+    "code": {"system": "http://snomed.info/sct", "code": "73761001", "display": "Colonoscopy (procedure)"},
+    "date": "2026-07-19T09:10:00-07:00",
+    "indication": "Active hematochezia in an anticoagulated patient (rivaroxaban) with orthostasis and anemia (Hgb 9.6); locate and treat lower GI bleeding source. Performed after ED stabilization, volume resuscitation, and coordinated hold of rivaroxaban with cardiology.",
+    "sedation": "Monitored anesthesia care (propofol), anesthesia-directed given hemodynamic risk",
+    "prep_quality": "Boston Bowel Prep Scale 6/9 — adequate (urgent inpatient prep; some residual liquid stool in right colon cleared with irrigation)",
+    "extent_reached": "Cecum (confirmed by appendiceal orifice and ileocecal valve; terminal ileum intubated)",
+    "withdrawal_time_min": 16,
+    "status": "completed"
+  },
+  "procedure_report": "PROCEDURE: Colonoscopy with endoscopic hemostasis. INDICATION: active hematochezia on rivaroxaban with orthostasis and anemia. Rivaroxaban held pre-procedure per cardiology; patient volume-resuscitated in ED with stabilized hemodynamics prior to scope. SEDATION: MAC/propofol, anesthesia-directed. PREP: adequate after irrigation (BBPS 6). FINDINGS: The colonoscope was advanced to the cecum and the terminal ileum was intubated with no blood or lesion in the ileum, excluding a more proximal source. Moderate diverticulosis was present throughout the sigmoid and descending colon. In the proximal sigmoid, a single diverticulum demonstrated a non-bleeding visible vessel with adherent clot and surrounding fresh blood — identified as the culprit diverticular bleeding source. The clot was gently irrigated; hemostasis was achieved with placement of two through-the-scope hemoclips across the vessel, with no further bleeding after treatment. No mass, no ulcer, and no stigmata of active bleeding elsewhere. Non-bleeding internal hemorrhoids noted on retroflexion in the rectum. IMPRESSION: Diverticular hemorrhage from a proximal sigmoid diverticulum, treated successfully with hemoclips; diverticulosis; non-bleeding internal hemorrhoids. No malignancy identified.",
+  "findings": [
+    {"finding": "Diverticular bleeding source — non-bleeding visible vessel with adherent clot and fresh blood", "location": "proximal sigmoid colon (diverticulum)", "action_taken": "clot irrigation; endoscopic hemostasis with 2 through-the-scope hemoclips; hemostasis achieved", "specimen": null},
+    {"finding": "Moderate diverticulosis, no other stigmata of bleeding", "location": "sigmoid and descending colon", "action_taken": "none"},
+    {"finding": "Non-bleeding internal hemorrhoids", "location": "rectum", "action_taken": "none"},
+    {"finding": "Normal terminal ileum — no blood, excludes proximal source", "location": "terminal ileum", "action_taken": "none"}
+  ],
+  "specimens": [],
+  "pathology": {"status": "not_applicable", "expected_back": null, "report": null, "diagnosis": null, "actionable": null},
+  "complications": [],
+  "disposition": "Admitted for overnight observation and serial hemoglobin monitoring given anticoagulation and prior orthostasis. Hemodynamically stable post-procedure. Post-hemostasis and diverticular-bleed precautions reviewed with patient and daughter.",
+  "followup": [
+    {"recommendation": "Serial hemoglobin/hematocrit monitoring during admission; transfuse per threshold and reassess for rebleeding", "timeframe": "next 24-48 hours", "owner": "GI / hospitalist", "status": "open"},
+    {"recommendation": "Coordinate timing of rivaroxaban resumption with cardiology, balancing nonvalvular afib stroke risk against rebleed risk after diverticular hemostasis", "timeframe": "before discharge", "owner": "GI / cardiology", "status": "open"},
+    {"recommendation": "Watch for rebleeding after hemoclip hemostasis (recurrent hematochezia, drop in Hgb, orthostasis)", "timeframe": "during admission and post-discharge", "owner": "GI / patient", "status": "open"},
+    {"recommendation": "Outpatient GI follow-up to confirm resolution and set diverticular/colon surveillance plan", "timeframe": "2-4 weeks", "owner": "GI", "status": "open"}
+  ],
+  "planted_followup_items": [
+    {"id": "F1", "type": "critical_result", "description": "Diverticular hemorrhage in a patient on rivaroxaban with orthostasis and anemia (Hgb 9.6) — active lower GI bleed on a DOAC treated with hemoclips; hemodynamic and rebleed status must be actively followed", "urgency": "critical", "expected_action": "admit for monitoring; serial Hgb, transfuse per threshold, escalate if rebleed", "status": "open"},
+    {"id": "F2", "type": "complication_watch", "description": "Post-hemostasis rebleeding risk from diverticular vessel after hemoclip placement", "urgency": "urgent", "expected_action": "monitor for recurrent hematochezia, falling Hgb, orthostasis; repeat colonoscopy or IR/angiography if rebleeds", "status": "open"},
+    {"id": "F3", "type": "med_resume", "description": "Rivaroxaban was held peri-procedurally; resumption timing must be decided with cardiology given nonvalvular afib stroke risk vs. rebleed risk", "urgency": "urgent", "expected_action": "cardiology + GI joint decision and documented resumption plan before discharge", "status": "open"},
+    {"id": "F4", "type": "care_coordination", "description": "Cardiology coordination for anticoagulation management around the GI bleed", "urgency": "urgent", "expected_action": "contact cardiology for stroke-risk-informed anticoagulation plan", "status": "open"},
+    {"id": "F5", "type": "surveillance_interval", "description": "Outpatient GI follow-up to confirm bleed resolution and set colon surveillance interval (last full screening 2019)", "urgency": "routine", "expected_action": "schedule GI follow-up and document surveillance plan", "status": "open"}
+  ],
+  "post_procedure_followup": {
+    "window": "day 0 to day 14",
+    "channels": ["automated_check_in", "patient_portal_message", "nurse_triage_call"],
+    "_note": "Patient-reported stream after the procedure — the inbound signal the LeftBehind product triages. Each contact is labeled ground truth so triage can be scored.",
+    "contacts": [
+      {
+        "id": "C1",
+        "day": 1,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "My throat is a little scratchy and I feel gassy and crampy after all that air. Otherwise I'm just tired from being in the hospital.",
+        "clinical_signal": "Expected post-colonoscopy sore throat and insufflation-related bloating/cramping; no bleeding, no hemodynamic symptom",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; scratchy throat and gas/cramping are expected and self-limited within 24-48h. Encourage walking and hydration.",
+        "rationale": "Common benign post-endoscopy symptoms with no bleeding or instability; no escalation."
+      },
+      {
+        "id": "C2",
+        "day": 3,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "The doctors stopped my blood thinner before the procedure. When am I supposed to start the rivaroxaban again? I'm nervous about my heart and a stroke.",
+        "clinical_signal": "Patient asking about anticoagulation resumption timing after held rivaroxaban; no symptoms reported",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F3",
+        "expected_action": "Answer from the plan: rivaroxaban was intentionally held; do NOT restart on your own. GI and cardiology will set and document the resumption date balancing stroke risk against rebleed risk. Confirm she has that guidance in writing.",
+        "rationale": "Answerable from the follow-up plan; the correct message is to await the joint cardiology/GI resumption decision and not self-resume. Links to the med_resume item."
+      },
+      {
+        "id": "C3",
+        "day": 6,
+        "channel": "nurse_triage_call",
+        "type": "complication",
+        "verbatim": "I got so worried about my heart that I started taking my rivaroxaban again on my own three days ago. Now I'm seeing bright red blood in the toilet again and I felt woozy standing up this morning.",
+        "clinical_signal": "Self-resumed anticoagulation too early after diverticular hemoclip hemostasis, now recurrent hematochezia with orthostatic symptom — likely rebleed unmasked by premature DOAC resumption",
+        "red_flag": true,
+        "ground_truth_disposition": "escalate",
+        "urgency": "emergent",
+        "links_followup_item": "F2",
+        "expected_action": "Escalate for same-day/ED evaluation: hold rivaroxaban immediately, IV access, serial Hgb, type-and-screen, hemodynamic monitoring; anticipate repeat colonoscopy or IR angiography for rebleeding. Loop in cardiology re: anticoagulation.",
+        "rationale": "Triage trap — a med-timing error (patient restarted anticoagulation before the sanctioned date) plus recurrent hematochezia and orthostasis is a red-flag rebleed on a DOAC requiring emergent action, not reassurance."
+      }
+    ]
+  }
+}

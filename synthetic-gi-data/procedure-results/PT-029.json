@@ -1,0 +1,205 @@
+{
+  "id": "gi-synth-0029::proc-result",
+  "_synthetic": true,
+  "_note": "MOCK procedure result. No real patient. For PreChart development/eval. Result of the ERCP the patient was referred for.",
+  "patient_id": "gi-synth-0029",
+  "procedure": {
+    "name": "Endoscopic retrograde cholangiopancreatography (ERCP) with sphincterotomy and stone extraction",
+    "code": {
+      "system": "http://snomed.info/sct",
+      "code": "235143008",
+      "display": "Endoscopic retrograde cholangiopancreatography (procedure)"
+    },
+    "date": "2026-07-24T09:10:00-07:00",
+    "indication": "Choledocholithiasis (7 mm distal CBD stone on MRCP) following resolved acute gallstone pancreatitis; duct clearance prior to interval cholecystectomy",
+    "sedation": "Monitored anesthesia care (MAC) with propofol, anesthesiologist-administered",
+    "prep_quality": "N/A (biliary procedure)",
+    "extent_reached": "Second portion of the duodenum; major papilla identified and cannulated selectively into the common bile duct",
+    "withdrawal_time_min": null,
+    "status": "completed"
+  },
+  "procedure_report": "PROCEDURE: ERCP with biliary sphincterotomy, occlusion cholangiogram, and balloon stone extraction. INDICATION: choledocholithiasis with mild upstream dilation on MRCP; resolved gallstone pancreatitis; downtrending LFTs. PREMEDICATION: given documented prior pruritic reaction to IV iodinated contrast, patient received corticosteroid and antihistamine premedication per protocol and anesthesia was notified; low-osmolar contrast used. Aspirin 81 mg was continued per proceduralist (acceptable for sphincterotomy); OTC fish oil supplement had been held pre-procedure; no prescription anticoagulant on board. SEDATION: MAC/propofol. FINDINGS: The duodenoscope was advanced to the major papilla without difficulty. The major papilla appeared normal. The common bile duct was selectively cannulated with a sphincterotome and guidewire. Occlusion cholangiogram demonstrated a mildly dilated CBD (~9 mm) with a single small (~4-5 mm) filling defect in the distal duct and a small amount of sludge — smaller than the 7 mm stone reported on prior MRCP, consistent with interval partial passage. A standard biliary sphincterotomy was performed with good bile flow. The duct was swept with an extraction balloon on multiple passes, retrieving one small stone and biliary sludge. Repeat occlusion cholangiogram showed no residual filling defects and free flow of contrast into the duodenum. Given the recent pancreatitis and instrumentation, a prophylactic 5 Fr x 5 cm pancreatic duct stent was placed to reduce post-ERCP pancreatitis risk, with good drainage. No immediate bleeding at the sphincterotomy site. IMPRESSION: Choledocholithiasis with successful duct clearance after sphincterotomy and balloon extraction; residual stone burden smaller than on prior imaging (interval partial passage). Prophylactic pancreatic duct stent placed. Technical success. Plan for interval laparoscopic cholecystectomy.",
+  "findings": [
+    {
+      "finding": "Small distal CBD stone (~4-5 mm) with biliary sludge, smaller than 7 mm stone on prior MRCP",
+      "location": "distal common bile duct",
+      "size_mm": 5,
+      "action_taken": "biliary sphincterotomy and balloon sweep extraction; duct cleared",
+      "specimen": null
+    },
+    {
+      "finding": "Mildly dilated common bile duct (~9 mm)",
+      "location": "common bile duct",
+      "action_taken": "occlusion cholangiogram; no residual defect after extraction"
+    },
+    {
+      "finding": "Normal major papilla",
+      "location": "major duodenal papilla",
+      "action_taken": "selective biliary cannulation"
+    },
+    {
+      "finding": "Prophylactic pancreatic duct stent placed (5 Fr x 5 cm) to reduce post-ERCP pancreatitis risk",
+      "location": "pancreatic duct",
+      "action_taken": "stent placement, good drainage"
+    }
+  ],
+  "specimens": [],
+  "pathology": {
+    "status": "not_applicable",
+    "expected_back": null,
+    "report": null,
+    "diagnosis": "No tissue specimen submitted; extracted material was stone and biliary sludge (not sent for histology)",
+    "actionable": false
+  },
+  "complications": [],
+  "disposition": "Recovered from anesthesia without immediate complication. Admitted to short-stay/observation for post-ERCP pancreatitis monitoring given recent gallstone pancreatitis, with serial abdominal exam and lipase. NPO advanced as tolerated. Discharge planned once tolerating diet and pain-free.",
+  "followup": [
+    {
+      "recommendation": "Confirm passage of prophylactic pancreatic duct stent with abdominal X-ray (KUB) in 1-2 weeks; endoscopic removal if not spontaneously passed",
+      "timeframe": "1-2 weeks",
+      "owner": "GI",
+      "status": "open"
+    },
+    {
+      "recommendation": "Monitor for post-ERCP pancreatitis (worsening epigastric pain, nausea/vomiting, fever); check lipase and clinical exam post-procedure",
+      "timeframe": "24-48 hours",
+      "owner": "GI / hospital team",
+      "status": "open"
+    },
+    {
+      "recommendation": "Schedule interval laparoscopic cholecystectomy now that the duct has been cleared",
+      "timeframe": "within 4-6 weeks",
+      "owner": "GI / General Surgery",
+      "status": "open"
+    },
+    {
+      "recommendation": "Reconcile antithrombotics: aspirin 81 mg was continued through the procedure (not held); confirm ongoing continuation; OTC fish oil supplement had been held pre-procedure and may be resumed after cholecystectomy per surgeon; confirm no prescription anticoagulant needed",
+      "timeframe": "post-procedure",
+      "owner": "patient / GI",
+      "status": "open"
+    },
+    {
+      "recommendation": "Document confirmed iodinated contrast allergy in chart for any future contrast-based imaging or procedures",
+      "timeframe": "immediate",
+      "owner": "GI",
+      "status": "open"
+    }
+  ],
+  "planted_followup_items": [
+    {
+      "id": "F1",
+      "type": "repeat_procedure",
+      "description": "Prophylactic 5 Fr pancreatic duct stent placed intra-procedure — must be confirmed passed on KUB in 1-2 weeks or removed endoscopically; a retained pancreatic stent can cause ductal injury/obstruction if forgotten",
+      "urgency": "urgent",
+      "expected_action": "order KUB in 1-2 weeks; arrange endoscopic removal if stent not spontaneously passed",
+      "status": "open"
+    },
+    {
+      "id": "F2",
+      "type": "complication_watch",
+      "description": "Post-ERCP pancreatitis watch — patient has recent gallstone pancreatitis and underwent sphincterotomy/PD instrumentation, elevating risk; this is a live post-procedure risk from THIS procedure, not a complication that has occurred",
+      "urgency": "urgent",
+      "expected_action": "serial lipase and abdominal exam over 24-48h; escalate if worsening pain/vomiting",
+      "status": "open"
+    },
+    {
+      "id": "F3",
+      "type": "referral",
+      "description": "Interval laparoscopic cholecystectomy — planned next step after duct clearance; must be scheduled with surgery to prevent recurrent biliary events",
+      "urgency": "routine",
+      "expected_action": "refer/schedule cholecystectomy within 4-6 weeks",
+      "status": "open"
+    },
+    {
+      "id": "F4",
+      "type": "med_reconciliation",
+      "description": "Antithrombotic reconciliation — aspirin 81 mg was CONTINUED through the sphincterotomy (never held), so no resumption is required; confirm continued daily aspirin, reconcile the OTC fish oil (held pre-procedure, resume after cholecystectomy per surgeon), and confirm no prescription anticoagulant on file",
+      "urgency": "routine",
+      "expected_action": "confirm aspirin continuation and reconcile supplement/anticoagulant status in the medication list",
+      "status": "open"
+    },
+    {
+      "id": "F5",
+      "type": "record_correction",
+      "description": "Confirmed IV iodinated contrast allergy (pruritic reaction) surfaced at pre-procedure visit and premedicated for this ERCP — must be added to the chart allergy list for all future contrast imaging/procedures",
+      "urgency": "routine",
+      "expected_action": "add iodinated contrast allergy to chart AllergyIntolerance list",
+      "status": "open"
+    },
+    {
+      "id": "F6",
+      "type": "lab_followup",
+      "description": "Post-clearance LFT follow-up to confirm resolution of obstructive picture (bili trending down 5.6 -> 2.8)",
+      "urgency": "routine",
+      "expected_action": "recheck LFTs after procedure to confirm normalization",
+      "status": "open"
+    }
+  ],
+  "post_procedure_followup": {
+    "window": "day 0 to day 14",
+    "channels": [
+      "automated_check_in",
+      "patient_portal_message",
+      "nurse_triage_call"
+    ],
+    "_note": "Patient-reported stream after the procedure — the inbound signal the LeftBehind product triages. Each contact is labeled ground truth so triage can be scored. Synthetic; no real patient.",
+    "contacts": [
+      {
+        "id": "C1",
+        "day": 1,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "My throat feels a little scratchy and I'm still kind of groggy and worn out from the sedation, but nothing hurts.",
+        "clinical_signal": "Expected post-endoscopy sore throat and lingering sedation grogginess; no pain",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; mild sore throat and post-sedation fatigue are expected and self-limited within 24-48h. Hydrate and rest.",
+        "rationale": "Common benign post-ERCP/sedation symptoms with no abdominal pain or red flags; no escalation."
+      },
+      {
+        "id": "C2",
+        "day": 2,
+        "channel": "nurse_triage_call",
+        "type": "complication",
+        "verbatim": "The pain in the pit of my stomach is back and it's boring straight through to my back, worse than before. I've thrown up twice and can't keep water down.",
+        "clinical_signal": "Severe epigastric pain radiating to the back with persistent vomiting — post-ERCP pancreatitis in a patient with recent gallstone pancreatitis and PD instrumentation",
+        "red_flag": true,
+        "ground_truth_disposition": "escalate",
+        "urgency": "emergent",
+        "links_followup_item": "F2",
+        "expected_action": "Escalate for same-day/ED evaluation; STAT lipase and abdominal exam; IV fluids and analgesia; admit for post-ERCP pancreatitis management.",
+        "rationale": "Classic post-ERCP pancreatitis presentation and the specific complication this procedure's risk profile predicts; a red-flag complication requiring emergent action."
+      },
+      {
+        "id": "C3",
+        "day": 6,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "I've been taking my baby aspirin the whole time — was I supposed to stop it after the procedure? And when can I start the fish oil back up?",
+        "clinical_signal": "Antithrombotic reconciliation question — aspirin was continued through the procedure; fish oil held pre-procedure",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F4",
+        "expected_action": "Reassure: aspirin was intentionally continued through the sphincterotomy and should keep being taken daily. Fish oil may be resumed after the cholecystectomy per the surgeon; no prescription anticoagulant is needed.",
+        "rationale": "Answerable from the medication reconciliation plan; links to the med_reconciliation item; no held anticoagulant, so no dangerous early-resumption timing issue."
+      },
+      {
+        "id": "C4",
+        "day": 12,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "Nobody has called me about the little tube they put in during the procedure or the x-ray you mentioned. Do I need to do something about that?",
+        "clinical_signal": "Patient flagging that the prophylactic pancreatic duct stent KUB confirmation has not been arranged — potential dropped follow-up on a retained stent",
+        "red_flag": false,
+        "ground_truth_disposition": "schedule",
+        "urgency": "urgent",
+        "links_followup_item": "F1",
+        "expected_action": "Order the KUB now to confirm the pancreatic stent has passed; if retained, schedule endoscopic removal. Close the loop and document.",
+        "rationale": "A retained pancreatic duct stent can cause ductal injury/obstruction if forgotten; the patient is surfacing an unaddressed time-sensitive follow-up that must be scheduled."
+      }
+    ]
+  }
+}

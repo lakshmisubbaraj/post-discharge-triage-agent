@@ -1,0 +1,100 @@
+{
+  "id": "gi-synth-0040::proc-result",
+  "_synthetic": true,
+  "_note": "MOCK procedure result. No real patient. For PreChart/LeftBehind development/eval.",
+  "patient_id": "gi-synth-0040",
+  "procedure": {
+    "name": "EGD (esophagogastroduodenoscopy) + Colonoscopy",
+    "code": {"system": "http://snomed.info/sct", "code": "1919006", "display": "Esophagogastroduodenoscopy (procedure)"},
+    "date": "2026-08-05T07:40:00-07:00",
+    "indication": "Iron-deficiency anemia (Hgb 9.6, ferritin 11) with new melena — evaluate for GI bleeding source",
+    "sedation": "General anesthesia with endotracheal intubation, anesthesiologist-directed. Difficult-airway precautions: awake video laryngoscopy (GlideScope) with bougie, given documented Cormack-Lehane grade 3 (2022), untreated severe OSA, and class III obesity (BMI 54). Weekly semaglutide held 3 weeks pre-procedure; extended clear-liquid diet and prolonged fast; point-of-care gastric ultrasound day-of showed empty antrum. Airway secured on first attempt with video laryngoscopy.",
+    "prep_quality": "Colonoscopy: Boston Bowel Prep Scale 7/9 (right 2, transverse 2, left 3) — adequate",
+    "extent_reached": "EGD: second/third portion of duodenum. Colonoscopy: cecum (confirmed by appendiceal orifice and ileocecal valve); terminal ileum intubated.",
+    "withdrawal_time_min": 11,
+    "status": "completed"
+  },
+  "procedure_report": "PROCEDURE: EGD followed by colonoscopy under general anesthesia with difficult-airway precautions. INDICATION: iron-deficiency anemia with new melena. EGD FINDINGS: The esophagus was normal with a normal Z-line; no varices. In the gastric antrum a single 15 mm clean-based to fibrin-covered ulcer was identified along the lesser curvature with an adherent clot; after clot washout a non-bleeding visible vessel (Forrest IIa) was seen. Hemostasis achieved with epinephrine injection (1:10,000) and placement of two through-the-scope hemoclips; no active bleeding on completion. The ulcer margins were irregular and were biopsied (4 samples) to exclude malignancy. Gastric body/antral mucosal biopsies obtained for H. pylori. The duodenal bulb and second/third portions were normal. COLONOSCOPY FINDINGS: The colonoscope was advanced to the cecum; terminal ileum normal. A single 6 mm sessile polyp in the ascending colon was removed by cold snare and retrieved. Scattered non-bleeding diverticula in the sigmoid. No colonic source of bleeding or angioectasia identified. IMPRESSION: 15 mm antral gastric ulcer with non-bleeding visible vessel (Forrest IIa) — endoscopic hemostasis performed; ulcer biopsied to exclude malignancy. H. pylori testing pending. 6 mm ascending colon polyp removed. Diverticulosis. Melena attributed to the gastric ulcer. Pathology pending.",
+  "findings": [
+    {"finding": "15 mm antral gastric ulcer, lesser curvature, non-bleeding visible vessel (Forrest IIa), irregular margins", "location": "gastric antrum", "size_mm": 15, "action_taken": "epinephrine injection + 2 hemoclips (hemostasis achieved); margin biopsies x4 to exclude malignancy", "specimen": "A"},
+    {"finding": "Gastric mucosal biopsies for H. pylori", "location": "gastric antrum/body", "action_taken": "biopsy", "specimen": "B"},
+    {"finding": "6 mm sessile polyp", "location": "ascending colon", "size_mm": 6, "action_taken": "cold snare polypectomy, retrieved", "specimen": "C"},
+    {"finding": "Diverticulosis, no stigmata of bleeding", "location": "sigmoid colon", "action_taken": "none"}
+  ],
+  "specimens": [
+    {"id": "A", "site": "gastric antral ulcer margins", "type": "biopsy (malignancy exclusion)"},
+    {"id": "B", "site": "gastric antrum/body", "type": "biopsy (H. pylori)"},
+    {"id": "C", "site": "ascending colon polyp", "type": "polypectomy"}
+  ],
+  "pathology": {"status": "pending", "expected_back": "2026-08-11", "report": null, "diagnosis": null, "actionable": null},
+  "complications": [],
+  "disposition": "Extubated awake without event; monitored in PACU with extended observation given untreated OSA and class III obesity. Admitted overnight for observation of the recently bleeding gastric ulcer. Hemodynamically stable, Hgb stable. Started on high-dose IV proton pump inhibitor (pantoprazole 80 mg bolus then infusion), transitioning to twice-daily oral PPI. Post-hemostasis and post-polypectomy precautions reviewed.",
+  "followup": [
+    {"recommendation": "Review gastric ulcer margin biopsy pathology (malignancy exclusion) — communicate result and act on it; ulcer margins were irregular", "timeframe": "within 1 week", "owner": "GI", "status": "open"},
+    {"recommendation": "Review H. pylori biopsy result; if positive, treat with eradication therapy and confirm eradication with post-treatment testing", "timeframe": "within 1 week", "owner": "GI", "status": "open"},
+    {"recommendation": "Review ascending colon polyp pathology and set colon surveillance interval", "timeframe": "within 2 weeks", "owner": "GI", "status": "open"},
+    {"recommendation": "Repeat EGD in 8-12 weeks to confirm gastric ulcer healing and re-biopsy if not fully healed (mandatory for gastric ulcer)", "timeframe": "8-12 weeks", "owner": "GI", "status": "open"},
+    {"recommendation": "Continue twice-daily PPI; monitor for rebleeding (hematemesis, recurrent melena, lightheadedness); recheck CBC", "timeframe": "ongoing / 48-72 hours", "owner": "GI / patient", "status": "open"},
+    {"recommendation": "Resume weekly semaglutide (Wegovy) only after recovery per GI/anesthesia guidance; do not resume during acute ulcer-bleed observation window", "timeframe": "after clinical recovery", "owner": "patient / GI / PCP", "status": "open"},
+    {"recommendation": "Continue oral iron for iron-deficiency anemia; recheck Hgb/ferritin to confirm response now that bleeding source is treated", "timeframe": "4-6 weeks", "owner": "PCP / GI", "status": "open"}
+  ],
+  "planted_followup_items": [
+    {"id": "F1", "type": "critical_result", "description": "Gastric antral ulcer margin biopsies pending to exclude malignancy; margins were irregular. Result must be reviewed and communicated regardless of endoscopic hemostasis.", "urgency": "critical", "expected_action": "review path within 1 week; if dysplasia/malignancy, urgent oncology/surgical referral and staging; if benign, ensure healing follow-up", "status": "open"},
+    {"id": "F2", "type": "repeat_procedure", "description": "Mandatory repeat EGD in 8-12 weeks to document gastric ulcer healing and re-biopsy if unhealed — standard of care for any gastric ulcer to exclude occult malignancy.", "urgency": "urgent", "expected_action": "schedule surveillance EGD with anesthesiology-directed difficult-airway plan", "status": "open"},
+    {"id": "F3", "type": "complication_watch", "description": "Forrest IIa gastric ulcer with non-bleeding visible vessel post-hemostasis — rebleeding risk in first 72 hours from the endoscopic hemostasis performed at this procedure. Continue high-dose PPI; monitor for hematemesis/recurrent melena and hemoglobin drop.", "urgency": "urgent", "expected_action": "inpatient observation, serial CBC, PPI; re-scope if rebleeding", "status": "open"},
+    {"id": "F4", "type": "pending_pathology", "description": "H. pylori biopsy result pending — if positive requires eradication therapy and post-treatment confirmation of eradication.", "urgency": "routine", "expected_action": "review result; treat and confirm eradication if positive", "status": "open"},
+    {"id": "F5", "type": "pending_pathology", "description": "Ascending colon polypectomy pathology pending — drives colon surveillance interval.", "urgency": "routine", "expected_action": "review path; document surveillance interval per histology/size", "status": "open"},
+    {"id": "F6", "type": "med_reconciliation", "description": "Weekly semaglutide (Wegovy) was held 3 weeks pre-procedure (GLP-1, not an anticoagulant/antiplatelet) and remains held during acute ulcer-bleed observation; resumption timing must be actively decided and communicated.", "urgency": "routine", "expected_action": "confirm safe resumption timing with patient after recovery; reconcile on active med list", "status": "open"},
+    {"id": "F7", "type": "lab_followup", "description": "Bleeding source for iron-deficiency anemia identified and treated (gastric ulcer). Anemia workup loop must be closed: recheck Hgb/ferritin to confirm response and continue iron.", "urgency": "routine", "expected_action": "repeat CBC/iron studies in 4-6 weeks; escalate if no response", "status": "open"},
+    {"id": "F8", "type": "referral", "description": "Incidental but active safety issue surfaced at pre-procedure: untreated severe OSA (AHI 42, CPAP declined) plus class III obesity and known difficult airway. Relevant to any future sedation/anesthesia and overall health.", "urgency": "routine", "expected_action": "re-refer to sleep medicine / reinforce OSA treatment; keep difficult-airway flag active", "status": "open"}
+  ],
+  "post_procedure_followup": {
+    "window": "day 0 to day 14",
+    "channels": ["automated_check_in", "patient_portal_message", "nurse_triage_call"],
+    "_note": "Patient-reported stream after the procedure — the inbound signal the LeftBehind product triages. Each contact is labeled ground truth so triage can be scored. Synthetic; benign_only profile (uneventful recovery).",
+    "contacts": [
+      {
+        "id": "C1",
+        "day": 1,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "My throat's kind of raw and I feel really gassy and bloated. Is that normal after all this?",
+        "clinical_signal": "Expected post-intubation/EGD sore throat plus colonoscopy insufflation bloating; no bleeding or airway symptoms",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; sore throat (intubation/scope) and gas/bloating (insufflation) are expected and self-limited over 24-48h. Warm fluids, walking. Review return precautions for vomiting blood, black/tarry stools, dizziness.",
+        "rationale": "Common benign post-endoscopy/anesthesia symptoms; no red flag despite the recent ulcer, since no bleeding or hemodynamic signal."
+      },
+      {
+        "id": "C2",
+        "day": 3,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "The hospital told me to skip my weekly Wegovy shot before the scope. When am I allowed to take it again? And any news on the biopsy?",
+        "clinical_signal": "Patient asking about resuming held semaglutide and status of pending malignancy-exclusion/H. pylori pathology",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F6",
+        "expected_action": "Answer from the plan: continue holding weekly semaglutide during the acute ulcer-bleed recovery window; GI/PCP will confirm the exact restart date after recovery. Advise pathology is pending (expected ~2026-08-11); the team will call with the ulcer-margin and H. pylori results and next steps.",
+        "rationale": "Fully answerable from the record; maps to the med_reconciliation item (F6) for semaglutide restart timing, with pathology status (F1/F4) addressed informationally."
+      },
+      {
+        "id": "C3",
+        "day": 6,
+        "channel": "patient_portal_message",
+        "type": "question",
+        "verbatim": "Can I go back to my regular diet now, and should I keep taking the iron pills you started me on?",
+        "clinical_signal": "Diet advancement question and confirmation to continue oral iron for iron-deficiency anemia workup",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": "F7",
+        "expected_action": "Advise gradual return to regular diet as tolerated; continue twice-daily PPI and continue oral iron as directed. Recheck Hgb/ferritin in 4-6 weeks to confirm response. Reinforce return precautions for hematemesis, recurrent melena, or lightheadedness.",
+        "rationale": "Answerable self-care/plan question; links to the anemia lab-follow-up item (F7). No warning features reported."
+      }
+    ]
+  }
+}

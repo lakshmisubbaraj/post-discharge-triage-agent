@@ -22,16 +22,23 @@ from flask import Blueprint, jsonify, request
 
 from extensions import db
 from models import Patient
-from services import triage_service
+from services import call_service, triage_service
 
 bp = Blueprint("tool", __name__, url_prefix="/api")
+
+
+def _latest_check_in(patient):
+    encounter = patient.encounters[0] if patient.encounters else None
+    if encounter and encounter.check_ins:
+        return encounter.check_ins[-1]  # most recent call
+    return None
 
 
 def _serialize_patient(patient):
     """Flatten a Patient + its latest encounter/check-in/result into the
     single object shape the frontend expects."""
     encounter = patient.encounters[0] if patient.encounters else None
-    check_in = encounter.check_ins[0] if (encounter and encounter.check_ins) else None
+    check_in = _latest_check_in(patient)
     result = check_in.triage_result if check_in else None
 
     data = patient.to_dict()
@@ -42,6 +49,12 @@ def _serialize_patient(patient):
         data["encounterId"] = encounter.id
     if check_in:
         data["transcript"] = check_in.transcript
+        data["callStatus"] = check_in.status
+        data["callMode"] = check_in.mode
+    else:
+        data["transcript"] = []
+        data["callStatus"] = "not_called"
+        data["callMode"] = None
     if result:
         data["triage"] = result.to_dict()
     return data
@@ -67,6 +80,65 @@ def get_patient(slug):
     if patient is None:
         return jsonify(error="patient not found"), 404
     return jsonify(_serialize_patient(patient))
+
+
+@bp.post("/patients/<slug>/call")
+def start_call(slug):
+    """Tool: start a voice check-in call to the patient's phone.
+
+    Uses ElevenLabs (real phone call) when credentials are configured,
+    otherwise runs a simulated call that streams a canned transcript.
+    Returns: { checkInId, status, mode }
+    """
+    patient = Patient.query.filter_by(slug=slug).first()
+    if patient is None:
+        return jsonify(error="patient not found"), 404
+    if not patient.encounters:
+        return jsonify(error="patient has no encounter on file"), 400
+
+    live = call_service.elevenlabs_configured()
+    if live and not patient.phone:
+        return jsonify(error="patient has no phone number on file"), 400
+
+    existing = _latest_check_in(patient)
+    if existing and existing.status == "in_progress":
+        return jsonify(error="a call is already in progress for this patient"), 409
+
+    try:
+        check_in = call_service.start_call(patient)
+    except RuntimeError as exc:
+        return jsonify(error=str(exc)), 502
+
+    return jsonify(
+        checkInId=check_in.id, status=check_in.status, mode=check_in.mode
+    ), 201
+
+
+@bp.get("/patients/<slug>/call")
+def call_status(slug):
+    """Poll the latest call for a patient: live transcript + status.
+
+    The frontend hits this every couple of seconds during a call. For live
+    ElevenLabs calls this also pulls the newest transcript from their API.
+    Returns: { status, mode, transcript, triage? }
+    """
+    patient = Patient.query.filter_by(slug=slug).first()
+    if patient is None:
+        return jsonify(error="patient not found"), 404
+
+    check_in = _latest_check_in(patient)
+    if check_in is None:
+        return jsonify(status="not_called", transcript=[], triage=None)
+
+    if check_in.mode == "live":
+        check_in = call_service.refresh_live_call(check_in)
+
+    return jsonify(
+        status=check_in.status,
+        mode=check_in.mode,
+        transcript=check_in.transcript or [],
+        triage=check_in.triage_result.to_dict() if check_in.triage_result else None,
+    )
 
 
 @bp.post("/triage")

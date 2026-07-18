@@ -1,0 +1,105 @@
+{
+  "id": "gi-synth-0044::proc-result",
+  "_synthetic": true,
+  "_note": "MOCK procedure result. No real patient. For PreChart development/eval.",
+  "patient_id": "gi-synth-0044",
+  "procedure": {
+    "name": "Endoscopic submucosal dissection (ESD), gastric antrum",
+    "code": {"system": "http://snomed.info/sct", "code": "726553002", "display": "Endoscopic submucosal dissection (procedure)"},
+    "date": "2026-07-16T08:00:00-07:00",
+    "indication": "Gastric antral adenoma with biopsy-proven high-grade dysplasia; EUS without submucosal invasion — en-bloc endoscopic resection",
+    "sedation": "General anesthesia with endotracheal intubation for airway protection",
+    "prep_quality": "N/A (upper GI); stomach adequately emptied after overnight fast",
+    "extent_reached": "Gastric antrum lesion resected; scope advanced to second portion of duodenum, remainder of stomach and esophagus surveyed",
+    "withdrawal_time_min": null,
+    "status": "completed"
+  },
+  "procedure_report": "PROCEDURE: Endoscopic submucosal dissection (ESD) of gastric antral lesion. INDICATION: 25 mm flat, slightly depressed gastric antral lesion with biopsy-proven high-grade dysplasia; staging EUS without submucosal invasion or perigastric lymphadenopathy. ANTITHROMBOTIC HOLD: Low-dose aspirin (primary prevention) held per high-bleed-risk resection protocol without cardiology clearance; OTC fish oil (omega-3) and OTC ibuprofen held pre-procedure; amlodipine continued through morning of procedure. Pre-procedure labs acceptable (Hgb 13.9, plt 244, INR 1.0). SEDATION: general anesthesia with endotracheal intubation. FINDINGS: The esophagus and gastroesophageal junction were normal. In the gastric antrum, the previously marked 25 mm flat, slightly depressed lesion with abnormal narrow-band-imaging surface pattern was identified. Circumferential marking dots were placed 5 mm outside the lesion margin. Submucosal injection of a lifting solution with indigo carmine produced a good lift with no non-lifting sign. Circumferential mucosal incision followed by submucosal dissection was performed, achieving en-bloc resection of the lesion on a single specimen. The resection bed was inspected; several visible vessels were coagulated prophylactically with coagulation forceps. No perforation. No active bleeding at completion. The specimen was retrieved, pinned, and sent to pathology for en-bloc margin assessment. The remainder of the stomach and the examined duodenum were normal. IMPRESSION: Successful en-bloc ESD of gastric antral high-grade dysplasia lesion; no immediate complication. Pathology pending for depth of invasion and lateral/deep margin status.",
+  "findings": [
+    {"finding": "25 mm flat, slightly depressed antral lesion with abnormal NBI surface pattern, resected en-bloc", "location": "gastric antrum", "size_mm": 25, "action_taken": "endoscopic submucosal dissection, en-bloc, specimen retrieved", "specimen": "A"},
+    {"finding": "Resection bed with visible vessels, no active bleeding", "location": "gastric antrum", "action_taken": "prophylactic coagulation of visible vessels"},
+    {"finding": "Normal esophagus, remaining stomach, and examined duodenum", "location": "upper GI tract", "action_taken": "none"}
+  ],
+  "specimens": [{"id": "A", "site": "gastric antral lesion", "type": "ESD en-bloc resection specimen"}],
+  "pathology": {"status": "pending", "expected_back": "2026-07-21", "report": null, "diagnosis": null, "actionable": null},
+  "complications": [],
+  "disposition": "Admitted for overnight observation per high-bleed-risk gastric ESD protocol. NPO overnight, IV proton pump inhibitor, advance to clear liquids in AM if stable. Delayed-bleeding and perforation precautions reviewed.",
+  "followup": [
+    {"recommendation": "Review ESD specimen pathology (depth of invasion, lateral and deep margin status, lymphovascular invasion) to determine curative vs non-curative resection and need for further therapy", "timeframe": "within 1 week", "owner": "GI", "status": "open"},
+    {"recommendation": "Delayed post-ESD bleeding watch — counsel on melena/hematemesis; high-bleed-risk gastric resection", "timeframe": "2 weeks", "owner": "patient / GI", "status": "open"},
+    {"recommendation": "Resume held medications (aspirin, fish oil, ibuprofen) only after confirmed hemostasis per post-ESD protocol; reassess NSAID need with PCP", "timeframe": "per protocol after hemostasis confirmed", "owner": "GI / PCP", "status": "open"},
+    {"recommendation": "Continue high-dose PPI to promote artificial ulcer healing; plan surveillance EGD", "timeframe": "surveillance EGD in 3-6 months", "owner": "GI", "status": "open"},
+    {"recommendation": "Add amlodipine 5 mg daily to reconciled medication list; continue for hypertension", "timeframe": "ongoing", "owner": "GI / PCP", "status": "open"}
+  ],
+  "planted_followup_items": [
+    {"id": "F1", "type": "pending_pathology", "description": "ESD en-bloc specimen pathology pending — depth of invasion and lateral/deep margin status determine whether resection was curative; a positive deep margin or unsuspected submucosal invasion would upstage to carcinoma and trigger oncology/surgical referral", "urgency": "critical", "expected_action": "review margins and depth on final pathology, communicate result to patient, escalate to multidisciplinary/surgical review if non-curative", "status": "open"},
+    {"id": "F2", "type": "complication_watch", "description": "Delayed post-ESD bleeding and perforation watch after high-bleed-risk gastric antral resection", "urgency": "urgent", "expected_action": "counsel patient on melena/hematemesis/abdominal pain; ensure access to care; assess before restarting any antithrombotic/NSAID", "status": "open"},
+    {"id": "F3", "type": "med_resume", "description": "Held aspirin (primary prevention, antiplatelet) plus OTC fish oil and OTC ibuprofen must be resumed only after confirmed hemostasis; NSAID need should be reassessed given post-ESD ulcer", "urgency": "routine", "expected_action": "confirm hemostasis then give explicit resume-or-hold instructions; coordinate NSAID alternative with PCP", "status": "open"},
+    {"id": "F4", "type": "repeat_procedure", "description": "Surveillance EGD to assess artificial ulcer healing and exclude residual/recurrent dysplasia", "urgency": "routine", "expected_action": "schedule surveillance EGD in 3-6 months on high-dose PPI", "status": "open"},
+    {"id": "F5", "type": "surveillance_interval", "description": "Post-resection gastric neoplasia surveillance interval to be set once curative status confirmed by pathology", "urgency": "routine", "expected_action": "document surveillance interval after final pathology", "status": "open"},
+    {"id": "F6", "type": "med_reconciliation", "description": "Medication reconciliation gap: amlodipine 5 mg daily taken but absent from chart medication list; undocumented OTC ibuprofen also identified", "urgency": "routine", "expected_action": "add amlodipine and OTC ibuprofen to reconciled medication list; continue amlodipine for hypertension", "status": "open"}
+  ],
+  "post_procedure_followup": {
+    "window": "day 0 to day 14",
+    "channels": ["automated_check_in", "patient_portal_message", "nurse_triage_call"],
+    "_note": "Patient-reported stream after the procedure — the inbound signal the LeftBehind product triages. Each contact is labeled ground truth so triage can be scored.",
+    "contacts": [
+      {
+        "id": "C1",
+        "day": 1,
+        "channel": "automated_check_in",
+        "type": "complaint",
+        "verbatim": "My throat is a bit scratchy from the breathing tube and my upper belly feels sore where they worked. Nothing bad, just achy.",
+        "clinical_signal": "Expected post-intubation sore throat and mild epigastric soreness at the ESD resection site; no bleeding or systemic signs",
+        "red_flag": false,
+        "ground_truth_disposition": "reassure_selfcare",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Reassure; sore throat from intubation and mild epigastric discomfort after ESD are expected and self-limited. Advise soft diet, prescribed PPI, and to call for melena, hematemesis, severe/worsening pain, or fever.",
+        "rationale": "Benign expected symptoms after ESD under general anesthesia; no red-flag features."
+      },
+      {
+        "id": "C2",
+        "day": 3,
+        "channel": "patient_portal_message",
+        "type": "complication",
+        "verbatim": "My knee was killing me so I went back on my ibuprofen yesterday, and I restarted the baby aspirin too since I felt fine. Is that okay?",
+        "clinical_signal": "TRIAGE TRAP (med-timing confusion): patient self-resumed NSAID and antiplatelet on day 2 after a high-bleed-risk gastric ESD, before hemostasis window per protocol — raises delayed post-ESD bleeding risk",
+        "red_flag": true,
+        "ground_truth_disposition": "escalate",
+        "urgency": "urgent",
+        "links_followup_item": "F3",
+        "expected_action": "Escalate to GI same day: instruct patient to STOP the ibuprofen and aspirin immediately, reinforce they must remain held until hemostasis is confirmed per post-ESD protocol, counsel on delayed-bleeding warning signs, and arrange an NSAID alternative (acetaminophen) for knee pain with PCP.",
+        "rationale": "Early self-resumption of an NSAID plus an antiplatelet after high-bleed-risk ESD is a live bleeding hazard; benign-sounding question but requires prompt clinical counseling, so it escalates."
+      },
+      {
+        "id": "C3",
+        "day": 7,
+        "channel": "automated_check_in",
+        "type": "question",
+        "verbatim": "I've been sticking to soft foods. When can I eat normally again and go back to my usual meals?",
+        "clinical_signal": "Routine diet-advancement question; no symptoms of bleeding or perforation reported",
+        "red_flag": false,
+        "ground_truth_disposition": "answer_info",
+        "urgency": "routine",
+        "links_followup_item": null,
+        "expected_action": "Answer from discharge instructions: advance diet gradually per post-ESD protocol while continuing high-dose PPI; return precautions for melena, hematemesis, or severe pain reviewed.",
+        "rationale": "Answerable informational question with no clinical red flags."
+      },
+      {
+        "id": "C4",
+        "day": 12,
+        "channel": "patient_portal_message",
+        "type": "complaint",
+        "verbatim": "It's been almost two weeks and no one ever called me about the results from the tissue they removed. I'm anxious about whether it was cancer. Did something get lost?",
+        "clinical_signal": "DROPPED BALL: pending ESD pathology (curative vs non-curative margins/depth) never communicated to the patient within the expected window",
+        "red_flag": false,
+        "ground_truth_disposition": "schedule",
+        "urgency": "routine",
+        "links_followup_item": "F1",
+        "expected_action": "Close the loop: retrieve the ESD margin/depth pathology, have GI call the patient with the result, and schedule follow-up to review curative status and surveillance interval; if non-curative, arrange multidisciplinary/surgical referral.",
+        "rationale": "Flags a dropped pathology follow-up on the critical pending_pathology item (F1); the result must be located and communicated, and follow-up scheduled."
+      }
+    ]
+  }
+}
