@@ -1,0 +1,21 @@
+# Environment / secrets
+.env
+.env.local
+*.key
+
+# Python
+venv/
+__pycache__/
+*.pyc
+.mypy_cache/
+
+# Node
+node_modules/
+npm-debug.log*
+
+# OS
+.DS_Store
+
+# Editors
+.vscode/
+.idea/
