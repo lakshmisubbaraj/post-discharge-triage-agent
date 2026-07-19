@@ -10,6 +10,7 @@ Endpoints
     GET  /api/patients/<slug>          -- one patient + encounter + check-in + result
     POST /api/triage                   -- score a transcript -> disposition (Claude Sonnet 5)
     POST /api/draft-note               -- draft a chart note from a disposition
+    POST /api/gi/analyze               -- live Agent 2 + Agent 3 for a GI voice check-in transcript
 
 NOTE: /triage and /draft-note now call the real triage_service.analyze_transcript_with_claude()
 (Sonnet 5, FHIR-grounded, 6-way disposition taxonomy) instead of the old
@@ -17,12 +18,18 @@ analyze_transcript() keyword stub. This changes /triage's request contract:
 it now requires a "patient" object (with an "id"/slug) in addition to
 "transcript", since the real agent looks up the patient's full FHIR record by
 slug rather than scoring the transcript in isolation.
+
+/api/gi/analyze is a separate, parallel path for the 7 GI demo patients in
+index.html's standalone frontend (not backed by the Patient/Encounter DB
+tables at all — those patients only exist as a JS array). It runs the same
+Agent 2 / Agent 3 prompts against a live ElevenLabs call's captured
+transcript instead of a canned one. See services/gi_live_service.py.
 """
 from flask import Blueprint, jsonify, request
 
 from extensions import db
 from models import Patient
-from services import call_service, triage_service
+from services import call_service, gi_live_service, triage_service
 
 bp = Blueprint("tool", __name__, url_prefix="/api")
 
@@ -261,3 +268,46 @@ def draft_note():
 
     note = triage_service.draft_note(patient, encounter, result)
     return jsonify(note=note, triage=result)
+
+
+@bp.post("/gi/analyze")
+def gi_analyze():
+    """Tool: run live Agent 2 (triage) + Agent 3 (note) over a just-captured
+    ElevenLabs voice check-in transcript for one of the 7 GI demo patients in
+    index.html's standalone frontend.
+
+    These patients are NOT in the Patient/Encounter DB — they're a plain JS
+    array in index.html — so this endpoint takes the transcript directly
+    rather than looking anything up via the DB-backed /triage or /draft-note
+    endpoints above.
+
+    Body: {
+      "slug": "helen",
+      "transcript": [["AGENT", "..."], ["PT", "..."], ...],
+      "patient": {"name": "...", "age": 76, "gender": "female",
+                  "discharge_dx": "...", "days_since_discharge": 6}
+        -- optional, only used as a fallback context source for patients
+           with no backing synthetic-gi-data record (e.g. jordan_test)
+    }
+    Returns: { triage: {severity, label, rationale, flags},
+               note: {subjective, assessment, plan, action_items},
+               groundedInFhir: bool }
+    """
+    payload = request.get_json(silent=True) or {}
+    slug = payload.get("slug")
+    transcript = payload.get("transcript")
+    patient_info = payload.get("patient") or {}
+
+    if not slug:
+        return jsonify(error="'slug' is required"), 400
+    if not isinstance(transcript, list) or not transcript:
+        return jsonify(error="'transcript' (non-empty list of [speaker, line]) is required"), 400
+
+    try:
+        triage_result, note_result, grounded = gi_live_service.analyze_live_call(
+            slug, transcript, patient_info
+        )
+    except Exception as e:  # network error, missing API key, bad slug, etc.
+        return jsonify(error=f"live GI analysis failed: {e}"), 502
+
+    return jsonify(triage=triage_result, note=note_result, groundedInFhir=grounded)

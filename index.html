@@ -399,14 +399,25 @@ let liveNote = {};       // slug -> current (possibly edited) note object
 // demo.html uses, so a demo always completes.
 // ---------------------------------------------------------------------
 const ELEVENLABS_AGENT_ID = "agent_3901kxvhbaadf6y9kwc413n03v2g";
-const API_BASE = "http://127.0.0.1:5001"; // optional — only for /api/config override
+const API_BASE = "http://127.0.0.1:5001"; // used for /api/config AND the live-analysis endpoint below
 
 let startVoiceSession = null; // resolved function: (options) => Promise<conversation instance>
 let voiceReady = false;
 let activeConversation = null; // the live conversation instance, while a call is in progress
 let voiceActiveSlug = null;
-let voiceTranscript = [];      // real [who, line] pairs captured from onMessage during the live call
+let voiceTranscript = [];      // committed real [who, line] pairs captured from onMessage
 let ELEVENLABS_RESOLVED_AGENT_ID = ELEVENLABS_AGENT_ID;
+
+// onMessage fires more than once per spoken turn (tentative/interim
+// transcriptions before the final one, plus the agent's own streamed reply
+// chunks) — without buffering, that shows up as repeated/fragmented lines
+// from the same speaker. voiceBuffer holds the not-yet-committed line for
+// the CURRENT speaker; a new message from the same speaker replaces it
+// in place (both in voiceBufferDiv on screen and once committed to
+// voiceTranscript), and it's only pushed into voiceTranscript when the
+// speaker changes or the call ends.
+let voiceBuffer = null;    // { who, message } | null
+let voiceBufferDiv = null; // the DOM node currently showing voiceBuffer, if any
 
 async function setupVoiceWidget() {
   let agentId = ELEVENLABS_AGENT_ID;
@@ -597,6 +608,8 @@ function beginVoiceCall(slug) {
   selectedSlug = slug;
   voiceActiveSlug = slug;
   voiceTranscript = [];
+  voiceBuffer = null;
+  voiceBufferDiv = null;
   ++activeCallToken;
   renderQueue();
 
@@ -645,12 +658,27 @@ function beginVoiceCall(slug) {
     onMessage: ({ message, source }) => {
       if (!message) return;
       const who = (source === "user" || source === "human") ? "PT" : "AGENT";
-      voiceTranscript.push([who, message]);
+      if (voiceBuffer && voiceBuffer.who === who) {
+        // Same speaker as the in-progress line — this is a refinement
+        // (interim -> final transcript, or a streamed continuation), not a
+        // new turn. Replace in place rather than appending a new line.
+        voiceBuffer.message = message;
+        if (voiceBufferDiv) {
+          voiceBufferDiv.innerHTML = `<span class="who">${who}</span>${message}`;
+        }
+        return;
+      }
+      // Speaker changed — commit whatever was buffered, then start fresh.
+      if (voiceBuffer) voiceTranscript.push([voiceBuffer.who, voiceBuffer.message]);
+      voiceBuffer = { who, message };
       if (area) {
         const div = document.createElement("div");
         div.className = "t-line " + (who === "PT" ? "pt" : "agent");
         div.innerHTML = `<span class="who">${who}</span>${message}`;
         area.appendChild(div);
+        voiceBufferDiv = div;
+      } else {
+        voiceBufferDiv = null;
       }
     },
     onDisconnect: () => {
@@ -680,16 +708,24 @@ function beginVoiceCall(slug) {
   });
 }
 
-// When the voice call ends, reveal the REAL transcript we captured, then the
-// pre-computed Agent 2 (reasoning) / Agent 3 (note) reference analysis for
-// this patient's case — labeled as such, since live Claude analysis of the
-// just-recorded conversation isn't wired up yet.
+// When the voice call ends, reveal the REAL transcript we captured, then send
+// it to the backend for a REAL Agent 2 (triage) + Agent 3 (note) pass — see
+// runLiveAnalysis(). Falls back to this patient's pre-computed reference
+// analysis, clearly labeled as such, if the backend call fails for any
+// reason (no backend running, no API key, network error, etc.).
 function finishVoiceCall(slug) {
   if (voiceActiveSlug !== slug) return;
   voiceActiveSlug = null;
   if (activeConversation) {
     try { activeConversation.endSession(); } catch (e) { /* already ended */ }
     activeConversation = null;
+  }
+
+  // Flush whatever line was still being refined when the call ended.
+  if (voiceBuffer) {
+    voiceTranscript.push([voiceBuffer.who, voiceBuffer.message]);
+    voiceBuffer = null;
+    voiceBufferDiv = null;
   }
 
   const p = patientBy(slug);
@@ -702,7 +738,6 @@ function finishVoiceCall(slug) {
   }
 
   p.transcript = capturedTranscript; // persist the real transcript on the record
-  p.calledViaVoice = true;
   revealAfterVoiceCall(p);
 }
 
@@ -765,7 +800,53 @@ function revealAfterVoiceCall(p) {
     </div>
   `;
   setStage(2);
-  setTimeout(() => { if (myToken === activeCallToken) showTriage(p, myToken); }, 500);
+  runLiveAnalysis(p, myToken);
+}
+
+// Sends the just-captured real transcript to the backend so Agent 2 (Claude
+// Sonnet 5 triage) and Agent 3 (Claude Haiku note) reason over what was
+// ACTUALLY said, instead of showing this patient's pre-baked reference case.
+// Requires the Flask backend running with an ANTHROPIC_API_KEY (see
+// services/gi_live_service.py + POST /api/gi/analyze in routes/tool.py). If
+// that call fails for any reason — backend not running, no API key, network
+// error, timeout — this falls back to the pre-baked reference triage/note
+// already on the patient record, clearly labeled as such by showTriage().
+async function runLiveAnalysis(p, myToken) {
+  const status = document.getElementById("call-status");
+  if (status) status.innerHTML = "&#9679; Live call completed &mdash; Claude is analyzing the actual conversation&hellip;";
+
+  let usedLive = false;
+  try {
+    const res = await fetch(`${API_BASE}/api/gi/analyze`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        slug: p.slug,
+        transcript: p.transcript,
+        patient: {
+          name: p.name, age: p.age, gender: p.gender,
+          discharge_dx: p.discharge_dx, days_since_discharge: p.days_since_discharge,
+        },
+      }),
+      signal: AbortSignal.timeout(45000),
+    });
+    if (!res.ok) throw new Error(`backend returned HTTP ${res.status}`);
+    const result = await res.json();
+    if (result.error) throw new Error(result.error);
+    p.triage = result.triage;
+    p.note = result.note;
+    delete liveNote[p.slug]; // drop any stale cached note so showNote() picks up the new one
+    usedLive = true;
+  } catch (e) {
+    console.warn("Live Claude analysis unavailable — showing this patient's reference analysis instead. Start the Flask backend (python app.py) with ANTHROPIC_API_KEY set to enable real analysis.", e);
+    // p.triage / p.note are left as whatever pre-baked reference values were
+    // already on the record.
+  }
+
+  if (myToken !== activeCallToken) return; // user navigated away while we were waiting
+  p.calledViaVoice = true;       // controls the Agent 1 "live voice" transcript badge
+  p.liveAnalysisUsed = usedLive; // controls whether showTriage shows the reference-analysis warning
+  showTriage(p, myToken);
 }
 
 // Three-stage "o --> o --> o" progress indicator shown under the patient
@@ -847,7 +928,8 @@ function beginSimulatedCall(slug) {
   `;
   document.getElementById("section-transcript").classList.add("show");
   setStage(1);
-  p.calledViaVoice = false; // scripted path — the transcript below is the canned demo one
+  p.calledViaVoice = false;   // scripted path — the transcript below is the canned demo one
+  p.liveAnalysisUsed = false; // and Agent 2/3 below are this patient's pre-baked reference case
 
   const area = document.getElementById("transcript-area");
   let i = 0;
@@ -876,9 +958,12 @@ function showTriage(p, myToken) {
   if (myToken !== activeCallToken) return;
   const t = p.triage;
   const tierVar = TIER_VARS[t.severity] || "--muted";
-  const referenceNote = p.calledViaVoice
-    ? `<div style="font-size:12px;color:var(--muted);margin:-2px 0 10px;">⚠️ Reference analysis for this patient's case — not yet re-derived from the live call's actual transcript above (that pipeline isn't wired up yet).</div>`
-    : "";
+  let referenceNote = "";
+  if (p.calledViaVoice && p.liveAnalysisUsed) {
+    referenceNote = `<div style="font-size:12px;color:#166534;margin:-2px 0 10px;">✓ Live analysis — Claude reasoned over the actual call transcript above.</div>`;
+  } else if (p.calledViaVoice && !p.liveAnalysisUsed) {
+    referenceNote = `<div style="font-size:12px;color:var(--muted);margin:-2px 0 10px;">⚠️ Reference analysis for this patient's case — the backend live-analysis call didn't succeed (check the console / that the Flask backend is running with an API key), so this isn't derived from the transcript above.</div>`;
+  }
   document.getElementById("tier-pill").innerHTML =
     `<span class="tier-pill" style="background:var(${tierVar})">${TIER_LABELS[t.severity] || t.severity}</span>
      <div style="font-size:13.5px;color:var(--muted);margin:-4px 0 10px;">${t.label}</div>${referenceNote}`;
