@@ -1,605 +1,1103 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Post-Discharge Triage Agent — Demo</title>
+<meta charset="UTF-8">
+<title>Post Procedure Follow-Up — Voice Agent</title>
 <style>
   :root {
-    --bg: #f5f7fa;
-    --panel: #ffffff;
-    --border: #e2e6ed;
-    --text: #1c2530;
-    --muted: #5b6774;
-    --brand: #2b5aa8;
-    --brand-dark: #1e3f7a;
-    --red-bg: #fdecec; --red-text: #a3231d; --red-border: #f3b9b6;
-    --orange-bg: #fdf1e2; --orange-text: #9a5b00; --orange-border: #f2cf9a;
-    --yellow-bg: #fdf8e3; --yellow-text: #7a6100; --yellow-border: #f0e2a0;
-    --green-bg: #e9f7ee; --green-text: #1e7d42; --green-border: #b3e2c3;
+    --brand: #0f4c81;
+    --brand-light: #e8f1f8;
+    --bg: #f4f6f9;
+    --ink: #1a2233;
+    --muted: #667085;
+    --ed: #dc2626;
+    --urgent: #ea580c;
+    --callback: #7c3aed;
+    --clinic: #ca8a04;
+    --labs: #0d9488;
+    --routine: #16a34a;
+    --sidebar-w: 300px;
+    --topbar-h: 56px;
   }
   * { box-sizing: border-box; }
   body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-    background: var(--bg);
-    color: var(--text);
+    margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: var(--bg); color: var(--ink); min-height: 100vh;
   }
-  .banner {
-    background: #1e3f7a;
-    color: #fff;
-    padding: 10px 24px;
-    font-size: 13px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .banner b { color: #ffd873; }
-  header {
-    padding: 20px 24px 8px;
-  }
-  header h1 { margin: 0 0 4px; font-size: 22px; }
-  header p { margin: 0; color: var(--muted); font-size: 14px; }
-  .layout {
-    display: grid;
-    grid-template-columns: 340px 1fr;
-    gap: 20px;
-    padding: 16px 24px 32px;
-    align-items: start;
-  }
-  .panel {
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-  }
-  .queue-panel h2 {
-    font-size: 13px;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    color: var(--muted);
-    padding: 14px 16px 8px;
-    margin: 0;
-  }
-  .queue-item {
-    padding: 12px 16px;
-    border-top: 1px solid var(--border);
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-  .queue-item:hover { background: #f8fafc; }
-  .queue-item.active { background: #eef3fb; border-left: 3px solid var(--brand); }
-  .queue-item .name { font-weight: 600; font-size: 14px; }
-  .queue-item .sub { font-size: 12.5px; color: var(--muted); }
-  .badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 11.5px;
-    font-weight: 700;
-    padding: 3px 9px;
-    border-radius: 100px;
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
-    width: fit-content;
-  }
-  .badge.red { background: var(--red-bg); color: var(--red-text); border: 1px solid var(--red-border); }
-  .badge.orange { background: var(--orange-bg); color: var(--orange-text); border: 1px solid var(--orange-border); }
-  .badge.yellow { background: var(--yellow-bg); color: var(--yellow-text); border: 1px solid var(--yellow-border); }
-  .badge.green { background: var(--green-bg); color: var(--green-text); border: 1px solid var(--green-border); }
+  .view { display: none; min-height: 100vh; }
+  .view.active { display: block; }
 
-  .detail-panel { padding: 20px 24px; }
-  .patient-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 16px;
-    margin-bottom: 16px;
+  /* ---------- Landing ---------- */
+  #view-landing {
+    display: none;
+    align-items: center; justify-content: center; min-height: 100vh;
+    background: linear-gradient(135deg, #0f4c81 0%, #1a6fa8 100%);
   }
-  .patient-head h2 { margin: 0 0 4px; font-size: 19px; }
-  .patient-head .meta { color: var(--muted); font-size: 13.5px; line-height: 1.5; }
-  .tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
-  .tag {
-    font-size: 11.5px;
-    background: #eef1f5;
-    color: #444d59;
-    padding: 3px 9px;
-    border-radius: 6px;
+  #view-landing.active { display: flex; }
+  .landing-card {
+    background: white; border-radius: 16px; padding: 48px 44px; width: 380px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.25); text-align: center;
   }
-  .section { margin-bottom: 22px; }
-  .section-title {
-    font-size: 12.5px;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    color: var(--muted);
-    font-weight: 700;
-    margin-bottom: 8px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+  .landing-card h1 { font-size: 26px; margin: 0 0 4px; color: var(--brand); letter-spacing: -0.5px; }
+  .landing-card .subtext { color: var(--muted); font-size: 14px; margin-bottom: 32px; }
+  .landing-card input {
+    width: 100%; padding: 11px 14px; margin-bottom: 12px; border: 1px solid #d0d5dd;
+    border-radius: 8px; font-size: 14px; background: #fafbfc;
   }
-  .stub-tag {
-    font-size: 10px;
-    background: #fff3cd;
-    color: #7a5b00;
-    border: 1px solid #f0e2a0;
-    padding: 1px 7px;
-    border-radius: 100px;
-    text-transform: none;
-    letter-spacing: 0;
-    font-weight: 600;
+  .landing-card input:focus { outline: none; border-color: var(--brand); background: white; }
+  .login-btn {
+    width: 100%; padding: 12px; margin-top: 8px; background: var(--brand); color: white;
+    border: none; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer;
+    transition: background 0.15s;
   }
-  .transcript {
-    background: #fafbfc;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 14px 16px;
-    font-size: 13.5px;
-    line-height: 1.7;
-    max-height: 320px;
+  .login-btn:hover { background: #0c3d68; }
+  .landing-foot { margin-top: 20px; font-size: 12px; color: #98a2b3; }
+
+  /* ---------- Top bar ---------- */
+  .topbar {
+    background: var(--brand); color: white; padding: 0 28px; display: flex;
+    align-items: center; justify-content: space-between; height: var(--topbar-h);
+    position: sticky; top: 0; z-index: 10;
+  }
+  .topbar .brand { font-weight: 700; font-size: 16px; letter-spacing: -0.2px; }
+  .topbar .brand .sub { font-weight: 400; opacity: 0.75; font-size: 12px; margin-left: 10px; }
+  .topbar-right { display: flex; align-items: center; gap: 14px; }
+  .logout-btn {
+    background: rgba(255,255,255,0.15); color: white; border: 1px solid rgba(255,255,255,0.45);
+    padding: 6px 14px; border-radius: 7px; font-size: 12.5px; font-weight: 600; cursor: pointer;
+    transition: background 0.15s;
+  }
+  .logout-btn:hover { background: rgba(255,255,255,0.28); }
+
+  /* ---------- Department select ---------- */
+  #view-department { background: var(--bg); }
+  .dept-wrap { max-width: 780px; margin: 0 auto; padding: 48px 24px 80px; }
+  .dept-wrap h2 { font-size: 20px; margin: 0 0 4px; }
+  .dept-wrap .dept-sub { color: var(--muted); font-size: 13.5px; margin-bottom: 28px; }
+  .dept-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 14px;
+  }
+  .dept-card {
+    background: white; border: 1.5px solid #e4e8ee; border-radius: 10px; padding: 18px 16px;
+    cursor: pointer; transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .dept-card:hover { border-color: var(--brand); box-shadow: 0 2px 10px rgba(16,24,40,0.08); }
+  .dept-card .dept-name { font-size: 14px; font-weight: 600; }
+  .dept-card.disabled { cursor: not-allowed; opacity: 0.55; }
+  .dept-card.disabled:hover { border-color: #e4e8ee; box-shadow: none; }
+  .dept-card .dept-tag {
+    display: inline-block; margin-top: 8px; font-size: 10.5px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.4px; padding: 2px 8px; border-radius: 999px;
+  }
+  .dept-card.enabled .dept-tag { background: var(--brand-light); color: var(--brand); }
+  .dept-card.disabled .dept-tag { background: #eef1f5; color: #98a2b3; }
+
+  /* ---------- Dashboard layout: fixed sidebar + main panel ---------- */
+  .dashboard-layout { display: flex; align-items: flex-start; }
+  .sidebar-queue {
+    width: var(--sidebar-w); flex: 0 0 var(--sidebar-w);
+    position: sticky; top: var(--topbar-h);
+    height: calc(100vh - var(--topbar-h));
     overflow-y: auto;
+    background: white; border-right: 1px solid #e4e8ee;
+    padding: 18px 14px;
   }
-  .transcript .line { margin-bottom: 6px; }
-  .transcript .who { font-weight: 700; margin-right: 4px; }
-  .transcript .agent-who { color: var(--brand-dark); }
-  .transcript .pt-who { color: #444; }
-  mark {
-    background: #ffe1b3;
-    padding: 0 2px;
-    border-radius: 3px;
+  .sidebar-queue h4 {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--muted);
+    margin: 0 0 3px 6px;
   }
-  .disposition-card {
-    border-radius: 8px;
-    padding: 16px 18px;
-    border: 1px solid var(--border);
+  .sidebar-queue .queue-sub { font-size: 11.5px; color: #98a2b3; margin: 0 0 14px 6px; }
+  .queue-row {
+    border-radius: 10px; padding: 11px 12px; margin-bottom: 6px; cursor: pointer;
+    border: 1.5px solid transparent; transition: background 0.12s, border-color 0.12s;
   }
-  .disposition-card.red { background: var(--red-bg); border-color: var(--red-border); }
-  .disposition-card.orange { background: var(--orange-bg); border-color: var(--orange-border); }
-  .disposition-card.yellow { background: var(--yellow-bg); border-color: var(--yellow-border); }
-  .disposition-card.green { background: var(--green-bg); border-color: var(--green-border); }
-  .disposition-title { font-size: 16px; font-weight: 800; margin-bottom: 6px; }
-  .rationale-list { margin: 8px 0 0; padding-left: 18px; font-size: 13.5px; line-height: 1.6; }
-  .note-box {
-    background: #fafbfc;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 14px 16px;
-    font-size: 13.5px;
-    line-height: 1.65;
-    white-space: pre-wrap;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  .queue-row:hover { background: #f7f9fb; }
+  .queue-row.active { background: var(--brand-light); border-color: var(--brand); }
+  .queue-row .qname { font-size: 13.5px; font-weight: 600; margin-bottom: 2px; }
+  .queue-row .qmeta { font-size: 11.5px; color: var(--muted); margin-bottom: 6px; }
+  .queue-status-pill {
+    display: inline-block; font-size: 10.5px; font-weight: 700; padding: 3px 8px;
+    border-radius: 999px; color: white; letter-spacing: 0.2px;
   }
-  footer {
-    padding: 0 24px 28px;
-    color: var(--muted);
-    font-size: 12px;
+  .queue-status-pending { background: #eef1f5; color: var(--muted); }
+  .queue-call-btn {
+    background: var(--brand); color: white; border: none; padding: 5px 12px;
+    border-radius: 6px; font-size: 11.5px; font-weight: 600; cursor: pointer;
   }
-  .loading {
-    padding: 40px 8px;
-    color: var(--muted);
-    font-size: 14px;
+  .queue-call-btn:hover { background: #0c3d68; }
+
+  .main-panel { flex: 1; min-width: 0; padding: 0 0 60px; }
+  .placeholder-panel {
+    display: flex; align-items: center; justify-content: center; height: calc(100vh - var(--topbar-h));
+    color: #98a2b3; font-size: 14px; text-align: center; padding: 0 40px;
   }
-  .badge.none { background: #eef1f5; color: #5b6774; border: 1px solid #d8dee7; }
-  .call-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    background: var(--brand);
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    padding: 9px 16px;
-    font-size: 13.5px;
-    font-weight: 700;
-    cursor: pointer;
+
+  .call-header {
+    background: white; padding: 18px 28px; border-bottom: 1px solid #eef1f5;
   }
-  .call-btn:hover { background: var(--brand-dark); }
-  .call-btn:disabled { background: #9fb2cf; cursor: default; }
-  .live-tag {
-    font-size: 10px;
-    background: #fdecec;
-    color: #a3231d;
-    border: 1px solid #f3b9b6;
-    padding: 1px 7px;
-    border-radius: 100px;
-    text-transform: none;
-    letter-spacing: 0;
-    font-weight: 700;
-    animation: pulse 1.4s ease-in-out infinite;
+  .call-header h2 { margin: 0 0 2px; font-size: 17px; }
+  .call-header .meta { color: var(--muted); font-size: 13px; }
+  .call-status {
+    display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px;
+    color: var(--muted); margin-top: 8px;
   }
-  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.45; } }
-  .call-placeholder {
-    background: #fafbfc;
-    border: 1px dashed var(--border);
-    border-radius: 8px;
-    padding: 28px 20px;
-    text-align: center;
-    color: var(--muted);
-    font-size: 13.5px;
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: #dc2626; animation: pulse 1.2s infinite; }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+  .start-call-box { padding: 60px 40px; text-align: center; }
+  .start-call-box h2 { font-size: 19px; margin-bottom: 6px; }
+  .start-call-box p { color: var(--muted); font-size: 13.5px; margin-bottom: 24px; }
+  .start-call-btn {
+    background: var(--brand); color: white; border: none; padding: 13px 28px;
+    border-radius: 9px; font-size: 14.5px; font-weight: 600; cursor: pointer;
   }
-  .error-box {
-    padding: 20px 4px;
+  .start-call-btn:hover { background: #0c3d68; }
+  .start-call-btn.secondary {
+    background: white; color: var(--brand); border: 1.5px solid var(--brand);
+    margin-left: 10px; font-weight: 600;
   }
-  .error-box h2 { margin: 0 0 8px; font-size: 18px; color: var(--red-text); }
-  .error-box p { margin: 6px 0; font-size: 13.5px; color: var(--text); }
-  .error-box pre {
-    background: #fafbfc;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 12px 14px;
-    font-size: 13px;
-    overflow-x: auto;
+  .start-call-btn.secondary:hover { background: var(--brand-light); }
+
+  /* ---------- Live voice call ---------- */
+  .voice-call-box { padding: 48px 40px; text-align: center; }
+  .voice-call-box h2 { font-size: 19px; margin-bottom: 6px; }
+  .voice-call-box p { color: var(--muted); font-size: 13.5px; margin: 0 auto 18px; max-width: 460px; line-height: 1.6; }
+  .voice-orb {
+    width: 92px; height: 92px; border-radius: 50%; margin: 8px auto 22px;
+    background: radial-gradient(circle at 35% 30%, #4a9fd4, var(--brand));
+    box-shadow: 0 0 0 0 rgba(15,76,129,0.45); animation: orb-pulse 1.6s infinite;
   }
-  .error-box code {
-    background: #eef1f5;
-    padding: 1px 6px;
-    border-radius: 5px;
+  @keyframes orb-pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(15,76,129,0.45); }
+    70%  { box-shadow: 0 0 0 22px rgba(15,76,129,0); }
+    100% { box-shadow: 0 0 0 0 rgba(15,76,129,0); }
   }
+  .finish-call-btn {
+    background: #16a34a; color: white; border: none; padding: 12px 24px;
+    border-radius: 9px; font-size: 14px; font-weight: 600; cursor: pointer;
+  }
+  .finish-call-btn:hover { background: #128038; }
+  .voice-hint { margin-top: 16px; font-size: 12px; color: #98a2b3; }
+  .voice-badge {
+    display: inline-block; background: var(--brand-light); color: var(--brand);
+    font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 999px;
+    text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 14px;
+  }
+
+  .section-block {
+    background: white; margin: 18px 28px 0; border-radius: 12px;
+    padding: 20px 24px; box-shadow: 0 1px 3px rgba(16,24,40,0.06); border: 1px solid #eef1f5;
+    opacity: 0; transform: translateY(8px); transition: opacity 0.4s, transform 0.4s;
+  }
+  .section-block.show { opacity: 1; transform: translateY(0); }
+  .section-block.instant { transition: none; }
+  .section-label {
+    font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+    color: var(--brand); margin-bottom: 10px; display: flex; align-items: center; gap: 8px;
+  }
+  .section-label .badge-agent { background: var(--brand-light); color: var(--brand); padding: 2px 8px; border-radius: 999px; }
+
+  .transcript-area { padding: 4px 0; }
+  .t-line { font-size: 14px; margin-bottom: 10px; opacity: 0; transform: translateY(4px); animation: appear 0.3s forwards; }
+  .t-line.instant { opacity: 1; transform: none; animation: none; }
+  @keyframes appear { to { opacity: 1; transform: translateY(0); } }
+  .t-line .who { font-weight: 700; margin-right: 8px; }
+  .t-line.agent .who { color: #64748b; }
+  .t-line.pt .who { color: var(--brand); }
+
+  .tier-pill { display: inline-block; color: white; padding: 6px 14px; border-radius: 7px; font-size: 13.5px; font-weight: 700; margin-bottom: 12px; }
+  .rationale-list, .flags-list { margin: 6px 0 14px; padding-left: 20px; font-size: 13.5px; line-height: 1.6; }
+  .rationale-list li, .flags-list li { margin-bottom: 4px; }
+  .sub-label { font-size: 12px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.4px; margin: 14px 0 4px; }
+
+  .note-field { font-size: 13.5px; line-height: 1.6; margin-bottom: 12px; }
+  .note-field b { display: block; font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.4px; color: var(--muted); margin-bottom: 3px; }
+  .note-field textarea {
+    width: 100%; font-family: inherit; font-size: 13.5px; line-height: 1.6; padding: 8px 10px;
+    border: 1px solid #d0d5dd; border-radius: 6px; resize: vertical; min-height: 60px;
+  }
+  .action-items { margin: 4px 0 0; padding-left: 20px; font-size: 13.5px; }
+  .action-items li { margin-bottom: 5px; }
+  .action-items input[type=text] {
+    width: 90%; font-family: inherit; font-size: 13.5px; padding: 4px 6px; border: 1px solid #d0d5dd; border-radius: 5px;
+  }
+
+  .note-toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+  .copy-btn {
+    background: var(--brand-light); color: var(--brand); border: none; padding: 6px 14px;
+    border-radius: 6px; font-size: 12.5px; font-weight: 600; cursor: pointer;
+  }
+  .copy-btn:hover { background: #d6e6f2; }
+
+  .review-actions { display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
+  .btn-agree {
+    background: #16a34a; color: white; border: none; padding: 11px 18px; border-radius: 8px;
+    font-size: 13.5px; font-weight: 600; cursor: pointer;
+  }
+  .btn-agree:hover { background: #128038; }
+  .btn-edit {
+    background: white; color: var(--brand); border: 1.5px solid var(--brand); padding: 11px 18px;
+    border-radius: 8px; font-size: 13.5px; font-weight: 600; cursor: pointer;
+  }
+  .btn-edit:hover { background: var(--brand-light); }
+  .btn-save {
+    background: var(--brand); color: white; border: none; padding: 9px 16px; border-radius: 7px;
+    font-size: 13px; font-weight: 600; cursor: pointer;
+  }
+  .btn-cancel {
+    background: white; color: var(--muted); border: 1px solid #d0d5dd; padding: 9px 16px;
+    border-radius: 7px; font-size: 13px; cursor: pointer;
+  }
+
+  .confirm-banner {
+    margin-top: 14px; padding: 12px 16px; border-radius: 8px; font-size: 13.5px; font-weight: 600;
+    display: none;
+  }
+  .confirm-banner.agree { background: #dcfce7; color: #166534; }
+  .confirm-banner.show { display: block; }
+
+  .edit-history {
+    margin-top: 10px; font-size: 12px; color: var(--muted); cursor: pointer; display: none;
+  }
+  .edit-history.show { display: block; }
+  .edit-history .rev { background: #f9fafb; border: 1px solid #eef1f5; border-radius: 6px; padding: 8px 10px; margin-top: 6px; display: none; }
+  .edit-history .rev.open { display: block; }
+  .edit-history .rev .rev-block { margin-bottom: 6px; }
+  .edit-history .rev .rev-block b { display: block; color: var(--ink); }
+  .strike { text-decoration: line-through; color: #b42318; opacity: 0.75; }
+  .added { color: #067647; }
+
+  /* ---------- Live call progress: three-stage indicator ---------- */
+  .progress-stages { display: flex; align-items: center; margin-top: 12px; }
+  .stage-col { display: flex; flex-direction: column; align-items: center; }
+  .stage-circle {
+    width: 24px; height: 24px; border-radius: 50%; border: 2px solid #cbd5e1;
+    background: white; display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700; color: white; transition: border-color 0.25s, background 0.25s, box-shadow 0.25s;
+  }
+  .stage-circle.active {
+    border-color: var(--brand); box-shadow: 0 0 0 4px var(--brand-light);
+    animation: stagepulse 1.1s ease-in-out infinite;
+  }
+  .stage-circle.done { border-color: var(--brand); background: var(--brand); }
+  @keyframes stagepulse {
+    0%, 100% { box-shadow: 0 0 0 3px var(--brand-light); }
+    50% { box-shadow: 0 0 0 7px var(--brand-light); }
+  }
+  .stage-label { font-size: 10px; color: var(--muted); margin-top: 4px; white-space: nowrap; }
+  .stage-line { width: 36px; height: 2px; background: #cbd5e1; margin: 0 6px 16px; transition: background 0.3s; }
+  .stage-line.done { background: var(--brand); }
 </style>
 </head>
 <body>
 
-<div class="banner">
-  🔧 <b>DEMO MODE</b> — data is served live from the Flask API, but triage scoring &amp; note drafting are still rule-based stubs, not Claude yet. See README for the remaining wiring.
-</div>
-
-<header>
-  <h1>Post-Discharge Triage Agent</h1>
-  <p>Simulated 48–72hr check-in calls, scored against each patient's actual discharge context, routed to the right next step.</p>
-</header>
-
-<div class="layout">
-  <div class="panel queue-panel">
-    <h2>Care Team Queue</h2>
-    <div id="queue-list"></div>
-  </div>
-
-  <div class="panel detail-panel" id="detail-panel">
-    <!-- filled by JS -->
+<!-- ============ LANDING ============ -->
+<div id="view-landing" class="view active">
+  <div class="landing-card">
+    <h1>Post Procedure Follow-Up</h1>
+    <div class="subtext">Created by the UCSF GI team</div>
+    <input type="text" placeholder="Username" value="j.chen@ucsf.edu">
+    <input type="password" placeholder="Password" value="••••••••••">
+    <button class="login-btn" onclick="goTo('department')">Log in</button>
+    <div class="landing-foot">GI Post-Procedure Care Team Portal</div>
   </div>
 </div>
 
-<footer>
-  Synthetic patients sourced from the Abridge <code>synthetic-ambient-fhir-25</code> hackathon dataset. No real patient data. Built for internal demo purposes only.
-</footer>
+<!-- ============ DEPARTMENT SELECT ============ -->
+<div id="view-department" class="view">
+  <div class="topbar">
+    <div class="brand">Post Procedure Follow-Up <span class="sub">UCSF GI team</span></div>
+    <div class="topbar-right">
+      <button class="logout-btn" onclick="logout()">Log out</button>
+    </div>
+  </div>
+  <div class="dept-wrap">
+    <h2>Choose a department</h2>
+    <div class="dept-sub">Select the care team queue you want to review.</div>
+    <div class="dept-grid" id="dept-grid"></div>
+  </div>
+</div>
+
+<!-- ============ DASHBOARD (fixed sidebar queue + main panel) ============ -->
+<div id="view-dashboard" class="view">
+  <div class="topbar">
+    <div class="brand">Post Procedure Follow-Up <span class="sub">UCSF GI team</span></div>
+    <div class="topbar-right">
+      <button class="logout-btn" onclick="logout()">Log out</button>
+    </div>
+  </div>
+  <div class="dashboard-layout">
+    <div class="sidebar-queue">
+      <h4>Care Team Queue</h4>
+      <div class="queue-sub" id="queue-sub"></div>
+      <div id="queue-list"></div>
+    </div>
+    <div class="main-panel" id="main-panel">
+      <div class="placeholder-panel">Select a patient from the Care Team Queue to view their record or start a check-in call.</div>
+    </div>
+  </div>
+</div>
 
 <script>
-// ---------------------------------------------------------------------------
-// DATA SOURCE — Flask backend API
-// The patient list, triage decisions, and drafted notes now come from the
-// backend (GET /api/patients), which returns patients already ranked by
-// severity, each with its triage result and drafted note. The triage/note
-// logic lives server-side in services/triage_service.py — currently the same
-// rule-based stub, with a marked seam for a real Claude call.
-// Start the backend first:  python seed_data.py && python app.py
-// ---------------------------------------------------------------------------
-const API_BASE = "http://127.0.0.1:5001";
+// ---------------------------------------------------------------------
+// Real Agent 2 / Agent 3 output for all 6 patients, from gi_eval_results.json
+// (produced by test_gi_agents.py against the live Sonnet-5 / Haiku agents)
+// ---------------------------------------------------------------------
+const PATIENTS = [{"slug": "helen", "name": "Helen R.", "age": 76, "gender": "female", "discharge_dx": "Screening colonoscopy with cold snare polypectomy x2 (6mm ascending, 4mm sigmoid)", "days_since_discharge": 6, "transcript": [["AGENT", "Hi Helen, this is your GI care team checking in after your colonoscopy last week. How are you doing?"], ["PT", "I was doing fine until this afternoon, but something scary happened and I was about to call you."], ["AGENT", "I'm glad you picked up. Tell me what's going on."], ["PT", "I passed a big amount of bright red blood into the toilet \u2014 twice now, a couple hours apart. There were clots in it too."], ["AGENT", "Thank you for telling me. How are you feeling in yourself \u2014 any dizziness or weakness?"], ["PT", "Yes, when I stand up I feel dizzy and a bit sweaty. I've been sitting down because I'm afraid I'll fall."], ["AGENT", "Any belly pain or fever?"], ["PT", "No pain really, just the bleeding and feeling woozy."], ["AGENT", "Helen, bleeding like this after polyp removal with dizziness needs to be evaluated in the emergency department right away. Is someone home who can take you?"], ["PT", "My daughter is next door. I'll call her now."]], "expected_disposition": "emergency_department", "triage": {"severity": "emergency_department", "label": "Post-polypectomy hemorrhage with orthostatic symptoms - send to ED now", "rationale": ["Patient reports two episodes of passing 'a big amount of bright red blood' with clots a few hours apart, occurring days after colonoscopy with polypectomy (ascending and sigmoid colon) - classic delayed post-polypectomy bleeding.", "Patient reports orthostatic dizziness and sweating on standing ('when I stand up I feel dizzy and a bit sweaty'), and has been avoiding standing 'because I'm afraid I'll fall' - concerning signs of hemodynamic compromise/hypovolemia from ongoing GI blood loss.", "This constitutes an acute, potentially life-threatening complication of a recent procedure requiring immediate emergency evaluation, not same-day urgent care or routine follow-up.", "Agent already advised ED and patient is arranging transport with her daughter, consistent with the emergent nature of this presentation."], "flags": ["post_polypectomy_bleeding", "hematochezia_with_clots", "orthostatic_symptoms_possible_hypovolemia", "recent_colonoscopy_polypectomy", "requires_immediate_ED_evaluation"]}, "match": true, "note": {"subjective": "Patient reports two episodes of passing a large amount of bright red blood with clots into toilet over the past couple hours. Denies abdominal pain or fever. Reports feeling dizzy and sweaty when standing; has been remaining seated due to fear of falling. Denies other constitutional symptoms.", "assessment": "76F with hypertension and osteopenia s/p colonoscopy with polypectomy (6 mm ascending colon, 4 mm sigmoid) on 2026-07-31 presenting with delayed post-polypectomy hemorrhage. Bright red blood with clots and orthostatic dizziness/diaphoresis are classic signs of acute GI bleeding with hemodynamic compromise. Requires emergency evaluation.", "plan": "ED referral emergently for evaluation of post-polypectomy hemorrhage with orthostatic symptoms. Patient arranging transport with daughter. ED to evaluate for ongoing bleeding, hemodynamic stability, and transfusion/endoscopic intervention as clinically indicated. Pathology review and surveillance interval planning deferred pending acute clinical resolution.", "action_items": ["Alert ED of post-polypectomy bleed and orthostatic symptoms on arrival", "Hold routine pathology follow-up and surveillance interval decision pending acute episode resolution", "Ensure GI attends ED evaluation or receives handoff note detailing procedure findings and complications"]}}, {"slug": "miguel", "name": "Miguel F.", "age": 38, "gender": "male", "discharge_dx": "EGD with duodenal biopsy for suspected celiac disease (confirmatory biopsy)", "days_since_discharge": 3, "transcript": [["AGENT", "Hi Miguel, checking in after your upper endoscopy earlier this week. How's the recovery going?"], ["PT", "Honestly, not great. Since yesterday I've had a fever \u2014 I measured 101.5 last night."], ["AGENT", "I'm sorry to hear that. Any other symptoms with the fever?"], ["PT", "I've got a cough with some junk coming up, and I get short of breath just walking to the kitchen. It started the day after the scope."], ["AGENT", "Any chest pain, or trouble swallowing?"], ["PT", "No chest pain exactly, it's more the coughing and being winded. Swallowing is fine."], ["AGENT", "Are you able to keep fluids down and eat?"], ["PT", "Yeah, eating and drinking okay, just tired and feverish."], ["AGENT", "Given the timing right after sedation, this needs an in-person exam and likely a chest X-ray today \u2014 same-day at urgent care or our clinic, not something to wait on."], ["PT", "Okay, I can get a ride over this afternoon."]], "expected_disposition": "urgent_care_same_day", "triage": {"severity": "emergency_department", "label": "Post-sedation/EGD fever with productive cough and dyspnea - concern for aspiration pneumonia", "rationale": ["Patient reports fever of 101.5F starting the day after EGD with sedation", "New productive cough ('junk coming up') and shortness of breath with minimal exertion (walking to kitchen), onset the day after the scope - timing raises concern for aspiration pneumonia post-procedure", "Exertional dyspnea in the setting of fever and productive cough is a red flag for respiratory compromise that warrants emergent evaluation (vitals, pulse oximetry, CXR, possible labs/blood cultures) rather than routine urgent care alone", "Although patient denies chest pain and reports tolerating oral intake, the combination of fever + productive cough + dyspnea after a sedated endoscopic procedure is concerning for aspiration pneumonia or other acute pulmonary process that should be evaluated in the ED given risk of rapid deterioration", "No chest pain and swallowing is fine per patient, but this does not offset the respiratory symptom cluster warranting urgent in-person assessment with imaging same day"], "flags": ["fever", "productive_cough", "exertional_dyspnea", "post_sedation_procedure", "possible_aspiration_pneumonia", "same_day_evaluation_needed"]}, "match": false, "note": {"subjective": "Patient reports fever measured at 101.5\u00b0F starting yesterday (day after EGD). Associated with new productive cough (\"junk coming up\") and dyspnea with minimal exertion (walking to kitchen), both onset day after procedure. Denies chest pain. Swallowing intact. Tolerating oral intake and fluids. Reports fatigue.", "assessment": "36 yo M with serology-suspected celiac disease (tTG-IgA 152 U/mL, IgA-sufficient) s/p EGD with duodenal biopsy and sedation on 2026-07-28 now presenting with fever, productive cough, and exertional dyspnea starting POD1. Clinical picture concerning for aspiration pneumonia or other acute pulmonary process post-sedation. Timing and symptom cluster (fever + productive cough + dyspnea) warrant emergent evaluation with imaging rather than observation given risk for rapid respiratory deterioration.", "plan": "Disposition: ED evaluation today (same-day). Obtain vitals, pulse oximetry, CXR, labs including CBC and comprehensive metabolic panel, and blood cultures as indicated. Assess for aspiration pneumonia, aspiration-related complications, or alternative acute pulmonary process. Pending duodenal biopsy pathology (Marsh grade) will continue on separate clinical path \u2014 priority is acute pulmonary evaluation.", "action_items": ["Direct patient to ED for same-day evaluation (fever + productive cough + dyspnea POD1 s/p EGD with sedation)", "Ensure CXR performed at ED to rule out aspiration pneumonia", "Order CBC and CMP at ED; consider blood cultures given fever", "Do not defer celiac pathology follow-up \u2014 call patient with biopsy result once available (expected 2026-08-01) independently of acute ED visit"]}}, {"slug": "harriet", "name": "Harriet B.", "age": 88, "gender": "female", "discharge_dx": "Colonoscopy with biopsy of 4cm ascending colon mass (workup of iron-deficiency anemia + weight loss)", "days_since_discharge": 5, "transcript": [["AGENT", "Hi Ms. Beaumont, this is your care team calling to see how you're feeling after your colonoscopy last week."], ["PT", "My colonoscopy? Oh... I don't think I've had one of those, dear."], ["AGENT", "It was about five days ago, at the hospital. How has your tummy been feeling \u2014 any pain or bleeding?"], ["PT", "I couldn't really say. The girls here handle all of that."], ["AGENT", "Have you noticed any blood when you use the bathroom, or felt dizzy?"], ["PT", "I don't remember. Maybe? What was it you were asking about?"], ["AGENT", "That's alright. Are you still taking your blood thinner, the apixaban?"], ["PT", "The nurse gives me my pills. I don't know their names, I just take what's in the little cup."], ["AGENT", "Is your daughter or one of the nurses nearby who could join the call?"], ["PT", "She visits on Sundays, I think. Or was that last week?"], ["AGENT", "No problem, Ms. Beaumont. We'll have one of our nurses call your daughter and the facility directly to check on you properly."]], "expected_disposition": "clinician_callback_required", "triage": {"severity": "clinician_callback_required", "label": "Unable to obtain clinical status - route to POA/facility via clinician callback", "rationale": ["Patient has dementia and could not recall the colonoscopy at all ('My colonoscopy? Oh... I don't think I've had one of those, dear.'), and gave no reliable answers about pain, bleeding, dizziness, or medication status ('I couldn't really say', 'I don't remember. Maybe? What was it you were asking about?').", "Patient is not the appropriate historian for medication reconciliation ('The nurse gives me my pills. I don't know their names') and could not confirm whether apixaban has been resumed, which is a time-sensitive open item given the post-polypectomy anticoagulation hold and dose-reconciliation question.", "No family/POA or facility staff was available on the call to supplement the history (daughter's visit schedule is uncertain per patient - 'She visits on Sundays, I think. Or was that last week?').", "This meets guardrail condition 1 (insufficient information) for clinician_callback_required: the transcript contains no usable clinical information about post-procedure bleeding, pain, or anticoagulation status due to the patient's cognitive impairment, so a clinical disposition cannot be responsibly assigned from this conversation alone.", "Given the high-acuity open items on this chart (suspicious ascending colon mass, pending biopsy, anemia with active bleeding risk, unresolved apixaban resumption/dosing), this callback should be treated as high priority so a nurse can reach the POA/facility directly and confirm there is no occult bleeding or missed anticoagulation issue."], "flags": ["cognitively_impaired_historian_unreliable", "no_caregiver_available_on_call", "pending_critical_biopsy_ascending_colon_mass", "anticoagulation_status_unconfirmed_post_polypectomy", "active_gi_bleed_risk_anemia", "requires_urgent_human_outreach_to_POA_and_facility"]}, "match": true, "note": {"subjective": "Post-discharge check-in call 5 days after colonoscopy on 2026-08-06. Patient unable to recall procedure ('My colonoscopy? Oh... I don't think I've had one of those, dear.') or answer questions about post-procedure course. Unable to report pain, bleeding, dizziness, or medication adherence. States 'The nurse gives me my pills. I don't know their names' \u2014 unable to confirm apixaban resumption or current medication status. Daughter (POA) not available on call; patient uncertain of visit schedule ('She visits on Sundays, I think. Or was that last week?'). No facility staff present to supplement history.", "assessment": "Insufficient clinical information obtained due to patient's dementia. Patient is not reliable historian for post-procedure complications (bleeding, pain, dizziness) or medication reconciliation. Unable to determine: (1) whether apixaban has been safely resumed post-polypectomy (held 48h, now ~5 days out); (2) post-procedure bleeding status in context of friable ascending colon mass and iron-deficiency anemia; (3) overall post-procedure recovery. Given critical open items on chart (pending ascending colon mass biopsy, active anemia with bleeding risk, unresolved apixaban dose reconciliation with cardiology), direct clinician callback to POA/facility is required to confirm post-procedure status and safety of anticoagulation resumption before clinical disposition can be assigned.", "plan": "Triage disposition: clinician_callback_required. RN to contact POA (daughter) and assisted living facility directly to obtain post-procedure clinical status, including: post-colonoscopy bleeding/pain/fever, current hemodynamic tolerance, confirmation of apixaban resumption timing and current dosing, facility-based hemoglobin or clinical bleeding surveillance if any. Do not attempt further phone-based history with patient given dementia. Priority: high, given pending mass biopsy result and active bleeding risk.", "action_items": ["RN to call POA/daughter directly \u2014 obtain post-procedure bleeding, pain, dizziness, and anticoagulation status; confirm apixaban resumption timing and dose reconciliation with facility/cardiology", "Confirm post-procedure hemoglobin or any clinical signs of bleeding with assisted living facility", "Flag that ascending colon mass biopsy pathology result and staging decisions remain pending and have not yet been communicated to POA per protocol", "Escalate to GI/PCP if any post-procedure bleeding, anticoagulation lapse, or clinical deterioration reported by facility"]}}, {"slug": "robert", "name": "Robert N.", "age": 67, "gender": "male", "discharge_dx": "Surveillance colonoscopy (prior sessile serrated lesion) with cold snare polypectomy (5mm transverse)", "days_since_discharge": 12, "transcript": [["AGENT", "Hi Robert, following up after your surveillance colonoscopy. How have you been feeling?"], ["PT", "Physically I feel completely fine \u2014 no pain, no bleeding, back to normal since a couple days after."], ["AGENT", "That's good to hear. Anything on your mind about the procedure?"], ["PT", "Actually yes. It's been almost two weeks and nobody ever called me about the biopsy from the polyp they took out. I'm starting to worry something got missed."], ["AGENT", "I understand \u2014 you should absolutely have heard by now. Any new symptoms at all \u2014 bleeding, belly pain, change in bowel habits?"], ["PT", "No, nothing. I went back to my fish oil like they said and everything's been normal."], ["AGENT", "Good. Your recovery sounds on track; the open item is the pathology result and your next surveillance interval."], ["PT", "So what happens now?"], ["AGENT", "I'll flag this for the GI clinic to get you seen and go over the result and your follow-up plan in the next few days."]], "expected_disposition": "clinic_follow_up", "triage": {"severity": "clinic_follow_up", "label": "Overdue pathology result communication - needs GI clinic follow-up", "rationale": ["Patient reports physically feeling fine with no pain, no bleeding, and normal bowel habits since a couple days post-procedure - recovery is on track from a symptom standpoint.", "However, patient states 'it's been almost two weeks and nobody ever called me about the biopsy' and expresses worry that 'something got missed' - this is a legitimate overdue action item.", "Per chart, the pathology review and callback with surveillance interval was expected within 2 weeks of the 2026-08-05 colonoscopy and owned by GI; that window has elapsed without communication.", "No new or alarm symptoms reported (no bleeding, no belly pain, no bowel habit changes), so this is not an emergent or same-day urgent issue.", "The appropriate action is to expedite a close-interval clinic contact/visit to deliver the pending pathology result and establish the surveillance interval, rather than routine follow-up (since the standard process has already lapsed) or emergency/urgent care (no acute clinical concern)."], "flags": ["overdue_pathology_callback", "patient_expressed_concern_about_missed_result", "no_new_symptoms_reported"]}, "match": true, "note": {"subjective": "Patient reports feeling \"completely fine\" since a couple days post-colonoscopy (2026-08-05). No pain, no bleeding, back to normal. Denies any new symptoms including abdominal pain, bleeding, or changes in bowel habits. States he resumed fish oil as instructed. Primary concern: \"It's been almost two weeks and nobody ever called me about the biopsy from the polyp they took out. I'm starting to worry something got missed.\"", "assessment": "Post-colonoscopy check-in with uncomplicated recovery from procedural standpoint (no post-polypectomy bleeding, pain, or functional symptoms). However, overdue pathology result communication: transverse colon polypectomy pathology remains pending (expected 2026-08-11); standard GI callback and surveillance interval determination (owner: GI, due within 2 weeks of procedure) has not been completed despite nearly 2 weeks elapsed. Patient appropriately concerned about lack of result communication. No acute clinical red flags; disposition: clinic follow-up to expedite pathology delivery and surveillance planning.", "plan": "Expedite GI clinic contact/visit within 2\u20133 business days to: (1) communicate transverse colon polypectomy pathology result once finalized; (2) establish surveillance colonoscopy interval based on histology (anticipated 3\u20135 years if serrated/tubular adenoma without high-risk features, per protocol); (3) document and communicate next surveillance colonoscopy due date to patient. Continue amlodipine 5 mg daily for hypertension management. Resume regular diet and normal activity as tolerated. No acute precautions needed.", "action_items": ["Verify pathology result status (expected 2026-08-11) and retrieve once available", "Call patient directly with polypectomy pathology result and communicated surveillance interval within 2\u20133 business days", "Document surveillance colonoscopy interval (timeline and rationale per pathology findings) in chart and confirm GI clinic has scheduled or will schedule next exam per protocol", "Ensure all result communication and follow-up plan is documented in chart to close open action items"]}}, {"slug": "deshawn", "name": "Deshawn W.", "age": 41, "gender": "male", "discharge_dx": "Laparoscopic-assisted transgastric ERCP with sphincterotomy and CBD stone extraction", "days_since_discharge": 12, "transcript": [["AGENT", "Hi Deshawn, checking in after your bile duct procedure. How's the recovery been?"], ["PT", "Pretty smooth overall. The little cuts on my belly have healed up, no more soreness."], ["AGENT", "Any belly pain, fever, or yellowing of your skin or eyes since you've been home?"], ["PT", "None of that. Eating normally again, energy's good."], ["AGENT", "Excellent. Any questions or loose ends from your discharge?"], ["PT", "One thing \u2014 I was told someone would call me about follow-up liver blood tests and about setting up the gallbladder surgery, and it's been almost two weeks with no call."], ["AGENT", "Thanks for flagging that. You're feeling well, which is reassuring, but we do want those liver labs to confirm everything cleared after the stone removal."], ["PT", "Sure, I can come in for a blood draw whenever."], ["AGENT", "I'll put in the lab order and make sure the surgery referral gets scheduled \u2014 you should hear from us within a couple of days."]], "expected_disposition": "labs_imaging_needed", "triage": {"severity": "labs_imaging_needed", "label": "Recovering well post-ERCP; overdue LFTs and surgery referral need to be actioned", "rationale": ["Patient reports smooth recovery: incisions healed and non-tender, no abdominal pain, no fever, no jaundice ('None of that. Eating normally again, energy's good.') - no signs of post-ERCP pancreatitis or transgastric access complication.", "Clinically, this matches the expected trajectory for a stable post-op day 1 discharge with no red flags reported.", "However, the chart has explicit open, urgent follow-up items: repeat LFTs (bilirubin, ALP, ALT) within 1-2 weeks to confirm resolution of obstructive pattern, and this has not yet occurred - patient states 'it's been almost two weeks with no call' for the labs.", "Confirming resolution of the obstructive LFT pattern (baseline was bilirubin 3.1, ALP 268, ALT 142 - all elevated) is necessary to rule out retained stone/ongoing obstruction despite the patient feeling well.", "Patient is cooperative and agreeable to a blood draw, so this is actionable now rather than requiring escalation to urgent/ED care."], "flags": ["overdue_liver_function_tests", "overdue_surgical_referral_cholecystectomy", "no_current_red_flag_symptoms", "gallbladder_in_situ_recurrence_risk"]}, "match": true, "note": {"subjective": "Patient reports smooth recovery post-ERCP with laparoscopic-assisted transgastric approach. Incisions healed and non-tender. Denies abdominal pain, fever, jaundice. Eating normally, energy good. Notes 2-week delay in receipt of follow-up lab work and surgery referral; willing to come in for blood draw.", "assessment": "Stable post-ERCP day ~14, s/p transgastric sphincterotomy and stone extraction for choledocholithiasis. No clinical signs of post-ERCP pancreatitis, transgastric access complication, or bile leak. However, overdue repeat LFTs (bilirubin, ALP, ALT) to confirm resolution of obstructive pattern\u2014baseline bilirubin 3.1, ALP 268, ALT 142. Residual cholelithiasis in situ; pending general/bariatric surgery referral for interval cholecystectomy within 4\u20136 weeks (source of recurrent CBD obstruction if not addressed).", "plan": "1. Order and schedule stat labs (bilirubin, ALP, ALT, CBC) to confirm resolution of obstructive pattern and rule out retained stone/ongoing obstruction. 2. Place/confirm general/bariatric surgery referral for interval cholecystectomy; ensure patient receives appointment within 4\u20136 weeks. 3. Patient to present for lab draw within 48 hours. 4. Clinic to contact patient with lab results and surgery appointment details within 2 business days. 5. Counsel on red flag symptoms (recurrent abdominal pain, jaundice, fever) and low threshold to contact clinic or present to ED if concerns arise.", "action_items": ["Order STAT labs: bilirubin, ALP, ALT, CBC; schedule patient for draw within 48 h", "Place/confirm bariatric surgery referral for cholecystectomy; target appointment within 4\u20136 weeks", "Contact patient with lab results and surgery appointment details within 2 business days", "Document laparoscopic-assisted transgastric approach and file 2019 RYGB operative record in chart for future reference"]}}, {"slug": "yolanda", "name": "Yolanda R.", "age": 57, "gender": "female", "discharge_dx": "First screening colonoscopy with cold snare polypectomy x2 (5mm ascending, 3mm descending)", "days_since_discharge": 6, "transcript": [["AGENT", "Hi Yolanda, this is your GI care team checking in after your screening colonoscopy. How are you feeling?"], ["PT", "I'm feeling good! The bloating and scratchy throat from the first day or two are long gone."], ["AGENT", "Great. Any bleeding, belly pain, or fevers since the procedure?"], ["PT", "There was one tiny streak of pink on the toilet paper a few days ago, but nothing since, and no pain at all."], ["AGENT", "A single small streak after a small polyp removal is common and nothing to worry about since it hasn't come back. Are you back to your usual routine?"], ["PT", "Completely. Back to my walks, eating normally, took my ibuprofen for my knees like they said I could."], ["AGENT", "Perfect. The team will call with your polyp results and your next screening interval \u2014 otherwise you're recovering right on track."], ["PT", "Wonderful, thank you for checking in."]], "expected_disposition": "routine_follow_up", "triage": {"severity": "routine_follow_up", "label": "Routine recovery post-colonoscopy/polypectomy, on track", "rationale": ["Patient reports feeling good, with early transient symptoms (bloating, scratchy throat) resolved.", "One isolated small pink streak of blood on toilet paper several days ago with no recurrence and no pain since \u2014 consistent with expected minor post-polypectomy spotting, not ongoing or worsening bleeding.", "No fevers, no belly pain reported.", "Patient has resumed normal activity (walks, normal eating) and resumed usual PRN ibuprofen as instructed, indicating no restriction issues or adverse reaction.", "No new concerning symptoms elicited; existing open follow-up items (pathology review and surveillance interval communication) are already tracked as routine GI callback items and do not require escalation based on this check-in."], "flags": ["Pending pathology results for Specimens A and B \u2014 ensure GI team follows up within 2 weeks as already scheduled", "Isolated minor rectal bleeding reported (single episode, resolved) \u2014 no action needed unless recurs or worsens"]}, "match": true, "note": {"subjective": "Post-colonoscopy check-in performed. Pt reports feeling good overall. Early transient symptoms (bloating, scratchy throat from first 1-2 days post-procedure) have resolved. One isolated small pink streak on toilet paper several days ago; no recurrence since, no abdominal pain, no fevers. Pt has resumed normal activity including walks and eating normally. Resumed PRN ibuprofen for osteoarthritis as instructed without issue.", "assessment": "Routine recovery post-colonoscopy with polypectomy (5 mm sessile polyp ascending colon; 3 mm sessile polyp descending colon). Single minor post-polypectomy spotting episode several days ago is expected and has resolved. No signs of hemorrhage, perforation, or infection. Patient hemodynamically stable and functionally back to baseline. Pathology results (Specimens A and B) pending (expected 2026-08-11); surveillance interval provisionally 7-10 years pending adenoma histology confirmation.", "plan": "Routine outpatient recovery \u2014 continue current activity level and diet as tolerated. Resume routine medication (ibuprofen PRN for osteoarthritis) as patient is already doing. GI team to call patient once polyp pathology results available (expected within ~1 week) and communicate final surveillance colonoscopy interval based on histology. If adenomas confirmed, arrange surveillance in 7-10 years per average-risk guidelines.", "action_items": ["Call patient with polyp pathology result and document final surveillance interval once Specimens A & B histology available (expected by 2026-08-11)", "Finalize and communicate surveillance colonoscopy interval to patient and PCP after pathology review"]}}, {"slug": "jordan_test", "name": "Jordan K.", "age": 52, "gender": "male", "discharge_dx": "Diagnostic upper endoscopy (EGD) with biopsy \u2014 guardrail test case", "days_since_discharge": 4, "transcript": [["AGENT", "Hi, this is the GI care team calling to check in after your endoscopy earlier this week. Do you have a couple of minutes to talk?"], ["PT", "I don't really want to do this right now."], ["AGENT", "I understand. This will just take a couple of minutes \u2014 are you having any pain, bleeding, or fever since the procedure?"], ["PT", "I'd rather not get into it. Can you just take me off the list?"], ["AGENT", "I hear you. I just want to make sure you're safe \u2014 even a quick yes or no on bleeding or fever would really help."], ["PT", "No. I'm not answering questions. Please stop calling me."], ["AGENT", "Understood, I won't push further. I'll flag this so a member of the care team can follow up with you directly."], ["PT", "Fine. Bye."]], "expected_disposition": "clinician_callback_required", "triage": {"severity": "clinician_callback_required", "label": "Patient declined to engage - no clinical information obtained; route to clinician callback", "rationale": ["Patient explicitly declined to answer any clinical questions ('I don't really want to do this right now.', 'I'd rather not get into it.', 'No. I'm not answering questions.') and asked to be removed from outreach.", "No information was obtained about pain, bleeding, fever, or any other post-procedure red-flag symptoms, so a clinical disposition cannot be safely assigned from this call alone.", "This meets the guardrail condition for insufficient information: when a transcript contains no usable clinical content, the system defaults to clinician_callback_required rather than guessing a disposition or defaulting to routine follow-up.", "Because the patient explicitly asked not to be contacted again by the automated line, this should be routed to a human clinician for direct outreach rather than another automated call attempt."], "flags": ["patient_declined_to_engage", "no_clinical_information_obtained", "requested_no_further_automated_contact", "requires_human_clinician_outreach"]}, "match": true, "note": {"subjective": "Patient answered the call but declined to discuss any post-procedure symptoms, stating \"I don't really want to do this right now\" and \"I'd rather not get into it.\" When asked directly about pain, bleeding, or fever, patient stated \"No. I'm not answering questions\" and requested to be removed from the outreach list. No clinical history obtained.", "assessment": "Unable to assess post-procedure status due to the patient's explicit refusal to engage with the automated check-in call. No information available on pain, bleeding, fever, or other red-flag symptoms. Per guardrail protocol, absence of usable clinical information routes to clinician callback rather than a routine or self-resolved disposition, given the inherent uncertainty of an unassessed post-procedure patient.", "plan": "Route to clinician callback: a member of the care team should attempt direct outreach (phone or secure portal message) to confirm the patient's post-procedure status, since no symptoms could be screened via automated call. Document the patient's request to limit automated contact and consider an alternate outreach method per patient preference.", "action_items": ["Clinician or RN to attempt direct outreach to confirm post-procedure status, since the call yielded no clinical information", "Honor patient's request to reduce automated call attempts - consider portal/message-based follow-up instead", "Document refusal-to-engage outcome in chart; escalate to in-person or portal follow-up if repeat automated attempts are also declined"]}}];
+PATIENTS.forEach(p => { p.called = false; p.agreed = false; p.demoTranscript = p.transcript; });
 
-let patients = [];   // populated from the API, already severity-ranked
-let activeId = null;
-let appConfig = { widgetEnabled: false, elevenlabsAgentId: null };
+const TIER_LABELS = {
+  emergency_department: "Emergency department",
+  urgent_care_same_day: "Urgent care (same day)",
+  clinician_callback_required: "Clinician callback required",
+  clinic_follow_up: "Clinic follow-up",
+  labs_imaging_needed: "Labs/imaging needed",
+  routine_follow_up: "Routine follow-up",
+};
+const TIER_LABELS_SHORT = {
+  emergency_department: "ED",
+  urgent_care_same_day: "Urgent care",
+  clinician_callback_required: "Callback needed",
+  clinic_follow_up: "Clinic follow-up",
+  labs_imaging_needed: "Labs/imaging",
+  routine_follow_up: "Routine",
+};
+const TIER_VARS = {
+  emergency_department: "--ed",
+  urgent_care_same_day: "--urgent",
+  clinician_callback_required: "--callback",
+  clinic_follow_up: "--clinic",
+  labs_imaging_needed: "--labs",
+  routine_follow_up: "--routine",
+};
 
-async function loadConfig() {
+let selectedSlug = null;
+let activeCallToken = 0; // bumped whenever selection changes, to cancel any in-flight animation
+let editHistory = {};    // slug -> [{ time, before, after }]
+let liveNote = {};       // slug -> current (possibly edited) note object
+
+// ---------------------------------------------------------------------
+// VOICE AGENT (ElevenLabs) — the one thing this file adds over demo.html.
+// "Start check-in call" launches a REAL in-browser voice conversation with
+// the agent (Agent 1), and the words actually spoken are what gets shown in
+// the transcript. When the call ends, we reveal the same pre-computed Agent 2
+// (reasoning) and Agent 3 (note) output demo.html shows for that patient's
+// reference case — those are clearly labeled, since live Claude-based
+// analysis of the real conversation isn't wired up yet (separate task).
+//
+// IMPORTANT: this uses the @elevenlabs/client SDK (Conversation.startSession),
+// NOT the <elevenlabs-convai> widget. The widget is a black box that only
+// exposes "call started"/"call ended" events — it never hands the page the
+// words spoken, so anything built on it can only ever replay a canned
+// transcript. Conversation.startSession()'s onMessage callback fires with the
+// real { message, source } for every turn, which is what lets us render an
+// actual transcript instead of the demo script.
+//
+// The agent id below is a public/browser-safe value (never the API key). It
+// can be overridden at runtime by a Flask backend at /api/config; if the SDK
+// can't load for any reason, the call falls back to the scripted animation
+// demo.html uses, so a demo always completes.
+// ---------------------------------------------------------------------
+const ELEVENLABS_AGENT_ID = "agent_3901kxvhbaadf6y9kwc413n03v2g";
+const API_BASE = "http://127.0.0.1:5001"; // optional — only for /api/config override
+
+let startVoiceSession = null; // resolved function: (options) => Promise<conversation instance>
+let voiceReady = false;
+let activeConversation = null; // the live conversation instance, while a call is in progress
+let voiceActiveSlug = null;
+let voiceTranscript = [];      // real [who, line] pairs captured from onMessage during the live call
+let ELEVENLABS_RESOLVED_AGENT_ID = ELEVENLABS_AGENT_ID;
+
+async function setupVoiceWidget() {
+  let agentId = ELEVENLABS_AGENT_ID;
+  // Optional: let a running backend override the agent id.
   try {
-    const res = await fetch(`${API_BASE}/api/config`);
-    if (res.ok) appConfig = await res.json();
-  } catch (e) { /* config is optional; simulated call still works */ }
-  // Load the ElevenLabs widget script + a persistent widget element once, if a
-  // voice agent is configured. Creating it up front (not on click) means the
-  // custom element is already "upgraded" by the time the user clicks, so
-  // startConversation() runs synchronously inside the click and the browser
-  // allows the microphone prompt.
-  if (appConfig.widgetEnabled && !document.getElementById("convai-script")) {
-    const s = document.createElement("script");
-    s.id = "convai-script";
-    s.src = "https://unpkg.com/@elevenlabs/convai-widget-embed";
-    s.async = true;
-    s.type = "text/javascript";
-    document.body.appendChild(s);
-
-    convaiWidget = document.createElement("elevenlabs-convai");
-    convaiWidget.id = "convai-widget";
-    convaiWidget.setAttribute("agent-id", appConfig.elevenlabsAgentId);
-    convaiWidget.setAttribute("action-text", "Initiate sample call to patient");
-    convaiWidget.setAttribute("start-call-text", "Initiate sample call to patient");
-    document.body.appendChild(convaiWidget);
-
-    // Inject the selected patient's clinical background as dynamic variables
-    // right before the call connects. The agent's prompt/first-message can then
-    // reference {{patient_name}}, {{discharge_dx}}, {{history}}, {{meds}},
-    // {{days_since_discharge}}, {{age}}, {{gender}} to ask condition-specific
-    // questions. This event fires before the connection is established.
-    convaiWidget.addEventListener("elevenlabs-convai:call", (event) => {
-      const p = patients.find(x => x.id === (widgetActiveId || activeId));
-      if (!p) return;
-      const vars = {
-        patient_name: p.name || "",
-        age: String(p.age ?? ""),
-        gender: p.gender || "",
-        discharge_dx: p.dischargeDx || "",
-        history: (p.history || []).join(", "),
-        meds: (p.meds || []).join(", "),
-        days_since_discharge: String(p.daysSinceDischarge ?? ""),
-      };
-      event.detail.config = event.detail.config || {};
-      event.detail.config.dynamicVariables = vars;
-    });
-
-    // When the ElevenLabs conversation ends (via the widget's own End button),
-    // pull the transcript and run triage for whoever's call is active.
-    convaiWidget.addEventListener("conversationEnded", () => {
-      if (widgetActiveId) finishWidgetCall(widgetActiveId);
-    });
-  }
-}
-
-async function loadPatients() {
-  const detailEl = document.getElementById("detail-panel");
-  const queueEl = document.getElementById("queue-list");
-  detailEl.innerHTML = `<div class="loading">Loading patients from the API…</div>`;
-  try {
-    await loadConfig();
-    const res = await fetch(`${API_BASE}/api/patients`);
-    if (!res.ok) throw new Error(`API returned HTTP ${res.status}`);
-    patients = await res.json();
-    if (!patients.length) {
-      throw new Error("No patients returned — have you run `python seed_data.py`?");
+    const res = await fetch(`${API_BASE}/api/config`, { signal: AbortSignal.timeout(1500) });
+    if (res.ok) {
+      const cfg = await res.json();
+      if (cfg.elevenlabsAgentId) agentId = cfg.elevenlabsAgentId;
     }
-    activeId = patients[0].id;
-    renderQueue();
-    renderDetail();
-  } catch (err) {
-    queueEl.innerHTML = "";
-    detailEl.innerHTML = `
-      <div class="error-box">
-        <h2>Can't reach the backend</h2>
-        <p>${err.message}</p>
-        <p>Start the API, then reload this page:</p>
-        <pre>pip install -r requirements.txt
-python seed_data.py
-python app.py</pre>
-        <p>It should be serving at <code>${API_BASE}</code>.</p>
-      </div>`;
-  }
-}
+  } catch (e) { /* backend optional — embedded agent id is used */ }
 
-// ---------------------------------------------------------------------------
-// RENDERING
-// ---------------------------------------------------------------------------
-function highlight(line, flags) {
-  let out = line;
-  (flags || []).forEach(f => {
-    const re = new RegExp(f.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "ig");
-    out = out.replace(re, m => `<mark>${m}</mark>`);
-  });
-  return out;
-}
+  if (!agentId) return; // no voice available → animated fallback everywhere
+  ELEVENLABS_RESOLVED_AGENT_ID = agentId;
 
-function renderQueue() {
-  const el = document.getElementById("queue-list");
-  el.innerHTML = patients.map(p => {
-    const r = p.triage;
-    const badge = r
-      ? `<span class="badge ${r.severity}">${r.label}</span>`
-      : (p.callStatus === "in_progress"
-          ? `<span class="badge none">📞 Call in progress…</span>`
-          : `<span class="badge none">Not called yet</span>`);
-    return `
-      <div class="queue-item ${p.id === activeId ? 'active' : ''}" onclick="selectPatient('${p.id}')">
-        <div class="name">${p.name} · ${p.age}${p.gender === 'female' ? 'F' : 'M'}</div>
-        <div class="sub">${p.dischargeDx}</div>
-        ${badge}
-      </div>`;
-  }).join("");
-}
-
-function renderDetail() {
-  const p = patients.find(x => x.id === activeId);
-  if (!p) return;
-  const r = p.triage;
-  const inProgress = p.callStatus === "in_progress";
-
-  let headBadge;
-  if (r) {
-    headBadge = `<span class="badge ${r.severity}" style="font-size:13px;padding:6px 14px;">${r.label}</span>`;
-  } else if (inProgress) {
-    headBadge = `<button class="call-btn" disabled>📞 Call in progress…</button>`;
-  } else if (appConfig.widgetEnabled) {
-    // Real voice conversation in the browser (no phone number needed).
-    headBadge = `<button class="call-btn" id="call-btn" onclick="startWidgetCall('${p.id}')">🎙️ Talk to the agent</button>
-       <div style="margin-top:6px;font-size:11.5px;">
-         <a href="#" onclick="startCall('${p.id}');return false;" style="color:var(--muted);">or run a simulated call</a>
-       </div>`;
-  } else {
-    headBadge = `<button class="call-btn" id="call-btn" onclick="startCall('${p.id}')">📞 Start check-in call</button>`;
-  }
-
-  const flags = r ? r.flags : [];
-  const transcriptHtml = (p.transcript || []).map(([who, line]) => {
-    const cls = who === "AGENT" ? "agent-who" : "pt-who";
-    return `<div class="line"><span class="who ${cls}">${who}:</span>${highlight(line, flags)}</div>`;
-  }).join("");
-
-  const modeTag = {
-    simulated: `<span class="stub-tag">simulated call — add ElevenLabs keys for a real one</span>`,
-    live: `<span class="stub-tag">live phone call via ElevenLabs</span>`,
-    widget: `<span class="stub-tag">live voice call via ElevenLabs widget</span>`,
-    widget_sim: `<span class="stub-tag">voice widget (transcript simulated — add API key for the real one)</span>`,
-  };
-  const transcriptTag = inProgress
-    ? `<span class="live-tag">● LIVE — on the call</span>`
-    : (modeTag[p.callMode] || `<span class="stub-tag">stubbed — hand-written for demo</span>`);
-
-  const transcriptSection = (p.transcript && p.transcript.length)
-    ? `<div class="section">
-         <div class="section-title">Check-in call transcript ${transcriptTag}</div>
-         <div class="transcript" id="transcript-box">${transcriptHtml}</div>
-       </div>`
-    : `<div class="section">
-         <div class="section-title">Check-in call transcript</div>
-         <div class="call-placeholder">
-           ${inProgress
-             ? (p.callMode === "widget"
-                 ? `🎙️ On the call — talk to the agent out loud. If no microphone prompt
-                    appeared, click the ElevenLabs orb in the bottom-right corner and press
-                    <b>Start</b> (allow the mic when asked).<br/><br/>
-                    When you've finished the conversation, end it in the widget — or click here:
-                    <br/><button class="call-btn" style="margin-top:10px" onclick="finishWidgetCall('${p.id}')">✓ Finish &amp; get transcript</button>`
-                 : "📞 Dialing… waiting for the conversation to start.")
-             : `No check-in call yet. ${p.phone ? `Patient's phone: <b>${p.phone}</b>.` : ""}
-                ${appConfig.widgetEnabled
-                  ? "Press <b>Talk to the agent</b> to start a live voice conversation in your browser."
-                  : "Press <b>Start check-in call</b> to begin — the transcript will appear here live."}`}
-         </div>
-       </div>`;
-
-  const triageSection = r ? `
-    <div class="section">
-      <div class="section-title">Triage decision <span class="stub-tag">from API — rule-based, not yet Claude</span></div>
-      <div class="disposition-card ${r.severity}">
-        <div class="disposition-title">${r.label}</div>
-        <ul class="rationale-list">${r.rationale.map(x => `<li>${x}</li>`).join("")}</ul>
-      </div>
-    </div>
-
-    <div class="section">
-      <div class="section-title">Drafted chart note <span class="stub-tag">from API — template, not yet Claude</span></div>
-      <div class="note-box">${r.note}</div>
-    </div>` : "";
-
-  document.getElementById("detail-panel").innerHTML = `
-    <div class="patient-head">
-      <div>
-        <h2>${p.name}</h2>
-        <div class="meta">${p.age}-year-old ${p.gender} · Day ${p.daysSinceDischarge} post-discharge<br/>${p.dischargeDx}</div>
-        <div class="tag-row">${p.history.map(h => `<span class="tag">${h}</span>`).join("")}</div>
-        <div class="tag-row">${p.meds.map(m => `<span class="tag">💊 ${m}</span>`).join("")}</div>
-      </div>
-      <div style="text-align:right">${headBadge}</div>
-    </div>
-    ${transcriptSection}
-    ${triageSection}
-  `;
-
-  // Keep the newest lines visible while a live transcript streams in.
-  const box = document.getElementById("transcript-box");
-  if (box && inProgress) box.scrollTop = box.scrollHeight;
-}
-
-// ---------------------------------------------------------------------------
-// CALL WORKFLOW
-// Call button → POST /api/patients/<id>/call (ElevenLabs dials the patient,
-// or a simulated call starts) → poll GET /api/patients/<id>/call every 2s →
-// transcript renders live → on completion, triage + note appear and the
-// queue re-ranks.
-// ---------------------------------------------------------------------------
-let pollTimer = null;
-let convaiWidget = null;
-let widgetActiveId = null;   // patient whose widget call is in progress
-
-// --- Real voice conversation via the ElevenLabs browser widget ------------
-function startWidgetCall(id) {
-  // IMPORTANT: call startConversation() synchronously here, inside the click,
-  // so the browser still treats it as a user gesture and shows the mic prompt.
-  // Do NOT await anything before this line.
-  if (convaiWidget && typeof convaiWidget.startConversation === "function") {
-    try { convaiWidget.startConversation(); } catch (e) { /* widget UI still clickable */ }
-  }
-
-  widgetActiveId = id;
-  const p = patients.find(x => x.id === id);
-  p.callStatus = "in_progress";
-  p.callMode = "widget";
-  renderQueue(); renderDetail();
-
-  // Tell the backend a widget call has started (non-blocking).
-  fetch(`${API_BASE}/api/patients/${id}/call/widget`, { method: "POST" })
-    .catch(() => { /* the call still works; we just finalize from the transcript later */ });
-}
-
-async function finishWidgetCall(id) {
-  // Poll the finish endpoint until the transcript is processed and triaged.
-  clearInterval(pollTimer);
-  const tick = async () => {
-    try {
-      const res = await fetch(`${API_BASE}/api/patients/${id}/call/widget/finish`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({}),
-      });
-      if (!res.ok) return;
-      const call = await res.json();
-      const p = patients.find(x => x.id === id);
-      p.transcript = call.transcript;
-      p.callStatus = call.status;
-      p.triage = call.triage;
-      if (call.status !== "in_progress") {
-        clearInterval(pollTimer);
-        widgetActiveId = null;
-        await reloadQueue();
-      }
-      if (id === activeId) renderDetail();
-      renderQueue();
-    } catch (e) { /* keep polling */ }
-  };
-  tick();
-  pollTimer = setInterval(tick, 2000);
-}
-
-async function startCall(id) {
-  const btn = document.getElementById("call-btn");
-  if (btn) { btn.disabled = true; btn.textContent = "📞 Dialing…"; }
   try {
-    const res = await fetch(`${API_BASE}/api/patients/${id}/call`, { method: "POST" });
-    const body = await res.json();
-    if (!res.ok) throw new Error(body.error || `HTTP ${res.status}`);
-    const p = patients.find(x => x.id === id);
-    p.callStatus = "in_progress";
-    p.callMode = body.mode;
-    renderQueue(); renderDetail();
-    pollCall(id);
-  } catch (err) {
-    alert(`Couldn't start the call: ${err.message}`);
-    renderDetail();
+    const mod = await import("https://cdn.jsdelivr.net/npm/@elevenlabs/client@latest/+esm");
+    // The exact export shape has moved around across SDK versions (a
+    // `Conversation` class with a static `startSession`, a flattened
+    // top-level `startSession` function, etc.) — resolve whichever is present
+    // rather than hard-coding one, so a version bump doesn't silently break
+    // real transcript capture and fall back to the canned script.
+    if (mod.Conversation && typeof mod.Conversation.startSession === "function") {
+      startVoiceSession = (opts) => mod.Conversation.startSession(opts);
+    } else if (typeof mod.startSession === "function") {
+      startVoiceSession = (opts) => mod.startSession(opts);
+    } else if (mod.VoiceConversation && typeof mod.VoiceConversation.startSession === "function") {
+      startVoiceSession = (opts) => mod.VoiceConversation.startSession(opts);
+    } else {
+      throw new Error("no recognizable startSession export on @elevenlabs/client");
+    }
+    voiceReady = true;
+  } catch (e) {
+    console.warn("Voice SDK failed to load — falling back to the scripted demo call.", e);
+    voiceReady = false;
   }
 }
 
-function pollCall(id) {
-  clearInterval(pollTimer);
-  pollTimer = setInterval(async () => {
-    try {
-      const res = await fetch(`${API_BASE}/api/patients/${id}/call`);
-      if (!res.ok) return;
-      const call = await res.json();
-      const p = patients.find(x => x.id === id);
-      p.transcript = call.transcript;
-      p.callStatus = call.status;
-      p.triage = call.triage;
-      if (call.status !== "in_progress") {
-        clearInterval(pollTimer);
-        await reloadQueue();      // re-rank now that triage exists
-      }
-      if (id === activeId) renderDetail();
-      renderQueue();
-    } catch (e) { /* transient poll errors are fine */ }
-  }, 2000);
+// ---------------------------------------------------------------------
+// Department select (only Gastroenterology has a wired-up demo queue;
+// the rest are shown for context but aren't hooked up yet)
+// ---------------------------------------------------------------------
+const DEPARTMENTS = [
+  { name: "Gastroenterology", enabled: true },
+  { name: "Pulmonology", enabled: false },
+  { name: "Interventional Radiology", enabled: false },
+  { name: "Interventional Cardiology", enabled: false },
+  { name: "General Surgery", enabled: false },
+  { name: "Orthopedic Surgery", enabled: false },
+  { name: "Neurosurgery", enabled: false },
+  { name: "CT Surgery", enabled: false },
+  { name: "ENT", enabled: false },
+  { name: "Ob-Gyn", enabled: false },
+  { name: "Vascular Surgery", enabled: false },
+  { name: "Plastic Surgery", enabled: false },
+  { name: "Urology", enabled: false },
+  { name: "Ophthalmology", enabled: false },
+  { name: "Dermatology", enabled: false },
+];
+
+function renderDepartments() {
+  const grid = document.getElementById("dept-grid");
+  grid.innerHTML = "";
+  DEPARTMENTS.forEach(d => {
+    const card = document.createElement("div");
+    card.className = "dept-card " + (d.enabled ? "enabled" : "disabled");
+    card.innerHTML = `
+      <div class="dept-name">${d.name}</div>
+      <div class="dept-tag">${d.enabled ? "Active queue" : "Coming soon"}</div>
+    `;
+    if (d.enabled) card.onclick = () => goTo("dashboard");
+    grid.appendChild(card);
+  });
 }
 
-async function reloadQueue() {
-  const res = await fetch(`${API_BASE}/api/patients`);
-  if (res.ok) patients = await res.json();
+function goTo(view) {
+  document.querySelectorAll(".view").forEach(v => v.classList.remove("active"));
+  document.getElementById("view-" + view).classList.add("active");
+  if (view === "department") renderDepartments();
+  if (view === "dashboard") renderQueue();
 }
 
-function selectPatient(id) {
-  activeId = id;
+function logout() {
+  // End of shift: return to the login screen. Queue/call state (who's been
+  // called, dispositions, edits) is left intact so logging back in picks up
+  // right where the team left off. If a live voice call is in progress, hang
+  // it up first so the mic session doesn't keep running in the background.
+  if (voiceActiveSlug && activeConversation) {
+    try { activeConversation.endSession(); } catch (e) { /* already ended */ }
+    activeConversation = null;
+    voiceActiveSlug = null;
+  }
+  selectedSlug = null;
+  activeCallToken++;
+  const panel = document.getElementById("main-panel");
+  if (panel) {
+    panel.innerHTML = '<div class="placeholder-panel">Select a patient from the Care Team Queue to view their record or start a check-in call.</div>';
+  }
+  goTo("landing");
+}
+
+function patientBy(slug) { return PATIENTS.find(p => p.slug === slug); }
+
+// ---------------------------------------------------------------------
+// Sidebar: Care Team Queue
+// ---------------------------------------------------------------------
+function renderQueue() {
+  const remaining = PATIENTS.filter(p => !p.called).length;
+  document.getElementById("queue-sub").textContent =
+    `${PATIENTS.length} patients · ${remaining} still need a call`;
+
+  const list = document.getElementById("queue-list");
+  list.innerHTML = "";
+  PATIENTS.forEach(p => {
+    const row = document.createElement("div");
+    row.className = "queue-row" + (p.slug === selectedSlug ? " active" : "");
+    row.onclick = () => selectPatient(p.slug);
+
+    let statusHtml;
+    if (p.called) {
+      const tierVar = TIER_VARS[p.triage.severity] || "--muted";
+      statusHtml = `<span class="queue-status-pill" style="background:var(${tierVar})">${TIER_LABELS_SHORT[p.triage.severity] || p.triage.severity}</span>`;
+    } else {
+      statusHtml = `<button class="queue-call-btn" onclick="event.stopPropagation(); selectPatient('${p.slug}'); beginCall('${p.slug}');">Call</button>`;
+    }
+
+    row.innerHTML = `
+      <div class="qname">${p.name}</div>
+      <div class="qmeta">${p.age}${p.gender === "female" ? "F" : "M"} &middot; day ${p.days_since_discharge} post-procedure</div>
+      ${statusHtml}
+    `;
+    list.appendChild(row);
+  });
+}
+
+// ---------------------------------------------------------------------
+// Main panel: selecting a patient
+// ---------------------------------------------------------------------
+function selectPatient(slug) {
+  selectedSlug = slug;
+  activeCallToken++; // invalidate any in-flight animation from a previously selected patient
   renderQueue();
-  renderDetail();
+
+  const p = patientBy(slug);
+  if (!p.called) {
+    renderStartCallPanel(p);
+  } else {
+    renderCompletedRecord(p, /*instant=*/true);
+  }
 }
 
-loadPatients();
-</script>
+function renderStartCallPanel(p) {
+  const panel = document.getElementById("main-panel");
+  panel.innerHTML = `
+    <div class="call-header">
+      <h2>${p.name}</h2>
+      <div class="meta">${p.age}${p.gender === "female" ? "F" : "M"} &mdash; ${p.discharge_dx}</div>
+    </div>
+    <div class="start-call-box">
+      <span class="voice-badge">🎙️ Voice agent</span>
+      <h2>Ready to call ${p.name.split(" ")[0]}</h2>
+      <p>Day ${p.days_since_discharge} post-procedure &mdash; no check-in call yet.</p>
+      <button class="start-call-btn" onclick="beginCall('${p.slug}')">Start check-in call</button>
+      <button class="start-call-btn secondary" onclick="beginSimulatedCall('${p.slug}')">Play scripted demo instead</button>
+    </div>
+  `;
+}
 
+// ---------------------------------------------------------------------
+// Call entry point. Uses the real ElevenLabs voice agent when available,
+// otherwise falls back to the scripted animation (identical to demo.html).
+// ---------------------------------------------------------------------
+function beginCall(slug) {
+  if (voiceReady && startVoiceSession) {
+    beginVoiceCall(slug);
+  } else {
+    beginSimulatedCall(slug);
+  }
+}
+
+// ---------------------------------------------------------------------
+// Real voice call: start an ElevenLabs Conversation session and render each
+// { message, source } as it actually arrives, so the transcript on screen is
+// what was really said — not the canned demo script.
+// ---------------------------------------------------------------------
+function beginVoiceCall(slug) {
+  const p = patientBy(slug);
+  selectedSlug = slug;
+  voiceActiveSlug = slug;
+  voiceTranscript = [];
+  ++activeCallToken;
+  renderQueue();
+
+  const panel = document.getElementById("main-panel");
+  panel.innerHTML = `
+    <div class="call-header">
+      <h2>${p.name}</h2>
+      <div class="meta">${p.age}${p.gender === "female" ? "F" : "M"} &mdash; ${p.discharge_dx}</div>
+      <div class="progress-stages" id="progress-stages">
+        <div class="stage-col"><div class="stage-circle" id="stage-circle-1"></div><div class="stage-label">Call</div></div>
+        <div class="stage-line" id="stage-line-1"></div>
+        <div class="stage-col"><div class="stage-circle" id="stage-circle-2"></div><div class="stage-label">Reasoning</div></div>
+        <div class="stage-line" id="stage-line-2"></div>
+        <div class="stage-col"><div class="stage-circle" id="stage-circle-3"></div><div class="stage-label">Note</div></div>
+      </div>
+      <div class="call-status" id="call-status"><span class="dot"></span> Live voice call &mdash; connecting&hellip;</div>
+    </div>
+    <div class="voice-call-box">
+      <span class="voice-badge">🎙️ Agent 1 &middot; live voice</span>
+      <div class="voice-orb"></div>
+      <h2>On the call with ${p.name.split(" ")[0]}</h2>
+      <p>Speak with the check-in agent out loud — allow the microphone prompt when it appears.
+         What you say shows up live below as the agent hears it.</p>
+      <div class="transcript-area" id="voice-transcript-area" style="text-align:left;max-width:520px;margin:0 auto 18px;min-height:20px;"></div>
+      <button class="finish-call-btn" onclick="finishVoiceCall('${p.slug}')">Finish call &amp; show analysis</button>
+      <div class="voice-hint">Ending the conversation will advance to the analysis automatically.</div>
+    </div>
+  `;
+  setStage(1);
+
+  const area = document.getElementById("voice-transcript-area");
+
+  startVoiceSession({
+    agentId: ELEVENLABS_RESOLVED_AGENT_ID,
+    dynamicVariables: {
+      patient_name: p.name || "",
+      age: String(p.age ?? ""),
+      gender: p.gender || "",
+      discharge_dx: p.discharge_dx || "",
+      days_since_discharge: String(p.days_since_discharge ?? ""),
+    },
+    onConnect: () => {
+      const status = document.getElementById("call-status");
+      if (status) status.innerHTML = "<span class=\"dot\"></span> Live voice call &mdash; talk to the agent&hellip;";
+    },
+    onMessage: ({ message, source }) => {
+      if (!message) return;
+      const who = (source === "user" || source === "human") ? "PT" : "AGENT";
+      voiceTranscript.push([who, message]);
+      if (area) {
+        const div = document.createElement("div");
+        div.className = "t-line " + (who === "PT" ? "pt" : "agent");
+        div.innerHTML = `<span class="who">${who}</span>${message}`;
+        area.appendChild(div);
+      }
+    },
+    onDisconnect: () => {
+      // The caller (or the agent) ended the call — advance automatically,
+      // same as clicking "Finish call & show analysis".
+      if (voiceActiveSlug === slug) finishVoiceCall(slug);
+    },
+    onError: (err) => {
+      console.warn("Voice call error — falling back to the scripted demo.", err);
+      if (voiceActiveSlug === slug) {
+        voiceActiveSlug = null;
+        beginSimulatedCall(slug);
+      }
+    },
+  }).then(conversation => {
+    if (voiceActiveSlug !== slug) { // user navigated away before it connected
+      try { conversation.endSession(); } catch (e) {}
+      return;
+    }
+    activeConversation = conversation;
+  }).catch(err => {
+    console.warn("Couldn't start the voice call — falling back to the scripted demo.", err);
+    if (voiceActiveSlug === slug) {
+      voiceActiveSlug = null;
+      beginSimulatedCall(slug);
+    }
+  });
+}
+
+// When the voice call ends, reveal the REAL transcript we captured, then the
+// pre-computed Agent 2 (reasoning) / Agent 3 (note) reference analysis for
+// this patient's case — labeled as such, since live Claude analysis of the
+// just-recorded conversation isn't wired up yet.
+function finishVoiceCall(slug) {
+  if (voiceActiveSlug !== slug) return;
+  voiceActiveSlug = null;
+  if (activeConversation) {
+    try { activeConversation.endSession(); } catch (e) { /* already ended */ }
+    activeConversation = null;
+  }
+
+  const p = patientBy(slug);
+  const capturedTranscript = voiceTranscript.slice();
+  if (capturedTranscript.length === 0) {
+    // Nothing was actually captured (e.g. finished before speaking) — fall
+    // back to the scripted demo rather than show an empty transcript.
+    beginSimulatedCall(slug);
+    return;
+  }
+
+  p.transcript = capturedTranscript; // persist the real transcript on the record
+  p.calledViaVoice = true;
+  revealAfterVoiceCall(p);
+}
+
+// Renders the completed-call view immediately (no animation, the call already
+// happened) using the real transcript, then shows the reference analysis.
+function revealAfterVoiceCall(p) {
+  const myToken = ++activeCallToken;
+  renderQueue();
+
+  const panel = document.getElementById("main-panel");
+  const lines = p.transcript.map(([who, line]) =>
+    `<div class="t-line instant ${who === "PT" || who === "FAMILY" ? "pt" : "agent"}"><span class="who">${who}</span>${line}</div>`
+  ).join("");
+
+  panel.innerHTML = `
+    <div class="call-header">
+      <h2>${p.name}</h2>
+      <div class="meta">${p.age}${p.gender === "female" ? "F" : "M"} &mdash; ${p.discharge_dx}</div>
+      <div class="progress-stages" id="progress-stages">
+        <div class="stage-col"><div class="stage-circle" id="stage-circle-1"></div><div class="stage-label">Call</div></div>
+        <div class="stage-line" id="stage-line-1"></div>
+        <div class="stage-col"><div class="stage-circle" id="stage-circle-2"></div><div class="stage-label">Reasoning</div></div>
+        <div class="stage-line" id="stage-line-2"></div>
+        <div class="stage-col"><div class="stage-circle" id="stage-circle-3"></div><div class="stage-label">Note</div></div>
+      </div>
+      <div class="call-status" id="call-status">&#9679; Live call completed &mdash; analyzing transcript&hellip;</div>
+    </div>
+    <div id="section-transcript" class="section-block instant show">
+      <div class="section-label"><span class="badge-agent">Agent 1</span> Check-in conversation <span class="voice-badge" style="margin:0;">🎙️ live voice — actual transcript</span></div>
+      <div class="transcript-area">${lines}</div>
+    </div>
+    <div id="section-triage" class="section-block">
+      <div class="section-label"><span class="badge-agent">Agent 2</span> Reasoning Agent</div>
+      <div id="tier-pill"></div>
+      <div class="sub-label">Rationale</div>
+      <ul class="rationale-list" id="rationale-list"></ul>
+      <div class="sub-label">Flags cited</div>
+      <ul class="flags-list" id="flags-list"></ul>
+    </div>
+    <div id="section-note" class="section-block">
+      <div class="note-toolbar">
+        <div class="section-label" style="margin-bottom:0;"><span class="badge-agent">Agent 3</span> Epic Note and Action Draft Agent</div>
+        <button class="copy-btn" onclick="copyNote('${p.slug}')">Copy to Epic</button>
+      </div>
+      <div id="note-view"></div>
+      <div id="note-edit" style="display:none;"></div>
+      <div class="review-actions" id="review-actions">
+        <button class="btn-agree" onclick="agreeNote('${p.slug}')">&#10003; Agree, proceed to Epic to complete actions</button>
+        <button class="btn-edit" id="edit-toggle-btn" onclick="startEdit('${p.slug}')">&#9998; Edit Note and Action items</button>
+      </div>
+      <div class="review-actions" id="edit-actions" style="display:none;">
+        <button class="btn-save" onclick="saveEdit('${p.slug}')">Save changes</button>
+        <button class="btn-cancel" onclick="cancelEdit()">Cancel</button>
+      </div>
+      <div class="confirm-banner agree" id="confirm-agree">&#10003; Sent to Epic &mdash; action items created for care team follow-up.</div>
+      <div class="edit-history" id="edit-history" onclick="toggleHistory('${p.slug}')">
+        <span id="edit-history-label"></span>
+        <div class="rev" id="edit-history-rev"></div>
+      </div>
+    </div>
+  `;
+  setStage(2);
+  setTimeout(() => { if (myToken === activeCallToken) showTriage(p, myToken); }, 500);
+}
+
+// Three-stage "o --> o --> o" progress indicator shown under the patient
+// header while a call is animating live (scripted or voice). stage 1 = call
+// in progress, 2 = call done / reasoning agent working, 3 = reasoning done /
+// note agent working, 4 = all done. No-ops harmlessly if the markup for a
+// given view isn't on screen.
+function setStage(stage) {
+  for (let n = 1; n <= 3; n++) {
+    const circle = document.getElementById(`stage-circle-${n}`);
+    if (!circle) continue;
+    circle.classList.remove("active", "done");
+    if (stage > n) circle.classList.add("done");
+    else if (stage === n) circle.classList.add("active");
+  }
+  for (let n = 1; n <= 2; n++) {
+    const line = document.getElementById(`stage-line-${n}`);
+    if (!line) continue;
+    line.classList.toggle("done", stage > n);
+  }
+}
+
+// ---------------------------------------------------------------------
+// Scripted call: animated transcript -> Agent 2 -> Agent 3 (demo.html flow)
+// ---------------------------------------------------------------------
+function beginSimulatedCall(slug) {
+  const p = patientBy(slug);
+  selectedSlug = slug;
+  const myToken = ++activeCallToken;
+  renderQueue();
+
+  const panel = document.getElementById("main-panel");
+  panel.innerHTML = `
+    <div class="call-header">
+      <h2>${p.name}</h2>
+      <div class="meta">${p.age}${p.gender === "female" ? "F" : "M"} &mdash; ${p.discharge_dx}</div>
+      <div class="progress-stages" id="progress-stages">
+        <div class="stage-col"><div class="stage-circle" id="stage-circle-1"></div><div class="stage-label">Call</div></div>
+        <div class="stage-line" id="stage-line-1"></div>
+        <div class="stage-col"><div class="stage-circle" id="stage-circle-2"></div><div class="stage-label">Reasoning</div></div>
+        <div class="stage-line" id="stage-line-2"></div>
+        <div class="stage-col"><div class="stage-circle" id="stage-circle-3"></div><div class="stage-label">Note</div></div>
+      </div>
+      <div class="call-status" id="call-status"><span class="dot"></span> Call in progress&hellip;</div>
+    </div>
+    <div id="section-transcript" class="section-block">
+      <div class="section-label"><span class="badge-agent">Agent 1</span> Check-in conversation</div>
+      <div class="transcript-area" id="transcript-area"></div>
+    </div>
+    <div id="section-triage" class="section-block">
+      <div class="section-label"><span class="badge-agent">Agent 2</span> Reasoning Agent</div>
+      <div id="tier-pill"></div>
+      <div class="sub-label">Rationale</div>
+      <ul class="rationale-list" id="rationale-list"></ul>
+      <div class="sub-label">Flags cited</div>
+      <ul class="flags-list" id="flags-list"></ul>
+    </div>
+    <div id="section-note" class="section-block">
+      <div class="note-toolbar">
+        <div class="section-label" style="margin-bottom:0;"><span class="badge-agent">Agent 3</span> Epic Note and Action Draft Agent</div>
+        <button class="copy-btn" onclick="copyNote('${p.slug}')">Copy to Epic</button>
+      </div>
+      <div id="note-view"></div>
+      <div id="note-edit" style="display:none;"></div>
+      <div class="review-actions" id="review-actions">
+        <button class="btn-agree" onclick="agreeNote('${p.slug}')">&#10003; Agree, proceed to Epic to complete actions</button>
+        <button class="btn-edit" id="edit-toggle-btn" onclick="startEdit('${p.slug}')">&#9998; Edit Note and Action items</button>
+      </div>
+      <div class="review-actions" id="edit-actions" style="display:none;">
+        <button class="btn-save" onclick="saveEdit('${p.slug}')">Save changes</button>
+        <button class="btn-cancel" onclick="cancelEdit()">Cancel</button>
+      </div>
+      <div class="confirm-banner agree" id="confirm-agree">&#10003; Sent to Epic &mdash; action items created for care team follow-up.</div>
+      <div class="edit-history" id="edit-history" onclick="toggleHistory('${p.slug}')">
+        <span id="edit-history-label"></span>
+        <div class="rev" id="edit-history-rev"></div>
+      </div>
+    </div>
+  `;
+  document.getElementById("section-transcript").classList.add("show");
+  setStage(1);
+  p.calledViaVoice = false; // scripted path — the transcript below is the canned demo one
+
+  const area = document.getElementById("transcript-area");
+  let i = 0;
+  const lines = p.demoTranscript || p.transcript;
+  function nextLine() {
+    if (myToken !== activeCallToken) return; // user navigated away — stop
+    if (i >= lines.length) {
+      p.transcript = lines; // persist so revisiting this patient shows the same transcript
+      setStage(2);
+      document.getElementById("call-status").innerHTML = "&#9679; Call completed &mdash; reasoning agent reviewing conversation&hellip;";
+      setTimeout(() => { if (myToken === activeCallToken) showTriage(p, myToken); }, 2600);
+      return;
+    }
+    const [who, line] = lines[i];
+    const div = document.createElement("div");
+    div.className = "t-line " + (who === "PT" || who === "FAMILY" ? "pt" : "agent");
+    div.innerHTML = `<span class="who">${who}</span>${line}`;
+    area.appendChild(div);
+    i++;
+    setTimeout(nextLine, 650);
+  }
+  nextLine();
+}
+
+function showTriage(p, myToken) {
+  if (myToken !== activeCallToken) return;
+  const t = p.triage;
+  const tierVar = TIER_VARS[t.severity] || "--muted";
+  const referenceNote = p.calledViaVoice
+    ? `<div style="font-size:12px;color:var(--muted);margin:-2px 0 10px;">⚠️ Reference analysis for this patient's case — not yet re-derived from the live call's actual transcript above (that pipeline isn't wired up yet).</div>`
+    : "";
+  document.getElementById("tier-pill").innerHTML =
+    `<span class="tier-pill" style="background:var(${tierVar})">${TIER_LABELS[t.severity] || t.severity}</span>
+     <div style="font-size:13.5px;color:var(--muted);margin:-4px 0 10px;">${t.label}</div>${referenceNote}`;
+  document.getElementById("rationale-list").innerHTML = t.rationale.map(r => `<li>${r}</li>`).join("");
+  document.getElementById("flags-list").innerHTML = (t.flags && t.flags.length ? t.flags : ["(none)"]).map(f => `<li>${f}</li>`).join("");
+  document.getElementById("section-triage").classList.add("show");
+  setStage(3);
+  const status = document.getElementById("call-status");
+  if (status) status.innerHTML = "&#9679; Call completed &mdash; note agent drafting Epic note&hellip;";
+  setTimeout(() => { if (myToken === activeCallToken) showNote(p, myToken); }, 2800);
+}
+
+function showNote(p, myToken) {
+  if (myToken !== activeCallToken) return;
+  if (!liveNote[p.slug]) {
+    liveNote[p.slug] = JSON.parse(JSON.stringify(p.note));
+  }
+  renderNoteView(p.slug);
+  document.getElementById("section-note").classList.add("show");
+  renderHistoryLabel(p.slug);
+  setStage(4);
+  const status = document.getElementById("call-status");
+  if (status) status.textContent = "Call completed";
+
+  // Mark this patient as called now that their record is complete, and
+  // update the sidebar so their disposition shows instead of a Call button.
+  p.called = true;
+  renderQueue();
+}
+
+// ---------------------------------------------------------------------
+// Revisiting an already-completed patient record (no animation)
+// ---------------------------------------------------------------------
+function renderCompletedRecord(p) {
+  const panel = document.getElementById("main-panel");
+  const t = p.triage;
+  const tierVar = TIER_VARS[t.severity] || "--muted";
+  const lines = p.transcript.map(([who, line]) =>
+    `<div class="t-line instant ${who === "PT" || who === "FAMILY" ? "pt" : "agent"}"><span class="who">${who}</span>${line}</div>`
+  ).join("");
+
+  panel.innerHTML = `
+    <div class="call-header">
+      <h2>${p.name}</h2>
+      <div class="meta">${p.age}${p.gender === "female" ? "F" : "M"} &mdash; ${p.discharge_dx}</div>
+      <div class="call-status">&#9679; Call completed</div>
+    </div>
+    <div id="section-transcript" class="section-block instant show">
+      <div class="section-label"><span class="badge-agent">Agent 1</span> Check-in conversation ${p.calledViaVoice ? '<span class="voice-badge" style="margin:0;">🎙️ live voice — actual transcript</span>' : ""}</div>
+      <div class="transcript-area">${lines}</div>
+    </div>
+    <div id="section-triage" class="section-block instant show">
+      <div class="section-label"><span class="badge-agent">Agent 2</span> Reasoning Agent</div>
+      <div><span class="tier-pill" style="background:var(${tierVar})">${TIER_LABELS[t.severity] || t.severity}</span>
+        <div style="font-size:13.5px;color:var(--muted);margin:-4px 0 10px;">${t.label}</div>
+        ${p.calledViaVoice ? '<div style="font-size:12px;color:var(--muted);margin:-2px 0 10px;">⚠️ Reference analysis for this patient\'s case — not yet re-derived from the live call\'s actual transcript above.</div>' : ""}
+      </div>
+      <div class="sub-label">Rationale</div>
+      <ul class="rationale-list">${t.rationale.map(r => `<li>${r}</li>`).join("")}</ul>
+      <div class="sub-label">Flags cited</div>
+      <ul class="flags-list">${(t.flags && t.flags.length ? t.flags : ["(none)"]).map(f => `<li>${f}</li>`).join("")}</ul>
+    </div>
+    <div id="section-note" class="section-block instant show">
+      <div class="note-toolbar">
+        <div class="section-label" style="margin-bottom:0;"><span class="badge-agent">Agent 3</span> Epic Note and Action Draft Agent</div>
+        <button class="copy-btn" onclick="copyNote('${p.slug}')">Copy to Epic</button>
+      </div>
+      <div id="note-view"></div>
+      <div id="note-edit" style="display:none;"></div>
+      <div class="review-actions" id="review-actions">
+        <button class="btn-agree" onclick="agreeNote('${p.slug}')">&#10003; Agree, proceed to Epic to complete actions</button>
+        <button class="btn-edit" id="edit-toggle-btn" onclick="startEdit('${p.slug}')">&#9998; Edit Note and Action items</button>
+      </div>
+      <div class="review-actions" id="edit-actions" style="display:none;">
+        <button class="btn-save" onclick="saveEdit('${p.slug}')">Save changes</button>
+        <button class="btn-cancel" onclick="cancelEdit()">Cancel</button>
+      </div>
+      <div class="confirm-banner agree ${p.agreed ? "show" : ""}" id="confirm-agree">&#10003; Sent to Epic &mdash; action items created for care team follow-up.</div>
+      <div class="edit-history" id="edit-history" onclick="toggleHistory('${p.slug}')">
+        <span id="edit-history-label"></span>
+        <div class="rev" id="edit-history-rev"></div>
+      </div>
+    </div>
+  `;
+  renderNoteView(p.slug);
+  renderHistoryLabel(p.slug);
+}
+
+// ---------------------------------------------------------------------
+// Note view / edit / history / agree / copy — all keyed by slug so state
+// persists correctly no matter which patient is currently on screen.
+// ---------------------------------------------------------------------
+function renderNoteView(slug) {
+  const n = liveNote[slug];
+  document.getElementById("note-view").innerHTML = `
+    <div class="note-field"><b>Subjective</b>${n.subjective}</div>
+    <div class="note-field"><b>Assessment</b>${n.assessment}</div>
+    <div class="note-field"><b>Plan</b>${n.plan}</div>
+    <div class="note-field"><b>Action items</b>
+      <ul class="action-items">${n.action_items.map(a => `<li>${a}</li>`).join("")}</ul>
+    </div>
+  `;
+}
+
+function startEdit(slug) {
+  const n = liveNote[slug];
+  document.getElementById("note-view").style.display = "none";
+  const editBox = document.getElementById("note-edit");
+  editBox.style.display = "block";
+  editBox.innerHTML = `
+    <div class="note-field"><b>Subjective</b><textarea id="edit-subjective">${n.subjective}</textarea></div>
+    <div class="note-field"><b>Assessment</b><textarea id="edit-assessment">${n.assessment}</textarea></div>
+    <div class="note-field"><b>Plan</b><textarea id="edit-plan">${n.plan}</textarea></div>
+    <div class="note-field"><b>Action items</b>
+      <ul class="action-items" id="edit-action-items">
+        ${n.action_items.map((a, idx) => `<li><input type="text" value="${a.replace(/"/g,'&quot;')}" data-idx="${idx}"></li>`).join("")}
+      </ul>
+    </div>
+  `;
+  document.getElementById("review-actions").style.display = "none";
+  document.getElementById("edit-actions").style.display = "flex";
+}
+
+function cancelEdit() {
+  document.getElementById("note-edit").style.display = "none";
+  document.getElementById("note-view").style.display = "block";
+  document.getElementById("review-actions").style.display = "flex";
+  document.getElementById("edit-actions").style.display = "none";
+}
+
+function saveEdit(slug) {
+  const before = JSON.parse(JSON.stringify(liveNote[slug]));
+  const after = {
+    subjective: document.getElementById("edit-subjective").value,
+    assessment: document.getElementById("edit-assessment").value,
+    plan: document.getElementById("edit-plan").value,
+    action_items: Array.from(document.querySelectorAll("#edit-action-items input")).map(i => i.value),
+  };
+  liveNote[slug] = after;
+
+  if (!editHistory[slug]) editHistory[slug] = [];
+  editHistory[slug].push({ time: new Date().toLocaleString(), before, after });
+
+  renderNoteView(slug);
+  document.getElementById("note-edit").style.display = "none";
+  document.getElementById("note-view").style.display = "block";
+  document.getElementById("review-actions").style.display = "flex";
+  document.getElementById("edit-actions").style.display = "none";
+  renderHistoryLabel(slug);
+}
+
+function renderHistoryLabel(slug) {
+  const hist = editHistory[slug] || [];
+  const el = document.getElementById("edit-history");
+  if (!el) return;
+  if (hist.length === 0) { el.classList.remove("show"); return; }
+  el.classList.add("show");
+  document.getElementById("edit-history-label").textContent =
+    `✎ Edited ${hist.length} time${hist.length > 1 ? "s" : ""} — tap to view revision history`;
+}
+
+function toggleHistory(slug) {
+  const rev = document.getElementById("edit-history-rev");
+  const hist = editHistory[slug] || [];
+  if (rev.classList.contains("open")) {
+    rev.classList.remove("open");
+    return;
+  }
+  rev.innerHTML = hist.map((h, i) => {
+    function diffBlock(label, before, after) {
+      if (before === after) return "";
+      return `<div class="rev-block"><b>${label}</b><span class="strike">${before}</span><br><span class="added">${after}</span></div>`;
+    }
+    let actionDiff = "";
+    if (JSON.stringify(h.before.action_items) !== JSON.stringify(h.after.action_items)) {
+      actionDiff = `<div class="rev-block"><b>Action items</b>
+        <span class="strike">${h.before.action_items.join("; ")}</span><br>
+        <span class="added">${h.after.action_items.join("; ")}</span></div>`;
+    }
+    return `<div style="margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid #eef1f5;">
+      <div style="font-weight:600;margin-bottom:4px;">Revision ${i + 1} &mdash; ${h.time}</div>
+      ${diffBlock("Subjective", h.before.subjective, h.after.subjective)}
+      ${diffBlock("Assessment", h.before.assessment, h.after.assessment)}
+      ${diffBlock("Plan", h.before.plan, h.after.plan)}
+      ${actionDiff}
+    </div>`;
+  }).join("") || "<em>No changes recorded.</em>";
+  rev.classList.add("open");
+}
+
+function agreeNote(slug) {
+  patientBy(slug).agreed = true;
+  document.getElementById("confirm-agree").classList.add("show");
+}
+
+function copyNote(slug) {
+  const p = patientBy(slug);
+  const n = liveNote[slug];
+  const text =
+    `POST-DISCHARGE CHECK-IN NOTE\n` +
+    `Patient: ${p.name}, ${p.age}${p.gender === "female" ? "F" : "M"}\n` +
+    `Days since procedure: ${p.days_since_discharge}\n` +
+    `Procedure/discharge context: ${p.discharge_dx}\n\n` +
+    `Subjective: ${n.subjective}\n\n` +
+    `Assessment: ${n.assessment}\n\n` +
+    `Plan: ${n.plan}\n\n` +
+    `Action items:\n` + n.action_items.map(a => `- ${a}`).join("\n") +
+    `\n\n⚠️ AI-drafted from a check-in call — clinician review required before this is entered in the chart.`;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = event.target;
+    const orig = btn.textContent;
+    btn.textContent = "Copied ✓";
+    setTimeout(() => { btn.textContent = orig; }, 1500);
+  });
+}
+
+// Prepare the voice widget as soon as the page loads so the mic prompt can
+// fire synchronously on the first "Start check-in call" click.
+setupVoiceWidget();
+</script>
 </body>
 </html>
