@@ -13,9 +13,20 @@ get documented (if at all) after the fact.
 This project is an agentic pipeline that standardizes that check-in: it
 conducts (or ingests) a post-discharge conversation, reasons about it against
 the *specific* patient's discharge context, and routes the outcome to one of
-four dispositions with a clinician-reviewable rationale and a drafted chart
-note — closing the loop from "we called the patient" to "the right person
-knows to act."
+six dispositions (see §4 — this started as a 4-tier red/orange/yellow/green
+design and was later expanded) with a clinician-reviewable rationale and a
+drafted chart note — closing the loop from "we called the patient" to "the
+right person knows to act."
+
+**Note:** this document describes the original design. Two things have since
+diverged from it in practice — worth reading alongside `README.md` and
+`CLAUDE.md` for the current state: (1) the disposition taxonomy is now 6-way,
+not 4-tier (§4 below is updated to match); (2) a second, parallel demo track
+was added — `demo.html`/`index.html`, grounded in a synthetic GI-procedure
+dataset instead of `synthetic-ambient-fhir-25`, with `index.html` placing a
+real live ElevenLabs voice call in the browser rather than Agent 1 being a
+Claude call at all. That track isn't reflected in the agentic-workflow
+diagram below, which still describes the original single-track design.
 
 It's designed as a natural extension of Abridge's existing product line
 (ambient conversation → structured clinical output), just applied to a
@@ -123,14 +134,24 @@ this becomes the backend service described below, running the three agents
 server-side and persisting results rather than recomputing them in the
 browser on every page load.
 
-## 4. Disposition taxonomy
+## 4. Disposition taxonomy (current — 6-way, supersedes the original 4-tier design)
 
-| Severity | Label | Meaning | Example from demo |
-|---|---|---|---|
-| 🔴 Red | Urgent care referral | Acute red-flag symptoms; do not wait for scheduled follow-up | Ariane R. — worsening dyspnea + possible cyanosis after pneumonia/hypoxemia admission |
-| 🟠 Orange | Physician callback today | Moderate concern not yet emergent, but shouldn't wait for the next scheduled visit | Latoyia W. — new ankle swelling + rising glucose in a CKD/cardiac patient; Monica H. — pain not controlled by current regimen |
-| 🟡 Yellow | Labs / imaging recommended | Symptoms consistent with the underlying condition, worth confirming with objective data, no acute concern | Dick L. — mild residual fatigue and family-reported pallor after sepsis recovery, anemia/glucose recheck appropriate |
-| 🟢 Green | Routine follow-up | No red-flag or moderate-concern findings; recovery on expected trajectory | Traci W. — steady glucose control, resolved symptoms after diabetes stabilization admission |
+| Disposition | Meaning | Example |
+|---|---|---|
+| `emergency_department` | Acute/emergent findings with an objective severe-distress feature (can't speak/breathe, chest pain, fainting, confusion, cyanosis, uncontrolled bleeding) — go now, don't wait for scheduled care | Helen R. (GI track) — post-polypectomy bleeding with orthostatic dizziness |
+| `urgent_care_same_day` | Moderate-to-serious concern needing same-day in-person evaluation, not immediately life-threatening | Miguel F. (GI track) — fever + productive cough + exertional dyspnea after EGD, no severe-distress features |
+| `clinician_callback_required` | **Not a severity tier** — a guardrail for when the AI can't responsibly assess the patient at all: insufficient information, or an uncooperative/hostile patient. Ranked above the "confirmed stable" tiers below since an unresolved unknown is riskier than a case with enough signal to conclude things are fine | Harriet B. (GI track) — dementia patient unable to reliably answer; Jordan K. (GI track) — patient refuses to engage |
+| `clinic_follow_up` | Scheduling ticket for a close (within-days) clinic visit — more than routine, less than same-day urgent | Robert N. (GI track) — overdue pathology-result callback |
+| `labs_imaging_needed` | Stable, symptoms consistent with the known condition, but objective data would confirm the recovery trajectory | Deshawn W. (GI track) — stable post-ERCP, overdue liver labs |
+| `routine_follow_up` | Recovering as expected; continue the existing plan, no new action | Yolanda R. (GI track) — expected post-colonoscopy course |
+
+The original 4-tier design (kept here for history): 🔴 Red (urgent care
+referral) → 🟠 Orange (physician callback today) → 🟡 Yellow (labs/imaging
+recommended) → 🟢 Green (routine follow-up), demonstrated against the 5
+`synthetic-ambient-fhir-25` patients (Ariane R., Latoyia W., Monica H.,
+Traci W., Dick L.). `services/triage_service.py`'s `SEVERITY_ORDER` still
+maps these old values to the new taxonomy's ranks for backward
+compatibility.
 
 ## 5. Data grounding
 
@@ -143,26 +164,43 @@ demo, clearly labeled as such in the UI.
 
 ## 6. Current vs. target implementation (engineering roadmap)
 
-| Component | Now | Next |
+| Component | Original plan | Current state |
 |---|---|---|
-| Agent 1 (conversation) | Hand-written transcripts | Claude-generated transcripts from discharge context |
-| Agent 2 (triage) | Keyword rule engine | Claude structured-output call |
-| Agent 3 (notes) | String template | Claude drafting call |
-| Hosting | Single static HTML file, all logic client-side | Small backend (Flask/FastAPI or Express) holding the Anthropic API key server-side; frontend calls `/api/triage` and `/api/draft-note` instead of running local JS functions |
-| Data source | Fixed 5-patient demo array in `index.html` | Full 25-encounter dataset, or a real EHR feed via FHIR |
+| Agent 1 (conversation) | Hand-written transcripts → Claude-generated transcripts | DB track: real ElevenLabs/Twilio call or simulated canned transcript. GI track (`index.html`): real live ElevenLabs voice call in the browser via `@elevenlabs/client`. Claude never generates the conversation itself in either track. |
+| Agent 2 (triage) | Keyword rule engine → Claude structured-output call | **Done** — Claude Sonnet 5 tool-use call (`analyze_transcript_with_claude()`), live in both tracks; old keyword matcher kept as fallback/reference only |
+| Agent 3 (notes) | String template → Claude drafting call | **Done for the GI track** (`draft_note_with_claude()`, Claude Haiku). DB track's call-completion pipeline (`services/pipeline_service.py`) still calls the old string-template stub — remaining gap |
+| Hosting | Single static HTML file, all logic client-side → small backend holding the API key server-side | **Done** — Flask + SQLAlchemy backend (`app.py`/`routes/`/`services/`); both `demo.html` (no backend needed) and `index.html` (calls the backend for live GI-track analysis) still ship as self-contained frontends |
+| Data source | Fixed 5-patient demo array → full 25-encounter dataset or real EHR feed | 5-patient DB track still uses `synthetic-ambient-fhir-25`; a second 7-patient GI track was added using a separate synthetic GI-procedure dataset (`synthetic-gi-data/`), not yet a real EHR feed |
 
 The backend split (server holds the API key, frontend never sees it) is
 required before any real Claude call — see `README.md` for the security
-rationale and suggested endpoint shapes.
+rationale and endpoint shapes, and `CLAUDE.md` for the specific remaining
+wiring gap (`pipeline_service.finalize_call()` not yet using the real
+Agent 2/3 calls).
 
-## 7. Possible extensions (not built)
+## 7. Extensions built since this design doc
 
-- **Closed-loop referral generation:** an urgent/orange disposition also
-  drafts a referral packet with clinical justification, rather than just
-  alerting a human (aligns with Abridge's current prior-authorization/payer
-  workflow expansion).
+- **A second, GI-procedure-focused demo track** (`demo.html`/`index.html`,
+  `services/gi_live_service.py`, `gi_context.py`, `gi_demo_patients.py`,
+  `synthetic-gi-data/`) — 7 patients, one per disposition tier plus a
+  guardrail test case, reusing the same Agent 2/3 prompts against a
+  different clinical dataset and a real live voice call instead of a
+  Claude-generated one.
+- **A guardrail disposition**, `clinician_callback_required`, for when the
+  AI shouldn't force a clinical guess at all (insufficient information, or
+  an uncooperative/adversarial patient) — not in the original 4-tier design.
+
+## 8. Possible extensions (not built)
+
+- **Closed-loop referral generation:** an urgent disposition also drafts a
+  referral packet with clinical justification, rather than just alerting a
+  human (aligns with Abridge's current prior-authorization/payer workflow
+  expansion).
 - **Real EHR grounding:** Epic's open FHIR sandbox (fhir.epic.com) can be
   read from for real `ServiceRequest`/`MedicationRequest` data, though it's
   read-only and limited to a small fixed set of generic test patients — more
   useful as a "we're FHIR-R4-native, here's proof" talking point than a
   fully wired demo path within a one-day build.
+- **Close the `pipeline_service.py` wiring gap** so the DB track's live/
+  simulated voice calls get the same real Agent 2/3 reasoning the direct
+  `/api/triage`/`/api/draft-note` endpoints already do.

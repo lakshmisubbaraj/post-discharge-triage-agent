@@ -8,11 +8,14 @@ you get guaranteed-parseable JSON back instead of hoping the model follows
 
 **Status:** Agent 2 below is the *canonical, currently-implemented* version —
 it matches `TRIAGE_SYSTEM_PROMPT` / `TRIAGE_TOOL` in `services/triage_service.py`
-exactly. Agents 1 and 3 below are still the original design, not yet ported
-into the Flask backend (Agent 1 remains hand-written transcripts; Agent 3
-remains the string-template stub in `services/triage_service.py`'s
-`draft_note()`). If you change Agent 2's prompt or schema, update both this
-file and `triage_service.py` — they're meant to stay identical.
+exactly. Agent 3 also has a real, live implementation now
+(`draft_note_with_claude()` / the inline call in `services/gi_live_service.py`)
+— see its section below for the current prompt. Agent 1 is still hand-written
+transcripts everywhere except the GI voice-call track's `index.html`, which
+places a real live ElevenLabs voice call instead of generating a transcript
+with Claude (see `ELEVENLABS_WORKFLOW.md` for that agent's system prompt). If
+you change Agent 2's or Agent 3's prompt or schema, update this file and the
+corresponding service file together — they're meant to stay identical.
 
 ---
 
@@ -101,10 +104,21 @@ transcript together with the patient's structured clinical record
 discharging encounter — observations, procedures, diagnostic reports,
 medication requests). Decide one of six dispositions:
 
-- "emergency_department": acute/emergent findings — go to the ED now, do
-  not wait for any scheduled care.
+- "emergency_department": reserve for symptoms with objective signs of
+  acute decompensation or immediate life threat — e.g. difficulty breathing
+  so severe the patient can't speak in full sentences or is struggling for
+  air even at rest, chest pain or pressure, fainting or loss of
+  consciousness, confusion/altered mental status, uncontrolled or heavy
+  bleeding, or bluish lips/fingertips. Go to the ED now, do not wait for any
+  scheduled care.
 - "urgent_care_same_day": moderate-to-serious concern needing same-day
-  in-person evaluation, not immediately life-threatening.
+  in-person evaluation, not immediately life-threatening — e.g. fever with a
+  productive cough and shortness of breath on exertion (concern for a
+  post-procedure infection or aspiration that needs prompt in-person
+  evaluation, but without the acute-distress red flags described under
+  emergency_department above), pain not controlled by current medication, or
+  other findings that shouldn't wait for a routine visit but don't meet the
+  emergency criteria above.
 - "clinician_callback_required": route to a human clinician to call the
   patient directly. Use this ONLY for one of two guardrail conditions,
   regardless of what the clinical content otherwise looks like:
@@ -137,6 +151,12 @@ General reasoning rules:
   unnecessary callback.
 - When there is NOT enough information, or the patient was uncooperative,
   use clinician_callback_required rather than guessing.
+- Fever plus respiratory symptoms (cough, shortness of breath) after a
+  procedure defaults to urgent_care_same_day, not emergency_department,
+  unless the patient also describes an objective severe-distress feature
+  (can't speak/breathe, cyanosis, fainting, confusion) — reserve
+  emergency_department for those explicit red-flag features, not for
+  fever/cough/dyspnea-on-exertion alone.
 - Always cite the specific patient statements (or their notable absence)
   that drove your decision.
 
@@ -210,36 +230,68 @@ urgent:
 
 ---
 
-## Agent 3 — Chart Note Drafting Agent
+## Agent 3 — Chart Note Drafting Agent (canonical — matches `note_service.py`)
 
 **Purpose:** turn the transcript + triage decision into a clinician-
-reviewable note for the chart. Not yet ported to a real Claude call — see
-`draft_note()` in `triage_service.py` for the current string-template stub.
+reviewable SOAP-style note plus a short action-items checklist. Split into
+its own file (`services/note_service.py`), separate from Agent 2
+(`services/triage_service.py`), so each agent's model, prompt, and reasoning
+stays independently readable/editable/testable.
+
+**Model:** Claude Haiku (`NOTE_MODEL` in `note_service.py`) — drafting/
+formatting, not the reasoning-heavy step; Agent 2 gets the stronger Sonnet
+tier for that.
 
 **System prompt:**
 ```
-You draft concise post-discharge check-in notes for clinician review, in
-Subjective / Assessment / Plan format. Write in clinical shorthand, not
-prose padding. Do not add clinical claims beyond what's in the transcript
-and triage decision provided.
+You draft concise post-discharge check-in chart notes for a clinician to
+review and finalize directly in Epic. Use clinical shorthand, not prose
+padding — this is copied into the chart as-is after clinician sign-off.
 
-Always include a closing line noting this note was AI-drafted from a
-check-in call and requires clinician review before being finalized in the
-chart — do not omit this regardless of how confident the input data seems.
+Write a standard SOAP-style note:
+- Subjective: what the patient/family reported on this call. Ground this
+only in the transcript provided — do not add symptoms or statements that
+were not actually said.
+- Assessment: the triage disposition already decided and the clinical
+reasoning behind it, informed by the patient's known conditions,
+medications, and recent results (not just today's call in isolation).
+- Plan: the disposition already decided (do not re-decide or contradict
+it) plus any condition-specific follow-up guidance worth noting for the
+patient.
+
+Separately, produce a short action_items checklist: 2-5 concrete,
+imperative next steps for the clinician or care team (e.g. "Order BMP",
+"Schedule GI follow-up within 1 week", "Call patient directly —
+insufficient information obtained on this check-in"). Action items must
+follow directly from the disposition and rationale already decided — do
+not introduce a new clinical claim or change the disposition here.
+
+Only reference clinical specifics (medications, conditions, prior
+results) that actually appear in the clinical context you were given —
+never invent one to sound more specific.
+
+This is an AI-drafted note. A clinician reviews and finalizes it before
+anything is entered in the chart — never state or imply it has already
+been clinically reviewed or finalized.
 ```
 
-**Tool-use schema:**
+**Tool-use schema (structured output):**
 ```json
 {
   "name": "record_chart_note",
-  "description": "Record the drafted post-discharge check-in note",
+  "description": "Record the drafted post-discharge check-in chart note",
   "input_schema": {
     "type": "object",
-    "required": ["subjective", "assessment", "plan"],
+    "required": ["subjective", "assessment", "plan", "action_items"],
     "properties": {
       "subjective": { "type": "string" },
       "assessment": { "type": "string" },
-      "plan": { "type": "string" }
+      "plan": { "type": "string" },
+      "action_items": {
+        "type": "array",
+        "items": { "type": "string" },
+        "description": "2-5 short imperative next steps for the clinician/care team, consistent with the disposition and rationale already decided — not a re-triage."
+      }
     }
   }
 }
@@ -247,31 +299,46 @@ chart — do not omit this regardless of how confident the input data seems.
 
 **User message template:**
 ```
-Patient: {{name}}, {{age}}{{gender_initial}}, day {{daysSinceDischarge}} post-discharge
-Discharge context: {{dischargeDx}}
+Patient clinical context:
+{{fhir_context_block or gi_clinical_context}}
 
 Check-in transcript:
 {{transcript_formatted}}
 
-Triage decision: {{severity}} — {{label}}
-Rationale: {{rationale_list}}
+Triage decision already made: {{severity}} — {{label}}
+Rationale:
+{{rationale_list}}
 
 Draft the chart note using the record_chart_note tool.
 ```
 
-Note: `{{severity}}` here will now be one of the 6 new values, not the
-original 4 — the template itself needs no change since it just echoes
-whatever the triage step produced.
+Note: `{{severity}}` is one of the 6 disposition values; the note is drafted
+*after* Agent 2's decision and must not contradict or re-decide it — only
+explain and act on it.
 
 ---
 
 ## Wiring notes
 
-- Agent 2 (`analyze_transcript_with_claude` in `services/triage_service.py`)
+- **Agent 2** (`analyze_transcript_with_claude` in `services/triage_service.py`)
   is live and called from `routes/tool.py`'s `/api/triage` and
-  `/api/draft-note` endpoints.
-- Agents 1 and 3 are not yet wired to real Claude calls — their prompts
-  above are the design to implement when that work happens.
-- Run these server-side — never in browser JS, since the API key would be
-  exposed. `config.Config.ANTHROPIC_API_KEY` is the current pattern for
-  that in this repo.
+  `/api/draft-note` endpoints (DB track), and from `services/gi_live_service.py`
+  (GI track, `/api/gi/analyze`), reusing the identical prompt/tool/model
+  constants in both places.
+- **Agent 3** (`draft_note_with_claude` in `services/note_service.py`) is
+  live and called inline from `services/gi_live_service.py` (GI track,
+  `/api/gi/analyze`). It is **not yet** called from the DB track: both
+  `routes/tool.py`'s `/api/draft-note` fallback path and
+  `services/pipeline_service.finalize_call()` (run after a DB-track call
+  ends) still call the old string-template `draft_note()` stub in
+  `triage_service.py`. Swap those call sites over to close this gap.
+- **Agent 1** is not a Claude call anywhere in the DB track (still
+  hand-written/simulated transcripts). The GI track's `index.html` instead
+  places a real live ElevenLabs voice call in the browser — see
+  `ELEVENLABS_WORKFLOW.md` for that agent's system prompt, which is a single
+  flat prompt (not a Claude tool-use call, and not the node-based workflow
+  design that file used to describe).
+- Run Agent 2/3 server-side — never in browser JS, since the API key would
+  be exposed. `config.Config.ANTHROPIC_API_KEY` is the current pattern for
+  that in this repo; the GI track's `index.html` POSTs its captured
+  transcript to the Flask backend rather than calling Claude directly.
