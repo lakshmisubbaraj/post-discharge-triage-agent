@@ -90,7 +90,10 @@ def _build_context(slug: str, patient_info: dict | None) -> tuple[str, bool]:
 
 
 def analyze_live_call(
-    slug: str, transcript: list[list[str]], patient_info: dict | None = None
+    slug: str,
+    transcript: list[list[str]],
+    patient_info: dict | None = None,
+    image_description: str | None = None,
 ) -> tuple[dict[str, Any], dict[str, Any], bool]:
     """Run the real Agent 2 (triage) then Agent 3 (note) over a just-captured
     live transcript. Returns (triage_dict, note_dict, grounded_in_dataset).
@@ -100,9 +103,25 @@ def analyze_live_call(
     pre-baked PATIENTS[].triage.
     note_dict shape: { subjective, assessment, plan, action_items } —
     identical to NOTE_TOOL's output / PATIENTS[].note.
+
+    image_description: optional plain-text description (from
+    services/image_service.describe_symptom_photo) of a symptom photo the
+    patient sent in during the call — e.g. after being asked to send a photo
+    of bloody stool or vomit. When present, it's folded into both agents'
+    user messages as a clearly-labeled extra section, right alongside the
+    transcript — not merged into the transcript text itself, since it wasn't
+    something the patient said out loud.
     """
     context, grounded = _build_context(slug, patient_info)
     transcript_text = format_transcript(transcript)
+    photo_block = (
+        "\n\nPatient-submitted symptom photo (described by a vision-AI "
+        "assistant from an actual photo the patient sent in during this "
+        "call, not the patient's own words — weigh its objective visual "
+        f"findings as clinical evidence, like an exam finding):\n{image_description}"
+        if image_description
+        else ""
+    )
 
     triage = _call_claude_tool(
         TRIAGE_MODEL,
@@ -110,7 +129,8 @@ def analyze_live_call(
         TRIAGE_TOOL,
         (
             f"Patient clinical context:\n{context}\n\n"
-            f"Check-in transcript:\n{transcript_text}\n\n"
+            f"Check-in transcript:\n{transcript_text}"
+            f"{photo_block}\n\n"
             "Determine the triage disposition using the record_triage_decision tool."
         ),
         max_tokens=1024,
@@ -123,7 +143,8 @@ def analyze_live_call(
         NOTE_TOOL,
         (
             f"Patient clinical context:\n{context}\n\n"
-            f"Check-in transcript:\n{transcript_text}\n\n"
+            f"Check-in transcript:\n{transcript_text}"
+            f"{photo_block}\n\n"
             f"Triage decision already made: {triage['severity']} — {triage['label']}\n"
             f"Rationale:\n{rationale_text}\n\n"
             "Draft the chart note using the record_chart_note tool."

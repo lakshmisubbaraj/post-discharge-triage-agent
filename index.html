@@ -184,6 +184,28 @@
     text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 14px;
   }
 
+  /* ---------- Symptom photo upload (during a live voice call) ---------- */
+  .photo-upload-box {
+    margin: 18px auto 0; max-width: 460px; text-align: left; background: #f8fafc;
+    border: 1px dashed #cbd5e1; border-radius: 10px; padding: 14px 18px;
+  }
+  .photo-upload-box .photo-quote {
+    font-size: 13px; color: var(--ink, #1f2937); font-style: italic; margin-bottom: 10px;
+  }
+  .photo-upload-link {
+    display: inline-block; font-size: 13px; font-weight: 600; color: var(--brand);
+    background: white; border: 1.5px solid var(--brand); border-radius: 7px;
+    padding: 7px 14px; cursor: pointer;
+  }
+  .photo-upload-link:hover { background: var(--brand-light); }
+  .photo-upload-status { margin-top: 10px; font-size: 12.5px; color: var(--muted); }
+  .photo-upload-status.ready { color: #166534; }
+  .photo-upload-status.error { color: #b42318; }
+  .photo-thumb {
+    display: block; margin-top: 10px; max-width: 140px; max-height: 140px;
+    border-radius: 8px; border: 1px solid #e2e8f0;
+  }
+
   .section-block {
     background: white; margin: 18px 28px 0; border-radius: 12px;
     padding: 20px 24px; box-shadow: 0 1px 3px rgba(16,24,40,0.06); border: 1px solid #eef1f5;
@@ -419,6 +441,95 @@ let ELEVENLABS_RESOLVED_AGENT_ID = ELEVENLABS_AGENT_ID;
 let voiceBuffer = null;    // { who, message } | null
 let voiceBufferDiv = null; // the DOM node currently showing voiceBuffer, if any
 
+// ---------------------------------------------------------------------
+// Symptom photo upload — during a live voice call, the page shows an
+// upload link (standing in for "text us a photo of your symptom") so a
+// patient with something hard to describe out loud (e.g. bloody stool or
+// vomit) can send in a picture instead. The uploaded image is sent to the
+// Flask backend (POST /api/gi/photo), which runs one multimodal Claude call
+// to turn it into a short objective text description; that description
+// rides alongside the transcript into POST /api/gi/analyze so Agent 2/3
+// reason over it too. See services/image_service.py + gi_live_service.py.
+// ---------------------------------------------------------------------
+let voiceSymptomPhotoDescription = null; // committed description for the in-progress call, if any
+
+function symptomPhotoBoxHtml() {
+  return `
+    <div class="photo-upload-box" id="photo-upload-box">
+      <div class="photo-quote">&#128248; &ldquo;Please message us a photo of your symptom (i.e. bloody stool or vomit) here.&rdquo;</div>
+      <label class="photo-upload-link" id="photo-upload-label">
+        <span id="photo-upload-label-text">Upload photo</span>
+        <input type="file" accept="image/*" id="photo-upload-input" style="display:none;" onchange="handleSymptomPhotoUpload(event)">
+      </label>
+      <div class="photo-upload-status" id="photo-upload-status"></div>
+    </div>
+  `;
+}
+
+async function handleSymptomPhotoUpload(event) {
+  const file = event.target.files && event.target.files[0];
+  if (!file) return;
+
+  const statusEl = document.getElementById("photo-upload-status");
+  const labelEl = document.getElementById("photo-upload-label");
+  if (statusEl) {
+    statusEl.className = "photo-upload-status";
+    statusEl.textContent = "Uploading & analyzing photo…";
+  }
+  if (labelEl) labelEl.style.opacity = "0.6";
+
+  try {
+    const dataUrl = await new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = () => reject(reader.error);
+      reader.readAsDataURL(file);
+    });
+    const [, base64] = dataUrl.split(",", 2);
+    const mediaType = file.type || "image/jpeg";
+
+    const res = await fetch(`${API_BASE}/api/gi/photo`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ image: base64, media_type: mediaType }),
+      signal: AbortSignal.timeout(45000),
+    });
+    // Read the JSON body even on a non-2xx response — the backend puts the
+    // actual failure reason (bad API key, unsupported image format, etc.) in
+    // an "error" field on 400/502 responses. Checking res.ok first and
+    // throwing before reading the body would swallow that detail and leave
+    // only an uninformative "HTTP 502".
+    let result;
+    try {
+      result = await res.json();
+    } catch (parseErr) {
+      throw new Error(`backend returned HTTP ${res.status} (no JSON body)`);
+    }
+    if (result.error) throw new Error(result.error);
+    if (!res.ok) throw new Error(`backend returned HTTP ${res.status}`);
+
+    voiceSymptomPhotoDescription = result.description;
+
+    if (statusEl) {
+      statusEl.className = "photo-upload-status ready";
+      statusEl.innerHTML =
+        `&#10003; Photo received &mdash; noted for the reasoning agent: &ldquo;${result.description}&rdquo;` +
+        `<img class="photo-thumb" src="${dataUrl}">`;
+    }
+    const labelTextEl = document.getElementById("photo-upload-label-text");
+    if (labelTextEl) labelTextEl.textContent = "Replace photo";
+    if (labelEl) labelEl.style.opacity = "1";
+  } catch (e) {
+    console.warn("Symptom photo upload/analysis failed.", e);
+    if (statusEl) {
+      statusEl.className = "photo-upload-status error";
+      statusEl.textContent =
+        `Couldn't analyze that photo — ${e.message || e} — you can try again, or continue without it.`;
+    }
+    if (labelEl) labelEl.style.opacity = "1";
+  }
+}
+
 async function setupVoiceWidget() {
   let agentId = ELEVENLABS_AGENT_ID;
   // Optional: let a running backend override the agent id.
@@ -610,6 +721,7 @@ function beginVoiceCall(slug) {
   voiceTranscript = [];
   voiceBuffer = null;
   voiceBufferDiv = null;
+  voiceSymptomPhotoDescription = null;
   ++activeCallToken;
   renderQueue();
 
@@ -634,6 +746,7 @@ function beginVoiceCall(slug) {
       <p>Speak with the check-in agent out loud — allow the microphone prompt when it appears.
          What you say shows up live below as the agent hears it.</p>
       <div class="transcript-area" id="voice-transcript-area" style="text-align:left;max-width:520px;margin:0 auto 18px;min-height:20px;"></div>
+      ${symptomPhotoBoxHtml()}
       <button class="finish-call-btn" onclick="finishVoiceCall('${p.slug}')">Finish call &amp; show analysis</button>
       <div class="voice-hint">Ending the conversation will advance to the analysis automatically.</div>
     </div>
@@ -738,6 +851,7 @@ function finishVoiceCall(slug) {
   }
 
   p.transcript = capturedTranscript; // persist the real transcript on the record
+  p.symptomPhotoDescription = voiceSymptomPhotoDescription; // may be null — no photo sent
   revealAfterVoiceCall(p);
 }
 
@@ -768,6 +882,7 @@ function revealAfterVoiceCall(p) {
     <div id="section-transcript" class="section-block instant show">
       <div class="section-label"><span class="badge-agent">Agent 1</span> Check-in conversation <span class="voice-badge" style="margin:0;">🎙️ live voice — actual transcript</span></div>
       <div class="transcript-area">${lines}</div>
+      ${p.symptomPhotoDescription ? `<div style="margin-top:12px;font-size:12.5px;color:#166534;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:10px 14px;">&#128248; <strong>Patient submitted a symptom photo</strong> &mdash; ${p.symptomPhotoDescription}</div>` : ""}
     </div>
     <div id="section-triage" class="section-block">
       <div class="section-label"><span class="badge-agent">Agent 2</span> Reasoning Agent</div>
@@ -827,6 +942,7 @@ async function runLiveAnalysis(p, myToken) {
           name: p.name, age: p.age, gender: p.gender,
           discharge_dx: p.discharge_dx, days_since_discharge: p.days_since_discharge,
         },
+        image_description: p.symptomPhotoDescription || null,
       }),
       signal: AbortSignal.timeout(45000),
     });
@@ -1014,6 +1130,7 @@ function renderCompletedRecord(p) {
     <div id="section-transcript" class="section-block instant show">
       <div class="section-label"><span class="badge-agent">Agent 1</span> Check-in conversation ${p.calledViaVoice ? '<span class="voice-badge" style="margin:0;">🎙️ live voice — actual transcript</span>' : ""}</div>
       <div class="transcript-area">${lines}</div>
+      ${p.symptomPhotoDescription ? `<div style="margin-top:12px;font-size:12.5px;color:#166534;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:10px 14px;">&#128248; <strong>Patient submitted a symptom photo</strong> &mdash; ${p.symptomPhotoDescription}</div>` : ""}
     </div>
     <div id="section-triage" class="section-block instant show">
       <div class="section-label"><span class="badge-agent">Agent 2</span> Reasoning Agent</div>

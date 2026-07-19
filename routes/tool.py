@@ -11,6 +11,7 @@ Endpoints
     POST /api/triage                   -- score a transcript -> disposition (Claude Sonnet 5)
     POST /api/draft-note               -- draft a chart note from a disposition
     POST /api/gi/analyze               -- live Agent 2 + Agent 3 for a GI voice check-in transcript
+    POST /api/gi/photo                 -- describe a patient-submitted symptom photo (multimodal Claude)
 
 NOTE: /triage and /draft-note now call the real triage_service.analyze_transcript_with_claude()
 (Sonnet 5, FHIR-grounded, 6-way disposition taxonomy) instead of the old
@@ -29,7 +30,7 @@ from flask import Blueprint, jsonify, request
 
 from extensions import db
 from models import Patient
-from services import call_service, gi_live_service, triage_service
+from services import call_service, gi_live_service, image_service, triage_service
 
 bp = Blueprint("tool", __name__, url_prefix="/api")
 
@@ -288,6 +289,10 @@ def gi_analyze():
                   "discharge_dx": "...", "days_since_discharge": 6}
         -- optional, only used as a fallback context source for patients
            with no backing synthetic-gi-data record (e.g. jordan_test)
+      "image_description": "..."
+        -- optional, plain-text description of a patient-submitted symptom
+           photo (from POST /api/gi/photo). If present, folded into both
+           Agent 2 and Agent 3's prompts alongside the transcript.
     }
     Returns: { triage: {severity, label, rationale, flags},
                note: {subjective, assessment, plan, action_items},
@@ -297,6 +302,7 @@ def gi_analyze():
     slug = payload.get("slug")
     transcript = payload.get("transcript")
     patient_info = payload.get("patient") or {}
+    image_description = payload.get("image_description") or None
 
     if not slug:
         return jsonify(error="'slug' is required"), 400
@@ -305,9 +311,40 @@ def gi_analyze():
 
     try:
         triage_result, note_result, grounded = gi_live_service.analyze_live_call(
-            slug, transcript, patient_info
+            slug, transcript, patient_info, image_description
         )
     except Exception as e:  # network error, missing API key, bad slug, etc.
         return jsonify(error=f"live GI analysis failed: {e}"), 502
 
     return jsonify(triage=triage_result, note=note_result, groundedInFhir=grounded)
+
+
+@bp.post("/gi/photo")
+def gi_photo():
+    """Tool: describe a patient-submitted symptom photo via a multimodal
+    Claude call, so Agent 2/Agent 3 can reason over it alongside the
+    transcript (see services/image_service.py).
+
+    Used by index.html's live voice-call flow: while a call is in progress,
+    the page shows an upload link asking the patient (or whoever is with
+    them) to send in a photo of the symptom being discussed (e.g. bloody
+    stool or vomit) — since a voice-only transcript can't capture that kind
+    of detail well. The description returned here is passed back into
+    POST /api/gi/analyze as "image_description" once the call ends.
+
+    Body: { "image": "<base64, no data-URL prefix>", "media_type": "image/jpeg" }
+    Returns: { description: "..." }
+    """
+    payload = request.get_json(silent=True) or {}
+    image_b64 = payload.get("image")
+    media_type = payload.get("media_type") or "image/jpeg"
+
+    if not image_b64:
+        return jsonify(error="'image' (base64-encoded, no data-URL prefix) is required"), 400
+
+    try:
+        description = image_service.describe_symptom_photo(image_b64, media_type)
+    except Exception as e:  # network error, missing API key, bad image data, etc.
+        return jsonify(error=f"photo analysis failed: {e}"), 502
+
+    return jsonify(description=description)

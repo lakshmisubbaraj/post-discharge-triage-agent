@@ -151,6 +151,11 @@ General reasoning rules:
   unnecessary callback.
 - When there is NOT enough information, or the patient was uncooperative,
   use clinician_callback_required rather than guessing.
+- If a patient-submitted symptom photo description is included, weigh its
+  objective visual findings (e.g. presence/color/amount of blood) as clinical
+  evidence on the same footing as a reported exam finding — it was generated
+  by a vision-AI description of an actual photo, not the patient's own words,
+  but has not been verified by a clinician.
 - Fever plus respiratory symptoms (cough, shortness of breath) after a
   procedure defaults to urgent_care_same_day, not emergency_department,
   unless the patient also describes an objective severe-distress feature
@@ -251,7 +256,10 @@ padding — this is copied into the chart as-is after clinician sign-off.
 Write a standard SOAP-style note:
 - Subjective: what the patient/family reported on this call. Ground this
 only in the transcript provided — do not add symptoms or statements that
-were not actually said.
+were not actually said. If a patient-submitted symptom photo description is
+included, mention that a photo was submitted and summarize its objective
+findings, noting it was a vision-AI description of the photo rather than the
+patient's own words.
 - Assessment: the triage disposition already decided and the clinical
 reasoning behind it, informed by the patient's known conditions,
 medications, and recent results (not just today's call in isolation).
