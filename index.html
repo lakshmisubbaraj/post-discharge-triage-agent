@@ -1019,7 +1019,8 @@ function renderCompletedRecord(p) {
       <div class="section-label"><span class="badge-agent">Agent 2</span> Reasoning Agent</div>
       <div><span class="tier-pill" style="background:var(${tierVar})">${TIER_LABELS[t.severity] || t.severity}</span>
         <div style="font-size:13.5px;color:var(--muted);margin:-4px 0 10px;">${t.label}</div>
-        ${p.calledViaVoice ? '<div style="font-size:12px;color:var(--muted);margin:-2px 0 10px;">⚠️ Reference analysis for this patient\'s case — not yet re-derived from the live call\'s actual transcript above.</div>' : ""}
+        ${p.calledViaVoice && p.liveAnalysisUsed ? '<div style="font-size:12px;color:#166534;margin:-2px 0 10px;">✓ Live analysis — Claude reasoned over the actual call transcript above.</div>' : ""}
+        ${p.calledViaVoice && !p.liveAnalysisUsed ? '<div style="font-size:12px;color:var(--muted);margin:-2px 0 10px;">⚠️ Reference analysis for this patient\'s case — the backend live-analysis call didn\'t succeed, so this isn\'t derived from the transcript above.</div>' : ""}
       </div>
       <div class="sub-label">Rationale</div>
       <ul class="rationale-list">${t.rationale.map(r => `<li>${r}</li>`).join("")}</ul>
